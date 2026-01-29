@@ -1,4 +1,4 @@
-# Requirements: Spanish Autónomo Tax Calculator
+# Requirements: Spanish Autonomo Tax Calculator
 
 **Defined:** 2026-01-29
 **Core Value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
@@ -10,28 +10,28 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Tax Calculations (CALC)
 
 - [ ] **CALC-01**: Calculate annual IRPF using official 2025/2026 progressive brackets (19%, 24%, 30%, 37%, 45%, 47%)
-- [ ] **CALC-02**: Apply mínimo personal (€5,550) in IRPF calculation
-- [ ] **CALC-03**: Apply mínimo por descendientes (€2,400 for 1 daughter) in IRPF calculation
-- [ ] **CALC-04**: Calculate 5% gastos de difícil justificación with €2,000 annual cap
-- [ ] **CALC-05**: Apply 7% reducción rendimientos for generic SS expenses
-- [ ] **CALC-06**: Use fixed RETA cuota of €428.40/month (€5,140.80/year) from registration
+- [ ] **CALC-02**: Apply minimo personal (5,550 EUR) in IRPF calculation
+- [ ] **CALC-03**: Apply minimo por descendientes (2,400 EUR for 1 daughter) in IRPF calculation
+- [ ] **CALC-04**: Calculate 5% gastos de dificil justificacion with 2,000 EUR annual cap
+- [ ] **CALC-05**: Apply 7% reduccion rendimientos for generic SS expenses
+- [ ] **CALC-06**: Use fixed RETA cuota of 428.40 EUR/month (5,140.80 EUR/year) from registration
 - [ ] **CALC-07**: Calculate effective tax rate (total tax / net income before tax)
 - [ ] **CALC-08**: Calculate net monthly income after all taxes and deductions
-- [ ] **CALC-09**: Calculate "leefgeld" (net income minus €1,727 private costs)
+- [ ] **CALC-09**: Calculate "leefgeld" (net income minus 1,727 EUR private costs)
 - [ ] **CALC-10**: Show annual and monthly breakdowns for all calculations
 
 ### Expense Tracking (EXP)
 
-- [ ] **EXP-01**: Track Spain deductible business expenses (huur €346.50, GSM €27.50, elektriciteit €9.00/month)
-- [ ] **EXP-02**: Track Belgium work costs (€1,000 or €2,500/month depending on pattern)
-- [ ] **EXP-03**: Track non-deductible private expenses (€1,727/month total)
+- [ ] **EXP-01**: Track Spain deductible business expenses (huur 346.50 EUR, GSM 27.50 EUR, elektriciteit 9.00 EUR/month)
+- [ ] **EXP-02**: Track Belgium work costs (1,000 EUR or 2,500 EUR/month depending on pattern)
+- [ ] **EXP-03**: Track non-deductible private expenses (1,727 EUR/month total)
 - [ ] **EXP-04**: Categorize expenses as deductible vs private in UI
-- [ ] **EXP-05**: Display expense breakdown with calculation formulas visible (e.g., "€1,155 × 30%")
+- [ ] **EXP-05**: Display expense breakdown with calculation formulas visible (e.g., "1,155 EUR x 30%")
 
 ### Scenario Planning (SCEN)
 
-- [ ] **SCEN-01**: Pre-configure 5 scenarios (A: €3K, B: €6K, C: €9K, D: €12K, E: €18K revenue)
-- [ ] **SCEN-02**: Support two Belgium cost patterns (€1,000 for A/B, €2,500 for C/D/E)
+- [ ] **SCEN-01**: Pre-configure 5 scenarios (A: 3K, B: 6K, C: 9K, D: 12K, E: 18K revenue)
+- [ ] **SCEN-02**: Support two Belgium cost patterns (1,000 EUR for A/B, 2,500 EUR for C/D/E)
 - [ ] **SCEN-03**: Allow creation of custom scenarios with user-defined revenue/expenses
 - [ ] **SCEN-04**: Allow live editing of any value in any scenario with auto-recalculation
 - [ ] **SCEN-05**: Display all scenarios side-by-side in comparison table
@@ -41,7 +41,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Belgium Calendar (CAL)
 
 - [ ] **CAL-01**: Display interactive calendar for Feb-Dec 2026 (11 months)
-- [ ] **CAL-02**: Allow toggling individual days between Belgium (🇧🇪), Spain (🇪🇸), Travel (✈️)
+- [ ] **CAL-02**: Allow toggling individual days between Belgium, Spain, Travel
 - [ ] **CAL-03**: Auto-count days per month in each location
 - [ ] **CAL-04**: Calculate annual total days in Belgium vs Spain
 - [ ] **CAL-05**: Show 183-day threshold warning when approaching or exceeding limit
@@ -75,12 +75,12 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **XLS-06**: Include expense breakdown tables on each sheet
 - [ ] **XLS-07**: Include RETA and IRPF step-by-step calculations
 - [ ] **XLS-08**: Workbook recalculates without errors (#REF!, #DIV/0!, #VALUE!, #NAME?)
-- [ ] **XLS-09**: Currency formatting (€ #,##0.00 for decimals, € #,##0 for whole numbers)
+- [ ] **XLS-09**: Currency formatting (EUR #,##0.00 for decimals, EUR #,##0 for whole numbers)
 - [ ] **XLS-10**: Percentage formatting (0.0%) for tax rates
 
 ### Compliance & Warnings (COMP)
 
-- [ ] **COMP-01**: Display 183-day threshold warning when days in Belgium ≥ 183
+- [ ] **COMP-01**: Display 183-day threshold warning when days in Belgium >= 183
 - [ ] **COMP-02**: Show Spain-Belgium treaty tie-breaker provisions (Article 4)
 - [ ] **COMP-03**: Explain "centro de intereses vitales" concept and how family situation helps
 - [ ] **COMP-04**: Display Art. 9.1.b LIRPF family presumption text and implications
@@ -88,7 +88,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **COMP-06**: Warning about factura completa requirement (not just tickets)
 - [ ] **COMP-07**: Warning about electronic payment requirement (no cash for dietas)
 - [ ] **COMP-08**: Disclaimer that tool provides calculations, not official tax advice
-- [ ] **COMP-09**: Show dietas limits (€91.35/day with overnight, €48.08 without)
+- [ ] **COMP-09**: Show dietas limits (91.35 EUR/day with overnight, 48.08 EUR without)
 - [ ] **COMP-10**: Warning about entry/exit days counting in BOTH countries
 
 ### Data Verification (DATA)
@@ -96,7 +96,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **DATA-01**: All fiscal data sourced from official 2025/2026 AEAT/BOE/Seguridad Social sources
 - [ ] **DATA-02**: Source citations visible in UI (footnotes or info boxes)
 - [ ] **DATA-03**: IRPF tramos match official 2025 brackets exactly
-- [ ] **DATA-04**: Mínimos match official 2025/2026 amounts
+- [ ] **DATA-04**: Minimos match official 2025/2026 amounts
 - [ ] **DATA-05**: Dietas match official Reglamento IRPF rates
 
 ## v2 Requirements
@@ -146,13 +146,80 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (To be populated during roadmap creation) | | |
+| CALC-01 | Phase 1 | Pending |
+| CALC-02 | Phase 1 | Pending |
+| CALC-03 | Phase 1 | Pending |
+| CALC-04 | Phase 1 | Pending |
+| CALC-05 | Phase 1 | Pending |
+| CALC-06 | Phase 1 | Pending |
+| CALC-07 | Phase 1 | Pending |
+| CALC-08 | Phase 1 | Pending |
+| CALC-09 | Phase 1 | Pending |
+| CALC-10 | Phase 1 | Pending |
+| DATA-01 | Phase 1 | Pending |
+| DATA-02 | Phase 1 | Pending |
+| DATA-03 | Phase 1 | Pending |
+| DATA-04 | Phase 1 | Pending |
+| DATA-05 | Phase 1 | Pending |
+| EXP-01 | Phase 2 | Pending |
+| EXP-02 | Phase 2 | Pending |
+| EXP-03 | Phase 2 | Pending |
+| EXP-04 | Phase 2 | Pending |
+| EXP-05 | Phase 2 | Pending |
+| SCEN-01 | Phase 3 | Pending |
+| SCEN-02 | Phase 3 | Pending |
+| SCEN-03 | Phase 3 | Pending |
+| SCEN-04 | Phase 3 | Pending |
+| SCEN-05 | Phase 3 | Pending |
+| SCEN-06 | Phase 3 | Pending |
+| SCEN-07 | Phase 3 | Pending |
+| CAL-01 | Phase 4 | Pending |
+| CAL-02 | Phase 4 | Pending |
+| CAL-03 | Phase 4 | Pending |
+| CAL-04 | Phase 4 | Pending |
+| CAL-05 | Phase 4 | Pending |
+| CAL-06 | Phase 4 | Pending |
+| CAL-07 | Phase 4 | Pending |
+| CAL-08 | Phase 4 | Pending |
+| CAL-09 | Phase 4 | Pending |
+| UI-01 | Phase 5 | Pending |
+| UI-02 | Phase 5 | Pending |
+| UI-03 | Phase 5 | Pending |
+| UI-04 | Phase 5 | Pending |
+| UI-05 | Phase 5 | Pending |
+| UI-06 | Phase 5 | Pending |
+| UI-07 | Phase 5 | Pending |
+| UI-08 | Phase 5 | Pending |
+| UI-09 | Phase 5 | Pending |
+| UI-10 | Phase 5 | Pending |
+| UI-11 | Phase 5 | Pending |
+| UI-12 | Phase 5 | Pending |
+| XLS-01 | Phase 6 | Pending |
+| XLS-02 | Phase 6 | Pending |
+| XLS-03 | Phase 6 | Pending |
+| XLS-04 | Phase 6 | Pending |
+| XLS-05 | Phase 6 | Pending |
+| XLS-06 | Phase 6 | Pending |
+| XLS-07 | Phase 6 | Pending |
+| XLS-08 | Phase 6 | Pending |
+| XLS-09 | Phase 6 | Pending |
+| XLS-10 | Phase 6 | Pending |
+| COMP-01 | Phase 7 | Pending |
+| COMP-02 | Phase 7 | Pending |
+| COMP-03 | Phase 7 | Pending |
+| COMP-04 | Phase 7 | Pending |
+| COMP-05 | Phase 7 | Pending |
+| COMP-06 | Phase 7 | Pending |
+| COMP-07 | Phase 7 | Pending |
+| COMP-08 | Phase 7 | Pending |
+| COMP-09 | Phase 7 | Pending |
+| COMP-10 | Phase 7 | Pending |
 
 **Coverage:**
-- v1 requirements: 59 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 59 ⚠️
+- v1 requirements: 68 total
+- Mapped to phases: 68
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-29*
-*Last updated: 2026-01-29 after initial definition*
+*Last updated: 2026-01-29 after roadmap creation*
