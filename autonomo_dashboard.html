@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomo Tax Calculator - 2025/2026</title>
+  <style>
+    /* Minimal styling for now - Phase 5 adds full dashboard */
+    :root {
+      --bg: #1a1a2e;
+      --text: #eaeaea;
+      --accent: #4ade80;
+    }
+    body {
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 2rem;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    input { padding: 0.5rem; font-size: 1rem; width: 150px; }
+    button { padding: 0.5rem 1rem; cursor: pointer; }
+    .result { margin-top: 1rem; font-family: monospace; }
+    .breakdown { margin-left: 1rem; font-size: 0.9rem; opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- UI added in Task 3 -->
+  </div>
+  <script>
+    // ============================================================
+    // FISCAL_2025 CONSTANTS
+    // ============================================================
+    // All fiscal data verified from official AEAT/BOE sources
+    // See: .planning/research/FISCAL_DATA.md for full citations
+    // ============================================================
+
+    const FISCAL_2025 = Object.freeze({
+      // IRPF Brackets - Combined estatal + autonomica rates
+      // Source: Wolters Kluwer, AEAT - unchanged from 2024
+      // https://www.wolterskluwer.com/es-es/expert-insights/tramos-retenciones-irpf-2025-novedades
+      //
+      // baseTax = cumulative tax from all lower brackets
+      // prevLimit = upper boundary of previous bracket
+      IRPF_BRACKETS: Object.freeze([
+        { upTo: 12450, rate: 0.19, baseTax: 0, prevLimit: 0 },
+        { upTo: 20200, rate: 0.24, baseTax: 2365.50, prevLimit: 12450 },
+        { upTo: 35200, rate: 0.30, baseTax: 4225.50, prevLimit: 20200 },
+        { upTo: 60000, rate: 0.37, baseTax: 8725.50, prevLimit: 35200 },
+        { upTo: 300000, rate: 0.45, baseTax: 17901.50, prevLimit: 60000 },
+        { upTo: Infinity, rate: 0.47, baseTax: 125901.50, prevLimit: 300000 }
+      ]),
+
+      // Personal/Family minimums
+      // Source: AEAT Manual Practico IRPF 2024
+      // https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2024/c14-adecuacion-impuesto-circunstancias-personales/cuadro-resumen-minimo-personal-familiar.html
+      MINIMO_PERSONAL: 5550,
+      MINIMO_DESCENDIENTES_PRIMERO: 2400,
+
+      // Fixed RETA from user registration
+      // This is the actual cuota paid, not a calculated value
+      // Source: User's Seguridad Social registration document
+      RETA_MONTHLY: 428.40,
+      RETA_ANNUAL: 5140.80,
+
+      // Gastos dificil justificacion (Estimacion Directa Simplificada)
+      // Source: AEAT Estimacion Directa Simplificada
+      // https://sede.agenciatributaria.gob.es/Sede/irpf/empresarios-individuales-profesionales/regimenes-determinar-rendimiento-actividad/estimacion-directa-simplificada.html
+      // Note: Was 7% in 2023, reverted to 5% for 2024 onwards
+      GASTOS_DIFICIL_RATE: 0.05,
+      GASTOS_DIFICIL_MAX: 2000,
+
+      // Private costs (fixed, not deductible)
+      // Breakdown: Rent 70% (808.50) + GSM 50% (27.50) + Electricity 91% (91) + Auto (600) + Insurance (200)
+      PRIVATE_COSTS_MONTHLY: 1727
+    });
+  </script>
+</body>
+</html>
