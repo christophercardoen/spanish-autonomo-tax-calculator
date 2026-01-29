@@ -300,6 +300,13 @@
         url: "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2022/c15-calculo-impuesto-determinacion-cuotas-integras/ejemplo-practico-calculo-cuotas-integras-autonomica.html",
         note: "Minimos reduce TAX LIABILITY, not taxable base. Tax on minimo is subtracted from tax on full base.",
         confidence: "HIGH"
+      },
+      DIETAS: {
+        name: "Dietas y Asignaciones para Gastos de Viaje",
+        source: "Reglamento IRPF Art. 9",
+        url: "https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820&tn=1&p=20231228#a9",
+        note: "Abroad: 91.35 EUR/day with overnight, 48.08 EUR without. Spain: 53.34 EUR/day with overnight, 26.67 EUR without.",
+        confidence: "HIGH"
       }
     });
 
@@ -458,6 +465,83 @@
         // Low travel: ~3 days, 1 flight per month
         return `~3 days x ${formatEUR(91.35)} dietas + 1 flight x ${formatEUR(250)} = ~${formatEUR(1000)}`;
       }
+    }
+
+    // ============================================================
+    // EXPENSE DATA MANAGEMENT
+    // ============================================================
+    // Reset, calculation helpers, and totals for expense tracking
+    // ============================================================
+
+    /**
+     * Reset all expenses to default values with confirmation
+     * @returns {boolean} - True if reset occurred
+     */
+    function resetToDefaults() {
+      if (confirm('Reset all expenses to default values? This cannot be undone.')) {
+        expenseData = structuredClone(DEFAULT_EXPENSES);
+        saveExpenses();
+        // Re-initialize Belgium toggle if present
+        initBelgiumToggle();
+        // Note: Full UI re-render will be added in Plan 02-02
+        return true;
+      }
+      return false;
+    }
+
+    /**
+     * Calculate deductible amount for an expense
+     * Spain expenses have baseAmount * deductionPct; others use amount directly
+     * @param {object} expense - Expense object
+     * @returns {number} - Monthly deductible amount (rounded to 2 decimals)
+     */
+    function calculateDeductible(expense) {
+      if (expense.baseAmount !== undefined && expense.deductionPct !== undefined) {
+        return Math.round(expense.baseAmount * (expense.deductionPct / 100) * 100) / 100;
+      }
+      return Math.round((expense.amount || 0) * 100) / 100;
+    }
+
+    /**
+     * Calculate total deductible for a category
+     * @param {string} categoryKey - Key in expenseData.categories
+     * @returns {number} - Total monthly amount (rounded to 2 decimals)
+     */
+    function calculateCategoryTotal(categoryKey) {
+      const category = expenseData.categories[categoryKey];
+      if (!category) return 0;
+
+      const total = category.reduce((sum, exp) => sum + calculateDeductible(exp), 0);
+      return Math.round(total * 100) / 100;
+    }
+
+    /**
+     * Get all expense totals for integration with IRPF calculation
+     * @returns {object} - Monthly and annual totals per category
+     */
+    function getExpenseTotals() {
+      const spainMonthly = calculateCategoryTotal('spainDeductible');
+      const belgiumMonthly = calculateCategoryTotal('belgiumCosts');
+      const privateMonthly = calculateCategoryTotal('private');
+
+      return {
+        spainDeductible: {
+          monthly: spainMonthly,
+          annual: Math.round(spainMonthly * 12 * 100) / 100
+        },
+        belgiumCosts: {
+          monthly: belgiumMonthly,
+          annual: Math.round(belgiumMonthly * 12 * 100) / 100
+        },
+        private: {
+          monthly: privateMonthly,
+          annual: Math.round(privateMonthly * 12 * 100) / 100
+        },
+        totalDeductible: {
+          monthly: Math.round((spainMonthly + belgiumMonthly) * 100) / 100,
+          annual: Math.round((spainMonthly + belgiumMonthly) * 12 * 100) / 100
+        }
+      };
     }
 
     // ============================================================
