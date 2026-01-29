@@ -244,6 +244,88 @@
     });
 
     // ============================================================
+    // EXPENSE DATA CONSTANTS
+    // ============================================================
+    // Pre-filled expense data for Spain deductible, Belgium costs, and private
+    // All amounts from CLAUDE.md Fixed Costs section
+    // ============================================================
+
+    const DEFAULT_EXPENSES = Object.freeze({
+      version: 1,
+      belgiumPattern: 'high',  // 'low' (1000) or 'high' (2500)
+      categories: Object.freeze({
+        spainDeductible: Object.freeze([
+          Object.freeze({ id: 'huur', name: 'Huur (Rent)', baseAmount: 1155, deductionPct: 30, deletable: true }),
+          Object.freeze({ id: 'gsm', name: 'GSM (Mobile)', baseAmount: 55, deductionPct: 50, deletable: true }),
+          Object.freeze({ id: 'elektriciteit', name: 'Elektriciteit', baseAmount: 100, deductionPct: 9, deletable: true })
+        ]),
+        belgiumCosts: Object.freeze([
+          Object.freeze({ id: 'belgium-travel', name: 'Belgium Work Costs', amount: 2500, isPatternLinked: true, deletable: true })
+        ]),
+        private: Object.freeze([
+          Object.freeze({ id: 'huur-private', name: 'Huur 70%', amount: 808.50, deletable: true }),
+          Object.freeze({ id: 'gsm-private', name: 'GSM 50%', amount: 27.50, deletable: true }),
+          Object.freeze({ id: 'elektriciteit-private', name: 'Elektriciteit 91%', amount: 91, deletable: true }),
+          Object.freeze({ id: 'auto', name: 'Auto', amount: 600, deletable: true }),
+          Object.freeze({ id: 'verzekeringen', name: 'Verzekeringen', amount: 200, deletable: true })
+        ])
+      })
+    });
+
+    // ============================================================
+    // LOCALSTORAGE PERSISTENCE
+    // ============================================================
+    // Expense data persists between browser sessions
+    // Graceful fallback for Safari private mode and quota errors
+    // ============================================================
+
+    const STORAGE_KEY = 'autonomo_expenses_v1';
+
+    /**
+     * Load expenses from localStorage
+     * Falls back to DEFAULT_EXPENSES on error or invalid data
+     * @returns {object} - Expense data object (mutable clone)
+     */
+    function loadExpenses() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          // Version check for future migration support
+          if (parsed && parsed.version === 1) {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.warn('localStorage load failed (Safari private mode?):', e.message);
+      }
+      // Return mutable clone of defaults
+      return structuredClone(DEFAULT_EXPENSES);
+    }
+
+    /**
+     * Save expenses to localStorage
+     * Handles QuotaExceededError gracefully
+     * @returns {boolean} - True if save succeeded
+     */
+    function saveExpenses() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(expenseData));
+        return true;
+      } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+          console.warn('localStorage quota exceeded - changes not persisted');
+        } else {
+          console.warn('localStorage save failed:', e.message);
+        }
+        return false;
+      }
+    }
+
+    // Global expense data - initialized from localStorage or defaults
+    let expenseData = loadExpenses();
+
+    // ============================================================
     // CALCULATION FUNCTIONS
     // ============================================================
     // Implements official AEAT IRPF calculation methodology
