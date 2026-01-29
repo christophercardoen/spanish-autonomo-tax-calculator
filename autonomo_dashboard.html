@@ -75,6 +75,190 @@
       // Breakdown: Rent 70% (808.50) + GSM 50% (27.50) + Electricity 91% (91) + Auto (600) + Insurance (200)
       PRIVATE_COSTS_MONTHLY: 1727
     });
+
+    // ============================================================
+    // CALCULATION FUNCTIONS
+    // ============================================================
+    // Implements official AEAT IRPF calculation methodology
+    // CRITICAL: Uses 4-phase method where minimos reduce TAX, not BASE
+    // ============================================================
+
+    /**
+     * Apply progressive IRPF brackets to any amount
+     * Uses cumulative baseTax approach for accuracy at bracket boundaries
+     * @param {number} amount - Taxable amount in EUR
+     * @returns {number} - Tax amount in EUR (rounded to 2 decimals)
+     */
+    function applyBrackets(amount) {
+      if (amount <= 0) return 0;
+
+      for (const bracket of FISCAL_2025.IRPF_BRACKETS) {
+        if (amount <= bracket.upTo) {
+          return Math.round((bracket.baseTax + (amount - bracket.prevLimit) * bracket.rate) * 100) / 100;
+        }
+      }
+      // Fallback (should never reach with Infinity bound)
+      const last = FISCAL_2025.IRPF_BRACKETS[FISCAL_2025.IRPF_BRACKETS.length - 1];
+      return Math.round((last.baseTax + (amount - last.prevLimit) * last.rate) * 100) / 100;
+    }
+
+    /**
+     * Calculate Cuota Integra using 4-phase AEAT method
+     * CRITICAL: Minimos reduce TAX liability, NOT taxable base
+     *
+     * Method:
+     * 1. Calculate tax on full base liquidable
+     * 2. Calculate tax on minimo amount (capped at base liquidable)
+     * 3. Subtract #2 from #1 to get cuota integra
+     *
+     * Source: AEAT practical examples
+     * https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2022/c15-calculo-impuesto-determinacion-cuotas-integras/ejemplo-practico-calculo-cuotas-integras-autonomica.html
+     *
+     * @param {number} baseLiquidable - Taxable base after all deductions
+     * @param {number} minimoTotal - Sum of minimo personal + descendientes
+     * @returns {number} - Cuota integra (tax liability) in EUR
+     */
+    function calculateCuotaIntegra(baseLiquidable, minimoTotal) {
+      const cuota1 = applyBrackets(baseLiquidable);
+      const minimoApplicable = Math.min(minimoTotal, baseLiquidable);
+      const cuota3 = applyBrackets(minimoApplicable);
+      return Math.max(0, Math.round((cuota1 - cuota3) * 100) / 100);
+    }
+
+    /**
+     * Calculate Gastos de Dificil Justificacion
+     * For Estimacion Directa Simplificada: 5% with 2000 EUR annual cap
+     *
+     * Source: AEAT Estimacion Directa Simplificada
+     * Note: Was 7% in 2023, reverted to 5% for 2024 onwards
+     *
+     * @param {number} rendimientoNetoPrevio - Net income before gastos dificil
+     * @returns {number} - Deductible amount in EUR
+     */
+    function calculateGastosDificil(rendimientoNetoPrevio) {
+      if (rendimientoNetoPrevio <= 0) return 0;
+      const calculated = rendimientoNetoPrevio * FISCAL_2025.GASTOS_DIFICIL_RATE;
+      return Math.round(Math.min(calculated, FISCAL_2025.GASTOS_DIFICIL_MAX) * 100) / 100;
+    }
+
+    /**
+     * Main IRPF calculation function - returns all intermediate values
+     *
+     * CALC-05 Clarification:
+     * The 7% reduccion rendimientos applies only when calculating the RETA base
+     * for Social Security purposes. For IRPF, the actual RETA cuota paid
+     * (428.40 EUR/month) is deducted as an expense. Since the user has a fixed
+     * RETA cuota from registration, we simply deduct it as a business expense.
+     *
+     * @param {number} monthlyRevenue - Gross monthly revenue in EUR
+     * @param {number} monthlyDeductibleExpenses - Monthly deductible business expenses in EUR
+     * @param {boolean} hasDescendant - Whether user has 1 dependent child
+     * @returns {object} - Complete calculation breakdown
+     */
+    function calculateFullIRPF(monthlyRevenue, monthlyDeductibleExpenses = 0, hasDescendant = true) {
+      // Step 1: Annualize inputs
+      const annualRevenue = monthlyRevenue * 12;
+      const annualExpenses = monthlyDeductibleExpenses * 12;
+
+      // Step 2: Total deductible = expenses + RETA (fixed cuota, not calculated)
+      // CALC-05: RETA cuota is deducted as expense. The 7% reduccion is for SS, not IRPF.
+      const totalDeductible = annualExpenses + FISCAL_2025.RETA_ANNUAL;
+
+      // Step 3: Rendimiento Neto Previo (before gastos dificil)
+      const rendimientoNetoPrevio = annualRevenue - totalDeductible;
+
+      // Step 4: Gastos dificil justificacion
+      const gastosDificil = calculateGastosDificil(rendimientoNetoPrevio);
+
+      // Step 5: Rendimiento Neto = Base Liquidable (for autonomo)
+      const rendimientoNeto = rendimientoNetoPrevio - gastosDificil;
+      const baseLiquidable = Math.max(0, rendimientoNeto);
+
+      // Step 6: Calculate minimos
+      const minimoPersonal = FISCAL_2025.MINIMO_PERSONAL;
+      const minimoDescendientes = hasDescendant ? FISCAL_2025.MINIMO_DESCENDIENTES_PRIMERO : 0;
+      const minimoTotal = minimoPersonal + minimoDescendientes;
+
+      // Step 7: Cuota Integra using 4-phase method
+      const cuotaIntegra = calculateCuotaIntegra(baseLiquidable, minimoTotal);
+
+      // Step 8: Effective tax rate
+      const effectiveRate = rendimientoNeto > 0 ? (cuotaIntegra / rendimientoNeto) : 0;
+
+      // Step 9: Net income calculations
+      const netAnnual = annualRevenue - totalDeductible - gastosDificil - cuotaIntegra;
+      const netMonthly = netAnnual / 12;
+
+      // Step 10: Leefgeld (after private costs)
+      const leefgeld = netMonthly - FISCAL_2025.PRIVATE_COSTS_MONTHLY;
+
+      return {
+        // Inputs
+        monthlyRevenue,
+        annualRevenue,
+        monthlyExpenses: monthlyDeductibleExpenses,
+        annualExpenses,
+
+        // Deductions
+        retaMonthly: FISCAL_2025.RETA_MONTHLY,
+        retaAnnual: FISCAL_2025.RETA_ANNUAL,
+        totalDeductible,
+
+        // Calculation chain
+        rendimientoNetoPrevio,
+        gastosDificil,
+        rendimientoNeto,
+        baseLiquidable,
+
+        // Minimos (for display)
+        minimoPersonal,
+        minimoDescendientes,
+        minimoTotal,
+
+        // Tax
+        cuotaIntegra,
+        effectiveRate,
+
+        // Net income
+        netAnnual,
+        netMonthly,
+        leefgeld,
+
+        // Private costs (for reference)
+        privateCostsMonthly: FISCAL_2025.PRIVATE_COSTS_MONTHLY
+      };
+    }
+
+    // ============================================================
+    // FORMATTING UTILITIES
+    // ============================================================
+
+    /**
+     * Format amount as EUR currency (Spanish locale)
+     * @param {number} amount - Amount in EUR
+     * @returns {string} - Formatted string like "5.550,00 EUR"
+     */
+    function formatEUR(amount) {
+      return new Intl.NumberFormat('es-ES', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(amount);
+    }
+
+    /**
+     * Format decimal as percentage
+     * @param {number} decimal - Decimal value (0.25 = 25%)
+     * @returns {string} - Formatted percentage like "25,00 %"
+     */
+    function formatPercent(decimal) {
+      return new Intl.NumberFormat('es-ES', {
+        style: 'percent',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(decimal);
+    }
   </script>
 </body>
 </html>
