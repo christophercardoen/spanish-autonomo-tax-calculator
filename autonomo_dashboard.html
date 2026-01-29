@@ -405,6 +405,16 @@
       <button onclick="calculate()">Calculate</button>
     </div>
 
+    <div class="expenses-container">
+      <h2>Expense Tracking</h2>
+      <div id="spainSection"></div>
+      <div id="belgiumSection"></div>
+      <div id="privateSection"></div>
+      <div style="margin-top: 1rem; display: flex; justify-content: flex-end;">
+        <button class="reset-btn" onclick="resetToDefaults()">Reset to Defaults</button>
+      </div>
+    </div>
+
     <div id="results" class="result"></div>
   </div>
   <script>
@@ -633,7 +643,8 @@
         updateBelgiumCost();
         saveExpenses();
         updateToggleLabels(e.target.checked);
-        // Note: UI re-render will be added in Plan 02-02
+        renderAllSections();
+        recalculateTotals();
       });
     }
 
@@ -684,9 +695,8 @@
       if (confirm('Reset all expenses to default values? This cannot be undone.')) {
         expenseData = structuredClone(DEFAULT_EXPENSES);
         saveExpenses();
-        // Re-initialize Belgium toggle if present
-        initBelgiumToggle();
-        // Note: Full UI re-render will be added in Plan 02-02
+        renderAllSections();
+        recalculateTotals();
         return true;
       }
       return false;
@@ -745,6 +755,127 @@
           annual: Math.round((spainMonthly + belgiumMonthly) * 12 * 100) / 100
         }
       };
+    }
+
+    // ============================================================
+    // EXPENSE SECTION RENDERING
+    // ============================================================
+    // Render expense sections with formulas, delete buttons, and totals
+    // ============================================================
+
+    /**
+     * Format expense calculation formula for display
+     * Shows transparent calculation: BASE x PERCENT% = RESULT
+     * @param {object} expense - Expense object
+     * @param {string} categoryKey - Category key for context
+     * @returns {string} - Formatted formula string
+     */
+    function formatFormula(expense, categoryKey) {
+      if (expense.baseAmount !== undefined && expense.deductionPct !== undefined) {
+        // Spain deductible: show base x percent
+        const result = expense.baseAmount * (expense.deductionPct / 100);
+        return `${formatEUR(expense.baseAmount)} x ${expense.deductionPct}% = ${formatEUR(result)}`;
+      } else if (categoryKey === 'private') {
+        // Private: 0% deductible
+        return `${formatEUR(expense.amount)} x 0% = ${formatEUR(0)}`;
+      } else {
+        // Belgium costs: 100% deductible
+        return `${formatEUR(expense.amount)} x 100% = ${formatEUR(expense.amount)}`;
+      }
+    }
+
+    /**
+     * Render a single expense row with formula and delete button
+     * @param {object} expense - Expense object
+     * @param {string} categoryKey - Category key
+     * @returns {string} - HTML string for expense row
+     */
+    function renderExpenseRow(expense, categoryKey) {
+      const monthly = calculateDeductible(expense);
+      const annual = Math.round(monthly * 12 * 100) / 100;
+
+      return `
+        <div class="expense-row" data-id="${expense.id}" data-category="${categoryKey}">
+          <span class="expense-name">${expense.name}</span>
+          <span class="expense-formula">${formatFormula(expense, categoryKey)}</span>
+          <span class="expense-value">${formatEUR(monthly)}/month (${formatEUR(annual)}/year)</span>
+          <div class="expense-actions">
+            <button class="delete-btn" onclick="deleteExpense('${categoryKey}', '${expense.id}')" title="Delete">x</button>
+          </div>
+        </div>
+      `;
+    }
+
+    /**
+     * Render a complete expense section with header, rows, and add button
+     * @param {string} categoryKey - Category key in expenseData.categories
+     * @param {string} sectionClass - CSS class for section styling
+     * @param {string} title - Section title
+     * @returns {string} - HTML string for section
+     */
+    function renderExpenseSection(categoryKey, sectionClass, title) {
+      const expenses = expenseData.categories[categoryKey] || [];
+      const total = calculateCategoryTotal(categoryKey);
+      const annual = Math.round(total * 12 * 100) / 100;
+
+      let headerExtra = '';
+      let breakdownHtml = '';
+
+      // Belgium section has toggle and breakdown formula
+      if (categoryKey === 'belgiumCosts') {
+        const isHigh = expenseData.belgiumPattern === 'high';
+        headerExtra = `
+          <div class="toggle-switch">
+            <span class="toggle-label low ${!isHigh ? 'active' : ''}">Low (1K)</span>
+            <label>
+              <input type="checkbox" id="belgiumToggle" ${isHigh ? 'checked' : ''}>
+              <span class="slider"></span>
+            </label>
+            <span class="toggle-label high ${isHigh ? 'active' : ''}">High (2.5K)</span>
+          </div>
+        `;
+        breakdownHtml = `<div class="belgium-breakdown">${getBelgiumBreakdownFormula()} ${sourceHint('DIETAS')}</div>`;
+      }
+
+      // Render expense rows
+      const rowsHtml = expenses.map(exp => renderExpenseRow(exp, categoryKey)).join('');
+
+      return `
+        <div class="expense-section ${sectionClass}">
+          <div class="section-header">
+            <span class="section-title">${title}</span>
+            ${headerExtra}
+            <span class="section-total">Total: ${formatEUR(total)}/month (${formatEUR(annual)}/year)</span>
+          </div>
+          ${breakdownHtml}
+          <div class="expense-rows">
+            ${rowsHtml}
+          </div>
+          <button class="add-expense-btn" onclick="showAddForm('${categoryKey}')">+ Add Expense</button>
+        </div>
+      `;
+    }
+
+    /**
+     * Render all expense sections
+     * Updates the DOM with current expense data
+     */
+    function renderAllSections() {
+      const spainEl = document.getElementById('spainSection');
+      const belgiumEl = document.getElementById('belgiumSection');
+      const privateEl = document.getElementById('privateSection');
+
+      if (spainEl) {
+        spainEl.innerHTML = renderExpenseSection('spainDeductible', 'spain-deductible', 'Spain Deductible Expenses');
+      }
+      if (belgiumEl) {
+        belgiumEl.innerHTML = renderExpenseSection('belgiumCosts', 'belgium-costs', 'Belgium Work Costs');
+        // Re-attach Belgium toggle listener after rendering
+        initBelgiumToggle();
+      }
+      if (privateEl) {
+        privateEl.innerHTML = renderExpenseSection('private', 'private', 'Private Expenses (Not Deductible)');
+      }
     }
 
     // ============================================================
