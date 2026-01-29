@@ -9,24 +9,24 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Tax Calculations (CALC)
 
-- [ ] **CALC-01**: Calculate annual IRPF using official 2025/2026 progressive brackets (19%, 24%, 30%, 37%, 45%, 47%)
-- [ ] **CALC-02**: Apply minimo personal (5,550 EUR) in IRPF calculation
-- [ ] **CALC-03**: Apply minimo por descendientes (2,400 EUR for 1 daughter) in IRPF calculation
-- [ ] **CALC-04**: Calculate 5% gastos de dificil justificacion with 2,000 EUR annual cap
-- [ ] **CALC-05**: Apply 7% reduccion rendimientos for generic SS expenses
-- [ ] **CALC-06**: Use fixed RETA cuota of 428.40 EUR/month (5,140.80 EUR/year) from registration
-- [ ] **CALC-07**: Calculate effective tax rate (total tax / net income before tax)
-- [ ] **CALC-08**: Calculate net monthly income after all taxes and deductions
-- [ ] **CALC-09**: Calculate "leefgeld" (net income minus 1,727 EUR private costs)
-- [ ] **CALC-10**: Show annual and monthly breakdowns for all calculations
+- [x] **CALC-01**: Calculate annual IRPF using official 2025/2026 progressive brackets (19%, 24%, 30%, 37%, 45%, 47%)
+- [x] **CALC-02**: Apply minimo personal (5,550 EUR) in IRPF calculation
+- [x] **CALC-03**: Apply minimo por descendientes (2,400 EUR for 1 daughter) in IRPF calculation
+- [x] **CALC-04**: Calculate 5% gastos de dificil justificacion with 2,000 EUR annual cap
+- [x] **CALC-05**: Apply 7% reduccion rendimientos for generic SS expenses
+- [x] **CALC-06**: Use fixed RETA cuota of 428.40 EUR/month (5,140.80 EUR/year) from registration
+- [x] **CALC-07**: Calculate effective tax rate (total tax / net income before tax)
+- [x] **CALC-08**: Calculate net monthly income after all taxes and deductions
+- [x] **CALC-09**: Calculate "leefgeld" (net income minus 1,727 EUR private costs)
+- [x] **CALC-10**: Show annual and monthly breakdowns for all calculations
 
 ### Expense Tracking (EXP)
 
-- [ ] **EXP-01**: Track Spain deductible business expenses (huur 346.50 EUR, GSM 27.50 EUR, elektriciteit 9.00 EUR/month)
-- [ ] **EXP-02**: Track Belgium work costs (1,000 EUR or 2,500 EUR/month depending on pattern)
-- [ ] **EXP-03**: Track non-deductible private expenses (1,727 EUR/month total)
-- [ ] **EXP-04**: Categorize expenses as deductible vs private in UI
-- [ ] **EXP-05**: Display expense breakdown with calculation formulas visible (e.g., "1,155 EUR x 30%")
+- [x] **EXP-01**: Track Spain deductible business expenses (huur 346.50 EUR, GSM 27.50 EUR, elektriciteit 9.00 EUR/month)
+- [x] **EXP-02**: Track Belgium work costs (1,000 EUR or 2,500 EUR/month depending on pattern)
+- [x] **EXP-03**: Track non-deductible private expenses (1,727 EUR/month total)
+- [x] **EXP-04**: Categorize expenses as deductible vs private in UI
+- [x] **EXP-05**: Display expense breakdown with calculation formulas visible (e.g., "1,155 EUR x 30%")
 
 ### Scenario Planning (SCEN)
 
@@ -93,11 +93,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Data Verification (DATA)
 
-- [ ] **DATA-01**: All fiscal data sourced from official 2025/2026 AEAT/BOE/Seguridad Social sources
-- [ ] **DATA-02**: Source citations visible in UI (footnotes or info boxes)
-- [ ] **DATA-03**: IRPF tramos match official 2025 brackets exactly
-- [ ] **DATA-04**: Minimos match official 2025/2026 amounts
-- [ ] **DATA-05**: Dietas match official Reglamento IRPF rates
+- [x] **DATA-01**: All fiscal data sourced from official 2025/2026 AEAT/BOE/Seguridad Social sources
+- [x] **DATA-02**: Source citations visible in UI (footnotes or info boxes)
+- [x] **DATA-03**: IRPF tramos match official 2025 brackets exactly
+- [x] **DATA-04**: Minimos match official 2025/2026 amounts
+- [x] **DATA-05**: Dietas match official Reglamento IRPF rates
 
 ## v2 Requirements
 

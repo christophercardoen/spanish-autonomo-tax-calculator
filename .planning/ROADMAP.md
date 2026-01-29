@@ -12,7 +12,7 @@ This roadmap delivers a single-file HTML tax calculator with Excel export for a 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Fiscal Foundation** - Core IRPF/RETA calculations with verified 2025/2026 rates
+- [x] **Phase 1: Fiscal Foundation** - Core IRPF/RETA calculations with verified 2025/2026 rates
 - [ ] **Phase 2: Expense Tracking** - Spain deductible and Belgium work cost categorization
 - [ ] **Phase 3: Scenario Engine** - Pre-configured scenarios (A-E) with live editing and comparison
 - [ ] **Phase 4: Belgium Calendar** - Interactive Feb-Dec 2026 calendar with 183-day tracking
@@ -41,16 +41,17 @@ Plans:
 ### Phase 2: Expense Tracking
 **Goal**: User can input and categorize business expenses vs private costs
 **Depends on**: Phase 1
-**Requirements**: EXP-01, EXP-02, EXP-03, EXP-04, EXP-05
+**Requirements**: EXP-01, EXP-02, EXP-03, EXP-04, EXP-05, DATA-05
 **Success Criteria** (what must be TRUE):
   1. Spain deductible expenses display with formulas visible (e.g., "huur 1,155 EUR x 30% = 346.50 EUR")
   2. Belgium work costs switchable between 1,000 EUR and 2,500 EUR monthly patterns
   3. Private expenses (1,727 EUR/month) tracked separately and excluded from deductions
   4. Each expense shows clear "deductible" or "private" categorization
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md - Expense data system with localStorage and Belgium toggle
+- [ ] 02-02-PLAN.md - Expense UI sections and Phase 1 integration
 
 ### Phase 3: Scenario Engine
 **Goal**: User can compare multiple income scenarios side-by-side with live editing
@@ -140,9 +141,9 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Fiscal Foundation | 2/2 | ✓ Complete | 2026-01-29 |
-| 2. Expense Tracking | 0/1 | Not started | - |
-| 3. Scenario Engine | 0/2 | Not started | - |
+| 1. Fiscal Foundation | 2/2 | Complete | 2026-01-29 |
+| 2. Expense Tracking | 2/2 | Complete | 2026-01-29 |
+| 3. Scenario Engine | 0/2 | Ready | - |
 | 4. Belgium Calendar | 0/2 | Not started | - |
 | 5. Dashboard UI | 0/3 | Not started | - |
 | 6. Excel Calculator | 0/2 | Not started | - |
