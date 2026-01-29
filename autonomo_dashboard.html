@@ -179,6 +179,209 @@
       opacity: 1;
       font-weight: 600;
     }
+
+    /* Expense Sections */
+    .expenses-container {
+      margin-top: 2rem;
+    }
+
+    .expense-section {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .expense-section.spain-deductible {
+      border-left: 3px solid #4ade80;  /* Green - deductible */
+    }
+
+    .expense-section.belgium-costs {
+      border-left: 3px solid #60a5fa;  /* Blue - Belgium */
+    }
+
+    .expense-section.private {
+      border-left: 3px solid #f87171;  /* Red - not deductible */
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .section-title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-total {
+      font-family: 'JetBrains Mono', monospace;
+      opacity: 0.8;
+    }
+
+    .expense-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .expense-row:last-child {
+      border-bottom: none;
+    }
+
+    .expense-name {
+      font-weight: 500;
+      min-width: 150px;
+    }
+
+    .expense-formula {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      flex: 1;
+      text-align: center;
+    }
+
+    .expense-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      min-width: 200px;
+      text-align: right;
+    }
+
+    .expense-actions {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .delete-btn {
+      background: transparent;
+      border: 1px solid #f87171;
+      color: #f87171;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .delete-btn:hover {
+      background: #f87171;
+      color: var(--bg);
+    }
+
+    /* Add Expense Form */
+    .add-expense-btn {
+      background: transparent;
+      border: 1px dashed rgba(255,255,255,0.3);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+
+    .add-expense-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .add-form {
+      background: rgba(0,0,0,0.2);
+      padding: 1rem;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+
+    .add-form.hidden {
+      display: none;
+    }
+
+    .add-form h4 {
+      margin: 0 0 1rem 0;
+      color: var(--accent);
+    }
+
+    .form-row {
+      margin-bottom: 0.75rem;
+    }
+
+    .form-row label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .form-row input,
+    .form-row select {
+      padding: 0.5rem;
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      color: var(--text);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .form-actions button {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .form-actions button:first-child {
+      background: var(--accent);
+      border: none;
+      color: var(--bg);
+    }
+
+    .form-actions button:last-child {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--text);
+    }
+
+    /* Belgium breakdown formula */
+    .belgium-breakdown {
+      font-size: 0.8rem;
+      opacity: 0.6;
+      margin-top: 0.25rem;
+      font-style: italic;
+    }
+
+    /* Reset button */
+    .reset-btn {
+      background: transparent;
+      border: 1px solid #f87171;
+      color: #f87171;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .reset-btn:hover {
+      background: #f87171;
+      color: var(--bg);
+    }
   </style>
 </head>
 <body>
