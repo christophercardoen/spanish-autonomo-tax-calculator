@@ -486,22 +486,22 @@
 
         <h3>Deductions</h3>
         <div class="breakdown">
-          RETA (Seguridad Social): ${formatEUR(r.retaAnnual)} (${formatEUR(r.retaMonthly)}/month)<br>
+          RETA (Seguridad Social): ${formatEUR(r.retaAnnual)} (${formatEUR(r.retaMonthly)}/month) ${sourceHint('RETA')}<br>
           Business Expenses: ${formatEUR(r.annualExpenses)}<br>
           <strong>Total Deductible: ${formatEUR(r.totalDeductible)}</strong>
         </div>
 
-        <h3>IRPF Calculation</h3>
+        <h3>IRPF Calculation ${sourceHint('IRPF_BRACKETS')}</h3>
         <div class="breakdown">
           Rendimiento Neto Previo: ${formatEUR(r.rendimientoNetoPrevio)}<br>
-          Gastos Dificil Justificacion (5%, max 2000): ${formatEUR(r.gastosDificil)}<br>
+          Gastos Dificil Justificacion (5%, max 2000): ${formatEUR(r.gastosDificil)} ${sourceHint('GASTOS_DIFICIL')}<br>
           <strong>Rendimiento Neto / Base Liquidable: ${formatEUR(r.baseLiquidable)}</strong>
         </div>
 
-        <h3>Minimos (reduce tax, not base)</h3>
+        <h3>Minimos (reduce tax, not base) ${sourceHint('MINIMO_APPLICATION')}</h3>
         <div class="breakdown">
-          Minimo Personal: ${formatEUR(r.minimoPersonal)}<br>
-          Minimo por Descendientes: ${formatEUR(r.minimoDescendientes)}<br>
+          Minimo Personal: ${formatEUR(r.minimoPersonal)} ${sourceHint('MINIMO_PERSONAL')}<br>
+          Minimo por Descendientes: ${formatEUR(r.minimoDescendientes)} ${sourceHint('MINIMO_DESCENDIENTES')}<br>
           <strong>Total Minimos: ${formatEUR(r.minimoTotal)}</strong>
         </div>
 
@@ -519,6 +519,8 @@
           Private Costs: ${formatEUR(r.privateCostsMonthly)}/month<br>
           <strong style="color: var(--accent);">Leefgeld (after all costs): ${formatEUR(r.leefgeld)}/month</strong>
         </div>
+
+        ${createFootnotes()}
       `;
 
       document.getElementById('results').innerHTML = html;
