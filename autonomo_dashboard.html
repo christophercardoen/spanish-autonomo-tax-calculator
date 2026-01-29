@@ -111,6 +111,57 @@
     });
 
     // ============================================================
+    // OFFICIAL SOURCE CITATIONS
+    // ============================================================
+    // All fiscal data traced to official AEAT/BOE/Seguridad Social sources
+    // ============================================================
+
+    const SOURCES = Object.freeze({
+      IRPF_BRACKETS: {
+        name: "IRPF Tramos 2025",
+        source: "AEAT / Wolters Kluwer",
+        url: "https://www.wolterskluwer.com/es-es/expert-insights/tramos-retenciones-irpf-2025-novedades",
+        note: "Unchanged from 2024. Combined estatal + autonomica rates.",
+        confidence: "HIGH"
+      },
+      MINIMO_PERSONAL: {
+        name: "Minimo del Contribuyente",
+        source: "AEAT Manual Practico IRPF 2024",
+        url: "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2024/c14-adecuacion-impuesto-circunstancias-personales/cuadro-resumen-minimo-personal-familiar.html",
+        note: "5,550 EUR for all taxpayers regardless of age.",
+        confidence: "HIGH"
+      },
+      MINIMO_DESCENDIENTES: {
+        name: "Minimo por Descendientes",
+        source: "AEAT",
+        url: "https://sede.agenciatributaria.gob.es/Sede/ciudadanos-familias-personas-discapacidad/minimo-personal-familiar/minimo-descendientes.html",
+        note: "2,400 EUR for first child. Add 2,800 EUR if under 3 years old.",
+        confidence: "HIGH"
+      },
+      RETA: {
+        name: "Cuota RETA",
+        source: "User registration document / BOE",
+        url: "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2025-3780",
+        note: "Fixed cuota 428.40 EUR/month from autonomo registration.",
+        confidence: "HIGH"
+      },
+      GASTOS_DIFICIL: {
+        name: "Gastos de Dificil Justificacion",
+        source: "AEAT Estimacion Directa Simplificada",
+        url: "https://sede.agenciatributaria.gob.es/Sede/irpf/empresarios-individuales-profesionales/regimenes-determinar-rendimiento-actividad/estimacion-directa-simplificada.html",
+        note: "5% of rendimiento neto, maximum 2,000 EUR/year. Was 7% only in 2023.",
+        confidence: "HIGH"
+      },
+      MINIMO_APPLICATION: {
+        name: "4-Phase Minimo Method",
+        source: "AEAT Cuotas Integras Example",
+        url: "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2022/c15-calculo-impuesto-determinacion-cuotas-integras/ejemplo-practico-calculo-cuotas-integras-autonomica.html",
+        note: "Minimos reduce TAX LIABILITY, not taxable base. Tax on minimo is subtracted from tax on full base.",
+        confidence: "HIGH"
+      }
+    });
+
+    // ============================================================
     // CALCULATION FUNCTIONS
     // ============================================================
     // Implements official AEAT IRPF calculation methodology
