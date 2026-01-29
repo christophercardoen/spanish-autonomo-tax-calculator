@@ -35,8 +35,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md - Core IRPF/RETA calculation engine with 4-phase minimo method
-- [ ] 01-02-PLAN.md - Source citations and official references in UI
+- [x] 01-01-PLAN.md - Core IRPF/RETA calculation engine with 4-phase minimo method
+- [x] 01-02-PLAN.md - Source citations and official references in UI
 
 ### Phase 2: Expense Tracking
 **Goal**: User can input and categorize business expenses vs private costs
@@ -140,7 +140,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Fiscal Foundation | 0/2 | Planned | - |
+| 1. Fiscal Foundation | 2/2 | ✓ Complete | 2026-01-29 |
 | 2. Expense Tracking | 0/1 | Not started | - |
 | 3. Scenario Engine | 0/2 | Not started | - |
 | 4. Belgium Calendar | 0/2 | Not started | - |

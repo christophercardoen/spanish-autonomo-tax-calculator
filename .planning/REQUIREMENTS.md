@@ -146,21 +146,21 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CALC-01 | Phase 1 | Pending |
-| CALC-02 | Phase 1 | Pending |
-| CALC-03 | Phase 1 | Pending |
-| CALC-04 | Phase 1 | Pending |
-| CALC-05 | Phase 1 | Pending |
-| CALC-06 | Phase 1 | Pending |
-| CALC-07 | Phase 1 | Pending |
-| CALC-08 | Phase 1 | Pending |
-| CALC-09 | Phase 1 | Pending |
-| CALC-10 | Phase 1 | Pending |
-| DATA-01 | Phase 1 | Pending |
-| DATA-02 | Phase 1 | Pending |
-| DATA-03 | Phase 1 | Pending |
-| DATA-04 | Phase 1 | Pending |
-| DATA-05 | Phase 1 | Pending |
+| CALC-01 | Phase 1 | Complete |
+| CALC-02 | Phase 1 | Complete |
+| CALC-03 | Phase 1 | Complete |
+| CALC-04 | Phase 1 | Complete |
+| CALC-05 | Phase 1 | Complete |
+| CALC-06 | Phase 1 | Complete |
+| CALC-07 | Phase 1 | Complete |
+| CALC-08 | Phase 1 | Complete |
+| CALC-09 | Phase 1 | Complete |
+| CALC-10 | Phase 1 | Complete |
+| DATA-01 | Phase 1 | Complete |
+| DATA-02 | Phase 1 | Complete |
+| DATA-03 | Phase 1 | Complete |
+| DATA-04 | Phase 1 | Complete |
+| DATA-05 | Phase 1 | Deferred to Phase 2 |
 | EXP-01 | Phase 2 | Pending |
 | EXP-02 | Phase 2 | Pending |
 | EXP-03 | Phase 2 | Pending |
