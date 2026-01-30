@@ -1706,10 +1706,118 @@
       recalculateTotals();
     }
 
+    // ============================================================
+    // SCENARIO CARD RENDERING
+    // ============================================================
+    // Renders scenario cards sorted by leefgeld (highest first)
+    // ============================================================
+
+    /**
+     * Render all scenario cards sorted by leefgeld (highest first)
+     * First card (optimal) shows "Highest Leefgeld" badge
+     */
+    function renderScenarioCards() {
+      const container = document.getElementById('scenarioCards');
+      if (!container) return;
+
+      const sorted = getSortedScenarios();
+
+      container.innerHTML = sorted.map((scenario, index) => {
+        const isOptimal = index === 0;
+        const isSelected = scenarioState.selected.includes(scenario.id);
+        const isCustom = !scenario.isPreset;
+        const belgiumCost = scenario.belgiumPattern === 'high' ? 2500 : 1000;
+        const totalExpenses = scenario.monthlyExpenses + belgiumCost;
+
+        const classes = [
+          'scenario-card',
+          isOptimal ? 'optimal' : '',
+          isSelected ? 'selected' : '',
+          isCustom ? 'custom' : ''
+        ].filter(Boolean).join(' ');
+
+        return `
+          <div class="${classes}" data-id="${scenario.id}">
+            <div class="card-header">
+              <input type="checkbox"
+                     ${isSelected ? 'checked' : ''}
+                     onchange="toggleScenarioSelection('${scenario.id}')"
+                     aria-label="Select ${scenario.name} for comparison">
+              <h3>${scenario.name}</h3>
+              ${isOptimal ? '<span class="optimal-badge">Highest Leefgeld</span>' : ''}
+            </div>
+
+            <div class="card-metrics">
+              <div class="metric">
+                <span class="label">Revenue</span>
+                <span class="value">${formatEUR(scenario.monthlyRevenue)}/mo</span>
+              </div>
+              <div class="metric">
+                <span class="label">Expenses</span>
+                <span class="value">${formatEUR(totalExpenses)}/mo</span>
+              </div>
+              <div class="metric">
+                <span class="label">IRPF</span>
+                <span class="value">${formatEUR(scenario.results.cuotaIntegra / 12)}/mo</span>
+              </div>
+              <div class="metric">
+                <span class="label">RETA</span>
+                <span class="value">${formatEUR(scenario.results.retaMonthly)}/mo</span>
+              </div>
+              <div class="metric highlight">
+                <span class="label">Leefgeld</span>
+                <span class="value">${formatEUR(scenario.results.leefgeld)}/mo</span>
+              </div>
+            </div>
+
+            <button class="edit-btn" onclick="openEditModal('${scenario.id}')">
+              Edit
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Toggle scenario selection for comparison
+     * Updates state, saves to localStorage, and re-renders
+     *
+     * @param {string} scenarioId - ID of scenario to toggle
+     */
+    function toggleScenarioSelection(scenarioId) {
+      const idx = scenarioState.selected.indexOf(scenarioId);
+      if (idx === -1) {
+        scenarioState.selected.push(scenarioId);
+      } else {
+        scenarioState.selected.splice(idx, 1);
+      }
+      saveScenarioState();
+      renderScenarioCards();
+      // renderComparisonTable() - Plan 03
+    }
+
+    /**
+     * Open edit modal for a scenario
+     * Placeholder - will be implemented in Plan 02
+     *
+     * @param {string} scenarioId - ID of scenario to edit
+     */
+    function openEditModal(scenarioId) {
+      // Implemented in Plan 02
+      console.log('Edit modal not yet implemented:', scenarioId);
+    }
+
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', () => {
+      // Initialize scenario state
+      scenarioState = initScenarioState();
+
+      // Existing Phase 2 initialization
       renderAllSections();
       recalculateTotals();
+
+      // Phase 3 initialization
+      renderScenarioCards();
     });
   </script>
 </body>
