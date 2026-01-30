@@ -628,6 +628,258 @@
     let expenseData = loadExpenses();
 
     // ============================================================
+    // SCENARIO PRESETS
+    // ============================================================
+    // Pre-configured scenarios (A-E) from CLAUDE.md
+    // Values: A(3K), B(6K), C(9K), D(12K), E(18K)
+    // Belgium patterns: A/B use 'low' (1K), C/D/E use 'high' (2.5K)
+    // ============================================================
+
+    const SCENARIO_PRESETS = Object.freeze({
+      'A': Object.freeze({
+        id: 'A',
+        name: 'Scenario A',
+        isPreset: true,
+        monthlyRevenue: 3000,
+        monthlyExpenses: 750,
+        belgiumPattern: 'low',  // 1000 EUR
+        hasDescendant: true,
+        fiscalOverrides: null
+      }),
+      'B': Object.freeze({
+        id: 'B',
+        name: 'Scenario B',
+        isPreset: true,
+        monthlyRevenue: 6000,
+        monthlyExpenses: 1500,
+        belgiumPattern: 'low',
+        hasDescendant: true,
+        fiscalOverrides: null
+      }),
+      'C': Object.freeze({
+        id: 'C',
+        name: 'Scenario C',
+        isPreset: true,
+        monthlyRevenue: 9000,
+        monthlyExpenses: 3000,
+        belgiumPattern: 'high',  // 2500 EUR
+        hasDescendant: true,
+        fiscalOverrides: null
+      }),
+      'D': Object.freeze({
+        id: 'D',
+        name: 'Scenario D',
+        isPreset: true,
+        monthlyRevenue: 12000,
+        monthlyExpenses: 5000,
+        belgiumPattern: 'high',
+        hasDescendant: true,
+        fiscalOverrides: null
+      }),
+      'E': Object.freeze({
+        id: 'E',
+        name: 'Scenario E',
+        isPreset: true,
+        monthlyRevenue: 18000,
+        monthlyExpenses: 8000,
+        belgiumPattern: 'high',
+        hasDescendant: true,
+        fiscalOverrides: null
+      })
+    });
+
+    // ============================================================
+    // SCENARIO STATE MANAGEMENT
+    // ============================================================
+    // Centralized state with localStorage persistence
+    // ============================================================
+
+    const SCENARIO_STORAGE_KEY = 'autonomo_scenarios_v1';
+
+    // Scenario state - initialized on DOMContentLoaded
+    let scenarioState = null;
+
+    /**
+     * Initialize scenario state from localStorage or defaults
+     * @returns {object} - Scenario state object
+     */
+    function initScenarioState() {
+      try {
+        const stored = localStorage.getItem(SCENARIO_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed.version === 1) {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to load scenarios:', e.message);
+      }
+      // Return default state with presets
+      return {
+        version: 1,
+        scenarios: structuredClone(SCENARIO_PRESETS),
+        selected: [],
+        customOrder: []
+      };
+    }
+
+    /**
+     * Save scenario state to localStorage
+     * @returns {boolean} - True if save succeeded
+     */
+    function saveScenarioState() {
+      try {
+        localStorage.setItem(SCENARIO_STORAGE_KEY, JSON.stringify(scenarioState));
+        return true;
+      } catch (e) {
+        console.warn('Failed to save scenarios:', e.message);
+        return false;
+      }
+    }
+
+    // ============================================================
+    // SCENARIO CALCULATION FUNCTIONS
+    // ============================================================
+    // Extends Phase 1 calculateFullIRPF with fiscal override support
+    // ============================================================
+
+    /**
+     * Calculate full IRPF with optional fiscal configuration overrides
+     * This is a copy of Phase 1's calculateFullIRPF but accepts a fiscal parameter
+     * for what-if analysis (scenarios can override RETA, minimos, brackets)
+     *
+     * @param {number} monthlyRevenue - Gross monthly revenue in EUR
+     * @param {number} monthlyDeductibleExpenses - Monthly deductible business expenses in EUR
+     * @param {boolean} hasDescendant - Whether user has 1 dependent child
+     * @param {object|null} fiscal - Optional fiscal config overrides (defaults to FISCAL_2025)
+     * @returns {object} - Complete calculation breakdown
+     */
+    function calculateFullIRPFWithFiscal(monthlyRevenue, monthlyDeductibleExpenses = 0, hasDescendant = true, fiscal = null) {
+      // Use provided fiscal config or default to FISCAL_2025
+      const config = fiscal || FISCAL_2025;
+
+      // Step 1: Annualize inputs
+      const annualRevenue = monthlyRevenue * 12;
+      const annualExpenses = monthlyDeductibleExpenses * 12;
+
+      // Step 2: Total deductible = expenses + RETA
+      const retaAnnual = config.RETA_ANNUAL || FISCAL_2025.RETA_ANNUAL;
+      const totalDeductible = annualExpenses + retaAnnual;
+
+      // Step 3: Rendimiento Neto Previo (before gastos dificil)
+      const rendimientoNetoPrevio = annualRevenue - totalDeductible;
+
+      // Step 4: Gastos dificil justificacion (use FISCAL_2025 rates - these don't change)
+      const gastosDificil = calculateGastosDificil(rendimientoNetoPrevio);
+
+      // Step 5: Rendimiento Neto = Base Liquidable (for autonomo)
+      const rendimientoNeto = rendimientoNetoPrevio - gastosDificil;
+      const baseLiquidable = Math.max(0, rendimientoNeto);
+
+      // Step 6: Calculate minimos (can be overridden)
+      const minimoPersonal = config.MINIMO_PERSONAL || FISCAL_2025.MINIMO_PERSONAL;
+      const minimoDescendientes = hasDescendant
+        ? (config.MINIMO_DESCENDIENTES_PRIMERO || FISCAL_2025.MINIMO_DESCENDIENTES_PRIMERO)
+        : 0;
+      const minimoTotal = minimoPersonal + minimoDescendientes;
+
+      // Step 7: Cuota Integra using 4-phase method
+      const cuotaIntegra = calculateCuotaIntegra(baseLiquidable, minimoTotal);
+
+      // Step 8: Effective tax rate
+      const effectiveRate = rendimientoNeto > 0 ? (cuotaIntegra / rendimientoNeto) : 0;
+
+      // Step 9: Net income calculations
+      const netAnnual = annualRevenue - totalDeductible - gastosDificil - cuotaIntegra;
+      const netMonthly = netAnnual / 12;
+
+      // Step 10: Leefgeld (after private costs)
+      const privateCostsMonthly = config.PRIVATE_COSTS_MONTHLY || FISCAL_2025.PRIVATE_COSTS_MONTHLY;
+      const leefgeld = netMonthly - privateCostsMonthly;
+
+      const retaMonthly = config.RETA_MONTHLY || FISCAL_2025.RETA_MONTHLY;
+
+      // Return all values matching Phase 1's calculateFullIRPF return structure
+      return {
+        // Inputs
+        monthlyRevenue,
+        annualRevenue,
+        monthlyExpenses: monthlyDeductibleExpenses,
+        annualExpenses,
+
+        // Deductions
+        retaMonthly,
+        retaAnnual,
+        totalDeductible,
+
+        // Calculation chain
+        rendimientoNetoPrevio,
+        gastosDificil,
+        rendimientoNeto,
+        baseLiquidable,
+
+        // Minimos (for display)
+        minimoPersonal,
+        minimoDescendientes,
+        minimoTotal,
+
+        // Tax
+        cuotaIntegra,
+        effectiveRate,
+
+        // Net income
+        netAnnual,
+        netMonthly,
+        leefgeld,
+
+        // Private costs (for reference)
+        privateCostsMonthly
+      };
+    }
+
+    /**
+     * Calculate results for a scenario
+     * Wraps calculateFullIRPFWithFiscal with scenario-specific inputs
+     *
+     * @param {object} scenario - Scenario object
+     * @returns {object} - Complete calculation results
+     */
+    function calculateScenarioResults(scenario) {
+      const belgiumCost = scenario.belgiumPattern === 'high' ? 2500 : 1000;
+      const totalDeductible = scenario.monthlyExpenses + belgiumCost;
+
+      // Allow fiscal overrides for what-if analysis
+      const fiscal = scenario.fiscalOverrides
+        ? { ...FISCAL_2025, ...scenario.fiscalOverrides }
+        : FISCAL_2025;
+
+      // Call calculateFullIRPFWithFiscal (derived from Phase 1's calculateFullIRPF)
+      return calculateFullIRPFWithFiscal(
+        scenario.monthlyRevenue,
+        totalDeductible,
+        scenario.hasDescendant,
+        fiscal
+      );
+    }
+
+    /**
+     * Get all scenarios sorted by leefgeld (highest first)
+     * Each scenario includes its calculated results
+     *
+     * @returns {array} - Array of scenarios with results, sorted by leefgeld descending
+     */
+    function getSortedScenarios() {
+      const scenarios = Object.values(scenarioState.scenarios);
+      return scenarios
+        .map(s => ({
+          ...s,
+          results: calculateScenarioResults(s)
+        }))
+        .sort((a, b) => b.results.leefgeld - a.results.leefgeld);
+    }
+
+    // ============================================================
     // BELGIUM PATTERN TOGGLE
     // ============================================================
     // Toggle between low-travel (1K/month) and high-travel (2.5K/month)
