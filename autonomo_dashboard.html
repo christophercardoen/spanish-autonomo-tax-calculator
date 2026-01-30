@@ -2142,6 +2142,204 @@
       currentEditScenarioId = null;
     }
 
+    // ============================================================
+    // LIVE RECALCULATION
+    // ============================================================
+    // requestAnimationFrame-debounced live recalculation on input
+    // ============================================================
+
+    let liveCalcRafId = null;
+
+    /**
+     * Handle input change in edit modal
+     * Uses requestAnimationFrame for debouncing
+     */
+    function onScenarioInputChange() {
+      // Cancel any pending recalculation
+      if (liveCalcRafId) {
+        cancelAnimationFrame(liveCalcRafId);
+      }
+
+      // Schedule recalculation for next frame
+      liveCalcRafId = requestAnimationFrame(() => {
+        updateLiveResults();
+        liveCalcRafId = null;
+      });
+    }
+
+    /**
+     * Get current values from edit form
+     * @returns {object} - Form values with fiscalOverrides if any
+     */
+    function getEditFormValues() {
+      const monthlyRevenue = parseFloat(document.getElementById('editMonthlyRevenue').value) || 0;
+      const monthlyExpenses = parseFloat(document.getElementById('editMonthlyExpenses').value) || 0;
+      const belgiumPattern = document.getElementById('editBelgiumPattern').value;
+      const hasDescendant = document.getElementById('editHasDescendant').checked;
+
+      // Fiscal overrides (empty string = use default)
+      const retaOverride = document.getElementById('editRetaOverride').value;
+      const minimoPersonalOverride = document.getElementById('editMinimoPersonalOverride').value;
+      const minimoDescOverride = document.getElementById('editMinimoDescOverride').value;
+
+      let fiscalOverrides = null;
+      if (retaOverride || minimoPersonalOverride || minimoDescOverride) {
+        fiscalOverrides = {};
+        if (retaOverride) {
+          fiscalOverrides.RETA_MONTHLY = parseFloat(retaOverride);
+          fiscalOverrides.RETA_ANNUAL = parseFloat(retaOverride) * 12;
+        }
+        if (minimoPersonalOverride) {
+          fiscalOverrides.MINIMO_PERSONAL = parseFloat(minimoPersonalOverride);
+        }
+        if (minimoDescOverride) {
+          fiscalOverrides.MINIMO_DESCENDIENTES_PRIMERO = parseFloat(minimoDescOverride);
+        }
+      }
+
+      return {
+        name: document.getElementById('editScenarioName').value.trim(),
+        monthlyRevenue,
+        monthlyExpenses,
+        belgiumPattern,
+        hasDescendant,
+        fiscalOverrides
+      };
+    }
+
+    /**
+     * Update live results pane with calculated values
+     * Called on every input change (debounced)
+     */
+    function updateLiveResults() {
+      const values = getEditFormValues();
+      const results = calculateScenarioResults(values);
+
+      // Verify results object has all expected properties (defensive programming)
+      // These properties are guaranteed by calculateFullIRPFWithFiscal in Plan 03-01
+      const requiredProps = [
+        'annualRevenue', 'totalDeductible', 'rendimientoNeto', 'gastosDificil',
+        'baseLiquidable', 'minimoTotal', 'cuotaIntegra', 'effectiveRate',
+        'retaAnnual', 'netMonthly', 'leefgeld'
+      ];
+      for (const prop of requiredProps) {
+        if (results[prop] === undefined) {
+          console.error(`updateLiveResults: missing property '${prop}' in results object`);
+        }
+      }
+
+      const container = document.getElementById('liveEditResults');
+      container.innerHTML = `
+        <div class="live-result-row">
+          <span class="label">Annual Revenue</span>
+          <span class="value">${formatEUR(results.annualRevenue)}</span>
+        </div>
+        <div class="live-result-row">
+          <span class="label">Total Deductible</span>
+          <span class="value">${formatEUR(results.totalDeductible)}</span>
+        </div>
+        <div class="live-result-row">
+          <span class="label">Rendimiento Neto</span>
+          <span class="value">${formatEUR(results.rendimientoNeto)}</span>
+        </div>
+        <div class="live-result-row">
+          <span class="label">Gastos Dificil (5%)</span>
+          <span class="value">${formatEUR(results.gastosDificil)}</span>
+        </div>
+        <div class="live-result-row">
+          <span class="label">Base Liquidable</span>
+          <span class="value">${formatEUR(results.baseLiquidable)}</span>
+        </div>
+        <div class="live-result-row">
+          <span class="label">Total Minimos</span>
+          <span class="value">${formatEUR(results.minimoTotal)}</span>
+        </div>
+        <div class="live-result-row">
+          <span class="label">Cuota Integra (IRPF)</span>
+          <span class="value">${formatEUR(results.cuotaIntegra)}</span>
+        </div>
+        <div class="live-result-row">
+          <span class="label">Effective Tax Rate</span>
+          <span class="value">${formatPercent(results.effectiveRate)}</span>
+        </div>
+        <div class="live-result-row">
+          <span class="label">RETA Annual</span>
+          <span class="value">${formatEUR(results.retaAnnual)}</span>
+        </div>
+        <div class="live-result-row">
+          <span class="label">Net Monthly</span>
+          <span class="value">${formatEUR(results.netMonthly)}</span>
+        </div>
+        <div class="live-result-row highlight">
+          <span class="label">Leefgeld</span>
+          <span class="value">${formatEUR(results.leefgeld)}/mo</span>
+        </div>
+      `;
+    }
+
+    // ============================================================
+    // SAVE AND DELETE FUNCTIONALITY
+    // ============================================================
+
+    /**
+     * Save changes from edit form to scenario state
+     * Called when dialog closes with 'save' return value
+     */
+    function saveScenarioChanges() {
+      if (!currentEditScenarioId) return;
+
+      const values = getEditFormValues();
+
+      // Validate name
+      if (!values.name) {
+        alert('Please enter a scenario name');
+        return;
+      }
+
+      const scenario = scenarioState.scenarios[currentEditScenarioId];
+      if (!scenario) return;
+
+      // Update scenario (keep id and isPreset)
+      Object.assign(scenario, {
+        name: values.name,
+        monthlyRevenue: values.monthlyRevenue,
+        monthlyExpenses: values.monthlyExpenses,
+        belgiumPattern: values.belgiumPattern,
+        hasDescendant: values.hasDescendant,
+        fiscalOverrides: values.fiscalOverrides
+      });
+
+      saveScenarioState();
+      renderScenarioCards();
+      // renderComparisonTable() - Plan 03
+    }
+
+    /**
+     * Confirm and delete current scenario
+     * Only works for custom scenarios (not presets A-E)
+     */
+    function confirmDeleteScenario() {
+      if (!currentEditScenarioId) return;
+
+      const scenario = scenarioState.scenarios[currentEditScenarioId];
+      if (!scenario) return;
+
+      if (scenario.isPreset) {
+        alert('Cannot delete preset scenarios (A-E). You can only delete custom scenarios.');
+        return;
+      }
+
+      if (confirm(`Delete "${scenario.name}"? This cannot be undone.`)) {
+        delete scenarioState.scenarios[currentEditScenarioId];
+        scenarioState.customOrder = scenarioState.customOrder.filter(id => id !== currentEditScenarioId);
+        scenarioState.selected = scenarioState.selected.filter(id => id !== currentEditScenarioId);
+        saveScenarioState();
+        closeEditModal();
+        renderScenarioCards();
+        // renderComparisonTable() - Plan 03
+      }
+    }
+
     /**
      * Initialize edit dialog event handlers
      * Called on DOMContentLoaded
