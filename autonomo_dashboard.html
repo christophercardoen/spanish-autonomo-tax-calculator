@@ -2085,15 +2085,89 @@
       // renderComparisonTable() - Plan 03
     }
 
+    // ============================================================
+    // EDIT MODAL FUNCTIONALITY
+    // ============================================================
+    // Modal for editing scenario values with live results preview
+    // ============================================================
+
+    let currentEditScenarioId = null;
+
     /**
      * Open edit modal for a scenario
-     * Placeholder - will be implemented in Plan 02
+     * Populates form with scenario values and shows modal
      *
      * @param {string} scenarioId - ID of scenario to edit
      */
     function openEditModal(scenarioId) {
-      // Implemented in Plan 02
-      console.log('Edit modal not yet implemented:', scenarioId);
+      const scenario = scenarioState.scenarios[scenarioId];
+      if (!scenario) return;
+
+      currentEditScenarioId = scenarioId;
+      const dialog = document.getElementById('editScenarioDialog');
+
+      // Populate form fields
+      document.getElementById('editScenarioName').value = scenario.name;
+      document.getElementById('editMonthlyRevenue').value = scenario.monthlyRevenue;
+      document.getElementById('editMonthlyExpenses').value = scenario.monthlyExpenses;
+      document.getElementById('editBelgiumPattern').value = scenario.belgiumPattern;
+      document.getElementById('editHasDescendant').checked = scenario.hasDescendant;
+
+      // Populate fiscal overrides (empty means use default)
+      const overrides = scenario.fiscalOverrides || {};
+      document.getElementById('editRetaOverride').value = overrides.RETA_MONTHLY || '';
+      document.getElementById('editMinimoPersonalOverride').value = overrides.MINIMO_PERSONAL || '';
+      document.getElementById('editMinimoDescOverride').value = overrides.MINIMO_DESCENDIENTES_PRIMERO || '';
+
+      // Show/hide delete button based on preset status
+      const deleteBtn = document.getElementById('deleteScenarioBtn');
+      deleteBtn.style.display = scenario.isPreset ? 'none' : 'block';
+
+      // Update dialog title
+      document.getElementById('dialogTitle').textContent = `Edit ${scenario.name}`;
+
+      // Calculate and show initial results
+      updateLiveResults();
+
+      // Open modal
+      dialog.showModal();
+    }
+
+    /**
+     * Close edit modal without saving
+     */
+    function closeEditModal() {
+      const dialog = document.getElementById('editScenarioDialog');
+      dialog.close();
+      currentEditScenarioId = null;
+    }
+
+    /**
+     * Initialize edit dialog event handlers
+     * Called on DOMContentLoaded
+     */
+    function initEditDialog() {
+      const dialog = document.getElementById('editScenarioDialog');
+      if (!dialog) return;
+
+      // Handle form submit (Save button)
+      dialog.addEventListener('close', () => {
+        if (dialog.returnValue === 'save') {
+          saveScenarioChanges();
+        }
+      });
+
+      // Prevent Esc from saving (cancel event)
+      dialog.addEventListener('cancel', (e) => {
+        // Default behavior is fine - just closes without saving
+      });
+
+      // Attach input change handlers for live recalculation
+      const inputs = dialog.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        input.addEventListener('input', onScenarioInputChange);
+        input.addEventListener('change', onScenarioInputChange); // For checkboxes and selects
+      });
     }
 
     // Initialize on page load
@@ -2107,6 +2181,7 @@
 
       // Phase 3 initialization
       renderScenarioCards();
+      initEditDialog();
     });
   </script>
 </body>
