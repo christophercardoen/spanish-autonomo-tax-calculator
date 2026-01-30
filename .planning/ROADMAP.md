@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Fiscal Foundation** - Core IRPF/RETA calculations with verified 2025/2026 rates
 - [x] **Phase 2: Expense Tracking** - Spain deductible and Belgium work cost categorization
-- [ ] **Phase 3: Scenario Engine** - Pre-configured scenarios (A-E) with live editing and comparison
+- [x] **Phase 3: Scenario Engine** - Pre-configured scenarios (A-E) with live editing and comparison
 - [ ] **Phase 4: Belgium Calendar** - Interactive Feb-Dec 2026 calendar with 183-day tracking
 - [ ] **Phase 5: Dashboard UI** - Professional financial dashboard with Bloomberg-inspired aesthetics
 - [ ] **Phase 6: Excel Calculator** - Multi-sheet workbook with formulas, not hardcoded values
@@ -66,9 +66,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md - Scenario data system and horizontal card layout with optimal indicator
-- [ ] 03-02-PLAN.md - Edit modal with split view and live recalculation
-- [ ] 03-03-PLAN.md - Comparison table with sticky header and custom scenario creation
+- [x] 03-01-PLAN.md - Scenario data system and horizontal card layout with optimal indicator
+- [x] 03-02-PLAN.md - Edit modal with split view and live recalculation
+- [x] 03-03-PLAN.md - Comparison table with sticky header and custom scenario creation
 
 ### Phase 4: Belgium Calendar
 **Goal**: User can track and manage Belgium presence days with 183-day threshold awareness
@@ -144,7 +144,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 |-------|----------------|--------|-----------|
 | 1. Fiscal Foundation | 2/2 | Complete | 2026-01-29 |
 | 2. Expense Tracking | 2/2 | Complete | 2026-01-29 |
-| 3. Scenario Engine | 0/3 | Ready | - |
+| 3. Scenario Engine | 3/3 | Complete | 2026-01-30 |
 | 4. Belgium Calendar | 0/2 | Not started | - |
 | 5. Dashboard UI | 0/3 | Not started | - |
 | 6. Excel Calculator | 0/2 | Not started | - |
