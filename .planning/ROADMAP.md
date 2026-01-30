@@ -13,7 +13,7 @@ This roadmap delivers a single-file HTML tax calculator with Excel export for a 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Fiscal Foundation** - Core IRPF/RETA calculations with verified 2025/2026 rates
-- [ ] **Phase 2: Expense Tracking** - Spain deductible and Belgium work cost categorization
+- [x] **Phase 2: Expense Tracking** - Spain deductible and Belgium work cost categorization
 - [ ] **Phase 3: Scenario Engine** - Pre-configured scenarios (A-E) with live editing and comparison
 - [ ] **Phase 4: Belgium Calendar** - Interactive Feb-Dec 2026 calendar with 183-day tracking
 - [ ] **Phase 5: Dashboard UI** - Professional financial dashboard with Bloomberg-inspired aesthetics
@@ -50,8 +50,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md - Expense data system with localStorage and Belgium toggle
-- [ ] 02-02-PLAN.md - Expense UI sections and Phase 1 integration
+- [x] 02-01-PLAN.md - Expense data system with localStorage and Belgium toggle
+- [x] 02-02-PLAN.md - Expense UI sections and Phase 1 integration
 
 ### Phase 3: Scenario Engine
 **Goal**: User can compare multiple income scenarios side-by-side with live editing
@@ -63,11 +63,12 @@ Plans:
   3. User can create custom scenarios with arbitrary revenue/expense values
   4. Comparison table shows all scenarios side-by-side with highlighting for selected scenarios
   5. Optimal scenario (highest leefgeld) is visually indicated
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
+- [ ] 03-01-PLAN.md - Scenario data system and horizontal card layout with optimal indicator
+- [ ] 03-02-PLAN.md - Edit modal with split view and live recalculation
+- [ ] 03-03-PLAN.md - Comparison table with sticky header and custom scenario creation
 
 ### Phase 4: Belgium Calendar
 **Goal**: User can track and manage Belgium presence days with 183-day threshold awareness
@@ -143,7 +144,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 |-------|----------------|--------|-----------|
 | 1. Fiscal Foundation | 2/2 | Complete | 2026-01-29 |
 | 2. Expense Tracking | 2/2 | Complete | 2026-01-29 |
-| 3. Scenario Engine | 0/2 | Ready | - |
+| 3. Scenario Engine | 0/3 | Ready | - |
 | 4. Belgium Calendar | 0/2 | Not started | - |
 | 5. Dashboard UI | 0/3 | Not started | - |
 | 6. Excel Calculator | 0/2 | Not started | - |
