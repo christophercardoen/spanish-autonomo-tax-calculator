@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 2 - Expense Tracking (COMPLETE)
+**Current focus:** Phase 3 - Scenario Engine (IN PROGRESS)
 
 ## Current Position
 
-Phase: 2 of 7 (Expense Tracking) - COMPLETE
-Plan: 2 of 2 in current phase
-Status: Phase complete
-Last activity: 2026-01-29 - Completed 02-02-PLAN.md (Expense Section UI)
+Phase: 3 of 7 (Scenario Engine)
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-01-30 - Completed 03-01-PLAN.md (Scenario Data and Card Layout)
 
-Progress: [███░░░░░░░] 29%
+Progress: [████░░░░░░] 36%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 3.5 min
-- Total execution time: 14 min
+- Total plans completed: 5
+- Average duration: 3.2 min
+- Total execution time: 16 min
 
 **By Phase:**
 
@@ -29,10 +29,11 @@ Progress: [███░░░░░░░] 29%
 |-------|-------|-------|----------|
 | 01-fiscal-foundation | 2 | 7 min | 3.5 min |
 | 02-expense-tracking | 2 | 7 min | 3.5 min |
+| 03-scenario-engine | 1 | 2 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (3 min), 01-02 (4 min), 02-01 (3 min), 02-02 (4 min)
-- Trend: Stable
+- Last 5 plans: 01-02 (4 min), 02-01 (3 min), 02-02 (4 min), 03-01 (2 min)
+- Trend: Improving
 
 *Updated after each plan completion*
 
@@ -57,10 +58,14 @@ Recent decisions affecting current work:
 | Global add form for expenses | Single form element for all categories, pre-selects based on source button | 02-02 |
 | Category-aware expense creation | Spain Deductible uses baseAmount+deductionPct, Belgium/Private use flat amount | 02-02 |
 | Live IRPF recalculation | Revenue and expense changes trigger immediate recalculation | 02-02 |
+| SCENARIO_PRESETS frozen objects | Prevent accidental mutation of preset values | 03-01 |
+| calculateFullIRPFWithFiscal | Copy of Phase 1 function with fiscal parameter for what-if analysis | 03-01 |
+| Belgium patterns: A/B low, C/D/E high | A/B use 'low' (1K), C/D/E use 'high' (2.5K) per CLAUDE.md requirements | 03-01 |
+| Leefgeld-based sorting | Highest leefgeld appears first with "Highest Leefgeld" badge | 03-01 |
 
 ### Pending Todos
 
-- Phase 3: Scenario Engine with pre-configured A-E scenarios and custom creation
+- Phase 3: Plan 02 (edit modal), Plan 03 (comparison table)
 
 ### Blockers/Concerns
 
@@ -68,19 +73,20 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-29T20:37:51Z
-Stopped at: Completed 02-02-PLAN.md (Phase 2 complete)
-Resume file: None (ready for Phase 3)
+Last session: 2026-01-30T13:00:23Z
+Stopped at: Completed 03-01-PLAN.md (Scenario Data and Card Layout)
+Resume file: None (ready for 03-02)
 
 ## Key Files Created
 
 | File | Purpose |
 |------|---------|
-| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking UI with add/delete + localStorage |
+| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards with localStorage |
 | .planning/phases/01-fiscal-foundation/01-01-SUMMARY.md | Plan 01-01 execution summary |
 | .planning/phases/01-fiscal-foundation/01-02-SUMMARY.md | Plan 01-02 execution summary |
 | .planning/phases/02-expense-tracking/02-01-SUMMARY.md | Plan 02-01 execution summary |
 | .planning/phases/02-expense-tracking/02-02-SUMMARY.md | Plan 02-02 execution summary |
+| .planning/phases/03-scenario-engine/03-01-SUMMARY.md | Plan 03-01 execution summary |
 
 ## Phase 1 Complete
 
@@ -107,4 +113,16 @@ Phase 2 (Expense Tracking) delivered:
 - Dynamic private costs from expense data
 - All EXP-01 through EXP-05 and DATA-05 requirements satisfied
 
-Ready for Phase 3: Scenario Engine
+## Phase 3 In Progress
+
+Phase 3 (Scenario Engine) progress:
+- Plan 01 COMPLETE: Scenario data and card layout
+  - SCENARIO_PRESETS with A-E frozen objects
+  - Scenario state management with localStorage
+  - calculateFullIRPFWithFiscal for fiscal overrides
+  - Horizontal scrolling scenario cards
+  - Leefgeld-based sorting with optimal badge
+- Plan 02 PENDING: Edit modal with live recalculation
+- Plan 03 PENDING: Comparison table
+
+Next: 03-02-PLAN.md (Edit Modal with Live Recalculation)
