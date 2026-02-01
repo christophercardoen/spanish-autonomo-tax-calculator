@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 4 - Belgium Calendar (In Progress)
+**Current focus:** Phase 5 - Dashboard UI (Next)
 
 ## Current Position
 
-Phase: 4 of 7 (Belgium Calendar)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-01 - Completed 04-02-PLAN.md (Day Status Toggle)
+Phase: 4 of 7 (Belgium Calendar) - COMPLETE
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-01 - Completed 04-03-PLAN.md (Calendar Export)
 
-Progress: [███████░░░] 64%
+Progress: [████████░░] 71%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
-- Average duration: 2.8 min
-- Total execution time: 27 min
+- Total plans completed: 10
+- Average duration: 3.1 min
+- Total execution time: 31 min
 
 **By Phase:**
 
@@ -30,10 +30,10 @@ Progress: [███████░░░] 64%
 | 01-fiscal-foundation | 2 | 7 min | 3.5 min |
 | 02-expense-tracking | 2 | 7 min | 3.5 min |
 | 03-scenario-engine | 3 | 6 min | 2 min |
-| 04-belgium-calendar | 2 | 7 min | 3.5 min |
+| 04-belgium-calendar | 3 | 11 min | 3.7 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-02 (2 min), 03-03 (2 min), 04-01 (4 min), 04-02 (3 min)
+- Last 5 plans: 03-03 (2 min), 04-01 (4 min), 04-02 (3 min), 04-03 (4 min)
 - Trend: Stable execution times
 
 *Updated after each plan completion*
@@ -82,10 +82,17 @@ Recent decisions affecting current work:
 | Conservative threshold counting | Belgium + Travel both count toward 183 days for compliance safety | 04-02 |
 | Deferred save workflow | Allows experimentation before committing; prevents accidental changes | 04-02 |
 | Warning at 170/180/183 | Tiered warnings give time to adjust before exceeding threshold | 04-02 |
+| ICS follows RFC 5545 | Standard format ensures compatibility with major calendar apps | 04-03 |
+| CSV includes summary section | Users can quickly see threshold status without counting rows | 04-03 |
+| Notification auto-hides after 3s | Long enough to read, short enough to not be intrusive | 04-03 |
+| Entry/exit tooltip references treaty | Provides legal basis for conservative counting approach | 04-03 |
+| Belgian holidays as reference only | User should make conscious decision about each holiday | 04-03 |
 
 ### Pending Todos
 
-- Phase 4: Belgium Calendar (1 plan remaining: 04-03)
+- Phase 5: Dashboard UI (12 requirements)
+- Phase 6: Excel Calculator (10 requirements)
+- Phase 7: Compliance & Documentation (10 requirements)
 
 ### Blockers/Concerns
 
@@ -93,15 +100,15 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-01T10:57:20Z
-Stopped at: Completed 04-02-PLAN.md (Day Status Toggle)
+Last session: 2026-02-01T11:03:48Z
+Stopped at: Completed 04-03-PLAN.md (Calendar Export) - Phase 4 Complete
 Resume file: None
 
 ## Key Files Created
 
 | File | Purpose |
 |------|---------|
-| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table + calendar grid with day picker and counting |
+| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table + calendar grid with exports |
 | .planning/phases/01-fiscal-foundation/01-01-SUMMARY.md | Plan 01-01 execution summary |
 | .planning/phases/01-fiscal-foundation/01-02-SUMMARY.md | Plan 01-02 execution summary |
 | .planning/phases/02-expense-tracking/02-01-SUMMARY.md | Plan 02-01 execution summary |
@@ -111,6 +118,7 @@ Resume file: None
 | .planning/phases/03-scenario-engine/03-03-SUMMARY.md | Plan 03-03 execution summary |
 | .planning/phases/04-belgium-calendar/04-01-SUMMARY.md | Plan 04-01 execution summary |
 | .planning/phases/04-belgium-calendar/04-02-SUMMARY.md | Plan 04-02 execution summary |
+| .planning/phases/04-belgium-calendar/04-03-SUMMARY.md | Plan 04-03 execution summary |
 
 ## Phase 1 Complete
 
@@ -149,20 +157,26 @@ Phase 3 (Scenario Engine) delivered:
 - localStorage persistence for scenarios and selections (SCEN-07)
 - All SCEN-01 through SCEN-07 requirements satisfied
 
-## Phase 4 In Progress
+## Phase 4 Complete
 
-Phase 4 (Belgium Calendar) - Plans 01-02 complete:
-- Calendar data system with localStorage persistence
-- Month grid rendering with Monday-start week alignment
-- Navigation between Feb-Dec 2026
-- Contracted pattern wizard for first-time setup
-- C badge display for contracted days
-- Status colors: Belgium (blue), Spain (green), Travel (orange)
-- Day picker dialog opens on day click
-- Status options: Belgium, Spain, Travel, Unset
-- Monthly and annual count displays
-- Warning thresholds at 170/180/183 days
-- Shift-click bulk selection for range operations
-- Save workflow with unsaved changes indicator
+Phase 4 (Belgium Calendar) delivered:
+- Calendar data system with localStorage persistence (CAL-01)
+- Month grid rendering with Monday-start week alignment (CAL-02)
+- Navigation between Feb-Dec 2026 (CAL-02)
+- Contracted pattern wizard for first-time setup (CAL-04)
+- C badge display for contracted days (CAL-04)
+- Status colors: Belgium (blue), Spain (green), Travel (orange) (CAL-03)
+- Day picker dialog opens on day click (CAL-05)
+- Status options: Belgium, Spain, Travel, Unset (CAL-05)
+- Monthly and annual count displays (CAL-06)
+- Warning thresholds at 170/180/183 days (CAL-06)
+- Shift-click bulk selection for range operations (CAL-07)
+- Save workflow with unsaved changes indicator (CAL-07)
+- ICS export for Google Calendar/Outlook (CAL-08)
+- CSV export with summary statistics (CAL-08)
+- Clipboard copy with notification (CAL-08)
+- Entry/exit day documentation via tooltip (CAL-09)
+- Belgian Public Holidays 2026 reference (CAL-09)
+- All CAL-01 through CAL-09 requirements satisfied
 
-Next: Plan 04-03 (Treaty Information Display)
+Next: Phase 5 - Dashboard UI
