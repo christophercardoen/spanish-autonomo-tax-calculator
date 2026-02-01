@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 3 - Scenario Engine (COMPLETE)
+**Current focus:** Phase 4 - Belgium Calendar (In Progress)
 
 ## Current Position
 
-Phase: 3 of 7 (Scenario Engine)
-Plan: 3 of 3 in current phase - PHASE COMPLETE
-Status: Phase complete
-Last activity: 2026-01-30 - Completed 03-03-PLAN.md (Comparison Table)
+Phase: 4 of 7 (Belgium Calendar)
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-02-01 - Completed 04-01-PLAN.md (Calendar Foundation)
 
-Progress: [██████░░░░] 50%
+Progress: [██████▓░░░] 57%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
-- Average duration: 2.9 min
-- Total execution time: 20 min
+- Total plans completed: 8
+- Average duration: 2.8 min
+- Total execution time: 24 min
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [██████░░░░] 50%
 | 01-fiscal-foundation | 2 | 7 min | 3.5 min |
 | 02-expense-tracking | 2 | 7 min | 3.5 min |
 | 03-scenario-engine | 3 | 6 min | 2 min |
+| 04-belgium-calendar | 1 | 4 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (4 min), 03-01 (2 min), 03-02 (2 min), 03-03 (2 min)
-- Trend: Stable at ~2 min/plan for scenario engine
+- Last 5 plans: 03-01 (2 min), 03-02 (2 min), 03-03 (2 min), 04-01 (4 min)
+- Trend: Stable execution times
 
 *Updated after each plan completion*
 
@@ -72,10 +73,14 @@ Recent decisions affecting current work:
 | optimalMax/optimalMin flags on metrics | Flexible highlighting system for different optimal directions | 03-03 |
 | Template dialog with radio options | Shows all existing scenarios as templates with preview info | 03-03 |
 | structuredClone for scenario copying | Prevents accidental mutation of template scenario | 03-03 |
+| Monday-start week alignment | European standard; (date.getDay() + 6) % 7 for column position | 04-01 |
+| First week ends on first Sunday | After first Sunday that occurs after day 1, isFirstWeek becomes false | 04-01 |
+| Status + contracted flags | Allows visual distinction while preserving day status for counting | 04-01 |
+| Wizard shown via flag | contractedPatternApplied persists in localStorage to prevent re-showing | 04-01 |
 
 ### Pending Todos
 
-- Phase 4: Belgium Calendar (3 plans)
+- Phase 4: Belgium Calendar (2 plans remaining: 04-02, 04-03)
 
 ### Blockers/Concerns
 
@@ -83,15 +88,15 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-30T13:07:33Z
-Stopped at: Completed 03-03-PLAN.md (Comparison Table) - Phase 3 COMPLETE
-Resume file: None (ready for Phase 4)
+Last session: 2026-02-01T10:50:00Z
+Stopped at: Completed 04-01-PLAN.md (Calendar Foundation)
+Resume file: None
 
 ## Key Files Created
 
 | File | Purpose |
 |------|---------|
-| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table with localStorage |
+| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table + calendar grid with localStorage |
 | .planning/phases/01-fiscal-foundation/01-01-SUMMARY.md | Plan 01-01 execution summary |
 | .planning/phases/01-fiscal-foundation/01-02-SUMMARY.md | Plan 01-02 execution summary |
 | .planning/phases/02-expense-tracking/02-01-SUMMARY.md | Plan 02-01 execution summary |
@@ -99,6 +104,7 @@ Resume file: None (ready for Phase 4)
 | .planning/phases/03-scenario-engine/03-01-SUMMARY.md | Plan 03-01 execution summary |
 | .planning/phases/03-scenario-engine/03-02-SUMMARY.md | Plan 03-02 execution summary |
 | .planning/phases/03-scenario-engine/03-03-SUMMARY.md | Plan 03-03 execution summary |
+| .planning/phases/04-belgium-calendar/04-01-SUMMARY.md | Plan 04-01 execution summary |
 
 ## Phase 1 Complete
 
@@ -137,4 +143,14 @@ Phase 3 (Scenario Engine) delivered:
 - localStorage persistence for scenarios and selections (SCEN-07)
 - All SCEN-01 through SCEN-07 requirements satisfied
 
-Next: Phase 4 - Belgium Calendar
+## Phase 4 In Progress
+
+Phase 4 (Belgium Calendar) - Plan 01 complete:
+- Calendar data system with localStorage persistence
+- Month grid rendering with Monday-start week alignment
+- Navigation between Feb-Dec 2026
+- Contracted pattern wizard for first-time setup
+- C badge display for contracted days
+- Status colors: Belgium (blue), Spain (green), Travel (orange)
+
+Next: Plan 04-02 (Day Status Toggle) and 04-03 (Day Counting)
