@@ -80,11 +80,12 @@ Plans:
   3. Monthly and annual day counts update automatically when days are toggled
   4. Warning appears when Belgium days reach or exceed 183-day threshold
   5. Contracted work pattern (Mon-Tue weekly, first-week Wed-Fri) pre-fills and shows as distinct from flexible days
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
+- [x] 04-01-PLAN.md - Calendar data system and grid rendering with contracted pattern wizard
+- [x] 04-02-PLAN.md - Day picker dialog, counting system, and warning thresholds
+- [x] 04-03-PLAN.md - Export functionality (ICS, CSV, clipboard) and entry/exit documentation
 
 ### Phase 5: Dashboard UI
 **Goal**: Professional financial dashboard aesthetic that integrates all calculator features
@@ -145,7 +146,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 1. Fiscal Foundation | 2/2 | Complete | 2026-01-29 |
 | 2. Expense Tracking | 2/2 | Complete | 2026-01-29 |
 | 3. Scenario Engine | 3/3 | Complete | 2026-01-30 |
-| 4. Belgium Calendar | 0/2 | Not started | - |
+| 4. Belgium Calendar | 3/3 | Complete | 2026-02-01 |
 | 5. Dashboard UI | 0/3 | Not started | - |
 | 6. Excel Calculator | 0/2 | Not started | - |
 | 7. Compliance & Documentation | 0/2 | Not started | - |

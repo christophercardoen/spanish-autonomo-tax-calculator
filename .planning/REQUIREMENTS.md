@@ -40,15 +40,15 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Belgium Calendar (CAL)
 
-- [ ] **CAL-01**: Display interactive calendar for Feb-Dec 2026 (11 months)
-- [ ] **CAL-02**: Allow toggling individual days between Belgium, Spain, Travel
-- [ ] **CAL-03**: Auto-count days per month in each location
-- [ ] **CAL-04**: Calculate annual total days in Belgium vs Spain
-- [ ] **CAL-05**: Show 183-day threshold warning when approaching or exceeding limit
-- [ ] **CAL-06**: Pre-fill calendar with contracted pattern (Mon-Tue always, first week Wed-Fri)
-- [ ] **CAL-07**: Visually distinguish contractual obligation days from flexible days
-- [ ] **CAL-08**: Export calendar data (ICS, CSV, or copy to clipboard)
-- [ ] **CAL-09**: Count entry/exit days correctly (warning that they count in BOTH countries)
+- [x] **CAL-01**: Display interactive calendar for Feb-Dec 2026 (11 months)
+- [x] **CAL-02**: Allow toggling individual days between Belgium, Spain, Travel
+- [x] **CAL-03**: Auto-count days per month in each location
+- [x] **CAL-04**: Calculate annual total days in Belgium vs Spain
+- [x] **CAL-05**: Show 183-day threshold warning when approaching or exceeding limit
+- [x] **CAL-06**: Pre-fill calendar with contracted pattern (Mon-Tue always, first week Wed-Fri)
+- [x] **CAL-07**: Visually distinguish contractual obligation days from flexible days
+- [x] **CAL-08**: Export calendar data (ICS, CSV, or copy to clipboard)
+- [x] **CAL-09**: Count entry/exit days correctly (warning that they count in BOTH countries)
 
 ### Dashboard UI (UI)
 
