@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 5 - Dashboard UI (Complete)
+**Current focus:** Phase 6 - Excel Calculator (Next)
 
 ## Current Position
 
