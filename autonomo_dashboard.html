@@ -1154,6 +1154,29 @@
       </form>
     </dialog>
 
+    <!-- Contracted Pattern Wizard Dialog -->
+    <dialog id="contractedWizardDialog">
+      <div class="dialog-header">
+        <h2>Apply Contracted Pattern?</h2>
+        <button type="button" class="dialog-close" onclick="declineContractedPattern()">x</button>
+      </div>
+      <div style="padding: 1.5rem;">
+        <p>Pre-fill calendar with your contracted work pattern?</p>
+        <ul style="opacity: 0.8; margin: 1rem 0;">
+          <li>Monday and Tuesday every week</li>
+          <li>Wednesday-Friday of first week each month</li>
+        </ul>
+        <p style="font-size: 0.9rem; opacity: 0.7;">
+          Belgian holidays are NOT auto-filled. You can override any day later.
+        </p>
+      </div>
+      <div class="dialog-footer">
+        <div class="spacer"></div>
+        <button class="secondary-btn" onclick="declineContractedPattern()">Skip</button>
+        <button class="primary-btn" onclick="applyContractedPattern()">Apply Pattern</button>
+      </div>
+    </dialog>
+
     <div id="results" class="result"></div>
   </div>
   <script>
@@ -1449,6 +1472,110 @@
       gridHtml += '</div>';
 
       container.innerHTML = headerHtml + gridHtml;
+    }
+
+    // ============================================================
+    // CONTRACTED PATTERN FUNCTIONS
+    // ============================================================
+    // Generate contracted work pattern: Mon-Tue weekly + first-week Wed-Fri
+    // ============================================================
+
+    /**
+     * Generate contracted work pattern for Feb-Dec 2026
+     * Pattern: Monday and Tuesday every week, plus Wed-Fri of first week each month
+     *
+     * @param {number} year - Year (e.g., 2026)
+     * @param {number} startMonth - Start month (0-indexed)
+     * @param {number} endMonth - End month (0-indexed)
+     * @returns {array} - Array of ISO date strings (contracted days)
+     */
+    function generateContractedPattern(year, startMonth, endMonth) {
+      const contractedDays = [];
+      for (let month = startMonth; month <= endMonth; month++) {
+        const lastOfMonth = new Date(year, month + 1, 0);
+        let isFirstWeek = true;
+
+        for (let day = 1; day <= lastOfMonth.getDate(); day++) {
+          const date = new Date(year, month, day);
+          const dayOfWeek = date.getDay(); // 0=Sunday, 1=Monday, etc.
+
+          // Monday (1) or Tuesday (2) = always contracted
+          if (dayOfWeek === 1 || dayOfWeek === 2) {
+            contractedDays.push(toISODateKey(date));
+          }
+
+          // First week: Wed(3), Thu(4), Fri(5) also contracted
+          if (isFirstWeek && (dayOfWeek === 3 || dayOfWeek === 4 || dayOfWeek === 5)) {
+            contractedDays.push(toISODateKey(date));
+          }
+
+          // End first week on Sunday (after first full week)
+          if (dayOfWeek === 0 && day > 1) {
+            isFirstWeek = false;
+          }
+        }
+      }
+      return contractedDays;
+    }
+
+    /**
+     * Show contracted pattern wizard dialog
+     * Only shows if contractedPatternApplied is false
+     */
+    function showContractedWizard() {
+      if (calendarState.contractedPatternApplied) {
+        return; // Already applied or declined
+      }
+
+      const dialog = document.getElementById('contractedWizardDialog');
+      if (dialog) {
+        dialog.showModal();
+      }
+    }
+
+    /**
+     * Apply contracted pattern to calendar
+     * Marks all contracted days as Belgium with contracted flag
+     */
+    function applyContractedPattern() {
+      const contractedDays = generateContractedPattern(
+        calendarState.year,
+        calendarState.startMonth,
+        calendarState.endMonth
+      );
+
+      // Mark each contracted day as Belgium + contracted
+      contractedDays.forEach(dateKey => {
+        calendarState.days[dateKey] = {
+          status: DAY_STATUS.BELGIUM,
+          contracted: true
+        };
+      });
+
+      calendarState.contractedPatternApplied = true;
+      saveCalendarState();
+      renderCalendar();
+
+      // Close dialog
+      const dialog = document.getElementById('contractedWizardDialog');
+      if (dialog) {
+        dialog.close();
+      }
+    }
+
+    /**
+     * Decline contracted pattern
+     * Sets flag so wizard doesn't appear again
+     */
+    function declineContractedPattern() {
+      calendarState.contractedPatternApplied = true;
+      saveCalendarState();
+
+      // Close dialog
+      const dialog = document.getElementById('contractedWizardDialog');
+      if (dialog) {
+        dialog.close();
+      }
     }
 
     const SOURCES = Object.freeze({
@@ -3159,6 +3286,7 @@
 
       // Phase 4 initialization - Calendar
       renderCalendar();
+      showContractedWizard(); // Show wizard if not yet applied
     });
   </script>
 </body>
