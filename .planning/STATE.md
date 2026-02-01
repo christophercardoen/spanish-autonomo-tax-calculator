@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-29)
 ## Current Position
 
 Phase: 4 of 7 (Belgium Calendar)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-02-01 - Completed 04-01-PLAN.md (Calendar Foundation)
+Last activity: 2026-02-01 - Completed 04-02-PLAN.md (Day Status Toggle)
 
-Progress: [██████▓░░░] 57%
+Progress: [███████░░░] 64%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 9
 - Average duration: 2.8 min
-- Total execution time: 24 min
+- Total execution time: 27 min
 
 **By Phase:**
 
@@ -30,10 +30,10 @@ Progress: [██████▓░░░] 57%
 | 01-fiscal-foundation | 2 | 7 min | 3.5 min |
 | 02-expense-tracking | 2 | 7 min | 3.5 min |
 | 03-scenario-engine | 3 | 6 min | 2 min |
-| 04-belgium-calendar | 1 | 4 min | 4 min |
+| 04-belgium-calendar | 2 | 7 min | 3.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (2 min), 03-02 (2 min), 03-03 (2 min), 04-01 (4 min)
+- Last 5 plans: 03-02 (2 min), 03-03 (2 min), 04-01 (4 min), 04-02 (3 min)
 - Trend: Stable execution times
 
 *Updated after each plan completion*
@@ -77,10 +77,15 @@ Recent decisions affecting current work:
 | First week ends on first Sunday | After first Sunday that occurs after day 1, isFirstWeek becomes false | 04-01 |
 | Status + contracted flags | Allows visual distinction while preserving day status for counting | 04-01 |
 | Wizard shown via flag | contractedPatternApplied persists in localStorage to prevent re-showing | 04-01 |
+| Day picker uses native dialog | HTML5 dialog provides focus trap, backdrop, Esc handling natively | 04-02 |
+| Shift-click for range selection | Familiar UX pattern from spreadsheets and file managers | 04-02 |
+| Conservative threshold counting | Belgium + Travel both count toward 183 days for compliance safety | 04-02 |
+| Deferred save workflow | Allows experimentation before committing; prevents accidental changes | 04-02 |
+| Warning at 170/180/183 | Tiered warnings give time to adjust before exceeding threshold | 04-02 |
 
 ### Pending Todos
 
-- Phase 4: Belgium Calendar (2 plans remaining: 04-02, 04-03)
+- Phase 4: Belgium Calendar (1 plan remaining: 04-03)
 
 ### Blockers/Concerns
 
@@ -88,15 +93,15 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-01T10:50:00Z
-Stopped at: Completed 04-01-PLAN.md (Calendar Foundation)
+Last session: 2026-02-01T10:57:20Z
+Stopped at: Completed 04-02-PLAN.md (Day Status Toggle)
 Resume file: None
 
 ## Key Files Created
 
 | File | Purpose |
 |------|---------|
-| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table + calendar grid with localStorage |
+| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table + calendar grid with day picker and counting |
 | .planning/phases/01-fiscal-foundation/01-01-SUMMARY.md | Plan 01-01 execution summary |
 | .planning/phases/01-fiscal-foundation/01-02-SUMMARY.md | Plan 01-02 execution summary |
 | .planning/phases/02-expense-tracking/02-01-SUMMARY.md | Plan 02-01 execution summary |
@@ -105,6 +110,7 @@ Resume file: None
 | .planning/phases/03-scenario-engine/03-02-SUMMARY.md | Plan 03-02 execution summary |
 | .planning/phases/03-scenario-engine/03-03-SUMMARY.md | Plan 03-03 execution summary |
 | .planning/phases/04-belgium-calendar/04-01-SUMMARY.md | Plan 04-01 execution summary |
+| .planning/phases/04-belgium-calendar/04-02-SUMMARY.md | Plan 04-02 execution summary |
 
 ## Phase 1 Complete
 
@@ -145,12 +151,18 @@ Phase 3 (Scenario Engine) delivered:
 
 ## Phase 4 In Progress
 
-Phase 4 (Belgium Calendar) - Plan 01 complete:
+Phase 4 (Belgium Calendar) - Plans 01-02 complete:
 - Calendar data system with localStorage persistence
 - Month grid rendering with Monday-start week alignment
 - Navigation between Feb-Dec 2026
 - Contracted pattern wizard for first-time setup
 - C badge display for contracted days
 - Status colors: Belgium (blue), Spain (green), Travel (orange)
+- Day picker dialog opens on day click
+- Status options: Belgium, Spain, Travel, Unset
+- Monthly and annual count displays
+- Warning thresholds at 170/180/183 days
+- Shift-click bulk selection for range operations
+- Save workflow with unsaved changes indicator
 
-Next: Plan 04-02 (Day Status Toggle) and 04-03 (Day Counting)
+Next: Plan 04-03 (Treaty Information Display)
