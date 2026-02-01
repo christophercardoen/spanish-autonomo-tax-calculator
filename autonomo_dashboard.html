@@ -1213,6 +1213,16 @@
 
     <div class="calendar-section">
       <h2>Belgium Calendar 2026</h2>
+
+      <div class="calendar-info" style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.03); border-radius: 4px; font-size: 0.9rem;">
+        <strong style="color: var(--accent);">How days are counted:</strong>
+        <ul style="margin: 0.5rem 0 0 1.5rem; opacity: 0.8; line-height: 1.6;">
+          <li><strong>Belgium days</strong> + <strong>Travel days</strong> count toward 183-day threshold</li>
+          <li><strong>Spain days</strong> do not count toward threshold</li>
+          <li><strong>Travel days:</strong> Use for flight days between countries</li>
+        </ul>
+      </div>
+
       <div class="calendar-stats">
         <div class="count-display">
           <span class="count-label">This month:</span>
@@ -1221,6 +1231,7 @@
         <div class="count-display">
           <span class="count-label">Annual total:</span>
           <span id="annualBelgiumCount" class="count-value">0</span> Belgium + Travel
+          <span class="source-hint" data-tooltip="Entry and exit days (travel days between Belgium and Spain) may be counted by BOTH countries' tax authorities. This calculator counts Travel days toward the 183-day threshold as a conservative approach. Art. 4 Spain-Belgium tax treaty applies for tie-breaker.">?</span>
           <span id="warningBadge" class="warning-badge hidden"></span>
         </div>
       </div>
@@ -1250,6 +1261,28 @@
           </button>
         </div>
       </div>
+
+      <details class="holidays-reference" style="margin-top: 1rem;">
+        <summary style="cursor: pointer; opacity: 0.8;">Belgian Public Holidays 2026 (Reference)</summary>
+        <div style="padding: 1rem 0; font-size: 0.9rem; opacity: 0.8;">
+          <p style="margin-bottom: 0.5rem;">These are NOT auto-marked. Mark manually if you are in Belgium:</p>
+          <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+            <li>Apr 6 - Easter Monday</li>
+            <li>May 1 - Labour Day</li>
+            <li>May 14 - Ascension Day</li>
+            <li>May 25 - Whit Monday</li>
+            <li>Jul 21 - Belgian National Holiday</li>
+            <li>Aug 15 - Assumption Day (Saturday - substitute TBD)</li>
+            <li>Nov 1 - All Saints' Day (Sunday - substitute TBD)</li>
+            <li>Nov 11 - Armistice Day</li>
+            <li>Dec 25 - Christmas Day</li>
+          </ul>
+          <p style="margin-top: 0.75rem; font-style: italic;">
+            If a holiday falls the day before a contracted work day, you may need to be in Belgium.
+            These still count toward the 183-day threshold.
+          </p>
+        </div>
+      </details>
     </div>
 
     <!-- Edit Scenario Modal -->
