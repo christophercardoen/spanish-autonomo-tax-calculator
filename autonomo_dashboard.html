@@ -1086,9 +1086,69 @@
     .warning-banner.red { background: rgba(248, 113, 113, 0.15); border: 1px solid #f87171; color: #f87171; }
 
     .warning-banner.hidden, .warning-badge.hidden { display: none; }
+
+    /* Export Section */
+    .export-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .export-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .export-buttons button {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Notification Toast */
+    .notification {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(1rem);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .notification.success {
+      background: rgba(74, 222, 128, 0.2);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .notification.error {
+      background: rgba(248, 113, 113, 0.2);
+      border: 1px solid #f87171;
+      color: #f87171;
+    }
+
+    .notification.hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
+  <!-- Notification Toast (used by clipboard copy) -->
+  <div id="notification" class="notification hidden"></div>
+
   <div class="container">
     <h1>Autonomo Tax Calculator 2025/2026</h1>
     <p>Calculate your IRPF liability as a Spanish autonomo</p>
@@ -1171,6 +1231,24 @@
       <div class="calendar-actions" style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: flex-end;">
         <span id="unsavedIndicator" class="unsaved-indicator hidden">Unsaved changes</span>
         <button id="saveCalendarBtn" class="primary-btn" onclick="commitCalendarChanges()" disabled>Save Calendar</button>
+      </div>
+
+      <div class="export-section">
+        <h4 style="margin: 0 0 0.75rem 0; opacity: 0.8;">Export Calendar</h4>
+        <div class="export-buttons">
+          <button class="secondary-btn" onclick="downloadICS()">
+            <span style="margin-right: 0.5rem;">&#128197;</span>
+            Export ICS
+          </button>
+          <button class="secondary-btn" onclick="downloadCSV()">
+            <span style="margin-right: 0.5rem;">&#128196;</span>
+            Export CSV
+          </button>
+          <button class="secondary-btn" onclick="copyToClipboard()">
+            <span style="margin-right: 0.5rem;">&#128203;</span>
+            Copy Summary
+          </button>
+        </div>
       </div>
     </div>
 
@@ -2131,6 +2209,152 @@
       const saveBtn = document.getElementById('saveCalendarBtn');
       if (indicator) indicator.classList.add('hidden');
       if (saveBtn) saveBtn.disabled = true;
+    }
+
+    // ============================================================
+    // CALENDAR EXPORT FUNCTIONS (Task 1)
+    // ============================================================
+    // ICS and CSV export with Blob API download
+    // ============================================================
+
+    /**
+     * Format date for ICS timestamp (YYYYMMDDTHHMMSSZ format)
+     * @param {Date} date - Date to format
+     * @returns {string} - ICS formatted timestamp
+     */
+    function formatICSTimestamp(date) {
+      return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    }
+
+    /**
+     * Generate ICS (iCalendar) content for all marked days
+     * Follows RFC 5545 specification
+     * @returns {string} - Valid ICS file content
+     */
+    function generateICS() {
+      const events = Object.entries(calendarState.days)
+        .filter(([_, data]) => data.status && data.status !== 'unset')
+        .map(([dateKey, data]) => {
+          const date = new Date(dateKey);
+          const nextDay = new Date(date);
+          nextDay.setDate(nextDay.getDate() + 1);
+
+          const statusText = {
+            belgium: 'Belgium Work Day',
+            spain: 'Spain',
+            travel: 'Travel Day'
+          }[data.status];
+
+          const contractedNote = data.contracted ? ' (Contracted)' : '';
+
+          // ICS format for all-day events
+          return `BEGIN:VEVENT
+UID:${dateKey}-autonomo@tax-calculator
+DTSTAMP:${formatICSTimestamp(new Date())}
+DTSTART;VALUE=DATE:${dateKey.replace(/-/g, '')}
+DTEND;VALUE=DATE:${toISODateKey(nextDay).replace(/-/g, '')}
+SUMMARY:${statusText}${contractedNote}
+DESCRIPTION:${statusText} - Autonomo Tax Calculator Belgium Tracking
+END:VEVENT`;
+        });
+
+      return `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Autonomo Tax Calculator//Belgium Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Belgium Work Calendar 2026
+${events.join('\n')}
+END:VCALENDAR`;
+    }
+
+    /**
+     * Download ICS file via Blob API
+     * Creates temporary anchor element for download
+     */
+    function downloadICS() {
+      const ics = generateICS();
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'belgium-calendar-2026.ics';
+      document.body.appendChild(a);
+      a.click();
+
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    /**
+     * Escape a field value for CSV (handles quotes, commas, newlines)
+     * @param {any} value - Value to escape
+     * @returns {string} - CSV-safe string
+     */
+    function escapeCSVField(value) {
+      if (value == null) return '';
+      const str = String(value);
+      if (str.search(/("|,|\n)/g) >= 0) {
+        return '"' + str.replace(/"/g, '""') + '"';
+      }
+      return str;
+    }
+
+    /**
+     * Generate CSV content for all marked days
+     * Includes headers, data rows, and summary section
+     * @returns {string} - CSV file content
+     */
+    function generateCSV() {
+      const headers = ['Date', 'Day of Week', 'Status', 'Contracted', 'Month'];
+      const rows = Object.entries(calendarState.days)
+        .filter(([_, data]) => data.status && data.status !== 'unset')
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([dateKey, data]) => {
+          const date = new Date(dateKey);
+          return [
+            dateKey,
+            date.toLocaleDateString('en-GB', { weekday: 'long' }),
+            data.status,
+            data.contracted ? 'Yes' : 'No',
+            date.toLocaleDateString('en-GB', { month: 'long' })
+          ];
+        });
+
+      // Add summary rows at bottom
+      const counts = calculateCounts();
+      const summaryRows = [
+        [],  // Empty row
+        ['SUMMARY'],
+        ['Total Belgium Days', counts.annualBelgium],
+        ['Total Travel Days', counts.annualTravel],
+        ['Total Spain Days', counts.annualSpain],
+        ['Combined (Belgium + Travel)', counts.annualThreshold],
+        ['183-day Threshold', counts.annualThreshold >= 183 ? 'EXCEEDED' : 'OK']
+      ];
+
+      const allRows = [headers, ...rows, ...summaryRows];
+      return allRows.map(row => row.map(escapeCSVField).join(',')).join('\n');
+    }
+
+    /**
+     * Download CSV file via Blob API
+     * Creates temporary anchor element for download
+     */
+    function downloadCSV() {
+      const csv = generateCSV();
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'belgium-calendar-2026.csv';
+      document.body.appendChild(a);
+      a.click();
+
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
 
     const SOURCES = Object.freeze({
