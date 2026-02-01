@@ -1505,6 +1505,342 @@
       display: block;
       margin-bottom: 0.25rem;
     }
+
+    /* ===========================================
+       PHASE 5: PRINT STYLES (UI-10)
+       =========================================== */
+
+    /* Export actions bar */
+    .export-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      justify-content: flex-end;
+    }
+
+    .export-actions button {
+      font-size: var(--size-small);
+      padding: 0.4rem 0.75rem;
+    }
+
+    @media print {
+      /* Light theme for printing */
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 11pt;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 100%;
+      }
+
+      /* Hide interactive elements */
+      .tab-nav,
+      .tab-input,
+      .edit-btn,
+      .delete-btn,
+      .add-expense-btn,
+      .new-scenario-btn,
+      .export-actions,
+      .nav-btn,
+      .reset-btn,
+      button:not(.print-include),
+      dialog,
+      .calendar-section,
+      .panel-calendar,
+      .panel-expenses,
+      .panel-details,
+      [role="tooltip"] {
+        display: none !important;
+      }
+
+      /* Show only scenarios panel */
+      .tab-panel {
+        display: block !important;
+      }
+
+      .panel-scenarios {
+        display: block !important;
+      }
+
+      /* Dashboard header adjustments */
+      .dashboard-header {
+        border-bottom: 2px solid #333;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .dashboard-title {
+        color: black;
+        font-size: 16pt;
+      }
+
+      .dashboard-subtitle {
+        color: #666;
+      }
+
+      /* Scenario cards in print grid */
+      .scenario-cards {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        overflow: visible !important;
+      }
+
+      .scenario-card {
+        background: white !important;
+        border: 1px solid #ccc !important;
+        color: black !important;
+        page-break-inside: avoid;
+        padding: 0.75rem;
+        flex: none !important;
+      }
+
+      .scenario-card.optimal {
+        border: 2px solid #333 !important;
+        background: #f5f5f5 !important;
+      }
+
+      .optimal-badge {
+        background: #333 !important;
+        color: white !important;
+      }
+
+      /* Metrics in print */
+      .metric .label,
+      .metric .value {
+        color: black !important;
+      }
+
+      .metric.highlight .value {
+        color: black !important;
+        font-weight: 700;
+      }
+
+      /* Comparison table for print */
+      .comparison-container {
+        overflow: visible !important;
+        border: 1px solid #ccc !important;
+      }
+
+      .comparison-table {
+        width: 100% !important;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        position: static !important;
+        background: white !important;
+        color: black !important;
+        border: 1px solid #ddd !important;
+        padding: 0.4rem !important;
+        font-size: 9pt;
+      }
+
+      .comparison-table thead th {
+        background: #f0f0f0 !important;
+        font-weight: 700;
+      }
+
+      .comparison-table td.optimal {
+        background: #e8f5e9 !important;
+        font-weight: 700;
+      }
+
+      /* Color classes in print */
+      .value-positive,
+      .value-negative,
+      .value-warning {
+        color: black !important;
+      }
+
+      /* Hide mobile comparison on print */
+      .comparison-mobile {
+        display: none !important;
+      }
+
+      /* Page settings */
+      @page {
+        margin: 1cm;
+        size: landscape;
+      }
+    }
+
+    /* ===========================================
+       PHASE 5: RESPONSIVE DESIGN (UI-08)
+       =========================================== */
+
+    /* Mobile comparison blocks (hidden on desktop) */
+    .comparison-mobile {
+      display: none;
+    }
+
+    .comparison-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-block.optimal {
+      border-color: var(--accent);
+      background: rgba(74, 222, 128, 0.05);
+    }
+
+    .block-title {
+      margin: 0 0 1rem 0;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .block-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .block-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .block-row:last-child {
+      border-bottom: none;
+    }
+
+    .block-row .label {
+      color: var(--text-muted);
+    }
+
+    .block-row .value {
+      font-family: var(--font-mono);
+    }
+
+    .block-row.highlight {
+      padding-top: 0.6rem;
+      margin-top: 0.4rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: none;
+    }
+
+    .block-row.highlight .value {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Tablet breakpoint */
+    @media (max-width: 900px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .scenario-cards {
+        gap: 0.75rem;
+      }
+
+      .scenario-card {
+        flex: 0 0 280px;
+      }
+
+      .dialog-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Mobile breakpoint */
+    @media (max-width: 600px) {
+      body {
+        padding: 0.5rem;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .dashboard-title {
+        font-size: 1.25rem;
+      }
+
+      /* Stack tabs vertically on very small screens */
+      .tab-nav {
+        flex-wrap: wrap;
+        gap: 0;
+      }
+
+      .tab-label {
+        padding: 0.5rem 1rem;
+        font-size: var(--size-small);
+        flex: 1 1 50%;
+        text-align: center;
+        border-bottom: none;
+        border-right: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .tab-label:nth-child(2n) {
+        border-right: none;
+      }
+
+      /* Scenario cards full width */
+      .scenario-cards {
+        flex-direction: column;
+        overflow-x: visible;
+      }
+
+      .scenario-card {
+        flex: none;
+        width: 100%;
+      }
+
+      /* Hide horizontal comparison table on mobile */
+      .comparison-container {
+        display: none;
+      }
+
+      /* Show vertical comparison blocks on mobile */
+      .comparison-mobile {
+        display: block;
+      }
+
+      /* Export actions stack */
+      .export-actions {
+        flex-direction: column;
+      }
+
+      .export-actions button {
+        width: 100%;
+      }
+
+      /* Calendar adjustments */
+      .calendar-grid {
+        gap: 1px;
+      }
+
+      .day-cell {
+        min-height: 45px;
+        font-size: 0.8rem;
+      }
+
+      .status-emoji {
+        font-size: 1rem;
+      }
+
+      /* Dialog full width on mobile */
+      dialog {
+        width: 100vw;
+        max-width: 100vw;
+        margin: 0;
+        border-radius: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1585,8 +1921,19 @@
             <div id="scenarioCards" class="scenario-cards">
               <!-- Populated by renderScenarioCards() -->
             </div>
+            <div class="export-actions">
+              <button onclick="copyTableToClipboard()" class="secondary-btn">
+                Copy to Clipboard
+              </button>
+              <button onclick="window.print()" class="secondary-btn">
+                Print / PDF
+              </button>
+            </div>
             <div id="comparisonTable">
               <!-- Populated by renderComparisonTable() -->
+            </div>
+            <div class="comparison-mobile">
+              <!-- Populated by renderMobileComparison() -->
             </div>
           </div>
         </section>
@@ -4275,6 +4622,96 @@ Generated by Autonomo Tax Calculator`;
       `;
 
       container.innerHTML = tableHtml;
+
+      // Also render mobile comparison view (UI-08)
+      const mobileContainer = document.querySelector('.comparison-mobile');
+      if (mobileContainer) {
+        mobileContainer.innerHTML = renderMobileComparison(scenarios);
+      }
+    }
+
+    /**
+     * Render mobile comparison blocks (vertical layout)
+     * @param {array} scenarios - Array of scenario objects with results
+     * @returns {string} - HTML string of comparison blocks
+     */
+    function renderMobileComparison(scenarios) {
+      if (!scenarios || scenarios.length === 0) {
+        return '<p class="comparison-empty">Select scenarios to compare</p>';
+      }
+
+      const optimalLeefgeld = Math.max(...scenarios.map(s => s.results.leefgeld));
+
+      return scenarios.map(s => {
+        const isOptimal = s.results.leefgeld === optimalLeefgeld;
+
+        return `
+          <div class="comparison-block${isOptimal ? ' optimal' : ''}">
+            <h4 class="block-title">${s.name}${isOptimal ? ' <span class="optimal-badge">Optimal</span>' : ''}</h4>
+            <div class="block-metrics">
+              <div class="block-row">
+                <span class="label">Revenue</span>
+                <span class="value value-positive">${formatEUR(s.results.annualRevenue)}/yr</span>
+              </div>
+              <div class="block-row">
+                <span class="label">Expenses</span>
+                <span class="value value-negative">${formatEUR(s.results.totalDeductible)}</span>
+              </div>
+              <div class="block-row">
+                <span class="label">IRPF</span>
+                <span class="value value-negative">${formatEUR(s.results.cuotaIntegra)}</span>
+              </div>
+              <div class="block-row">
+                <span class="label">RETA</span>
+                <span class="value value-negative">${formatEUR(s.results.retaAnnual)}</span>
+              </div>
+              <div class="block-row">
+                <span class="label">Tax Rate</span>
+                <span class="value">${(s.results.effectiveRate * 100).toFixed(1)}%</span>
+              </div>
+              <div class="block-row">
+                <span class="label">Net Income</span>
+                <span class="value value-positive">${formatEUR(s.results.netAnnual)}</span>
+              </div>
+              <div class="block-row highlight">
+                <span class="label">Leefgeld</span>
+                <span class="value">${formatEUR(s.results.leefgeld)}/mo</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Copy comparison table data to clipboard (UI-10)
+     * Strips tooltips from cells before copying
+     */
+    async function copyTableToClipboard() {
+      const table = document.querySelector('.comparison-table');
+      if (!table) {
+        showNotification('No comparison data to copy', 'error');
+        return;
+      }
+
+      const rows = Array.from(table.querySelectorAll('tr'));
+      const text = rows.map(row => {
+        const cells = Array.from(row.querySelectorAll('th, td'));
+        return cells.map(cell => {
+          // Get text content, stripping tooltips
+          const clone = cell.cloneNode(true);
+          clone.querySelectorAll('[role="tooltip"]').forEach(t => t.remove());
+          return clone.textContent.trim();
+        }).join('\t');
+      }).join('\n');
+
+      try {
+        await navigator.clipboard.writeText(text);
+        showNotification('Copied to clipboard!');
+      } catch (err) {
+        console.error('Clipboard write failed:', err);
+        showNotification('Copy failed - try again', 'error');
+      }
     }
 
     // ============================================================
