@@ -982,48 +982,85 @@
       }
     }
 
-    /* Comparison Table */
+    /* Comparison Table with sticky first column (UI-06) */
     .comparison-container {
       margin-top: 2rem;
-      max-height: 500px;
-      overflow-y: auto;
+      overflow-x: auto;      /* Enable horizontal scroll */
+      overflow-y: visible;   /* Let content expand vertically */
+      max-width: 100%;
       background: rgba(255,255,255,0.02);
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,0.1);
     }
 
+    /* Horizontal scrollbar for comparison */
+    .comparison-container::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .comparison-container::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+    }
+
+    .comparison-container::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
+
+    .comparison-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* Base table */
     .comparison-table {
-      width: 100%;
+      width: max-content;    /* Allow table to exceed container */
+      min-width: 100%;
       border-collapse: collapse;
       font-size: 0.9rem;
     }
 
+    /* Sticky header row - z-index: 100 */
     .comparison-table thead th {
       position: sticky;
       top: 0;
       background: var(--bg);
-      z-index: 10;
+      z-index: 100;
       border-bottom: 2px solid var(--accent);
       padding: 0.75rem 1rem;
       text-align: right;
       font-weight: 600;
+      white-space: nowrap;
     }
 
+    /* Sticky first column (metric names) - z-index: 99 */
+    .comparison-table tbody td:first-child,
     .comparison-table thead th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 99;
+      background: var(--bg);
+      min-width: 180px;
       text-align: left;
     }
 
+    /* Corner cell (sticky both directions) - z-index: 101 */
+    .comparison-table thead th:first-child {
+      z-index: 101;
+    }
+
+    /* Regular cells */
     .comparison-table tbody td {
       padding: 0.5rem 1rem;
       text-align: right;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       border-bottom: 1px solid rgba(255,255,255,0.05);
+      white-space: nowrap;
     }
 
     .comparison-table tbody td:first-child {
-      text-align: left;
-      font-family: inherit;
-      opacity: 0.8;
+      font-family: var(--font-ui);
+      color: var(--text-muted);
     }
 
     /* Divider row */
@@ -1044,6 +1081,11 @@
       color: var(--accent);
       font-weight: 700;
     }
+
+    /* Color-coded values in comparison table (UI-07) */
+    .comparison-table .value-positive { color: var(--positive); }
+    .comparison-table .value-negative { color: var(--negative); }
+    .comparison-table .value-warning { color: var(--warning); }
 
     /* Empty state */
     .comparison-empty {
@@ -1401,21 +1443,35 @@
   <div id="notification" class="notification hidden"></div>
 
   <div class="container">
-    <h1>Autonomo Tax Calculator 2025/2026</h1>
-    <p>Calculate your IRPF liability as a Spanish autonomo</p>
+    <div class="dashboard">
+      <!-- Dashboard Header -->
+      <header class="dashboard-header">
+        <div>
+          <h1 class="dashboard-title">Autonomo Tax Calculator</h1>
+          <p class="dashboard-subtitle">Spain - Belgium Cross-Border 2025/2026</p>
+        </div>
+      </header>
 
-    <div class="input-section">
-      <label>
-        Monthly Revenue (EUR):
-        <input type="number" id="monthlyRevenue" value="6000" min="0" step="100" oninput="recalculateTotals()">
-      </label>
-      <label>
-        <input type="checkbox" id="hasDescendant" checked onchange="recalculateTotals()">
-        1 Dependent Child (adds 2,400 EUR minimo)
-      </label>
-    </div>
+      <!-- Tab radio inputs (hidden) -->
+      <input type="radio" name="tabs" id="tab-scenarios" class="tab-input" checked>
+      <input type="radio" name="tabs" id="tab-calendar" class="tab-input">
+      <input type="radio" name="tabs" id="tab-expenses" class="tab-input">
+      <input type="radio" name="tabs" id="tab-details" class="tab-input">
 
-    <div class="expenses-container">
+      <!-- Tab navigation -->
+      <nav class="tab-nav">
+        <label for="tab-scenarios" class="tab-label">Scenarios</label>
+        <label for="tab-calendar" class="tab-label">Calendar</label>
+        <label for="tab-expenses" class="tab-label">Expenses</label>
+        <label for="tab-details" class="tab-label">Details</label>
+      </nav>
+
+      <!-- Tab panels container -->
+      <div class="tab-panels">
+
+        <!-- EXPENSES TAB -->
+        <section class="tab-panel panel-expenses">
+          <div class="expenses-container">
       <h2>Expense Tracking</h2>
       <div id="spainSection"></div>
       <div id="belgiumSection"></div>
@@ -1450,19 +1506,25 @@
           <button onclick="hideAddForm()">Cancel</button>
         </div>
       </div>
-    </div>
+          </div>
+        </section>
 
-    <div class="scenario-section">
-      <h2>Scenario Comparison</h2>
-      <div id="scenarioCards" class="scenario-cards">
-        <!-- Populated by renderScenarioCards() -->
-      </div>
-      <div id="comparisonTable">
-        <!-- Populated by renderComparisonTable() in Plan 03 -->
-      </div>
-    </div>
+        <!-- SCENARIOS TAB -->
+        <section class="tab-panel panel-scenarios">
+          <div class="scenario-section">
+            <h2>Scenario Comparison</h2>
+            <div id="scenarioCards" class="scenario-cards">
+              <!-- Populated by renderScenarioCards() -->
+            </div>
+            <div id="comparisonTable">
+              <!-- Populated by renderComparisonTable() -->
+            </div>
+          </div>
+        </section>
 
-    <div class="calendar-section">
+        <!-- CALENDAR TAB -->
+        <section class="tab-panel panel-calendar">
+          <div class="calendar-section">
       <h2>Belgium Calendar 2026</h2>
 
       <div class="calendar-info" style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.03); border-radius: 4px; font-size: 0.9rem;">
@@ -1534,7 +1596,26 @@
           </p>
         </div>
       </details>
-    </div>
+          </div>
+        </section>
+
+        <!-- DETAILS TAB -->
+        <section class="tab-panel panel-details">
+          <div class="input-section">
+            <label>
+              Monthly Revenue (EUR):
+              <input type="number" id="monthlyRevenue" value="6000" min="0" step="100" oninput="recalculateTotals()">
+            </label>
+            <label>
+              <input type="checkbox" id="hasDescendant" checked onchange="recalculateTotals()">
+              1 Dependent Child (adds 2,400 EUR minimo)
+            </label>
+          </div>
+          <div id="results" class="result"></div>
+        </section>
+
+      </div><!-- end .tab-panels -->
+    </div><!-- end .dashboard -->
 
     <!-- Edit Scenario Modal -->
     <dialog id="editScenarioDialog" aria-labelledby="dialogTitle">
@@ -1757,8 +1838,6 @@
         <button class="primary-btn" onclick="saveBulkStatus()">Apply to All</button>
       </div>
     </dialog>
-
-    <div id="results" class="result"></div>
   </div>
   <script>
     // ============================================================
