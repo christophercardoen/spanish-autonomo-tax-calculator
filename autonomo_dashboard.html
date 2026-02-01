@@ -982,6 +982,60 @@
       font-weight: 600;
       color: var(--accent);
     }
+
+    /* Day Picker Dialog Status Options */
+    .status-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .status-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .status-option:hover {
+      border-color: var(--accent);
+    }
+
+    .status-option input[type="radio"] {
+      accent-color: var(--accent);
+    }
+
+    .status-emoji-large {
+      font-size: 1.5rem;
+    }
+
+    /* Day Picker Dialog - narrower width */
+    #dayPickerDialog {
+      max-width: 400px;
+    }
+
+    #bulkPickerDialog {
+      max-width: 400px;
+    }
+
+    /* Selected day cells (for bulk selection) */
+    .day-cell.selected {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
+    /* Unsaved changes indicator */
+    .unsaved-indicator {
+      color: #facc15;
+      font-size: 0.9rem;
+      align-self: center;
+    }
+    .unsaved-indicator.hidden { display: none; }
   </style>
 </head>
 <body>
@@ -1177,6 +1231,88 @@
       </div>
     </dialog>
 
+    <!-- Day Picker Dialog (Single Day Status) -->
+    <dialog id="dayPickerDialog">
+      <div class="dialog-header">
+        <h2 id="pickerDateDisplay">February 15, 2026</h2>
+        <button type="button" class="dialog-close" onclick="closeDayPicker()">x</button>
+      </div>
+      <div style="padding: 1.5rem;">
+        <p id="pickerContracted" style="opacity: 0.7; margin-bottom: 1rem;"></p>
+
+        <div class="status-options">
+          <label class="status-option">
+            <input type="radio" name="dayStatus" value="belgium">
+            <span class="status-emoji-large">&#x1F1E7;&#x1F1EA;</span>
+            <span>Belgium</span>
+          </label>
+          <label class="status-option">
+            <input type="radio" name="dayStatus" value="spain">
+            <span class="status-emoji-large">&#x1F1EA;&#x1F1F8;</span>
+            <span>Spain</span>
+          </label>
+          <label class="status-option">
+            <input type="radio" name="dayStatus" value="travel">
+            <span class="status-emoji-large">&#x2708;&#xFE0F;</span>
+            <span>Travel</span>
+          </label>
+          <label class="status-option">
+            <input type="radio" name="dayStatus" value="unset">
+            <span class="status-emoji-large">&#x26AA;</span>
+            <span>Unset</span>
+          </label>
+        </div>
+
+        <div class="picker-counts" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+          <p id="pickerMonthCount" style="opacity: 0.8;"></p>
+          <p id="pickerAnnualCount" style="opacity: 0.8;"></p>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <div class="spacer"></div>
+        <button class="secondary-btn" onclick="closeDayPicker()">Cancel</button>
+        <button class="primary-btn" onclick="saveDayStatus()">Save</button>
+      </div>
+    </dialog>
+
+    <!-- Bulk Picker Dialog (Multiple Days Status) -->
+    <dialog id="bulkPickerDialog">
+      <div class="dialog-header">
+        <h2>Set Status for <span id="bulkCount">5</span> Days</h2>
+        <button type="button" class="dialog-close" onclick="closeBulkPicker()">x</button>
+      </div>
+      <div style="padding: 1.5rem;">
+        <p style="opacity: 0.7; margin-bottom: 1rem;">Apply status to all selected days:</p>
+        <div class="status-options">
+          <label class="status-option">
+            <input type="radio" name="bulkStatus" value="belgium">
+            <span class="status-emoji-large">&#x1F1E7;&#x1F1EA;</span>
+            <span>Belgium</span>
+          </label>
+          <label class="status-option">
+            <input type="radio" name="bulkStatus" value="spain">
+            <span class="status-emoji-large">&#x1F1EA;&#x1F1F8;</span>
+            <span>Spain</span>
+          </label>
+          <label class="status-option">
+            <input type="radio" name="bulkStatus" value="travel">
+            <span class="status-emoji-large">&#x2708;&#xFE0F;</span>
+            <span>Travel</span>
+          </label>
+          <label class="status-option">
+            <input type="radio" name="bulkStatus" value="unset">
+            <span class="status-emoji-large">&#x26AA;</span>
+            <span>Unset</span>
+          </label>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <div class="spacer"></div>
+        <button class="secondary-btn" onclick="closeBulkPicker()">Cancel</button>
+        <button class="primary-btn" onclick="saveBulkStatus()">Apply to All</button>
+      </div>
+    </dialog>
+
     <div id="results" class="result"></div>
   </div>
   <script>
@@ -1322,6 +1458,11 @@
     // Global calendar state - initialized from localStorage or defaults
     let calendarState = loadCalendarState();
 
+    // Selection state for bulk operations
+    let lastClickedDate = null;
+    let selectedDates = new Set();
+    let unsavedChanges = false;
+
     // ============================================================
     // CALENDAR RENDERING FUNCTIONS
     // ============================================================
@@ -1458,8 +1599,11 @@
             const isContracted = dayData.contracted === true;
             const emoji = getStatusEmoji(status);
 
+            const isSelected = selectedDates.has(dateKey);
+            const selectedClass = isSelected ? 'selected' : '';
+
             gridHtml += `
-              <div class="day-cell ${status}" data-date="${dateKey}">
+              <div class="day-cell ${status} ${selectedClass}" data-date="${dateKey}" onclick="handleDayClick('${dateKey}', event)">
                 <span class="day-number">${date.getDate()}</span>
                 ${isContracted ? '<span class="contracted-badge">C</span>' : ''}
                 <span class="status-emoji">${emoji}</span>
@@ -1576,6 +1720,349 @@
       if (dialog) {
         dialog.close();
       }
+    }
+
+    // ============================================================
+    // DAY PICKER DIALOG FUNCTIONS
+    // ============================================================
+    // Open/close day picker and save status for individual days
+    // ============================================================
+
+    /**
+     * Open day picker dialog for a specific date
+     * Shows date info, contracted status, and current status selection
+     *
+     * @param {string} dateKey - ISO date key (YYYY-MM-DD)
+     */
+    function openDayPicker(dateKey) {
+      const dialog = document.getElementById('dayPickerDialog');
+      if (!dialog) return;
+
+      // Store dateKey for save operation
+      dialog.dataset.dateKey = dateKey;
+
+      // Format date for display
+      const date = new Date(dateKey);
+      const dateDisplay = new Intl.DateTimeFormat('en-US', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      }).format(date);
+      document.getElementById('pickerDateDisplay').textContent = dateDisplay;
+
+      // Show contracted status
+      const dayData = calendarState.days[dateKey] || {};
+      const contractedEl = document.getElementById('pickerContracted');
+      if (dayData.contracted) {
+        contractedEl.textContent = 'Contracted work day';
+      } else {
+        contractedEl.textContent = '';
+      }
+
+      // Set current status radio
+      const currentStatus = dayData.status || 'unset';
+      const radios = dialog.querySelectorAll('input[name="dayStatus"]');
+      radios.forEach(radio => {
+        radio.checked = radio.value === currentStatus;
+      });
+
+      // Update count displays
+      updatePickerCounts();
+
+      dialog.showModal();
+    }
+
+    /**
+     * Update the count displays in the day picker dialog
+     */
+    function updatePickerCounts() {
+      const counts = calculateCounts();
+      const monthCountEl = document.getElementById('pickerMonthCount');
+      const annualCountEl = document.getElementById('pickerAnnualCount');
+
+      if (monthCountEl) {
+        monthCountEl.textContent = `${counts.monthBelgium} days in Belgium this month`;
+      }
+      if (annualCountEl) {
+        annualCountEl.textContent = `${counts.annualThreshold} days in Belgium (annual total)`;
+      }
+    }
+
+    /**
+     * Save the selected status for the current day
+     * Marks state as dirty (unsaved) - requires explicit Save to commit
+     */
+    function saveDayStatus() {
+      const dialog = document.getElementById('dayPickerDialog');
+      if (!dialog) return;
+
+      const dateKey = dialog.dataset.dateKey;
+      if (!dateKey) return;
+
+      // Get selected status
+      const selectedRadio = dialog.querySelector('input[name="dayStatus"]:checked');
+      const newStatus = selectedRadio ? selectedRadio.value : 'unset';
+
+      // Update calendarState.days, preserving contracted flag
+      const existingData = calendarState.days[dateKey] || {};
+      calendarState.days[dateKey] = {
+        status: newStatus,
+        contracted: existingData.contracted || false
+      };
+
+      // Mark as having unsaved changes
+      markUnsaved();
+
+      // Close dialog and re-render
+      dialog.close();
+      renderCalendar();
+      updateCountDisplays();
+    }
+
+    /**
+     * Close day picker dialog without saving
+     */
+    function closeDayPicker() {
+      const dialog = document.getElementById('dayPickerDialog');
+      if (dialog) {
+        dialog.close();
+      }
+    }
+
+    /**
+     * Handle day cell click
+     * Single click opens day picker; Shift+click selects range for bulk operation
+     *
+     * @param {string} dateKey - ISO date key (YYYY-MM-DD)
+     * @param {Event} event - Click event
+     */
+    function handleDayClick(dateKey, event) {
+      if (event.shiftKey && lastClickedDate) {
+        // Range selection
+        selectDateRange(lastClickedDate, dateKey);
+      } else {
+        // Single selection
+        selectedDates.clear();
+        selectedDates.add(dateKey);
+        lastClickedDate = dateKey;
+        openDayPicker(dateKey);
+      }
+    }
+
+    /**
+     * Select a range of dates between start and end
+     * Opens bulk picker after selection
+     *
+     * @param {string} start - Start date key (YYYY-MM-DD)
+     * @param {string} end - End date key (YYYY-MM-DD)
+     */
+    function selectDateRange(start, end) {
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+
+      // Ensure start < end
+      const [from, to] = startDate <= endDate
+        ? [startDate, endDate]
+        : [endDate, startDate];
+
+      selectedDates.clear();
+      const current = new Date(from);
+      while (current <= to) {
+        // Only include dates in valid range (Feb-Dec 2026)
+        const month = current.getMonth();
+        if (current.getFullYear() === 2026 && month >= 1 && month <= 11) {
+          selectedDates.add(toISODateKey(current));
+        }
+        current.setDate(current.getDate() + 1);
+      }
+
+      // Re-render to show selection, then open bulk picker
+      renderCalendar();
+      updateCountDisplays();
+      openBulkPicker();
+    }
+
+    /**
+     * Open bulk picker dialog for multiple selected dates
+     */
+    function openBulkPicker() {
+      const dialog = document.getElementById('bulkPickerDialog');
+      if (!dialog) return;
+
+      // Update count display
+      document.getElementById('bulkCount').textContent = selectedDates.size;
+
+      // Default to belgium selected
+      const radios = dialog.querySelectorAll('input[name="bulkStatus"]');
+      radios.forEach(radio => {
+        radio.checked = radio.value === 'belgium';
+      });
+
+      dialog.showModal();
+    }
+
+    /**
+     * Close bulk picker dialog without saving
+     */
+    function closeBulkPicker() {
+      const dialog = document.getElementById('bulkPickerDialog');
+      if (dialog) {
+        dialog.close();
+      }
+      // Clear selection
+      selectedDates.clear();
+      renderCalendar();
+    }
+
+    /**
+     * Save bulk status to all selected dates
+     */
+    function saveBulkStatus() {
+      const dialog = document.getElementById('bulkPickerDialog');
+      if (!dialog) return;
+
+      // Get selected status
+      const selectedRadio = dialog.querySelector('input[name="bulkStatus"]:checked');
+      const newStatus = selectedRadio ? selectedRadio.value : 'unset';
+
+      // Apply status to all selected dates
+      selectedDates.forEach(dateKey => {
+        const existingData = calendarState.days[dateKey] || {};
+        calendarState.days[dateKey] = {
+          status: newStatus,
+          contracted: existingData.contracted || false
+        };
+      });
+
+      // Mark as having unsaved changes
+      markUnsaved();
+
+      // Close dialog, clear selection, and re-render
+      dialog.close();
+      selectedDates.clear();
+      renderCalendar();
+      updateCountDisplays();
+    }
+
+    /**
+     * Mark calendar as having unsaved changes
+     * Shows indicator and enables save button
+     */
+    function markUnsaved() {
+      unsavedChanges = true;
+      const indicator = document.getElementById('unsavedIndicator');
+      const saveBtn = document.getElementById('saveCalendarBtn');
+      if (indicator) indicator.classList.remove('hidden');
+      if (saveBtn) saveBtn.disabled = false;
+    }
+
+    // ============================================================
+    // COUNTING SYSTEM AND WARNING THRESHOLDS (Task 2)
+    // ============================================================
+    // Count Belgium/Spain/Travel days and display warnings
+    // ============================================================
+
+    const WARNING_THRESHOLDS = Object.freeze({
+      YELLOW: 170,
+      ORANGE: 180,
+      RED: 183
+    });
+
+    /**
+     * Calculate all day counts for current month and year
+     * @returns {object} - Monthly and annual counts
+     */
+    function calculateCounts() {
+      const days = calendarState.days;
+      let monthBelgium = 0, monthTravel = 0, monthSpain = 0;
+      let annualBelgium = 0, annualTravel = 0, annualSpain = 0;
+
+      const currentMonth = calendarState.currentMonth;
+      const year = calendarState.year;
+
+      Object.entries(days).forEach(([dateKey, data]) => {
+        const [y, m] = dateKey.split('-').map(Number);
+        if (y !== year) return;
+
+        // Annual counts
+        if (data.status === 'belgium') annualBelgium++;
+        else if (data.status === 'travel') annualTravel++;
+        else if (data.status === 'spain') annualSpain++;
+
+        // Monthly counts (for current displayed month)
+        if (m - 1 === currentMonth) {  // m is 1-indexed from ISO string
+          if (data.status === 'belgium') monthBelgium++;
+          else if (data.status === 'travel') monthTravel++;
+          else if (data.status === 'spain') monthSpain++;
+        }
+      });
+
+      return {
+        monthBelgium, monthTravel, monthSpain,
+        annualBelgium, annualTravel, annualSpain,
+        annualThreshold: annualBelgium + annualTravel  // Conservative: both count
+      };
+    }
+
+    /**
+     * Get warning level based on threshold count
+     * @param {number} thresholdCount - Number of Belgium + Travel days
+     * @returns {string|null} - 'red', 'orange', 'yellow', or null
+     */
+    function getWarningLevel(thresholdCount) {
+      if (thresholdCount >= WARNING_THRESHOLDS.RED) return 'red';
+      if (thresholdCount >= WARNING_THRESHOLDS.ORANGE) return 'orange';
+      if (thresholdCount >= WARNING_THRESHOLDS.YELLOW) return 'yellow';
+      return null;
+    }
+
+    /**
+     * Update count displays and warning banners
+     * Called after any day status change
+     */
+    function updateCountDisplays() {
+      const counts = calculateCounts();
+
+      const monthCountEl = document.getElementById('monthBelgiumCount');
+      const annualCountEl = document.getElementById('annualBelgiumCount');
+      if (monthCountEl) monthCountEl.textContent = counts.monthBelgium;
+      if (annualCountEl) annualCountEl.textContent = counts.annualThreshold;
+
+      const warningLevel = getWarningLevel(counts.annualThreshold);
+      const badge = document.getElementById('warningBadge');
+      const banner = document.getElementById('warningBanner');
+
+      // Reset classes
+      if (badge) badge.className = 'warning-badge hidden';
+      if (banner) banner.className = 'warning-banner hidden';
+
+      if (warningLevel && badge && banner) {
+        badge.className = `warning-badge ${warningLevel}`;
+        badge.textContent = warningLevel === 'red' ? 'EXCEEDED' : 'WARNING';
+
+        banner.className = `warning-banner ${warningLevel}`;
+        const messages = {
+          yellow: `Approaching threshold: ${counts.annualThreshold} days in Belgium (183 triggers residency review)`,
+          orange: `Very close to threshold: ${counts.annualThreshold} days in Belgium (183 triggers residency review)`,
+          red: `Threshold exceeded: ${counts.annualThreshold} days in Belgium (exceeds 183-day limit)`
+        };
+        banner.textContent = messages[warningLevel];
+      }
+    }
+
+    /**
+     * Commit calendar changes to localStorage
+     * Clears unsaved indicator and disables save button
+     */
+    function commitCalendarChanges() {
+      calendarState.lastModified = new Date().toISOString();
+      saveCalendarState();
+      unsavedChanges = false;
+      const indicator = document.getElementById('unsavedIndicator');
+      const saveBtn = document.getElementById('saveCalendarBtn');
+      if (indicator) indicator.classList.add('hidden');
+      if (saveBtn) saveBtn.disabled = true;
     }
 
     const SOURCES = Object.freeze({
