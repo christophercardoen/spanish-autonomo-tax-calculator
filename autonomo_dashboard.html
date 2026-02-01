@@ -1036,6 +1036,56 @@
       align-self: center;
     }
     .unsaved-indicator.hidden { display: none; }
+
+    /* Calendar Stats Display */
+    .calendar-stats {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .count-display {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .count-label {
+      opacity: 0.7;
+    }
+
+    .count-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    /* Warning Badge */
+    .warning-badge {
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .warning-badge.yellow { background: #facc15; color: #1a1a2e; }
+    .warning-badge.orange { background: #fb923c; color: #1a1a2e; }
+    .warning-badge.red { background: #f87171; color: #1a1a2e; }
+
+    /* Warning Banner */
+    .warning-banner {
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .warning-banner.yellow { background: rgba(250, 204, 21, 0.15); border: 1px solid #facc15; color: #facc15; }
+    .warning-banner.orange { background: rgba(251, 146, 60, 0.15); border: 1px solid #fb923c; color: #fb923c; }
+    .warning-banner.red { background: rgba(248, 113, 113, 0.15); border: 1px solid #f87171; color: #f87171; }
+
+    .warning-banner.hidden, .warning-badge.hidden { display: none; }
   </style>
 </head>
 <body>
@@ -1103,8 +1153,24 @@
 
     <div class="calendar-section">
       <h2>Belgium Calendar 2026</h2>
+      <div class="calendar-stats">
+        <div class="count-display">
+          <span class="count-label">This month:</span>
+          <span id="monthBelgiumCount" class="count-value">0</span> Belgium
+        </div>
+        <div class="count-display">
+          <span class="count-label">Annual total:</span>
+          <span id="annualBelgiumCount" class="count-value">0</span> Belgium + Travel
+          <span id="warningBadge" class="warning-badge hidden"></span>
+        </div>
+      </div>
+      <div id="warningBanner" class="warning-banner hidden"></div>
       <div id="calendarContainer">
         <!-- Populated by renderCalendar() -->
+      </div>
+      <div class="calendar-actions" style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: flex-end;">
+        <span id="unsavedIndicator" class="unsaved-indicator hidden">Unsaved changes</span>
+        <button id="saveCalendarBtn" class="primary-btn" onclick="commitCalendarChanges()" disabled>Save Calendar</button>
       </div>
     </div>
 
@@ -1541,6 +1607,7 @@
         calendarState.currentMonth = newMonth;
         saveCalendarState();
         renderCalendar();
+        updateCountDisplays();  // Update counts for new month
       }
     }
 
@@ -1699,6 +1766,7 @@
       calendarState.contractedPatternApplied = true;
       saveCalendarState();
       renderCalendar();
+      updateCountDisplays();  // Update counts after applying pattern
 
       // Close dialog
       const dialog = document.getElementById('contractedWizardDialog');
@@ -3773,6 +3841,7 @@
 
       // Phase 4 initialization - Calendar
       renderCalendar();
+      updateCountDisplays();  // Initialize count displays
       showContractedWizard(); // Show wizard if not yet applied
     });
   </script>
