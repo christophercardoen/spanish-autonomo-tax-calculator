@@ -868,6 +868,120 @@
       font-size: 0.85rem;
       opacity: 0.7;
     }
+
+    /* Calendar Section */
+    .calendar-section {
+      margin-top: 2rem;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 0 0.5rem;
+    }
+
+    .calendar-header h3 {
+      margin: 0;
+      flex: 1;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 0.5rem;
+    }
+
+    .day-header {
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      opacity: 0.6;
+    }
+
+    .day-cell {
+      min-height: 60px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 4px;
+      padding: 0.25rem;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .day-cell:hover:not(.empty) {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .day-cell.empty {
+      background: transparent;
+      cursor: default;
+    }
+
+    .day-cell.belgium {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .day-cell.spain {
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+
+    .day-cell.travel {
+      background: rgba(251, 146, 60, 0.15);
+      border: 1px solid rgba(251, 146, 60, 0.3);
+    }
+
+    .day-number {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .status-emoji {
+      display: block;
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 0.25rem;
+    }
+
+    .contracted-badge {
+      position: absolute;
+      top: 2px;
+      right: 4px;
+      font-size: 10px;
+      opacity: 0.7;
+      font-weight: 600;
+      color: var(--accent);
+    }
   </style>
 </head>
 <body>
@@ -930,6 +1044,13 @@
       </div>
       <div id="comparisonTable">
         <!-- Populated by renderComparisonTable() in Plan 03 -->
+      </div>
+    </div>
+
+    <div class="calendar-section">
+      <h2>Belgium Calendar 2026</h2>
+      <div id="calendarContainer">
+        <!-- Populated by renderCalendar() -->
       </div>
     </div>
 
@@ -1177,6 +1298,158 @@
 
     // Global calendar state - initialized from localStorage or defaults
     let calendarState = loadCalendarState();
+
+    // ============================================================
+    // CALENDAR RENDERING FUNCTIONS
+    // ============================================================
+    // Month grid rendering with navigation for Feb-Dec 2026
+    // ============================================================
+
+    /**
+     * Get month grid as 2D array of weeks
+     * Each week is 7 cells (Date or null for empty padding)
+     * Uses Monday-start week alignment
+     *
+     * @param {number} year - Year (e.g., 2026)
+     * @param {number} month - Month (0-indexed, 0=January)
+     * @returns {array} - Array of weeks, each week is array of 7 elements
+     */
+    function getMonthGrid(year, month) {
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const totalDays = lastDay.getDate();
+
+      // Monday-start: convert Sunday=0 to 6, Mon=1 to 0, etc.
+      const startOffset = (firstDay.getDay() + 6) % 7;
+
+      const weeks = [];
+      let currentWeek = [];
+
+      // Add empty cells for days before month starts
+      for (let i = 0; i < startOffset; i++) {
+        currentWeek.push(null);
+      }
+
+      // Add days of month
+      for (let day = 1; day <= totalDays; day++) {
+        currentWeek.push(new Date(year, month, day));
+
+        if (currentWeek.length === 7) {
+          weeks.push(currentWeek);
+          currentWeek = [];
+        }
+      }
+
+      // Add empty cells to complete last week
+      while (currentWeek.length > 0 && currentWeek.length < 7) {
+        currentWeek.push(null);
+      }
+      if (currentWeek.length > 0) {
+        weeks.push(currentWeek);
+      }
+
+      return weeks;
+    }
+
+    /**
+     * Get status emoji for a day status
+     * @param {string} status - Day status from DAY_STATUS
+     * @returns {string} - Emoji character
+     */
+    function getStatusEmoji(status) {
+      switch (status) {
+        case DAY_STATUS.BELGIUM: return '\u{1F1E7}\u{1F1EA}'; // Flag Belgium
+        case DAY_STATUS.SPAIN: return '\u{1F1EA}\u{1F1F8}'; // Flag Spain
+        case DAY_STATUS.TRAVEL: return '\u{2708}\u{FE0F}'; // Airplane
+        default: return '';
+      }
+    }
+
+    /**
+     * Navigate to different month
+     * Updates currentMonth within bounds [startMonth, endMonth]
+     *
+     * @param {number} delta - Direction (-1 for prev, +1 for next)
+     */
+    function navigateMonth(delta) {
+      const newMonth = calendarState.currentMonth + delta;
+      if (newMonth >= calendarState.startMonth && newMonth <= calendarState.endMonth) {
+        calendarState.currentMonth = newMonth;
+        saveCalendarState();
+        renderCalendar();
+      }
+    }
+
+    /**
+     * Render calendar for current month
+     * Shows month header with navigation and day grid
+     */
+    function renderCalendar() {
+      const container = document.getElementById('calendarContainer');
+      if (!container) return;
+
+      const year = calendarState.year;
+      const month = calendarState.currentMonth;
+
+      // Get month name
+      const monthName = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' })
+        .format(new Date(year, month, 1));
+
+      // Check navigation bounds
+      const canPrev = month > calendarState.startMonth;
+      const canNext = month < calendarState.endMonth;
+
+      // Build header
+      const headerHtml = `
+        <div class="calendar-header">
+          <button class="nav-btn" onclick="navigateMonth(-1)" ${canPrev ? '' : 'disabled'}>
+            &larr; Prev
+          </button>
+          <h3>${monthName}</h3>
+          <button class="nav-btn" onclick="navigateMonth(1)" ${canNext ? '' : 'disabled'}>
+            Next &rarr;
+          </button>
+        </div>
+      `;
+
+      // Build grid
+      const weeks = getMonthGrid(year, month);
+      const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+      let gridHtml = '<div class="calendar-grid">';
+
+      // Day headers
+      dayNames.forEach(name => {
+        gridHtml += `<div class="day-header">${name}</div>`;
+      });
+
+      // Day cells
+      weeks.forEach(week => {
+        week.forEach(date => {
+          if (date === null) {
+            gridHtml += '<div class="day-cell empty"></div>';
+          } else {
+            const dateKey = toISODateKey(date);
+            const dayData = calendarState.days[dateKey] || {};
+            const status = dayData.status || DAY_STATUS.UNSET;
+            const isContracted = dayData.contracted === true;
+            const emoji = getStatusEmoji(status);
+
+            gridHtml += `
+              <div class="day-cell ${status}" data-date="${dateKey}">
+                <span class="day-number">${date.getDate()}</span>
+                ${isContracted ? '<span class="contracted-badge">C</span>' : ''}
+                <span class="status-emoji">${emoji}</span>
+              </div>
+            `;
+          }
+        });
+      });
+
+      gridHtml += '</div>';
+
+      container.innerHTML = headerHtml + gridHtml;
+    }
 
     const SOURCES = Object.freeze({
       IRPF_BRACKETS: {
@@ -2883,6 +3156,9 @@
       renderComparisonTable();
       initEditDialog();
       initTemplateDialog();
+
+      // Phase 4 initialization - Calendar
+      renderCalendar();
     });
   </script>
 </body>
