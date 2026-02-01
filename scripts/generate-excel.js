@@ -616,23 +616,28 @@ async function main() {
   workbook.created = new Date();
   workbook.modified = new Date();
 
-  // Create Constants sheet
+  // Create Constants sheet (must be first for named ranges)
   createConstantsSheet(workbook);
   console.log('  - Constants sheet created with named ranges');
+
+  // Create all 5 scenario sheets
+  SCENARIOS.forEach(scenario => {
+    createScenarioSheet(workbook, scenario);
+    console.log(`  - Scenario ${scenario.id} - ${scenario.label} created (Revenue: ${scenario.monthlyRevenue}, Belgium: ${scenario.belgiumCost})`);
+  });
 
   // Write to file (relative to scripts/ directory)
   const outputPath = path.join(__dirname, '..', 'autonomo_calculator.xlsx');
   await workbook.xlsx.writeFile(outputPath);
 
   console.log(`\nWorkbook saved to: ${outputPath}`);
-  console.log('\nNamed ranges created:');
-  console.log('  - RETA_MONTHLY (428.40)');
-  console.log('  - RETA_ANNUAL (formula: RETA_MONTHLY*12)');
-  console.log('  - MINIMO_PERSONAL (5,550)');
-  console.log('  - MINIMO_DESCENDIENTES (2,400)');
-  console.log('  - GASTOS_DIFICIL_RATE (5%)');
-  console.log('  - GASTOS_DIFICIL_MAX (2,000)');
-  console.log('  - PRIVATE_COSTS (1,727)');
+  console.log('\nSheets created:');
+  console.log('  1. Constants (named ranges for fiscal data)');
+  console.log('  2. Scenario A - 3K (Revenue: 3000, Belgium: 1000)');
+  console.log('  3. Scenario B - 6K (Revenue: 6000, Belgium: 1000)');
+  console.log('  4. Scenario C - 9K (Revenue: 9000, Belgium: 2500)');
+  console.log('  5. Scenario D - 12K (Revenue: 12000, Belgium: 2500)');
+  console.log('  6. Scenario E - 18K (Revenue: 18000, Belgium: 2500)');
   console.log('\nOpen the file in Excel to verify formulas calculate correctly.');
 }
 
