@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 5 - Dashboard UI (In Progress)
+**Current focus:** Phase 5 - Dashboard UI (Complete)
 
 ## Current Position
 
 Phase: 5 of 7 (Dashboard UI)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-01 - Completed 05-02-PLAN.md (Enhanced Cards & Sticky Table)
+Plan: 3 of 3 in current phase (COMPLETE)
+Status: Phase complete
+Last activity: 2026-02-01 - Completed 05-03-PLAN.md (Export & Responsive)
 
-Progress: [████████░░] 86%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
-- Average duration: 3.5 min
-- Total execution time: 42 min
+- Total plans completed: 13
+- Average duration: 3.6 min
+- Total execution time: 47 min
 
 **By Phase:**
 
@@ -31,10 +31,10 @@ Progress: [████████░░] 86%
 | 02-expense-tracking | 2 | 7 min | 3.5 min |
 | 03-scenario-engine | 3 | 6 min | 2 min |
 | 04-belgium-calendar | 3 | 11 min | 3.7 min |
-| 05-dashboard-ui | 2 | 11 min | 5.5 min |
+| 05-dashboard-ui | 3 | 16 min | 5.3 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-02 (3 min), 04-03 (4 min), 05-01 (5 min), 05-02 (6 min)
+- Last 5 plans: 04-03 (4 min), 05-01 (5 min), 05-02 (6 min), 05-03 (5 min)
 - Trend: Stable execution times
 
 *Updated after each plan completion*
@@ -96,10 +96,15 @@ Recent decisions affecting current work:
 | 4-section detail modal | Organized breakdown: Income -> Expenses -> Taxes -> Net Result | 05-02 |
 | Z-index hierarchy 99/100/101 | First column (99), header (100), corner cell (101) prevents overlap issues | 05-02 |
 | Optimal overrides color class | When a value is optimal, it uses accent green instead of positive/negative color | 05-02 |
+| TOOLTIPS constant with 8 terms | Covers all key tax terminology used in calculator | 05-03 |
+| role=tooltip ARIA pattern | Keyboard accessible tooltips per WCAG 1.4.13 | 05-03 |
+| Escape key dismisses tooltips | Standard accessibility pattern for dismissable content | 05-03 |
+| @media print with landscape | Comparison table fits better in landscape orientation | 05-03 |
+| 600px mobile breakpoint | Standard mobile threshold for vertical layout | 05-03 |
+| Vertical comparison blocks on mobile | Horizontal table unreadable on small screens | 05-03 |
 
 ### Pending Todos
 
-- Phase 5: Dashboard UI (12 requirements)
 - Phase 6: Excel Calculator (10 requirements)
 - Phase 7: Compliance & Documentation (10 requirements)
 
@@ -109,15 +114,15 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-01T13:59:47Z
-Stopped at: Completed 05-02-PLAN.md (Enhanced Cards & Sticky Table)
+Last session: 2026-02-01T14:20:00Z
+Stopped at: Completed 05-03-PLAN.md (Export & Responsive)
 Resume file: None
 
 ## Key Files Created
 
 | File | Purpose |
 |------|---------|
-| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table + calendar grid with exports |
+| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table + calendar grid with exports + tooltips + responsive layout |
 | .planning/phases/01-fiscal-foundation/01-01-SUMMARY.md | Plan 01-01 execution summary |
 | .planning/phases/01-fiscal-foundation/01-02-SUMMARY.md | Plan 01-02 execution summary |
 | .planning/phases/02-expense-tracking/02-01-SUMMARY.md | Plan 02-01 execution summary |
@@ -130,6 +135,7 @@ Resume file: None
 | .planning/phases/04-belgium-calendar/04-03-SUMMARY.md | Plan 04-03 execution summary |
 | .planning/phases/05-dashboard-ui/05-01-SUMMARY.md | Plan 05-01 execution summary |
 | .planning/phases/05-dashboard-ui/05-02-SUMMARY.md | Plan 05-02 execution summary |
+| .planning/phases/05-dashboard-ui/05-03-SUMMARY.md | Plan 05-03 execution summary |
 
 ## Phase 1 Complete
 
@@ -190,9 +196,9 @@ Phase 4 (Belgium Calendar) delivered:
 - Belgian Public Holidays 2026 reference (CAL-09)
 - All CAL-01 through CAL-09 requirements satisfied
 
-## Phase 5 In Progress
+## Phase 5 Complete
 
-Phase 5 (Dashboard UI) progress:
+Phase 5 (Dashboard UI) delivered:
 - Google Fonts loaded (DM Sans + JetBrains Mono) (UI-11)
 - CSS variables for theme colors and typography
 - Charcoal #1a1a1a background (not purple-tinted)
@@ -205,4 +211,8 @@ Phase 5 (Dashboard UI) progress:
 - Click-to-expand detail modal with 4 sections (UI-04)
 - Sticky first column in comparison table with z-index hierarchy (UI-06)
 - Semantic color-coding: positive (green), negative (red), warning (orange) (UI-07)
-- Next: 05-03 (Export & Responsive)
+- Accessible ARIA tooltips for 8 technical terms (UI-09)
+- Print stylesheet with light theme for PDF export (UI-10)
+- Clipboard copy for comparison table (UI-10)
+- Responsive mobile layout with vertical comparison blocks (UI-08)
+- All UI-01 through UI-12 requirements satisfied
