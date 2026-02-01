@@ -730,6 +730,144 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* Comparison Table */
+    .comparison-container {
+      margin-top: 2rem;
+      max-height: 500px;
+      overflow-y: auto;
+      background: rgba(255,255,255,0.02);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .comparison-table thead th {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+      border-bottom: 2px solid var(--accent);
+      padding: 0.75rem 1rem;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .comparison-table thead th:first-child {
+      text-align: left;
+    }
+
+    .comparison-table tbody td {
+      padding: 0.5rem 1rem;
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .comparison-table tbody td:first-child {
+      text-align: left;
+      font-family: inherit;
+      opacity: 0.8;
+    }
+
+    /* Divider row */
+    .comparison-table tr.divider td {
+      padding: 0.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* Highlight row (leefgeld) */
+    .comparison-table tr.highlight-row td {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-weight: 600;
+    }
+
+    /* Optimal value cell */
+    .comparison-table td.optimal {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Empty state */
+    .comparison-empty {
+      text-align: center;
+      padding: 2rem;
+      opacity: 0.6;
+    }
+
+    .comparison-empty p {
+      margin: 0;
+    }
+
+    /* New Scenario Button */
+    .new-scenario-btn {
+      background: transparent;
+      border: 2px dashed rgba(255,255,255,0.2);
+      color: var(--text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-left: 1rem;
+      flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .new-scenario-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Template Selection Dialog */
+    #templateSelectDialog {
+      max-width: 400px;
+    }
+
+    .template-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .template-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .template-option:hover {
+      border-color: var(--accent);
+    }
+
+    .template-option input[type="radio"] {
+      accent-color: var(--accent);
+    }
+
+    .template-option .template-info {
+      flex: 1;
+    }
+
+    .template-option .template-name {
+      font-weight: 600;
+    }
+
+    .template-option .template-desc {
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
@@ -867,6 +1005,34 @@
       </form>
     </dialog>
 
+    <!-- Template Selection Dialog for New Scenario -->
+    <dialog id="templateSelectDialog" aria-labelledby="templateDialogTitle">
+      <form method="dialog">
+        <header class="dialog-header">
+          <h2 id="templateDialogTitle">Create New Scenario</h2>
+          <button type="button" class="dialog-close" aria-label="Close" onclick="closeTemplateDialog()">x</button>
+        </header>
+
+        <div style="padding: 1.5rem;">
+          <div class="form-group">
+            <label for="newScenarioName">Scenario Name (required)</label>
+            <input type="text" id="newScenarioName" required placeholder="e.g., Aggressive Growth">
+          </div>
+
+          <h3 style="margin-top: 1rem; font-size: 0.95rem;">Copy values from:</h3>
+          <div class="template-options" id="templateOptions">
+            <!-- Populated by showTemplateDialog() -->
+          </div>
+        </div>
+
+        <footer class="dialog-footer">
+          <div class="spacer"></div>
+          <button type="button" class="secondary-btn" onclick="closeTemplateDialog()">Cancel</button>
+          <button type="submit" value="create" class="primary-btn">Create Scenario</button>
+        </footer>
+      </form>
+    </dialog>
+
     <div id="results" class="result"></div>
   </div>
   <script>
@@ -922,6 +1088,95 @@
     // ============================================================
     // All fiscal data traced to official AEAT/BOE/Seguridad Social sources
     // ============================================================
+
+    // ============================================================
+    // CALENDAR CONSTANTS
+    // ============================================================
+    // Data structures for Belgium presence calendar (Feb-Dec 2026)
+    // ============================================================
+
+    const CALENDAR_STORAGE_KEY = 'autonomo_calendar_v1';
+
+    const DAY_STATUS = Object.freeze({
+      UNSET: 'unset',
+      BELGIUM: 'belgium',
+      SPAIN: 'spain',
+      TRAVEL: 'travel'
+    });
+
+    const DEFAULT_CALENDAR_STATE = Object.freeze({
+      version: 1,
+      year: 2026,
+      startMonth: 1,  // February (0-indexed)
+      endMonth: 11,   // December (0-indexed)
+      days: {},       // { "2026-02-15": { status: "belgium", contracted: true } }
+      contractedPatternApplied: false,
+      lastModified: null,
+      currentMonth: 1  // February (0-indexed) - for navigation
+    });
+
+    // ============================================================
+    // CALENDAR STATE MANAGEMENT
+    // ============================================================
+    // localStorage persistence for calendar state
+    // ============================================================
+
+    /**
+     * Convert Date to ISO date key string (YYYY-MM-DD)
+     * @param {Date} date - Date object
+     * @returns {string} - ISO date string like "2026-02-15"
+     */
+    function toISODateKey(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    /**
+     * Load calendar state from localStorage
+     * Falls back to DEFAULT_CALENDAR_STATE on error or invalid data
+     * @returns {object} - Calendar state object (mutable clone)
+     */
+    function loadCalendarState() {
+      try {
+        const stored = localStorage.getItem(CALENDAR_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          // Version check for future migration support
+          if (parsed && parsed.version === 1) {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.warn('localStorage calendar load failed:', e.message);
+      }
+      // Return mutable clone of defaults
+      return structuredClone(DEFAULT_CALENDAR_STATE);
+    }
+
+    /**
+     * Save calendar state to localStorage
+     * Updates lastModified timestamp
+     * @returns {boolean} - True if save succeeded
+     */
+    function saveCalendarState() {
+      try {
+        calendarState.lastModified = new Date().toISOString();
+        localStorage.setItem(CALENDAR_STORAGE_KEY, JSON.stringify(calendarState));
+        return true;
+      } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+          console.warn('localStorage quota exceeded - calendar state not persisted');
+        } else {
+          console.warn('localStorage calendar save failed:', e.message);
+        }
+        return false;
+      }
+    }
+
+    // Global calendar state - initialized from localStorage or defaults
+    let calendarState = loadCalendarState();
 
     const SOURCES = Object.freeze({
       IRPF_BRACKETS: {
@@ -2004,6 +2259,7 @@
     /**
      * Render all scenario cards sorted by leefgeld (highest first)
      * First card (optimal) shows "Highest Leefgeld" badge
+     * Includes "+ New Scenario" button at the end
      */
     function renderScenarioCards() {
       const container = document.getElementById('scenarioCards');
@@ -2011,7 +2267,7 @@
 
       const sorted = getSortedScenarios();
 
-      container.innerHTML = sorted.map((scenario, index) => {
+      const cardsHtml = sorted.map((scenario, index) => {
         const isOptimal = index === 0;
         const isSelected = scenarioState.selected.includes(scenario.id);
         const isCustom = !scenario.isPreset;
@@ -2065,6 +2321,13 @@
           </div>
         `;
       }).join('');
+
+      // Add "+ New" button at end
+      const newButtonHtml = `
+        <button class="new-scenario-btn" onclick="showTemplateDialog()">+ New Scenario</button>
+      `;
+
+      container.innerHTML = cardsHtml + newButtonHtml;
     }
 
     /**
@@ -2082,7 +2345,142 @@
       }
       saveScenarioState();
       renderScenarioCards();
-      // renderComparisonTable() - Plan 03
+      renderComparisonTable();
+    }
+
+    // ============================================================
+    // COMPARISON TABLE RENDERING
+    // ============================================================
+    // Renders side-by-side comparison table for selected scenarios
+    // ============================================================
+
+    /**
+     * Render comparison table for selected scenarios
+     * Shows full calculation breakdown with sticky header and optimal highlighting
+     */
+    function renderComparisonTable() {
+      const container = document.getElementById('comparisonTable');
+      if (!container) return;
+
+      const selectedIds = scenarioState.selected;
+
+      // Empty state
+      if (selectedIds.length === 0) {
+        container.innerHTML = `
+          <div class="comparison-empty">
+            <p>Select scenarios using checkboxes to compare them side-by-side</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Get selected scenarios with results
+      const scenarios = selectedIds
+        .map(id => scenarioState.scenarios[id])
+        .filter(Boolean)
+        .map(s => ({
+          ...s,
+          results: calculateScenarioResults(s)
+        }));
+
+      // Verify all required properties exist on first results object (defensive check)
+      if (scenarios.length > 0) {
+        const requiredProps = [
+          'annualRevenue', 'annualExpenses', 'retaAnnual', 'totalDeductible',
+          'rendimientoNetoPrevio', 'gastosDificil', 'baseLiquidable',
+          'minimoPersonal', 'minimoDescendientes', 'minimoTotal',
+          'cuotaIntegra', 'effectiveRate', 'netAnnual', 'netMonthly',
+          'leefgeld', 'privateCostsMonthly'
+        ];
+        const firstResults = scenarios[0].results;
+        for (const prop of requiredProps) {
+          if (firstResults[prop] === undefined) {
+            console.error(`renderComparisonTable: missing property '${prop}' in results object. Check calculateFullIRPFWithFiscal return value in Plan 03-01.`);
+          }
+        }
+      }
+
+      // Find optimal values for highlighting
+      const optimalLeefgeld = Math.max(...scenarios.map(s => s.results.leefgeld));
+      const optimalEffRate = Math.min(...scenarios.map(s => s.results.effectiveRate));
+      const optimalNetMonthly = Math.max(...scenarios.map(s => s.results.netMonthly));
+
+      // Define metric rows (full breakdown per CONTEXT.md)
+      const metrics = [
+        { label: 'Monthly Revenue', getValue: (s) => s.monthlyRevenue, format: formatEUR },
+        { label: 'Monthly Expenses', getValue: (s) => s.monthlyExpenses, format: formatEUR },
+        { label: 'Belgium Work Costs', getValue: (s) => s.belgiumPattern === 'high' ? 2500 : 1000, format: formatEUR },
+        { label: 'Total Monthly Expenses', getValue: (s) => s.monthlyExpenses + (s.belgiumPattern === 'high' ? 2500 : 1000), format: formatEUR },
+        { divider: true },
+        { label: 'Annual Revenue', getValue: (s) => s.results.annualRevenue, format: formatEUR },
+        { label: 'RETA (Annual)', getValue: (s) => s.results.retaAnnual, format: formatEUR },
+        { label: 'Annual Expenses', getValue: (s) => s.results.annualExpenses, format: formatEUR },
+        { label: 'Total Deductible', getValue: (s) => s.results.totalDeductible, format: formatEUR },
+        { divider: true },
+        { label: 'Rendimiento Neto Previo', getValue: (s) => s.results.rendimientoNetoPrevio, format: formatEUR },
+        { label: 'Gastos Dificil (5%)', getValue: (s) => s.results.gastosDificil, format: formatEUR },
+        { label: 'Base Liquidable', getValue: (s) => s.results.baseLiquidable, format: formatEUR },
+        { divider: true },
+        { label: 'Minimo Personal', getValue: (s) => s.results.minimoPersonal, format: formatEUR },
+        { label: 'Minimo Descendientes', getValue: (s) => s.results.minimoDescendientes, format: formatEUR },
+        { label: 'Total Minimos', getValue: (s) => s.results.minimoTotal, format: formatEUR },
+        { divider: true },
+        { label: 'Cuota Integra (Annual IRPF)', getValue: (s) => s.results.cuotaIntegra, format: formatEUR },
+        { label: 'Effective Tax Rate', getValue: (s) => s.results.effectiveRate, format: formatPercent, optimalMin: true },
+        { divider: true },
+        { label: 'Net Annual', getValue: (s) => s.results.netAnnual, format: formatEUR },
+        { label: 'Net Monthly', getValue: (s) => s.results.netMonthly, format: formatEUR, optimalMax: optimalNetMonthly },
+        { label: 'Private Costs', getValue: (s) => s.results.privateCostsMonthly, format: formatEUR },
+        { label: 'Leefgeld', getValue: (s) => s.results.leefgeld, format: formatEUR, optimalMax: optimalLeefgeld, highlight: true }
+      ];
+
+      // Build table HTML
+      let tableHtml = `
+        <div class="comparison-container">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                ${scenarios.map(s => `<th>${s.name}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+      `;
+
+      metrics.forEach(metric => {
+        if (metric.divider) {
+          tableHtml += `<tr class="divider"><td colspan="${scenarios.length + 1}"></td></tr>`;
+        } else {
+          const rowClass = metric.highlight ? 'highlight-row' : '';
+          tableHtml += `<tr class="${rowClass}">`;
+          tableHtml += `<td>${metric.label}</td>`;
+
+          scenarios.forEach(s => {
+            const value = metric.getValue(s);
+            let cellClass = '';
+
+            // Determine if this value is optimal
+            if (metric.optimalMax !== undefined && value === metric.optimalMax) {
+              cellClass = 'optimal';
+            }
+            if (metric.optimalMin && value === optimalEffRate) {
+              cellClass = 'optimal';
+            }
+
+            tableHtml += `<td class="${cellClass}">${metric.format(value)}</td>`;
+          });
+
+          tableHtml += '</tr>';
+        }
+      });
+
+      tableHtml += `
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      container.innerHTML = tableHtml;
     }
 
     // ============================================================
@@ -2311,7 +2709,7 @@
 
       saveScenarioState();
       renderScenarioCards();
-      // renderComparisonTable() - Plan 03
+      renderComparisonTable();
     }
 
     /**
@@ -2336,7 +2734,7 @@
         saveScenarioState();
         closeEditModal();
         renderScenarioCards();
-        // renderComparisonTable() - Plan 03
+        renderComparisonTable();
       }
     }
 
@@ -2368,6 +2766,109 @@
       });
     }
 
+    // ============================================================
+    // TEMPLATE DIALOG / CUSTOM SCENARIO CREATION
+    // ============================================================
+    // Create new scenarios from existing scenario templates
+    // ============================================================
+
+    let selectedTemplateId = null;
+
+    /**
+     * Show template selection dialog for creating new scenario
+     */
+    function showTemplateDialog() {
+      const dialog = document.getElementById('templateSelectDialog');
+      const optionsContainer = document.getElementById('templateOptions');
+
+      // Build template options from all scenarios
+      const allScenarios = Object.values(scenarioState.scenarios);
+
+      optionsContainer.innerHTML = allScenarios.map((s, index) => {
+        const belgiumCost = s.belgiumPattern === 'high' ? 2500 : 1000;
+        const checked = index === 0 ? 'checked' : '';
+
+        return `
+          <label class="template-option">
+            <input type="radio" name="template" value="${s.id}" ${checked}>
+            <div class="template-info">
+              <div class="template-name">${s.name}</div>
+              <div class="template-desc">${formatEUR(s.monthlyRevenue)}/mo revenue, ${formatEUR(s.monthlyExpenses + belgiumCost)}/mo expenses</div>
+            </div>
+          </label>
+        `;
+      }).join('');
+
+      // Clear name input
+      document.getElementById('newScenarioName').value = '';
+
+      dialog.showModal();
+    }
+
+    /**
+     * Close template dialog without creating
+     */
+    function closeTemplateDialog() {
+      document.getElementById('templateSelectDialog').close();
+    }
+
+    /**
+     * Initialize template dialog event handlers
+     * Called on DOMContentLoaded
+     */
+    function initTemplateDialog() {
+      const dialog = document.getElementById('templateSelectDialog');
+      if (!dialog) return;
+
+      dialog.addEventListener('close', () => {
+        if (dialog.returnValue === 'create') {
+          createCustomScenario();
+        }
+      });
+    }
+
+    /**
+     * Create a new custom scenario from selected template
+     * Called when template dialog closes with 'create' return value
+     */
+    function createCustomScenario() {
+      const name = document.getElementById('newScenarioName').value.trim();
+      if (!name) {
+        alert('Please enter a name for the scenario');
+        return;
+      }
+
+      // Get selected template
+      const selectedRadio = document.querySelector('#templateOptions input[name="template"]:checked');
+      if (!selectedRadio) {
+        alert('Please select a template');
+        return;
+      }
+
+      const templateId = selectedRadio.value;
+      const template = scenarioState.scenarios[templateId];
+      if (!template) return;
+
+      // Create new scenario from template
+      const newScenario = {
+        ...structuredClone(template),
+        id: crypto.randomUUID(),
+        name: name,
+        isPreset: false,
+        fiscalOverrides: null  // Reset any overrides from template
+      };
+
+      // Add to state
+      scenarioState.scenarios[newScenario.id] = newScenario;
+      scenarioState.customOrder.push(newScenario.id);
+      saveScenarioState();
+      renderScenarioCards();
+      renderComparisonTable();
+
+      // Open edit modal for new scenario
+      openEditModal(newScenario.id);
+    }
+
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', () => {
       // Initialize scenario state
@@ -2379,7 +2880,9 @@
 
       // Phase 3 initialization
       renderScenarioCards();
+      renderComparisonTable();
       initEditDialog();
+      initTemplateDialog();
     });
   </script>
 </body>
