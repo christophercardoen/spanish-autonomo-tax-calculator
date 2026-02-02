@@ -105,11 +105,11 @@ Critical bug fixes and enhancements discovered during user testing.
 
 ### Critical Bug Fixes (BUG)
 
-- [ ] **BUG-01**: Fix add expense button - currently doesn't open form or create expenses
-- [ ] **BUG-02**: Fix tooltip positioning - open as centered modal with background blur instead of top-aligned
-- [ ] **BUG-03**: Remove all Dutch text - everything must be in English
-- [ ] **BUG-04**: Redesign Belgium cost toggle - use pill-style buttons instead of circular dots
-- [ ] **BUG-05**: Enhance calendar multi-select - add week selection and month selection
+- [x] **BUG-01**: Fix add expense button - currently doesn't open form or create expenses
+- [x] **BUG-02**: Fix tooltip positioning - open as centered modal with background blur instead of top-aligned
+- [x] **BUG-03**: Remove all Dutch text - everything must be in English
+- [x] **BUG-04**: Redesign Belgium cost toggle - use pill-style buttons instead of circular dots
+- [x] **BUG-05**: Enhance calendar multi-select - add week selection and month selection
 
 ### Enhanced Features (ENH)
 
@@ -235,11 +235,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | COMP-08 | Phase 7 | Complete |
 | COMP-09 | Phase 7 | Complete |
 | COMP-10 | Phase 7 | Complete |
-| BUG-01 | Phase 7.1 | Pending |
-| BUG-02 | Phase 7.1 | Pending |
-| BUG-03 | Phase 7.1 | Pending |
-| BUG-04 | Phase 7.1 | Pending |
-| BUG-05 | Phase 7.1 | Pending |
+| BUG-01 | Phase 7.1 | Complete |
+| BUG-02 | Phase 7.1 | Complete |
+| BUG-03 | Phase 7.1 | Complete |
+| BUG-04 | Phase 7.1 | Complete |
+| BUG-05 | Phase 7.1 | Complete |
 | ENH-01 | Phase 8 | Pending |
 | ENH-02 | Phase 8 | Pending |
 | ENH-03 | Phase 8 | Pending |

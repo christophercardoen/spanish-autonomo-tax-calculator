@@ -149,10 +149,12 @@ Plans:
   3. All Dutch text removed, everything in English
   4. Belgium cost toggle uses pill-style buttons (not circular dots)
   5. Calendar supports multi-select (shift-click range, week/month selection)
-**Plans**: TBD (run /gsd:plan-phase 7.1)
+**Plans**: 3 plans
 
 Plans:
-- [ ] TBD
+- [x] 7.1-01-PLAN.md - Fix add expense button, remove Dutch text, redesign Belgium pill toggle
+- [x] 7.1-02-PLAN.md - Redesign tooltips as centered modals with blur backdrop
+- [x] 7.1-03-PLAN.md - Enhanced calendar multi-select with week and month selection
 
 ### Phase 8: Enhanced Features
 **Goal**: Add missing v1 features: multi-select calendar improvements, income tracking, and official source links
@@ -184,5 +186,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 8
 | 5. Dashboard UI | 3/3 | Complete | 2026-02-01 |
 | 6. Excel Calculator | 3/3 | Complete | 2026-02-02 |
 | 7. Compliance & Documentation | 2/2 | Complete | 2026-02-02 |
-| 7.1. Critical Bug Fixes (INSERTED) | 0/? | Not started | - |
+| 7.1. Critical Bug Fixes (INSERTED) | 3/3 | Complete | 2026-02-02 |
 | 8. Enhanced Features | 0/? | Not started | - |
