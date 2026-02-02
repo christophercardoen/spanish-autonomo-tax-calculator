@@ -230,6 +230,7 @@
     #tab-calendar:checked ~ .tab-nav .tab-label[for="tab-calendar"],
     #tab-expenses:checked ~ .tab-nav .tab-label[for="tab-expenses"],
     #tab-details:checked ~ .tab-nav .tab-label[for="tab-details"],
+    #tab-income:checked ~ .tab-nav .tab-label[for="tab-income"],
     #tab-compliance:checked ~ .tab-nav .tab-label[for="tab-compliance"] {
       border-bottom-color: var(--accent);
       color: var(--accent);
@@ -246,8 +247,192 @@
     #tab-calendar:checked ~ .tab-panels .panel-calendar,
     #tab-expenses:checked ~ .tab-panels .panel-expenses,
     #tab-details:checked ~ .tab-panels .panel-details,
+    #tab-income:checked ~ .tab-panels .panel-income,
     #tab-compliance:checked ~ .tab-panels .panel-compliance {
       display: block;
+    }
+
+    /* ===========================================
+       PHASE 8: INCOME TAB STYLES
+       =========================================== */
+
+    /* Income panel styles */
+    .panel-income {
+      padding: var(--spacing-md);
+    }
+
+    .income-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-md);
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+    }
+
+    .income-header h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .income-summary {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+
+    .income-total {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .income-count {
+      color: var(--text-muted);
+      font-size: var(--size-small);
+    }
+
+    .income-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-md);
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .income-filters {
+      display: flex;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+    }
+
+    .income-filters select,
+    .income-filters input {
+      padding: 8px 12px;
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: var(--size-small);
+    }
+
+    .income-filters input {
+      min-width: 200px;
+    }
+
+    .income-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    /* Income entry card */
+    .income-entry {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.06);
+      align-items: center;
+    }
+
+    .income-entry:hover {
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .income-entry-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .income-client {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .income-details {
+      display: flex;
+      gap: var(--spacing-md);
+      font-size: var(--size-small);
+      color: var(--text-muted);
+    }
+
+    .income-amount {
+      font-family: var(--font-mono);
+      font-size: var(--size-numbers);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .income-actions {
+      display: flex;
+      gap: var(--spacing-xs);
+    }
+
+    .income-actions button {
+      padding: 6px 10px;
+      font-size: var(--size-small);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .income-actions button:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+
+    .income-actions .delete-btn:hover {
+      border-color: var(--negative);
+      color: var(--negative);
+    }
+
+    /* Empty state */
+    .income-empty {
+      text-align: center;
+      padding: var(--spacing-2xl);
+      color: var(--text-muted);
+    }
+
+    /* Income dialog */
+    #incomeDialog {
+      max-width: 500px;
+    }
+
+    #incomeDialog .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+    }
+
+    /* Responsive: stack income entry on mobile */
+    @media (max-width: 600px) {
+      .income-entry {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+      }
+
+      .income-amount {
+        text-align: left;
+      }
+
+      .income-actions {
+        justify-content: flex-start;
+      }
+
+      .income-filters input {
+        min-width: 150px;
+      }
+
+      #incomeDialog .form-row {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ===========================================
@@ -3606,6 +3791,7 @@
       <input type="radio" name="tabs" id="tab-calendar" class="tab-input">
       <input type="radio" name="tabs" id="tab-expenses" class="tab-input">
       <input type="radio" name="tabs" id="tab-details" class="tab-input">
+      <input type="radio" name="tabs" id="tab-income" class="tab-input">
       <input type="radio" name="tabs" id="tab-compliance" class="tab-input">
 
       <!-- Tab navigation -->
@@ -3614,6 +3800,7 @@
         <label for="tab-calendar" class="tab-label">Calendar</label>
         <label for="tab-expenses" class="tab-label">Expenses</label>
         <label for="tab-details" class="tab-label">Details</label>
+        <label for="tab-income" class="tab-label">Income</label>
         <label for="tab-compliance" class="tab-label">Compliance</label>
       </nav>
 
@@ -3904,6 +4091,35 @@
           </div>
         </section>
 
+        <!-- INCOME TAB (Phase 8 - ENH-02) -->
+        <section class="tab-panel panel-income">
+          <div class="income-header">
+            <h2>Income Tracking</h2>
+            <div class="income-summary">
+              <span class="income-total">Total: <span id="incomeTotalDisplay" class="mono">0.00 EUR</span></span>
+              <span class="income-count">(<span id="incomeCountDisplay">0</span> entries)</span>
+            </div>
+          </div>
+
+          <div class="income-controls">
+            <div class="income-filters">
+              <select id="incomeSortBy" onchange="renderIncomeList()">
+                <option value="date-desc">Newest First</option>
+                <option value="date-asc">Oldest First</option>
+                <option value="amount-desc">Highest Amount</option>
+                <option value="amount-asc">Lowest Amount</option>
+                <option value="client-asc">Client A-Z</option>
+              </select>
+              <input type="text" id="incomeFilterText" placeholder="Filter by client or invoice..." oninput="renderIncomeList()">
+            </div>
+            <button type="button" class="add-btn" onclick="openIncomeDialog()">+ Add Income</button>
+          </div>
+
+          <div id="incomeList" class="income-list">
+            <!-- Income entries rendered here -->
+          </div>
+        </section>
+
         <!-- COMPLIANCE TAB -->
         <section class="tab-panel panel-compliance" id="compliancePanel">
           <!-- Content populated by renderComplianceContent() -->
@@ -4140,6 +4356,65 @@
         <button class="secondary-btn" onclick="closeBulkPicker()">Cancel</button>
         <button class="primary-btn" onclick="saveBulkStatus()">Apply to All</button>
       </div>
+    </dialog>
+
+    <!-- Income Entry Dialog (Phase 8 - ENH-02) -->
+    <dialog id="incomeDialog" class="modal-dialog">
+      <form id="incomeForm" onsubmit="saveIncomeEntry(event)">
+        <div class="dialog-header">
+          <h3 id="incomeDialogTitle">Add Income Entry</h3>
+          <button type="button" class="dialog-close" onclick="closeIncomeDialog()">x</button>
+        </div>
+
+        <div style="padding: var(--spacing-md);">
+          <div class="form-group">
+            <label for="incomeClient">Client Name *</label>
+            <input type="text" id="incomeClient" name="clientName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="incomeInvoice">Invoice Number</label>
+            <input type="text" id="incomeInvoice" name="invoiceNumber" placeholder="INV-2026-001">
+          </div>
+
+          <div class="form-group">
+            <label for="incomeAmount">Amount (EUR) *</label>
+            <input type="number" id="incomeAmount" name="amount" step="0.01" min="0" required>
+          </div>
+
+          <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+            <div class="form-group">
+              <label for="incomeDateInvoiced">Date Invoiced</label>
+              <input type="date" id="incomeDateInvoiced" name="dateInvoiced">
+            </div>
+            <div class="form-group">
+              <label for="incomeDateReceived">Date Received *</label>
+              <input type="date" id="incomeDateReceived" name="dateReceived" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="incomeDescription">Description</label>
+            <textarea id="incomeDescription" name="description" rows="2" placeholder="IT Consulting - January 2026" style="width: 100%; resize: vertical;"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="incomeStatus">Status</label>
+            <select id="incomeStatus" name="status">
+              <option value="paid">Paid</option>
+              <option value="pending">Pending</option>
+              <option value="overdue">Overdue</option>
+            </select>
+          </div>
+
+          <input type="hidden" id="incomeEditId" name="editId">
+        </div>
+
+        <div class="dialog-footer">
+          <button type="button" class="secondary-btn" onclick="closeIncomeDialog()">Cancel</button>
+          <button type="submit" class="primary-btn">Save</button>
+        </div>
+      </form>
     </dialog>
 
     <!-- Tooltip Modal (single instance, reused for all tooltips) -->
