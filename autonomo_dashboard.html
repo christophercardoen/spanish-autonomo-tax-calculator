@@ -112,7 +112,8 @@
     #tab-scenarios:checked ~ .tab-nav .tab-label[for="tab-scenarios"],
     #tab-calendar:checked ~ .tab-nav .tab-label[for="tab-calendar"],
     #tab-expenses:checked ~ .tab-nav .tab-label[for="tab-expenses"],
-    #tab-details:checked ~ .tab-nav .tab-label[for="tab-details"] {
+    #tab-details:checked ~ .tab-nav .tab-label[for="tab-details"],
+    #tab-compliance:checked ~ .tab-nav .tab-label[for="tab-compliance"] {
       border-bottom-color: var(--accent);
       color: var(--accent);
     }
@@ -126,8 +127,233 @@
     #tab-scenarios:checked ~ .tab-panels .panel-scenarios,
     #tab-calendar:checked ~ .tab-panels .panel-calendar,
     #tab-expenses:checked ~ .tab-panels .panel-expenses,
-    #tab-details:checked ~ .tab-panels .panel-details {
+    #tab-details:checked ~ .tab-panels .panel-details,
+    #tab-compliance:checked ~ .tab-panels .panel-compliance {
       display: block;
+    }
+
+    /* ===========================================
+       PHASE 7: COMPLIANCE TAB STYLES
+       =========================================== */
+
+    .compliance-section {
+      margin-bottom: 1.5rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .compliance-section .section-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .compliance-section .section-header:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .compliance-section .section-icon {
+      font-size: 1.25rem;
+      transition: transform 0.2s;
+    }
+
+    .compliance-section .section-header[aria-expanded="true"] .section-icon {
+      transform: rotate(45deg);
+    }
+
+    .compliance-section .section-content {
+      padding: 0 1rem 1rem;
+    }
+
+    .compliance-section .section-content[hidden] {
+      display: none;
+    }
+
+    .legal-text {
+      background: rgba(255,255,255,0.05);
+      border-left: 3px solid var(--accent);
+      padding: 1rem;
+      margin: 0 0 1rem 0;
+      font-style: italic;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .plain-summary {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .plain-summary strong {
+      color: var(--accent);
+    }
+
+    .action-phase {
+      margin-bottom: 2rem;
+    }
+
+    .action-phase h3 {
+      font-size: 1.1rem;
+      margin: 0 0 1rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .fiscal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .fiscal-table th,
+    .fiscal-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .fiscal-table th {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .fiscal-table td.highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .fiscal-table tbody tr:hover {
+      background: rgba(255,255,255,0.03);
+    }
+
+    .panel-compliance .source-citation {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      font-style: normal;
+    }
+
+    .requirements-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .requirements-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .requirements-list li:last-child {
+      border-bottom: none;
+    }
+
+    .requirements-list .field-name {
+      color: var(--accent);
+      font-weight: 500;
+      min-width: 180px;
+    }
+
+    .invalid-list {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .invalid-list h5 {
+      color: var(--negative);
+      margin: 0 0 0.75rem 0;
+      font-size: 0.9rem;
+    }
+
+    .invalid-list li {
+      color: var(--text-muted);
+    }
+
+    .invalid-list .invalid-type {
+      color: var(--negative);
+      font-weight: 500;
+    }
+
+    .tie-breaker-steps {
+      list-style: none;
+      padding: 0;
+      counter-reset: step;
+    }
+
+    .tie-breaker-steps li {
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 4px;
+      counter-increment: step;
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .tie-breaker-steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .tie-breaker-steps .step-name {
+      font-weight: 600;
+      color: var(--text);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .tie-breaker-steps .step-legal {
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .tie-breaker-steps .step-plain {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .payment-warning {
+      background: rgba(248, 113, 113, 0.1);
+      border-left: 3px solid var(--negative);
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .payment-warning strong {
+      color: var(--negative);
     }
 
     input[type="number"] { padding: 0.5rem; font-size: 1rem; width: 150px; }
@@ -1862,6 +2088,7 @@
       <input type="radio" name="tabs" id="tab-calendar" class="tab-input">
       <input type="radio" name="tabs" id="tab-expenses" class="tab-input">
       <input type="radio" name="tabs" id="tab-details" class="tab-input">
+      <input type="radio" name="tabs" id="tab-compliance" class="tab-input">
 
       <!-- Tab navigation -->
       <nav class="tab-nav">
@@ -1869,6 +2096,7 @@
         <label for="tab-calendar" class="tab-label">Calendar</label>
         <label for="tab-expenses" class="tab-label">Expenses</label>
         <label for="tab-details" class="tab-label">Details</label>
+        <label for="tab-compliance" class="tab-label">Compliance</label>
       </nav>
 
       <!-- Tab panels container -->
@@ -2028,6 +2256,11 @@
             </label>
           </div>
           <div id="results" class="result"></div>
+        </section>
+
+        <!-- COMPLIANCE TAB -->
+        <section class="tab-panel panel-compliance" id="compliancePanel">
+          <!-- Content populated by renderComplianceContent() -->
         </section>
 
       </div><!-- end .tab-panels -->
@@ -3287,6 +3520,88 @@ Generated by Autonomo Tax Calculator`;
         note: "Abroad: 91.35 EUR/day with overnight, 48.08 EUR without. Spain: 53.34 EUR/day with overnight, 26.67 EUR without.",
         confidence: "HIGH"
       }
+    });
+
+    // ===========================================
+    // PHASE 7: COMPLIANCE CONSTANTS
+    // ===========================================
+
+    const DIETAS_LIMITS = Object.freeze({
+      spain: {
+        withOvernight: 53.34,
+        withoutOvernight: 26.67
+      },
+      abroad: {
+        withOvernight: 91.35,
+        withoutOvernight: 48.08
+      },
+      source: 'Art. 9 Reglamento IRPF (RD 439/2007)'
+    });
+
+    const TREATY_ARTICLE_4 = Object.freeze({
+      title: 'Article 4: Tax Residence Tie-Breaker',
+      source: 'Spain-Belgium Tax Treaty (BOE-A-2003-13375)',
+      steps: [
+        {
+          name: 'Permanent Home',
+          legal: 'vivienda permanente a su disposicion',
+          plain: 'The country where you have a permanent home available to you. If only in one country, that country is your tax residence.'
+        },
+        {
+          name: 'Center of Vital Interests',
+          legal: 'centro de intereses vitales - relaciones personales y economicas mas estrechas',
+          plain: 'If permanent homes in both countries: where your personal ties (family, social life) and economic ties (work, assets) are strongest. Family location receives special weight per OECD Commentary.'
+        },
+        {
+          name: 'Habitual Abode',
+          legal: 'viva habitualmente',
+          plain: 'If center cannot be determined: the country where you spend more time overall.'
+        },
+        {
+          name: 'Nationality',
+          legal: 'nacional',
+          plain: 'If habitual abode is equal: the country of your citizenship.'
+        },
+        {
+          name: 'Mutual Agreement',
+          legal: 'autoridades competentes resolveran de comun acuerdo',
+          plain: 'If dual national or none: tax authorities of both countries negotiate.'
+        }
+      ]
+    });
+
+    const ARTICLE_9_1_B = Object.freeze({
+      title: 'Art. 9.1.b LIRPF: Family Presumption',
+      source: 'Ley 35/2006, Art. 9.1.b (BOE-A-2006-20764)',
+      legalText: 'Se presumira, salvo prueba en contrario, que el contribuyente tiene su residencia habitual en territorio espanol cuando, de acuerdo con los criterios anteriores, resida habitualmente en Espana el conyuge no separado legalmente y los hijos menores de edad que dependan de aquel.',
+      plainSummary: 'If your non-legally-separated spouse AND/OR dependent minor children habitually reside in Spain, Spanish law PRESUMES you are also a Spanish tax resident. This presumption is "rebuttable" (can be challenged), but the burden of proof shifts to you to demonstrate your tax residence is elsewhere.',
+      implication: 'For a person with family in Spain, this presumption operates in your FAVOR when another country might claim tax residency. Spain starts from the position that you are Spanish resident based on family ties, making it easier to defend Spanish tax residence under treaty tie-breaker rules.'
+    });
+
+    const FACTURA_REQUIREMENTS = Object.freeze({
+      title: 'Factura Completa Requirements',
+      source: 'AEAT - Reglamento de Facturacion',
+      required: [
+        { field: 'Numero de factura', description: 'Sequential invoice number' },
+        { field: 'Fecha de emision', description: 'Issue date' },
+        { field: 'NIF del emisor', description: 'Supplier tax ID' },
+        { field: 'Nombre/Razon social emisor', description: 'Supplier name or company' },
+        { field: 'Domicilio fiscal emisor', description: 'Supplier address' },
+        { field: 'NIF del destinatario', description: 'YOUR tax ID (autonomo NIF)' },
+        { field: 'Nombre destinatario', description: 'YOUR name' },
+        { field: 'Domicilio fiscal destinatario', description: 'YOUR fiscal address' },
+        { field: 'Descripcion', description: 'Description of goods/services' },
+        { field: 'Base imponible', description: 'Taxable amount before IVA' },
+        { field: 'Tipo de IVA', description: 'IVA rate (if applicable)' },
+        { field: 'Cuota de IVA', description: 'IVA amount' },
+        { field: 'Total', description: 'Total amount' }
+      ],
+      notValid: [
+        { type: 'Ticket/Receipt', reason: 'Missing recipient identification' },
+        { type: 'Factura simplificada', reason: 'Lacks full recipient data for IRPF deduction' },
+        { type: 'Bank statement alone', reason: 'Not proof of business expense' },
+        { type: 'Airbnb confirmation email', reason: 'Not a valid tax invoice' }
+      ]
     });
 
     // ============================================================
@@ -5225,6 +5540,218 @@ Generated by Autonomo Tax Calculator`;
       }
     });
 
+    // ============================================================
+    // PHASE 7: COMPLIANCE TAB CONTENT
+    // ============================================================
+
+    /**
+     * Render the Compliance tab content with collapsible sections
+     * Content organized by action: Before Travel, While Working, When Filing
+     */
+    function renderComplianceContent() {
+      const panel = document.getElementById('compliancePanel');
+      if (!panel) return;
+
+      panel.innerHTML = `
+        <h2>Compliance Information</h2>
+
+        <!-- SECTION 1: Before You Travel -->
+        <div class="action-phase">
+          <h3>Before You Travel</h3>
+
+          <div class="compliance-section">
+            <button class="section-header" aria-expanded="false" aria-controls="content-treaty-overview">
+              <span>Spain-Belgium Tax Treaty Overview</span>
+              <span class="section-icon">+</span>
+            </button>
+            <div class="section-content" id="content-treaty-overview" hidden>
+              <p class="plain-summary">
+                Spain and Belgium have a tax treaty (BOE-A-2003-13375) to prevent double taxation.
+                If both countries claim you as a tax resident, the treaty provides "tie-breaker" rules
+                to determine which country has primary taxation rights.
+              </p>
+              <cite class="source-citation">${TREATY_ARTICLE_4.source}</cite>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: While Working in Belgium -->
+        <div class="action-phase">
+          <h3>While Working in Belgium</h3>
+
+          <div class="compliance-section">
+            <button class="section-header" aria-expanded="false" aria-controls="content-dietas">
+              <span>Dietas Limits (Meal Allowances)</span>
+              <span class="section-icon">+</span>
+            </button>
+            <div class="section-content" id="content-dietas" hidden>
+              <p class="plain-summary">
+                Spanish tax law allows deduction of meal expenses ("dietas") up to fixed daily limits
+                when working in a different municipality from your residence. Higher limits apply abroad.
+              </p>
+              <table class="fiscal-table">
+                <thead>
+                  <tr>
+                    <th>Location</th>
+                    <th>With Overnight</th>
+                    <th>Without Overnight</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Spain</td>
+                    <td>${formatEUR(DIETAS_LIMITS.spain.withOvernight)}/day</td>
+                    <td>${formatEUR(DIETAS_LIMITS.spain.withoutOvernight)}/day</td>
+                  </tr>
+                  <tr>
+                    <td>Belgium (Abroad)</td>
+                    <td class="highlight">${formatEUR(DIETAS_LIMITS.abroad.withOvernight)}/day</td>
+                    <td>${formatEUR(DIETAS_LIMITS.abroad.withoutOvernight)}/day</td>
+                  </tr>
+                </tbody>
+              </table>
+              <cite class="source-citation">${DIETAS_LIMITS.source}</cite>
+            </div>
+          </div>
+
+          <div class="compliance-section">
+            <button class="section-header" aria-expanded="false" aria-controls="content-factura">
+              <span>Factura Completa Requirements</span>
+              <span class="section-icon">+</span>
+            </button>
+            <div class="section-content" id="content-factura" hidden>
+              <p class="plain-summary">
+                <strong>To deduct an expense, you need a "factura completa" (complete invoice)</strong>,
+                not just a ticket or receipt. The invoice must include both the supplier's AND your fiscal data.
+              </p>
+              <ul class="requirements-list">
+                ${FACTURA_REQUIREMENTS.required.map(r => `
+                  <li>
+                    <span class="field-name">${r.field}</span>
+                    <span class="field-desc">${r.description}</span>
+                  </li>
+                `).join('')}
+              </ul>
+              <div class="invalid-list">
+                <h5>NOT Valid for Deduction:</h5>
+                <ul class="requirements-list">
+                  ${FACTURA_REQUIREMENTS.notValid.map(r => `
+                    <li>
+                      <span class="invalid-type">${r.type}</span>
+                      <span class="field-desc">- ${r.reason}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+              <cite class="source-citation">${FACTURA_REQUIREMENTS.source}</cite>
+            </div>
+          </div>
+
+          <div class="compliance-section">
+            <button class="section-header" aria-expanded="false" aria-controls="content-payment">
+              <span>Electronic Payment Requirement</span>
+              <span class="section-icon">+</span>
+            </button>
+            <div class="section-content" id="content-payment" hidden>
+              <p class="plain-summary">
+                Since 2018, meal/maintenance expenses (dietas) must be paid via electronic means to be deductible.
+              </p>
+              <div class="payment-warning">
+                <strong>Cash payments for dietas are NOT deductible.</strong>
+                <p>Acceptable payment methods: bank card, bank transfer, Bizum, or other traceable electronic payment.</p>
+              </div>
+              <cite class="source-citation">Ley 6/2017 (AEAT)</cite>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: When Filing Taxes -->
+        <div class="action-phase">
+          <h3>When Filing Taxes</h3>
+
+          <div class="compliance-section">
+            <button class="section-header" aria-expanded="false" aria-controls="content-tiebreaker">
+              <span>Treaty Tie-Breaker Rules (Article 4)</span>
+              <span class="section-icon">+</span>
+            </button>
+            <div class="section-content" id="content-tiebreaker" hidden>
+              <p class="plain-summary">
+                When both Spain and Belgium claim you as a tax resident, the treaty resolves the conflict
+                using a 5-step hierarchy. <strong>The first criterion that produces a clear answer determines your residence.</strong>
+              </p>
+              <ol class="tie-breaker-steps">
+                ${TREATY_ARTICLE_4.steps.map(s => `
+                  <li>
+                    <span class="step-name">${s.name}</span>
+                    <span class="step-legal">"${s.legal}"</span>
+                    <span class="step-plain">${s.plain}</span>
+                  </li>
+                `).join('')}
+              </ol>
+              <cite class="source-citation">${TREATY_ARTICLE_4.source}</cite>
+            </div>
+          </div>
+
+          <div class="compliance-section">
+            <button class="section-header" aria-expanded="false" aria-controls="content-centro">
+              <span>Centro de Intereses Vitales (Center of Vital Interests)</span>
+              <span class="section-icon">+</span>
+            </button>
+            <div class="section-content" id="content-centro" hidden>
+              <p class="plain-summary">
+                The "center of vital interests" considers BOTH personal ties (family, social connections)
+                AND economic ties (work, assets). Per OECD Commentary, <strong>personal ties receive special weight</strong>.
+              </p>
+              <p class="plain-summary">
+                <strong>Personal relations include:</strong> Family location, social relationships, where you "live your life"
+              </p>
+              <p class="plain-summary">
+                <strong>Economic relations include:</strong> Work location, income source, property ownership
+              </p>
+              <p class="plain-summary">
+                For a person with family in one country but working extensively in another:
+                The family location often tips the balance, especially when combined with maintained family home,
+                regular returns, and social ties in the home country.
+              </p>
+              <cite class="source-citation">OECD Model Tax Convention Commentary, Art. 4</cite>
+            </div>
+          </div>
+
+          <div class="compliance-section">
+            <button class="section-header" aria-expanded="false" aria-controls="content-family">
+              <span>Family Presumption (Art. 9.1.b LIRPF)</span>
+              <span class="section-icon">+</span>
+            </button>
+            <div class="section-content" id="content-family" hidden>
+              <blockquote class="legal-text" cite="BOE-A-2006-20764">
+                "${ARTICLE_9_1_B.legalText}"
+              </blockquote>
+              <p class="plain-summary">
+                <strong>In plain language:</strong> ${ARTICLE_9_1_B.plainSummary}
+              </p>
+              <p class="plain-summary" style="margin-top: 1rem;">
+                <strong>Practical implication:</strong> ${ARTICLE_9_1_B.implication}
+              </p>
+              <cite class="source-citation">${ARTICLE_9_1_B.source}</cite>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Set up collapsible section event listeners
+      panel.querySelectorAll('.compliance-section .section-header').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', !expanded);
+          const contentId = btn.getAttribute('aria-controls');
+          const content = document.getElementById(contentId);
+          if (content) {
+            content.hidden = expanded;
+          }
+        });
+      });
+    }
+
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', () => {
       // Initialize scenario state
@@ -5244,6 +5771,9 @@ Generated by Autonomo Tax Calculator`;
       renderCalendar();
       updateCountDisplays();  // Initialize count displays
       showContractedWizard(); // Show wizard if not yet applied
+
+      // Phase 7 initialization - Compliance
+      renderComplianceContent();
     });
   </script>
 </body>
