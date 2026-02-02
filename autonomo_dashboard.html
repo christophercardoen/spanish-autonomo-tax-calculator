@@ -255,10 +255,16 @@
        =========================================== */
 
     .compliance-section {
-      margin-bottom: 1.5rem;
-      background: rgba(255,255,255,0.03);
-      border-radius: 8px;
+      margin-bottom: var(--spacing-md);
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
       overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .compliance-section:hover {
+      border-color: rgba(255,255,255,0.15);
     }
 
     .compliance-section .section-header {
@@ -266,31 +272,51 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem;
+      padding: var(--spacing-md) var(--spacing-lg);
       background: transparent;
       border: none;
       color: var(--text);
       cursor: pointer;
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
       text-align: left;
+      transition: background 0.15s ease;
     }
 
     .compliance-section .section-header:hover {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .compliance-section .section-header[aria-expanded="true"] {
+      background: rgba(74, 222, 128, 0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .compliance-section .section-icon {
-      font-size: 1.25rem;
-      transition: transform 0.2s;
+      font-size: 1rem;
+      transition: transform 0.2s ease;
+      color: var(--text-muted);
     }
 
     .compliance-section .section-header[aria-expanded="true"] .section-icon {
-      transform: rotate(45deg);
+      transform: rotate(90deg);
+      color: var(--accent);
     }
 
     .compliance-section .section-content {
-      padding: 0 1rem 1rem;
+      padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+      animation: slideDown 0.2s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .compliance-section .section-content[hidden] {
@@ -580,87 +606,121 @@
       gap: 0.5rem;
     }
 
-    /* Details tab input card styling */
-    .details-input-card {
+    /* Details tab layout */
+    .details-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: var(--spacing-xl);
+      align-items: start;
+    }
+
+    .details-sidebar {
+      position: sticky;
+      top: var(--spacing-md);
       background: var(--bg-surface);
       border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
-      margin-bottom: var(--spacing-xl);
-      max-width: 400px;
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
     }
 
-    .input-card-title {
-      margin: 0 0 var(--spacing-md) 0;
-      font-size: 1.1rem;
-      color: var(--accent);
-    }
-
-    .input-row {
+    .details-input-group {
       margin-bottom: var(--spacing-md);
     }
 
-    .input-label {
+    .details-label {
       display: block;
-      font-size: var(--size-labels);
-      color: var(--text-muted);
-      margin-bottom: var(--spacing-xs);
-    }
-
-    .input-with-unit {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-    }
-
-    .input-prefix,
-    .input-suffix {
       font-size: var(--size-small);
       color: var(--text-muted);
+      margin-bottom: var(--spacing-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .revenue-input {
-      flex: 1;
-      max-width: 150px;
-      font-family: var(--font-mono);
-      font-size: var(--size-numbers);
-      padding: var(--spacing-sm) var(--spacing-md);
+    .details-input-wrapper {
+      display: flex;
+      align-items: center;
       background: var(--bg);
       border: 1px solid rgba(255,255,255,0.2);
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .details-currency {
+      padding: var(--spacing-sm);
+      background: rgba(255,255,255,0.05);
+      color: var(--text-muted);
+      font-size: var(--size-small);
+      font-weight: 500;
+    }
+
+    .details-input {
+      flex: 1;
+      width: 100%;
+      padding: var(--spacing-sm);
+      background: transparent;
+      border: none;
       color: var(--text);
+      font-family: var(--font-mono);
+      font-size: var(--size-numbers);
       text-align: right;
     }
 
-    .revenue-input:focus {
-      border-color: var(--accent);
+    .details-input:focus {
       outline: none;
+    }
+
+    .details-input-wrapper:focus-within {
+      border-color: var(--accent);
       box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2);
     }
 
-    .checkbox-row {
-      padding-top: var(--spacing-sm);
-    }
-
-    .checkbox-label {
+    .details-checkbox-label {
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
       cursor: pointer;
-    }
-
-    .checkbox-text {
       font-size: var(--size-labels);
     }
 
-    .checkbox-hint {
-      color: var(--text-muted);
+    .details-hint {
+      display: block;
       font-size: var(--size-small);
+      color: var(--text-muted);
+      margin-top: 2px;
+      margin-left: 22px;
     }
 
-    .reset-btn.small {
+    .details-reset-btn {
+      width: 100%;
+      padding: var(--spacing-sm);
+      margin-top: var(--spacing-sm);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
       font-size: var(--size-small);
-      padding: var(--spacing-xs) var(--spacing-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .details-reset-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .details-results {
+      min-height: 400px;
+    }
+
+    /* Mobile: stack vertically */
+    @media (max-width: 768px) {
+      .details-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .details-sidebar {
+        position: static;
+      }
     }
     h2 { color: var(--accent); margin-top: 2rem; }
     h3 { margin-top: 1.5rem; margin-bottom: 0.5rem; opacity: 0.9; }
@@ -1008,8 +1068,9 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-padding: 1rem;
-      padding: 1rem 0;
+      padding: 1rem 0 1.5rem 0;  /* Extra bottom padding for scrollbar clearance */
       -webkit-overflow-scrolling: touch;
+      margin-bottom: 0.5rem;
     }
 
     /* Enhanced scenario cards per UI-02, UI-03, Phase 7.2 polish */
@@ -1738,22 +1799,18 @@
     }
 
     .day-cell {
-      min-height: 60px;
+      min-height: 70px;
       background: rgba(255,255,255,0.03);
       border-radius: 4px;
-      padding: 0.25rem;
+      padding: 0.35rem;
       position: relative;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .day-cell:hover:not(.empty) {
-      background: rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
     .day-cell.empty {
       background: transparent;
-      cursor: default;
     }
 
     .day-cell.belgium {
@@ -1771,26 +1828,89 @@
       border: 1px solid rgba(251, 146, 60, 0.3);
     }
 
-    .day-number {
-      font-size: 0.85rem;
-      font-weight: 500;
+    .day-cell-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .status-emoji {
-      display: block;
-      text-align: center;
-      font-size: 1.2rem;
-      margin-top: 0.25rem;
+    .day-number {
+      font-size: 0.8rem;
+      font-weight: 600;
     }
 
     .contracted-badge {
-      position: absolute;
-      top: 2px;
-      right: 4px;
-      font-size: 10px;
+      font-size: 9px;
       opacity: 0.7;
       font-weight: 600;
       color: var(--accent);
+    }
+
+    /* Inline status buttons */
+    .day-status-buttons {
+      display: flex;
+      gap: 2px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .day-status-btn {
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.05);
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      opacity: 0.5;
+    }
+
+    .day-status-btn:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .day-status-btn.active {
+      opacity: 1;
+      border-width: 2px;
+    }
+
+    .day-status-btn.belgium-btn {
+      border-color: var(--belgium);
+    }
+    .day-status-btn.belgium-btn.active {
+      background: rgba(59, 130, 246, 0.3);
+      border-color: var(--belgium);
+    }
+
+    .day-status-btn.spain-btn {
+      border-color: var(--positive);
+    }
+    .day-status-btn.spain-btn.active {
+      background: rgba(74, 222, 128, 0.3);
+      border-color: var(--positive);
+    }
+
+    .day-status-btn.travel-btn {
+      border-color: var(--warning);
+    }
+    .day-status-btn.travel-btn.active {
+      background: rgba(251, 146, 60, 0.3);
+      border-color: var(--warning);
+    }
+
+    .day-status-btn.clear-btn {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .day-status-btn.clear-btn:hover {
+      color: var(--negative);
+      border-color: var(--negative);
     }
 
     /* Day Picker Dialog Status Options */
@@ -3194,8 +3314,8 @@
 
       <!-- Calendar Help Tip -->
       <div class="calendar-help-tip">
-        <strong>Tip:</strong> Click a day to set its status. Use <kbd>Shift</kbd>+click to select a range.
-        Click <strong>W</strong> to select a week, or <strong>Select All</strong> to select an entire month.
+        <strong>Tip:</strong> Click <strong>BE</strong>, <strong>ES</strong>, or <strong>T</strong> buttons on each day to set status.
+        Use <strong>W</strong> to set an entire week, or <strong>Select All</strong> for the whole month.
       </div>
 
       <!-- Selection Indicator (shows when days are selected) -->
@@ -3258,27 +3378,33 @@
 
         <!-- DETAILS TAB -->
         <section class="tab-panel panel-details">
-          <div class="details-input-card">
-            <h3 class="input-card-title">Quick Calculator</h3>
-            <div class="input-row">
-              <label class="input-label" for="monthlyRevenue">Monthly Revenue</label>
-              <div class="input-with-unit">
-                <span class="input-prefix">EUR</span>
-                <input type="number" id="monthlyRevenue" value="6000" min="0" step="100" oninput="recalculateTotals()" class="revenue-input">
-                <span class="input-suffix">/month</span>
+          <div class="details-layout">
+            <!-- Left: Input Controls -->
+            <div class="details-sidebar">
+              <div class="details-input-group">
+                <label class="details-label" for="monthlyRevenue">Monthly Revenue</label>
+                <div class="details-input-wrapper">
+                  <span class="details-currency">EUR</span>
+                  <input type="number" id="monthlyRevenue" value="6000" min="0" step="100" oninput="recalculateTotals()" class="details-input">
+                </div>
               </div>
+
+              <div class="details-input-group">
+                <label class="details-checkbox-label">
+                  <input type="checkbox" id="hasDescendant" checked onchange="recalculateTotals()">
+                  <span>1 Dependent Child</span>
+                </label>
+                <span class="details-hint">Adds 2,400 EUR to minimo personal</span>
+              </div>
+
+              <button class="details-reset-btn" onclick="resetDetailsForm()">Reset</button>
             </div>
-            <div class="input-row checkbox-row">
-              <label class="checkbox-label">
-                <input type="checkbox" id="hasDescendant" checked onchange="recalculateTotals()">
-                <span class="checkbox-text">1 Dependent Child <span class="checkbox-hint">(+2,400 EUR minimo)</span></span>
-              </label>
-            </div>
-            <div class="input-row">
-              <button class="reset-btn small" onclick="resetDetailsForm()">Reset to Defaults</button>
+
+            <!-- Right: Results -->
+            <div class="details-results" id="results">
+              <!-- Populated by recalculateTotals() -->
             </div>
           </div>
-          <div id="results" class="result"></div>
         </section>
 
         <!-- COMPLIANCE TAB -->
@@ -3877,10 +4003,21 @@
             const selectedClass = isSelected ? 'selected' : '';
 
             gridHtml += `
-              <div class="day-cell ${status} ${selectedClass}" data-date="${dateKey}" onclick="handleDayClick('${dateKey}', event)">
-                <span class="day-number">${date.getDate()}</span>
-                ${isContracted ? '<span class="contracted-badge">C</span>' : ''}
-                <span class="status-emoji">${emoji}</span>
+              <div class="day-cell ${status}" data-date="${dateKey}">
+                <div class="day-cell-header">
+                  <span class="day-number">${date.getDate()}</span>
+                  ${isContracted ? '<span class="contracted-badge">C</span>' : ''}
+                </div>
+                <div class="day-status-buttons">
+                  <button type="button" class="day-status-btn belgium-btn ${status === 'belgium' ? 'active' : ''}"
+                    onclick="setDayStatus('${dateKey}', 'belgium')" title="Belgium">BE</button>
+                  <button type="button" class="day-status-btn spain-btn ${status === 'spain' ? 'active' : ''}"
+                    onclick="setDayStatus('${dateKey}', 'spain')" title="Spain">ES</button>
+                  <button type="button" class="day-status-btn travel-btn ${status === 'travel' ? 'active' : ''}"
+                    onclick="setDayStatus('${dateKey}', 'travel')" title="Travel">T</button>
+                  <button type="button" class="day-status-btn clear-btn"
+                    onclick="setDayStatus('${dateKey}', 'unset')" title="Clear">x</button>
+                </div>
               </div>
             `;
           }
@@ -3997,8 +4134,38 @@
       }
     }
 
+    /**
+     * Set day status directly from inline button click
+     * This is the new inline approach replacing the dialog pattern
+     *
+     * @param {string} dateKey - ISO date key (YYYY-MM-DD)
+     * @param {string} status - New status ('belgium', 'spain', 'travel', 'unset')
+     */
+    function setDayStatus(dateKey, status) {
+      const existingData = calendarState.days[dateKey] || {};
+
+      if (status === 'unset') {
+        // Clear the day but preserve contracted flag
+        if (existingData.contracted) {
+          calendarState.days[dateKey] = { status: 'unset', contracted: true };
+        } else {
+          delete calendarState.days[dateKey];
+        }
+      } else {
+        calendarState.days[dateKey] = {
+          status: status,
+          contracted: existingData.contracted || false
+        };
+      }
+
+      // Mark as unsaved and update UI
+      markUnsaved();
+      renderCalendar();
+      updateCountDisplays();
+    }
+
     // ============================================================
-    // DAY PICKER DIALOG FUNCTIONS
+    // DAY PICKER DIALOG FUNCTIONS (legacy, kept for bulk operations)
     // ============================================================
     // Open/close day picker and save status for individual days
     // ============================================================
@@ -5886,7 +6053,7 @@ Generated by Autonomo Tax Calculator`;
 
     /**
      * Create source hint HTML for inline citations
-     * Now uses click modal instead of hover tooltip for better UX
+     * Uses click modal for better UX
      * @param {string} sourceKey - Key from SOURCES constant
      * @returns {string} - HTML string with clickable info icon
      */
@@ -5895,7 +6062,7 @@ Generated by Autonomo Tax Calculator`;
       if (!s) return '';
       const title = s.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
       const text = `${s.source}: ${s.note}`.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-      return `<button type="button" class="source-hint-btn" onclick="openTooltipModal('${title}', '${text}')" aria-label="More info about ${s.name}">i</button>`;
+      return `<button type="button" class="source-hint-btn" onclick="openTooltipModal('${title}', '${text}')" aria-label="More info about ${s.name}">?</button>`;
     }
 
     /**
@@ -6883,7 +7050,7 @@ Generated by Autonomo Tax Calculator`;
           <div class="compliance-section">
             <button class="section-header" aria-expanded="false" aria-controls="content-treaty-overview">
               <span>Spain-Belgium Tax Treaty Overview</span>
-              <span class="section-icon">+</span>
+              <span class="section-icon">&#9654;</span>
             </button>
             <div class="section-content" id="content-treaty-overview" hidden>
               <p class="plain-summary">
@@ -6903,7 +7070,7 @@ Generated by Autonomo Tax Calculator`;
           <div class="compliance-section">
             <button class="section-header" aria-expanded="false" aria-controls="content-dietas">
               <span>Dietas Limits (Meal Allowances)</span>
-              <span class="section-icon">+</span>
+              <span class="section-icon">&#9654;</span>
             </button>
             <div class="section-content" id="content-dietas" hidden>
               <p class="plain-summary">
@@ -6938,7 +7105,7 @@ Generated by Autonomo Tax Calculator`;
           <div class="compliance-section">
             <button class="section-header" aria-expanded="false" aria-controls="content-factura">
               <span>Factura Completa Requirements</span>
-              <span class="section-icon">+</span>
+              <span class="section-icon">&#9654;</span>
             </button>
             <div class="section-content" id="content-factura" hidden>
               <p class="plain-summary">
@@ -6971,7 +7138,7 @@ Generated by Autonomo Tax Calculator`;
           <div class="compliance-section">
             <button class="section-header" aria-expanded="false" aria-controls="content-payment">
               <span>Electronic Payment Requirement</span>
-              <span class="section-icon">+</span>
+              <span class="section-icon">&#9654;</span>
             </button>
             <div class="section-content" id="content-payment" hidden>
               <p class="plain-summary">
@@ -6993,7 +7160,7 @@ Generated by Autonomo Tax Calculator`;
           <div class="compliance-section">
             <button class="section-header" aria-expanded="false" aria-controls="content-tiebreaker">
               <span>Treaty Tie-Breaker Rules (Article 4)</span>
-              <span class="section-icon">+</span>
+              <span class="section-icon">&#9654;</span>
             </button>
             <div class="section-content" id="content-tiebreaker" hidden>
               <p class="plain-summary">
@@ -7016,7 +7183,7 @@ Generated by Autonomo Tax Calculator`;
           <div class="compliance-section">
             <button class="section-header" aria-expanded="false" aria-controls="content-centro">
               <span>Centro de Intereses Vitales (Center of Vital Interests)</span>
-              <span class="section-icon">+</span>
+              <span class="section-icon">&#9654;</span>
             </button>
             <div class="section-content" id="content-centro" hidden>
               <p class="plain-summary">
@@ -7041,7 +7208,7 @@ Generated by Autonomo Tax Calculator`;
           <div class="compliance-section">
             <button class="section-header" aria-expanded="false" aria-controls="content-family">
               <span>Family Presumption (Art. 9.1.b LIRPF)</span>
-              <span class="section-icon">+</span>
+              <span class="section-icon">&#9654;</span>
             </button>
             <div class="section-content" id="content-family" hidden>
               <blockquote class="legal-text" cite="BOE-A-2006-20764">
@@ -7060,7 +7227,7 @@ Generated by Autonomo Tax Calculator`;
           <div class="compliance-section">
             <button class="section-header" aria-expanded="false" aria-controls="content-183">
               <span>The 183-Day Threshold</span>
-              <span class="section-icon">+</span>
+              <span class="section-icon">&#9654;</span>
             </button>
             <div class="section-content" id="content-183" hidden>
               <p class="plain-summary">
