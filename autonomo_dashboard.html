@@ -4209,9 +4209,6 @@
             const emoji = getStatusEmoji(status);
 
             const isSelected = selectedDates.has(dateKey);
-            const selectedClass = isSelected ? 'selected' : '';
-
-            const isSelected = selectedDates.has(dateKey);
             gridHtml += `
               <div class="day-cell ${status} ${isSelected ? 'selected' : ''}" data-date="${dateKey}">
                 <div class="day-cell-header">
