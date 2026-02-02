@@ -131,11 +131,11 @@ Plans:
   3. Centro de intereses vitales concept explained with how family situation helps residency defense
   4. Expense documentation requirements listed (factura completa, electronic payment for dietas)
   5. Clear disclaimer that tool provides calculations, not official tax advice
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 07-01: TBD
-- [ ] 07-02: TBD
+- [ ] 07-01-PLAN.md - Compliance tab with treaty provisions, family presumption, dietas limits, and documentation requirements
+- [ ] 07-02-PLAN.md - Warning banner integration, disclaimer footer, and entry/exit day warning
 
 ## Progress
 
