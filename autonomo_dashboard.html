@@ -29,7 +29,7 @@
 
       /* Typography per CONTEXT.md and UI-11 */
       --font-ui: 'DM Sans', system-ui, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace;
       --size-header: 20px;
       --size-numbers: 18px;
       --size-labels: 14px;
@@ -88,10 +88,43 @@
        PHASE 7.2: GLOBAL POLISH
        =========================================== */
 
+    /* Cross-browser compatibility */
+    * {
+      -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+      -webkit-touch-callout: none; /* Disable long-press context menu on images */
+    }
+
+    /* Enable text selection for inputs and text */
+    input, textarea, [contenteditable="true"] {
+      -webkit-user-select: text;
+      user-select: text;
+    }
+
+    /* Touch-action for interactive elements (prevents 300ms delay) */
+    button, a, .day-cell, .scenario-card, .tab-label {
+      touch-action: manipulation;
+    }
+
+    /* Safari flexbox fixes */
+    .scenario-cards,
+    .calendar-grid,
+    .export-actions,
+    .dialog-footer {
+      -webkit-box-pack: start;
+    }
+
     /* Focus-visible styles for keyboard accessibility */
     :focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
+    }
+
+    /* Fallback for browsers without :focus-visible */
+    @supports not selector(:focus-visible) {
+      :focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
     }
 
     /* Button consistency */
@@ -100,6 +133,8 @@
       font-weight: 500;
       border-radius: var(--radius-md);
       transition: background-color 0.15s ease, transform 0.1s ease;
+      -webkit-appearance: none; /* Remove iOS button styling */
+      appearance: none;
     }
 
     button:hover:not(:disabled) {
@@ -108,6 +143,20 @@
 
     button:active:not(:disabled) {
       transform: scale(0.98);
+    }
+
+    /* Input cross-browser styling */
+    input, select {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    /* Preserve native select dropdown arrow */
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0a0a0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      padding-right: 2rem;
     }
 
     /* ===========================================
@@ -988,6 +1037,7 @@
 
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.7);
+      -webkit-backdrop-filter: blur(4px);
       backdrop-filter: blur(4px);
     }
 
@@ -3259,6 +3309,40 @@
     </dialog>
   </div>
   <script>
+    // ============================================================
+    // BROWSER COMPATIBILITY CHECK
+    // ============================================================
+    // Check for required browser features
+    (function() {
+      const requiredFeatures = [
+        { name: 'dialog', test: () => typeof HTMLDialogElement !== 'undefined' },
+        { name: 'localStorage', test: () => {
+          try {
+            localStorage.setItem('test', 'test');
+            localStorage.removeItem('test');
+            return true;
+          } catch (e) {
+            return false; // Private mode - app still works, just no persistence
+          }
+        }},
+        { name: 'structuredClone', test: () => typeof structuredClone === 'function' }
+      ];
+
+      const missing = requiredFeatures.filter(f => !f.test()).map(f => f.name);
+
+      // Dialog is critical - show warning if missing
+      if (missing.includes('dialog')) {
+        console.warn('Your browser does not support the <dialog> element. Please use a modern browser (Chrome 37+, Firefox 98+, Safari 15.4+, Edge 79+) for the best experience.');
+      }
+
+      // Polyfill structuredClone if missing (older Safari)
+      if (typeof structuredClone === 'undefined') {
+        window.structuredClone = function(obj) {
+          return JSON.parse(JSON.stringify(obj));
+        };
+      }
+    })();
+
     // ============================================================
     // FISCAL_2025 CONSTANTS
     // ============================================================
