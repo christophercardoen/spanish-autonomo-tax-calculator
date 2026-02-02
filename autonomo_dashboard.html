@@ -547,64 +547,42 @@
     .confidence-high { color: #4ade80; }
     .confidence-medium { color: #facc15; }
 
-    /* Belgium Pattern Toggle Switch */
-    .toggle-switch {
-      position: relative;
+    /* Pill Toggle for Belgium Pattern */
+    .pill-toggle {
       display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 4px;
+      gap: 4px;
     }
 
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-      position: absolute;
-    }
-
-    .toggle-switch .slider {
-      position: relative;
-      width: 50px;
-      height: 26px;
-      background: #444;
-      border-radius: 13px;
+    .pill-toggle button {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 16px;
       cursor: pointer;
-      transition: background 0.3s;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
     }
 
-    .toggle-switch .slider::before {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      left: 3px;
-      top: 3px;
-      background: white;
-      border-radius: 50%;
-      transition: transform 0.3s;
+    .pill-toggle button:hover {
+      color: var(--text);
     }
 
-    .toggle-switch input:checked + .slider {
+    .pill-toggle button.active,
+    .pill-toggle button[aria-pressed="true"] {
       background: var(--accent);
+      color: var(--bg);
+      font-weight: 600;
     }
 
-    .toggle-switch input:checked + .slider::before {
-      transform: translateX(24px);
-    }
-
-    .toggle-switch input:focus + .slider {
+    .pill-toggle button:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
-    }
-
-    .toggle-label {
-      font-size: 0.9rem;
-      opacity: 0.7;
-    }
-
-    .toggle-label.active {
-      opacity: 1;
-      font-weight: 600;
     }
 
     /* Expense Sections */
@@ -1858,72 +1836,111 @@
     }
 
     /* ===========================================
-       PHASE 5: TOOLTIPS (UI-09)
+       PHASE 5/7.1: TOOLTIP MODALS (UI-09, BUG-02)
        =========================================== */
 
-    /* Tooltip trigger styling */
-    .term-tooltip {
-      position: relative;
-      cursor: help;
+    /* Tooltip trigger - clickable info icon */
+    .term-tooltip-trigger {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: inherit;
+      text-decoration: none;
       border-bottom: 1px dotted var(--text-muted);
     }
 
-    /* Tooltip content */
-    [role="tooltip"] {
-      visibility: hidden;
-      opacity: 0;
-      position: absolute;
-      bottom: 100%;
+    .term-tooltip-trigger:hover,
+    .term-tooltip-trigger:focus {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .term-tooltip-trigger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .info-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--bg);
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Tooltip Modal Dialog */
+    .tooltip-modal {
+      position: fixed;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      background: var(--bg-elevated);
-      border: 1px solid var(--accent);
-      border-radius: 6px;
-      padding: 0.75rem 1rem;
-      max-width: 300px;
-      min-width: 200px;
-      font-size: var(--size-small);
-      line-height: 1.4;
+      transform: translate(-50%, -50%);
+      max-width: 400px;
+      width: 90%;
+      padding: 0;
+      border: none;
+      border-radius: 12px;
+      background: var(--bg-surface);
       color: var(--text);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      transition: opacity 0.2s, visibility 0.2s;
-      margin-bottom: 8px;
-      text-align: left;
-      font-weight: 400;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
-    /* Tooltip arrow */
-    [role="tooltip"]::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 6px solid transparent;
-      border-top-color: var(--accent);
+    .tooltip-modal::backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
     }
 
-    /* Show on hover/focus of trigger AND when hovering tooltip itself */
-    .term-tooltip:hover [role="tooltip"],
-    .term-tooltip:focus [role="tooltip"],
-    .term-tooltip:focus-within [role="tooltip"],
-    [role="tooltip"]:hover {
-      visibility: visible;
-      opacity: 1;
+    .tooltip-modal-content {
+      padding: 24px;
+    }
+
+    .tooltip-modal-title {
+      margin: 0 0 12px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .tooltip-modal-text {
+      margin: 0 0 20px 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .tooltip-modal-close {
+      display: block;
+      width: 100%;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .tooltip-modal-close:hover {
+      opacity: 0.9;
+    }
+
+    .tooltip-modal-close:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
     }
 
     /* Ensure tooltips in cards don't get clipped */
     .scenario-card {
       overflow: visible;
-    }
-
-    /* Tooltip title */
-    .tooltip-title {
-      font-weight: 600;
-      color: var(--accent);
-      display: block;
-      margin-bottom: 0.25rem;
     }
 
     /* ===========================================
@@ -3307,6 +3324,7 @@
       // Clear selection
       selectedDates.clear();
       renderCalendar();
+      updateSelectionIndicator();
     }
 
     /**
@@ -3336,6 +3354,7 @@
       dialog.close();
       selectedDates.clear();
       renderCalendar();
+      updateSelectionIndicator();
       updateCountDisplays();
     }
 
@@ -4329,44 +4348,34 @@ Generated by Autonomo Tax Calculator`;
     }
 
     /**
-     * Initialize Belgium toggle switch
-     * Sets initial state and adds change event listener
+     * Set Belgium cost pattern and update UI
+     * @param {string} pattern - 'low' or 'high'
      */
-    function initBelgiumToggle() {
-      const toggle = document.getElementById('belgiumToggle');
-      if (!toggle) return;  // Toggle not yet in DOM
+    function setBelgiumPattern(pattern) {
+      expenseData.belgiumPattern = pattern;
 
-      // Set initial state based on expenseData
-      toggle.checked = expenseData.belgiumPattern === 'high';
-
-      // Update label active states
-      updateToggleLabels(toggle.checked);
-
-      // Add change event listener
-      toggle.addEventListener('change', (e) => {
-        expenseData.belgiumPattern = e.target.checked ? 'high' : 'low';
-        updateBelgiumCost();
-        saveExpenses();
-        updateToggleLabels(e.target.checked);
-        renderAllSections();
-        recalculateTotals();
+      // Update button states
+      document.querySelectorAll('.pill-toggle button').forEach(btn => {
+        const isActive = btn.textContent.toLowerCase().includes(pattern);
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
+
+      updateBelgiumCost();
+      saveExpenses();
+      recalculateTotals();
+
+      // Re-render expense sections to update breakdown
+      renderAllSections();
     }
 
     /**
-     * Update toggle label active states
-     * @param {boolean} isHigh - True if high pattern selected
+     * Initialize Belgium toggle state (called after render)
+     * Now simplified - pill buttons are self-contained
      */
-    function updateToggleLabels(isHigh) {
-      const lowLabel = document.querySelector('.toggle-label.low');
-      const highLabel = document.querySelector('.toggle-label.high');
-
-      if (lowLabel) {
-        lowLabel.classList.toggle('active', !isHigh);
-      }
-      if (highLabel) {
-        highLabel.classList.toggle('active', isHigh);
-      }
+    function initBelgiumToggle() {
+      // No longer needed - pill buttons handle their own state via onclick
+      // Kept for backwards compatibility in case called elsewhere
     }
 
     /**
@@ -4526,17 +4535,15 @@ Generated by Autonomo Tax Calculator`;
       let headerExtra = '';
       let breakdownHtml = '';
 
-      // Belgium section has toggle and breakdown formula
+      // Belgium section has pill toggle and breakdown formula
       if (categoryKey === 'belgiumCosts') {
         const isHigh = expenseData.belgiumPattern === 'high';
         headerExtra = `
-          <div class="toggle-switch">
-            <span class="toggle-label low ${!isHigh ? 'active' : ''}">Low (1K)</span>
-            <label>
-              <input type="checkbox" id="belgiumToggle" ${isHigh ? 'checked' : ''}>
-              <span class="slider"></span>
-            </label>
-            <span class="toggle-label high ${isHigh ? 'active' : ''}">High (2.5K)</span>
+          <div class="pill-toggle" role="group" aria-label="Belgium cost pattern">
+            <button type="button" ${!isHigh ? 'class="active" aria-pressed="true"' : 'aria-pressed="false"'}
+                    onclick="setBelgiumPattern('low')">Low (1K)</button>
+            <button type="button" ${isHigh ? 'class="active" aria-pressed="true"' : 'aria-pressed="false"'}
+                    onclick="setBelgiumPattern('high')">High (2.5K)</button>
           </div>
         `;
         breakdownHtml = `<div class="belgium-breakdown">${getBelgiumBreakdownFormula()} ${sourceHint('DIETAS')}</div>`;
