@@ -19,6 +19,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Dashboard UI** - Professional financial dashboard with Bloomberg-inspired aesthetics
 - [x] **Phase 6: Excel Calculator** - Multi-sheet workbook with formulas, not hardcoded values
 - [x] **Phase 7: Compliance & Documentation** - Treaty provisions, warnings, and fiscal source citations
+- [ ] **Phase 7.1: Critical Bug Fixes (INSERTED)** - Fix blocking UX issues discovered in user testing
+- [ ] **Phase 8: Enhanced Features** - Multi-select calendar, income tracking, official source links
 
 ## Phase Details
 
@@ -137,10 +139,41 @@ Plans:
 - [x] 07-01-PLAN.md - Compliance tab with treaty provisions, family presumption, dietas limits, and documentation requirements
 - [x] 07-02-PLAN.md - Warning banner integration, disclaimer footer, and entry/exit day warning
 
+### Phase 7.1: Critical Bug Fixes (INSERTED)
+**Goal**: Fix critical bugs and UX issues discovered in user testing that block v1.0 release
+**Depends on**: Phase 7
+**Requirements**: BUG-01, BUG-02, BUG-03, BUG-04, BUG-05
+**Success Criteria** (what must be TRUE):
+  1. Add expense button works correctly and creates expenses
+  2. Info tooltips open as centered modals with background blur
+  3. All Dutch text removed, everything in English
+  4. Belgium cost toggle uses pill-style buttons (not circular dots)
+  5. Calendar supports multi-select (shift-click range, week/month selection)
+**Plans**: TBD (run /gsd:plan-phase 7.1)
+
+Plans:
+- [ ] TBD
+
+### Phase 8: Enhanced Features
+**Goal**: Add missing v1 features: multi-select calendar improvements, income tracking, and official source links
+**Depends on**: Phase 7.1
+**Requirements**: ENH-01, ENH-02, ENH-03, ENH-04, ENH-05, ENH-06
+**Success Criteria** (what must be TRUE):
+  1. Calendar can select multiple days, full weeks, full months across date ranges
+  2. Auto-detection of 100% deductible expenses when adding
+  3. Income tab allows adding client earnings with invoice number and auto-calculation
+  4. Official Spanish Agencia Tributaria source links added to Details and Compliance tabs
+  5. All source citations verified and clickable
+  6. Calendar multi-select includes visual feedback for selected ranges
+**Plans**: TBD (run /gsd:plan-phase 8)
+
+Plans:
+- [ ] TBD
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -151,3 +184,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 5. Dashboard UI | 3/3 | Complete | 2026-02-01 |
 | 6. Excel Calculator | 3/3 | Complete | 2026-02-02 |
 | 7. Compliance & Documentation | 2/2 | Complete | 2026-02-02 |
+| 7.1. Critical Bug Fixes (INSERTED) | 0/? | Not started | - |
+| 8. Enhanced Features | 0/? | Not started | - |

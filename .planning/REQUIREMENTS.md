@@ -99,9 +99,30 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **DATA-04**: Minimos match official 2025/2026 amounts
 - [x] **DATA-05**: Dietas match official Reglamento IRPF rates
 
+## v1.1 Requirements (Phase 7.1 & 8)
+
+Critical bug fixes and enhancements discovered during user testing.
+
+### Critical Bug Fixes (BUG)
+
+- [ ] **BUG-01**: Fix add expense button - currently doesn't open form or create expenses
+- [ ] **BUG-02**: Fix tooltip positioning - open as centered modal with background blur instead of top-aligned
+- [ ] **BUG-03**: Remove all Dutch text - everything must be in English
+- [ ] **BUG-04**: Redesign Belgium cost toggle - use pill-style buttons instead of circular dots
+- [ ] **BUG-05**: Enhance calendar multi-select - add week selection and month selection
+
+### Enhanced Features (ENH)
+
+- [ ] **ENH-01**: Auto-detect 100% deductible expenses when user adds them
+- [ ] **ENH-02**: Add income tracking tab with client earnings, invoice numbers, and auto-calculation
+- [ ] **ENH-03**: Add official Spanish Agencia Tributaria source links to Details tab
+- [ ] **ENH-04**: Add official Spanish Agencia Tributaria source links to Compliance tab
+- [ ] **ENH-05**: Make all source citations clickable with URLs
+- [ ] **ENH-06**: Add visual feedback for multi-select calendar ranges
+
 ## v2 Requirements
 
-Deferred to future release. Tracked but not in current roadmap.
+Deferred to future milestone. Tracked but not in current roadmap.
 
 ### Advanced Features
 
@@ -214,10 +235,22 @@ Which phases cover which requirements. Updated during roadmap creation.
 | COMP-08 | Phase 7 | Complete |
 | COMP-09 | Phase 7 | Complete |
 | COMP-10 | Phase 7 | Complete |
+| BUG-01 | Phase 7.1 | Pending |
+| BUG-02 | Phase 7.1 | Pending |
+| BUG-03 | Phase 7.1 | Pending |
+| BUG-04 | Phase 7.1 | Pending |
+| BUG-05 | Phase 7.1 | Pending |
+| ENH-01 | Phase 8 | Pending |
+| ENH-02 | Phase 8 | Pending |
+| ENH-03 | Phase 8 | Pending |
+| ENH-04 | Phase 8 | Pending |
+| ENH-05 | Phase 8 | Pending |
+| ENH-06 | Phase 8 | Pending |
 
 **Coverage:**
-- v1 requirements: 68 total
-- Mapped to phases: 68
+- v1 requirements: 68 total (complete)
+- v1.1 requirements: 11 total (pending)
+- Mapped to phases: 79
 - Unmapped: 0
 
 ---

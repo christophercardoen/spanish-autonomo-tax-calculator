@@ -9,13 +9,13 @@ See: .planning/PROJECT.md (updated 2026-01-29)
 
 ## Current Position
 
-Phase: 7 of 7 (Compliance & Documentation) - COMPLETE
-Plan: 2 of 2 in current phase (COMPLETE)
-Status: PROJECT COMPLETE
-Last activity: 2026-02-02 - Completed 07-02-PLAN.md (Warning Banner and Disclaimer)
+Phase: 7.1 of 9 (Critical Bug Fixes - INSERTED)
+Plan: Not started
+Status: Ready to plan Phase 7.1
+Last activity: 2026-02-02 - Inserted Phase 7.1 and Phase 8 for user-reported issues
 
-Progress: [██████████] 100% (Phase 7)
-Overall: [██████████] 100% (Project)
+Progress: [          ] 0% (Phase 7.1)
+Overall: [███████▌  ] 78% (7/9 phases complete)
 
 ## Performance Metrics
 
@@ -125,11 +125,27 @@ Recent decisions affecting current work:
 
 ### Pending Todos
 
-None - Project complete.
+**Phase 7.1 (Critical Bug Fixes):**
+- Fix add expense button (not working)
+- Fix tooltip positioning (centered modal with blur)
+- Remove all Dutch text (make everything English)
+- Redesign Belgium cost toggle (pill buttons instead of dots)
+- Add calendar multi-select (shift-click range working, need week/month selection)
+
+**Phase 8 (Enhanced Features):**
+- Auto-detect 100% deductible expenses
+- Add income tracking tab with client earnings
+- Add official Agencia Tributaria source links
+- Enhanced calendar multi-select with visual feedback
 
 ### Blockers/Concerns
 
-None.
+**BLOCKER:** Phase 7.1 must complete before v1.0 milestone completion. Critical bugs prevent user from using core features (add expense broken, tooltips unreadable).
+
+### Roadmap Evolution
+
+- **2026-02-02:** Phase 7.1 inserted after Phase 7 (Critical Bug Fixes) - URGENT user-reported issues
+- **2026-02-02:** Phase 8 added to roadmap (Enhanced Features) - Missing v1 functionality
 
 ## Session Continuity
 
