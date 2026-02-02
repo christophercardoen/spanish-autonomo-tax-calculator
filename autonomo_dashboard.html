@@ -54,7 +54,35 @@
       color: var(--text);
       padding: 2rem;
     }
-    .container { max-width: 1200px; margin: 0 auto; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Prevent horizontal overflow on html/body */
+    html, body {
+      overflow-x: hidden;
+    }
+
+    /* Text overflow handling */
+    .expense-name,
+    .metric .label,
+    .block-row .label,
+    .detail-row .label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Number overflow prevention */
+    .metric .value,
+    .expense-value,
+    .block-row .value,
+    .detail-row .value {
+      flex-shrink: 0;
+    }
 
     /* ===========================================
        PHASE 7.2: GLOBAL POLISH
@@ -2101,6 +2129,80 @@
       @page {
         margin: 1cm;
         size: landscape;
+      }
+    }
+
+    /* ===========================================
+       PHASE 7.2: DESKTOP LAYOUT POLISH
+       =========================================== */
+
+    /* Large desktop (1440px+) */
+    @media (min-width: 1440px) {
+      .container {
+        max-width: 1400px;
+      }
+
+      /* More comfortable padding on large screens */
+      body {
+        padding: 2.5rem;
+      }
+
+      /* Scenario cards can be wider */
+      .scenario-card {
+        flex: 0 0 340px;
+      }
+
+      /* Comparison table with more padding */
+      .comparison-table tbody td,
+      .comparison-table thead th {
+        padding: 0.75rem 1.25rem;
+      }
+    }
+
+    /* Extra large desktop (1920px+) */
+    @media (min-width: 1920px) {
+      .container {
+        max-width: 1600px;
+      }
+
+      body {
+        padding: 3rem;
+      }
+
+      /* Dashboard header enhanced */
+      .dashboard-title {
+        font-size: 1.75rem;
+      }
+
+      /* Wider scenario cards on large displays */
+      .scenario-card {
+        flex: 0 0 360px;
+      }
+
+      /* More spacious metrics */
+      .metric {
+        padding: 0.3rem 0;
+        font-size: 0.9rem;
+      }
+
+      /* Calendar day cells larger */
+      .day-cell {
+        min-height: 70px;
+      }
+    }
+
+    /* Smooth scrolling for horizontal containers */
+    .scenario-cards,
+    .comparison-container {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Ensure scrollbar is always visible on desktop for horizontal scroll containers */
+    @media (min-width: 769px) {
+      .scenario-cards::-webkit-scrollbar,
+      .comparison-container::-webkit-scrollbar {
+        height: 10px;
       }
     }
 
