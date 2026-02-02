@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 8 Enhanced Features
+**Current focus:** Phase 8 Enhanced Features - COMPLETE
 
 ## Current Position
 
-Phase: 8 of 9 (Enhanced Features)
-Plan: 2 of 3 complete
-Status: In progress
-Last activity: 2026-02-02 - Completed 08-02-PLAN.md (Income Tracking Tab)
+Phase: 8 of 9 (Enhanced Features) - COMPLETE
+Plan: 3 of 3 complete
+Status: Phase complete
+Last activity: 2026-02-02 - Completed 08-03-PLAN.md (Official Source Links)
 
-Progress: [██████░░░░] 67% (Plan 2 of 3)
-Overall: [█████████░] 97% (Phase 8 in progress)
+Progress: [██████████] 100% (Plan 3 of 3)
+Overall: [██████████] 100% (Phase 8 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 27
-- Average duration: 3.6 min
-- Total execution time: 140 min
+- Total plans completed: 28
+- Average duration: 3.8 min
+- Total execution time: 155 min
 
 **By Phase:**
 
@@ -37,11 +37,11 @@ Overall: [█████████░] 97% (Phase 8 in progress)
 | 07-compliance-documentation | 2 | 8 min | 4 min |
 | 07.1-critical-bug-fixes | 3 | 12 min | 4 min |
 | 07.2-ui-ux-polish | 4 | 59 min | 14.75 min |
-| 08-enhanced-features | 2 | 6 min | 3 min |
+| 08-enhanced-features | 3 | 21 min | 7 min |
 
 **Recent Trend:**
-- Last 5 plans: 7.2-03 (4 min), 7.2-04 (45 min), 08-01 (3 min), 08-02 (3 min)
-- Trend: 08-02 executed efficiently with no verification rounds needed
+- Last 5 plans: 7.2-04 (45 min), 08-01 (3 min), 08-02 (3 min), 08-03 (15 min)
+- Trend: 08-03 included human verification checkpoint
 
 *Updated after each plan completion*
 
@@ -156,6 +156,10 @@ Recent decisions affecting current work:
 | Total unaffected by filter | Total shows sum of ALL entries regardless of filter for accuracy | 08-02 |
 | escapeHtml for XSS | User-entered client names and descriptions must be sanitized | 08-02 |
 | Status color coding | paid=green, pending=orange, overdue=red - standard financial colors | 08-02 |
+| 13 official sources from AEAT, BOE, SS | Comprehensive coverage of all fiscal data in calculator | 08-03 |
+| Blue (--belgium) color for source links | Visual distinction from other UI elements | 08-03 |
+| Inline vs button source links | Inline for citations in text, button-style for Official Sources section | 08-03 |
+| Categorized sources grid | Organized by topic: IRPF, RETA, Treaty, Expenses | 08-03 |
 
 ### Pending Todos
 
@@ -167,15 +171,15 @@ Recent decisions affecting current work:
 - ~~Responsive layout audit~~ DONE (7.2-03)
 - ~~Human verification & bug fixes~~ DONE (7.2-04)
 
-**Phase 8 (Enhanced Features): IN PROGRESS**
+**Phase 8 (Enhanced Features): COMPLETE**
 - ~~Auto-detect 100% deductible expenses~~ DONE (08-01)
 - ~~Enhanced calendar selection visual feedback~~ DONE (08-01)
 - ~~Add income tracking tab with client earnings~~ DONE (08-02)
-- Add official Agencia Tributaria source links
+- ~~Add official Agencia Tributaria source links~~ DONE (08-03)
 
 ### Blockers/Concerns
 
-None - Plan 08-02 complete. Ready for 08-03.
+None - Phase 8 complete. Project feature-complete.
 
 ### Roadmap Evolution
 
@@ -183,18 +187,19 @@ None - Plan 08-02 complete. Ready for 08-03.
 - **2026-02-02:** Phase 8 added to roadmap (Enhanced Features) - Missing v1 functionality
 - **2026-02-02:** Phase 7.1 completed - All critical bugs fixed
 - **2026-02-02:** Phase 7.2 started - UI/UX polish and generalization
+- **2026-02-02:** Phase 8 completed - All enhanced features delivered
 
 ## Session Continuity
 
-Last session: 2026-02-02T21:10:10Z
-Stopped at: Completed 08-02-PLAN.md (Income Tracking Tab)
-Resume file: None - continue with 08-03
+Last session: 2026-02-02T21:28:19Z
+Stopped at: Completed 08-03-PLAN.md (Official Source Links)
+Resume file: None - Phase 8 complete
 
 ## Key Files Created
 
 | File | Purpose |
 |------|---------|
-| autonomo_dashboard.html | Complete tax calculator with IRPF/RETA calculation, expense tracking, scenario comparison, Belgium calendar with multi-select, tooltips, responsive layout, and Compliance tab |
+| autonomo_dashboard.html | Complete tax calculator with IRPF/RETA calculation, expense tracking, scenario comparison, Belgium calendar with multi-select, tooltips, responsive layout, Compliance tab, Income tracking, and Official Source links |
 | scripts/package.json | Node.js project configuration with ExcelJS dependency |
 | scripts/generate-excel.js | Excel workbook generator with Constanten + Overzicht + 5 scenario sheets (Dutch localized) |
 | autonomo_calculator.xlsx | Generated workbook with Overzicht + Scenarios A-E + Constanten (Dutch labels) |
@@ -225,6 +230,7 @@ Resume file: None - continue with 08-03
 | .planning/phases/07.2-ui-ux-polish/7.2-04-SUMMARY.md | Plan 7.2-04 execution summary |
 | .planning/phases/08-enhanced-features/08-01-SUMMARY.md | Plan 08-01 execution summary |
 | .planning/phases/08-enhanced-features/08-02-SUMMARY.md | Plan 08-02 execution summary |
+| .planning/phases/08-enhanced-features/08-03-SUMMARY.md | Plan 08-03 execution summary |
 
 ## Phase 1 Complete
 
@@ -382,23 +388,54 @@ Phase 7.2 (UI/UX Polish) delivered:
   - Compliance tab optimized with 2-column layout
   - All reported UX issues resolved
 
+## Phase 8 Complete
+
+Phase 8 (Enhanced Features) delivered:
+- Plan 08-01: UX Enhancements
+  - Enhanced calendar selection with green overlay, 2px border, glow effect
+  - Selection count badge with pill styling
+  - DEDUCTIBLE_100_CATEGORIES constant with IT/consulting keywords
+  - Expense auto-detection for Spain Deductible category
+  - HIGH confidence: green badge + auto-fill 100%
+  - MEDIUM confidence: orange badge (no auto-fill)
+  - ENH-01 and ENH-06 complete
+- Plan 08-02: Income Tracking Tab
+  - INCOME_STORAGE_KEY = 'autonomo_income_v1' for localStorage
+  - Income entries with client, amount, date, invoice, status, description
+  - Sort by date, amount, client
+  - Filter by text search
+  - Status color coding (paid/pending/overdue)
+  - Edit and delete functionality
+  - ENH-02 complete
+- Plan 08-03: Official Source Links
+  - OFFICIAL_SOURCES constant with 13 verified government URLs
+  - renderSourceLink() for button-style external links
+  - renderInlineSource() for inline text citations
+  - Details tab source hints (RETA, Minimo Personal)
+  - Compliance tab inline sources throughout all sections
+  - Official Sources grid section at bottom of Compliance
+  - ENH-03, ENH-04, ENH-05 complete
+
 ## PROJECT STATUS
 
 **Summary:**
-- 7.2 phases complete (7 original + 7.1 critical bug fixes + 7.2 polish)
-- 25 plans executed
-- 74+ requirements satisfied (59 v1 + 10 v2 + 5 bug fixes + polish)
-- Total execution time: ~134 minutes
+- 8 phases complete (7 original + 7.1 critical bug fixes + 7.2 polish + 8 enhanced features)
+- 28 plans executed
+- 80+ requirements satisfied (59 v1 + 10 v2 + 5 bug fixes + polish + enhanced features)
+- Total execution time: ~155 minutes
 
 **Deliverables:**
 1. `autonomo_dashboard.html` - Single-file HTML tax calculator with:
    - Progressive IRPF calculation with official 2025/2026 rates
    - RETA as fixed cuota (428.40 EUR/month)
    - Three-category expense tracking with formula display
+   - Auto-detection of 100% deductible IT/consulting expenses
    - 5 preset scenarios (A-E) with comparison table
-   - Belgium presence calendar (Feb-Dec 2026) with week/month multi-select
+   - Belgium presence calendar (Feb-Dec 2026) with multi-select
+   - Income tracking tab with client/invoice management
    - 183-day threshold warnings
    - Treaty compliance documentation
+   - Official AEAT/BOE/SS source links throughout
    - Professional dark theme UI with English-only interface
    - Responsive mobile layout
    - Export capabilities (ICS, CSV, clipboard)
@@ -409,14 +446,5 @@ Phase 7.2 (UI/UX Polish) delivered:
    - Overview sheet with cross-sheet comparison
    - Conditional formatting for key metrics
 
-## Phase 8 In Progress
-
-Phase 8 (Enhanced Features) - Plan 1 of 3 complete:
-- Plan 08-01: UX Enhancements (COMPLETE)
-  - Enhanced calendar selection with green overlay, 2px border, glow effect
-  - Selection count badge with pill styling
-  - DEDUCTIBLE_100_CATEGORIES constant with IT/consulting keywords
-  - Expense auto-detection for Spain Deductible category
-  - HIGH confidence: green badge + auto-fill 100%
-  - MEDIUM confidence: orange badge (no auto-fill)
-  - ENH-01 and ENH-06 complete
+---
+*Last updated: 2026-02-02 after Phase 8 completion*
