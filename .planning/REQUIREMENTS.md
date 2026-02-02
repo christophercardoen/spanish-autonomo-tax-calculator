@@ -204,16 +204,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | XLS-08 | Phase 6 | Complete |
 | XLS-09 | Phase 6 | Complete |
 | XLS-10 | Phase 6 | Complete |
-| COMP-01 | Phase 7 | Pending |
-| COMP-02 | Phase 7 | Pending |
-| COMP-03 | Phase 7 | Pending |
-| COMP-04 | Phase 7 | Pending |
-| COMP-05 | Phase 7 | Pending |
-| COMP-06 | Phase 7 | Pending |
-| COMP-07 | Phase 7 | Pending |
-| COMP-08 | Phase 7 | Pending |
-| COMP-09 | Phase 7 | Pending |
-| COMP-10 | Phase 7 | Pending |
+| COMP-01 | Phase 7 | Complete |
+| COMP-02 | Phase 7 | Complete |
+| COMP-03 | Phase 7 | Complete |
+| COMP-04 | Phase 7 | Complete |
+| COMP-05 | Phase 7 | Complete |
+| COMP-06 | Phase 7 | Complete |
+| COMP-07 | Phase 7 | Complete |
+| COMP-08 | Phase 7 | Complete |
+| COMP-09 | Phase 7 | Complete |
+| COMP-10 | Phase 7 | Complete |
 
 **Coverage:**
 - v1 requirements: 68 total

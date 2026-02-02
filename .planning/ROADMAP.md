@@ -17,8 +17,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Scenario Engine** - Pre-configured scenarios (A-E) with live editing and comparison
 - [x] **Phase 4: Belgium Calendar** - Interactive Feb-Dec 2026 calendar with 183-day tracking
 - [x] **Phase 5: Dashboard UI** - Professional financial dashboard with Bloomberg-inspired aesthetics
-- [ ] **Phase 6: Excel Calculator** - Multi-sheet workbook with formulas, not hardcoded values
-- [ ] **Phase 7: Compliance & Documentation** - Treaty provisions, warnings, and fiscal source citations
+- [x] **Phase 6: Excel Calculator** - Multi-sheet workbook with formulas, not hardcoded values
+- [x] **Phase 7: Compliance & Documentation** - Treaty provisions, warnings, and fiscal source citations
 
 ## Phase Details
 
@@ -117,9 +117,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 06-01-PLAN.md - Node.js project setup with ExcelJS and Constants sheet with named ranges
-- [ ] 06-02-PLAN.md - Scenario sheet template with IRPF brackets and 4-phase minimo
-- [ ] 06-03-PLAN.md - Overview sheet with comparison table and final verification
+- [x] 06-01-PLAN.md - Node.js project setup with ExcelJS and Constants sheet with named ranges
+- [x] 06-02-PLAN.md - Scenario sheet template with IRPF brackets and 4-phase minimo
+- [x] 06-03-PLAN.md - Overview sheet with comparison table and final verification
 
 ### Phase 7: Compliance & Documentation
 **Goal**: User understands fiscal compliance obligations and residency defense provisions
@@ -134,8 +134,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 07-01-PLAN.md - Compliance tab with treaty provisions, family presumption, dietas limits, and documentation requirements
-- [ ] 07-02-PLAN.md - Warning banner integration, disclaimer footer, and entry/exit day warning
+- [x] 07-01-PLAN.md - Compliance tab with treaty provisions, family presumption, dietas limits, and documentation requirements
+- [x] 07-02-PLAN.md - Warning banner integration, disclaimer footer, and entry/exit day warning
 
 ## Progress
 
@@ -150,4 +150,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 4. Belgium Calendar | 3/3 | Complete | 2026-02-01 |
 | 5. Dashboard UI | 3/3 | Complete | 2026-02-01 |
 | 6. Excel Calculator | 3/3 | Complete | 2026-02-02 |
-| 7. Compliance & Documentation | 0/2 | Not started | - |
+| 7. Compliance & Documentation | 2/2 | Complete | 2026-02-02 |
