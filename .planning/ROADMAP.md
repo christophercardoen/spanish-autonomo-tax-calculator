@@ -21,7 +21,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 7: Compliance & Documentation** - Treaty provisions, warnings, and fiscal source citations
 - [x] **Phase 7.1: Critical Bug Fixes (INSERTED)** - Fix blocking UX issues discovered in user testing
 - [x] **Phase 7.2: UI/UX Polish & Generalization (INSERTED)** - Visual refinement, bug fixes, remove Belgium hardcoding, English localization
-- [ ] **Phase 8: Enhanced Features** - Multi-select calendar, income tracking, official source links
+- [x] **Phase 8: Enhanced Features** - Multi-select calendar, income tracking, official source links
+- [ ] **Phase 9: Fix Reset to Defaults Button** - Critical integration fix for missing function reference
 
 ## Phase Details
 
@@ -193,10 +194,25 @@ Plans:
 - [x] 08-02-PLAN.md - Income tracking tab with CRUD and localStorage
 - [x] 08-03-PLAN.md - Official source links throughout Details and Compliance tabs
 
+### Phase 9: Fix Reset to Defaults Button
+**Goal**: Fix critical integration issue preventing "Reset to Defaults" button from working
+**Depends on**: Phase 8
+**Requirements**: Integration gap from v1.1-MILESTONE-AUDIT.md
+**Success Criteria** (what must be TRUE):
+  1. Missing function `recalculateAllScenarios()` reference removed or implemented at line 6656
+  2. "Reset to Defaults" button executes without JavaScript errors
+  3. All scenarios successfully reset to A-E presets when button clicked
+  4. Scenario cards and comparison table update correctly after reset
+  5. localStorage cleared of custom scenarios
+**Plans**: 1 plan
+
+Plans:
+- [ ] 09-01-PLAN.md - Fix missing function reference and test reset functionality
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 7.2 -> 8
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 7.2 -> 8 -> 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -210,3 +226,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 7.2 -
 | 7.1. Critical Bug Fixes (INSERTED) | 3/3 | Complete | 2026-02-02 |
 | 7.2. UI/UX Polish & Generalization (INSERTED) | 4/4 | Complete | 2026-02-02 |
 | 8. Enhanced Features | 3/3 | Complete | 2026-02-02 |
+| 9. Fix Reset to Defaults Button | 0/1 | Pending | — |
