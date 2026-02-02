@@ -324,35 +324,52 @@
     }
 
     .legal-text {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03);
       border-left: 3px solid var(--accent);
-      padding: 1rem;
-      margin: 0 0 1rem 0;
+      padding: var(--spacing-md) var(--spacing-lg);
+      margin: 0 0 var(--spacing-md) 0;
       font-style: italic;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      font-size: var(--size-small);
+      line-height: 1.7;
+      color: var(--text-muted);
     }
 
     .plain-summary {
-      font-size: 0.95rem;
-      line-height: 1.6;
+      font-size: var(--size-body);
+      line-height: 1.7;
       color: var(--text);
+      padding: var(--spacing-sm) 0;
     }
 
     .plain-summary strong {
       color: var(--accent);
     }
 
+    .compliance-grid {
+      display: grid;
+      gap: var(--spacing-md);
+    }
+
     .action-phase {
-      margin-bottom: 2rem;
+      margin-bottom: var(--spacing-xl);
     }
 
     .action-phase h3 {
-      font-size: 1.1rem;
-      margin: 0 0 1rem 0;
-      padding-bottom: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 var(--spacing-md) 0;
+      padding-bottom: var(--spacing-sm);
       border-bottom: 1px solid rgba(255,255,255,0.1);
       color: var(--text);
+    }
+
+    /* Compliance panel padding */
+    .panel-compliance {
+      padding: var(--spacing-lg);
+    }
+
+    .panel-compliance h2 {
+      margin-top: 0;
     }
 
     .fiscal-table {
@@ -712,6 +729,108 @@
       min-height: 400px;
     }
 
+    /* Results Summary Cards */
+    .results-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .summary-card {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      text-align: center;
+    }
+
+    .summary-card.highlight {
+      background: rgba(74, 222, 128, 0.1);
+      border-color: rgba(74, 222, 128, 0.3);
+    }
+
+    .summary-label {
+      display: block;
+      font-size: var(--size-small);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .summary-value {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .summary-value.accent {
+      color: var(--accent);
+    }
+
+    .summary-value.negative {
+      color: var(--negative);
+    }
+
+    .summary-unit {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-left: 2px;
+    }
+
+    /* Results Grid */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    .results-section {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+    }
+
+    .results-section-title {
+      font-size: var(--size-labels);
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0 0 var(--spacing-md) 0;
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .results-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-xs) 0;
+      font-size: var(--size-labels);
+    }
+
+    .results-row.total {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: var(--spacing-sm);
+      padding-top: var(--spacing-sm);
+      font-weight: 600;
+    }
+
+    .row-label {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .row-value {
+      font-family: var(--font-mono);
+      color: var(--text);
+    }
+
     /* Mobile: stack vertically */
     @media (max-width: 768px) {
       .details-layout {
@@ -720,6 +839,14 @@
 
       .details-sidebar {
         position: static;
+      }
+
+      .results-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr;
       }
     }
     h2 { color: var(--accent); margin-top: 2rem; }
@@ -1798,119 +1925,191 @@
       opacity: 0.6;
     }
 
+    /* Calendar Toolbar */
+    .calendar-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+    }
+
+    .toolbar-selection {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .toolbar-label {
+      font-size: var(--size-small);
+      color: var(--text-muted);
+    }
+
+    .toolbar-btn {
+      padding: 4px 10px;
+      font-size: var(--size-small);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .toolbar-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+    }
+
+    .toolbar-status-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: var(--size-small);
+      font-weight: 500;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .toolbar-status-btn:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .toolbar-status-btn.belgium:hover {
+      border-color: var(--belgium);
+      background: rgba(59, 130, 246, 0.15);
+    }
+
+    .toolbar-status-btn.spain:hover {
+      border-color: var(--positive);
+      background: rgba(74, 222, 128, 0.15);
+    }
+
+    .toolbar-status-btn.travel:hover {
+      border-color: var(--warning);
+      background: rgba(251, 146, 60, 0.15);
+    }
+
+    .status-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .status-indicator.belgium { background: var(--belgium); }
+    .status-indicator.spain { background: var(--positive); }
+    .status-indicator.travel { background: var(--warning); }
+
+    /* Day Cell - Checkbox-based selection */
     .day-cell {
-      min-height: 70px;
+      min-height: 60px;
       background: rgba(255,255,255,0.03);
+      border: 1px solid transparent;
       border-radius: 4px;
-      padding: 0.35rem;
-      position: relative;
+      padding: 6px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      transition: all 0.15s ease;
+    }
+
+    .day-cell:hover:not(.empty) {
+      background: rgba(255,255,255,0.06);
     }
 
     .day-cell.empty {
       background: transparent;
     }
 
+    .day-cell.selected {
+      border-color: var(--accent);
+      background: rgba(74, 222, 128, 0.1);
+    }
+
     .day-cell.belgium {
       background: rgba(59, 130, 246, 0.15);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-color: rgba(59, 130, 246, 0.3);
     }
 
     .day-cell.spain {
       background: rgba(74, 222, 128, 0.15);
-      border: 1px solid rgba(74, 222, 128, 0.3);
+      border-color: rgba(74, 222, 128, 0.3);
     }
 
     .day-cell.travel {
       background: rgba(251, 146, 60, 0.15);
-      border: 1px solid rgba(251, 146, 60, 0.3);
+      border-color: rgba(251, 146, 60, 0.3);
+    }
+
+    .day-cell.selected.belgium,
+    .day-cell.selected.spain,
+    .day-cell.selected.travel {
+      box-shadow: 0 0 0 2px var(--accent);
     }
 
     .day-cell-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 4px;
+    }
+
+    .day-checkbox {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      cursor: pointer;
+      accent-color: var(--accent);
     }
 
     .day-number {
       font-size: 0.8rem;
       font-weight: 600;
+      flex: 1;
     }
 
     .contracted-badge {
       font-size: 9px;
-      opacity: 0.7;
       font-weight: 600;
       color: var(--accent);
+      opacity: 0.8;
     }
 
-    /* Inline status buttons */
-    .day-status-buttons {
-      display: flex;
-      gap: 2px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .day-status-btn {
-      width: 24px;
-      height: 24px;
-      padding: 0;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 4px;
-      background: rgba(255,255,255,0.05);
-      cursor: pointer;
-      font-size: 12px;
+    .day-status-display {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.15s ease;
-      opacity: 0.5;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 4px;
     }
 
-    .day-status-btn:hover {
-      opacity: 1;
-      transform: scale(1.1);
+    .day-status-display:hover {
+      background: rgba(255,255,255,0.05);
     }
 
-    .day-status-btn.active {
-      opacity: 1;
-      border-width: 2px;
+    .status-emoji {
+      font-size: 1.4rem;
     }
 
-    .day-status-btn.belgium-btn {
-      border-color: var(--belgium);
-    }
-    .day-status-btn.belgium-btn.active {
-      background: rgba(59, 130, 246, 0.3);
-      border-color: var(--belgium);
-    }
-
-    .day-status-btn.spain-btn {
-      border-color: var(--positive);
-    }
-    .day-status-btn.spain-btn.active {
-      background: rgba(74, 222, 128, 0.3);
-      border-color: var(--positive);
-    }
-
-    .day-status-btn.travel-btn {
-      border-color: var(--warning);
-    }
-    .day-status-btn.travel-btn.active {
-      background: rgba(251, 146, 60, 0.3);
-      border-color: var(--warning);
-    }
-
-    .day-status-btn.clear-btn {
-      font-size: 10px;
+    .status-empty {
+      font-size: 1rem;
       color: var(--text-muted);
-    }
-    .day-status-btn.clear-btn:hover {
-      color: var(--negative);
-      border-color: var(--negative);
+      opacity: 0.3;
     }
 
     /* Day Picker Dialog Status Options */
@@ -3312,17 +3511,27 @@
       </div>
       <div id="warningBanner" class="warning-banner hidden"></div>
 
-      <!-- Calendar Help Tip -->
-      <div class="calendar-help-tip">
-        <strong>Tip:</strong> Click <strong>BE</strong>, <strong>ES</strong>, or <strong>T</strong> buttons on each day to set status.
-        Use <strong>W</strong> to set an entire week, or <strong>Select All</strong> for the whole month.
-      </div>
-
-      <!-- Selection Indicator (shows when days are selected) -->
-      <div id="selectionIndicator" class="selection-indicator hidden">
-        <span><span id="selectionCount">0</span> days selected</span>
-        <button type="button" class="clear-btn" onclick="clearSelection()">Clear</button>
-        <button type="button" class="clear-btn" onclick="openBulkPicker()">Set Status</button>
+      <!-- Calendar Toolbar - Always visible for bulk operations -->
+      <div class="calendar-toolbar">
+        <div class="toolbar-selection">
+          <span class="toolbar-label">Selected: <strong id="selectionCount">0</strong> days</span>
+          <button type="button" class="toolbar-btn" onclick="clearSelection()" title="Clear selection">Clear</button>
+        </div>
+        <div class="toolbar-actions">
+          <span class="toolbar-label">Set status:</span>
+          <button type="button" class="toolbar-status-btn belgium" onclick="applyStatusToSelected('belgium')">
+            <span class="status-indicator belgium"></span> Belgium
+          </button>
+          <button type="button" class="toolbar-status-btn spain" onclick="applyStatusToSelected('spain')">
+            <span class="status-indicator spain"></span> Spain
+          </button>
+          <button type="button" class="toolbar-status-btn travel" onclick="applyStatusToSelected('travel')">
+            <span class="status-indicator travel"></span> Travel
+          </button>
+          <button type="button" class="toolbar-status-btn clear" onclick="applyStatusToSelected('unset')">
+            Clear Status
+          </button>
+        </div>
       </div>
 
       <div id="calendarContainer">
@@ -4002,21 +4211,19 @@
             const isSelected = selectedDates.has(dateKey);
             const selectedClass = isSelected ? 'selected' : '';
 
+            const isSelected = selectedDates.has(dateKey);
             gridHtml += `
-              <div class="day-cell ${status}" data-date="${dateKey}">
+              <div class="day-cell ${status} ${isSelected ? 'selected' : ''}" data-date="${dateKey}">
                 <div class="day-cell-header">
+                  <input type="checkbox" class="day-checkbox"
+                    ${isSelected ? 'checked' : ''}
+                    onchange="toggleDaySelection('${dateKey}', this.checked)"
+                    aria-label="Select ${date.getDate()}">
                   <span class="day-number">${date.getDate()}</span>
                   ${isContracted ? '<span class="contracted-badge">C</span>' : ''}
                 </div>
-                <div class="day-status-buttons">
-                  <button type="button" class="day-status-btn belgium-btn ${status === 'belgium' ? 'active' : ''}"
-                    onclick="setDayStatus('${dateKey}', 'belgium')" title="Belgium">BE</button>
-                  <button type="button" class="day-status-btn spain-btn ${status === 'spain' ? 'active' : ''}"
-                    onclick="setDayStatus('${dateKey}', 'spain')" title="Spain">ES</button>
-                  <button type="button" class="day-status-btn travel-btn ${status === 'travel' ? 'active' : ''}"
-                    onclick="setDayStatus('${dateKey}', 'travel')" title="Travel">T</button>
-                  <button type="button" class="day-status-btn clear-btn"
-                    onclick="setDayStatus('${dateKey}', 'unset')" title="Clear">x</button>
+                <div class="day-status-display" onclick="toggleDaySelection('${dateKey}')">
+                  ${emoji ? `<span class="status-emoji">${emoji}</span>` : '<span class="status-empty">-</span>'}
                 </div>
               </div>
             `;
@@ -4135,17 +4342,83 @@
     }
 
     /**
-     * Set day status directly from inline button click
-     * This is the new inline approach replacing the dialog pattern
-     *
+     * Toggle selection of a single day
      * @param {string} dateKey - ISO date key (YYYY-MM-DD)
-     * @param {string} status - New status ('belgium', 'spain', 'travel', 'unset')
+     * @param {boolean} isChecked - Whether checkbox is checked (optional, toggles if not provided)
+     */
+    function toggleDaySelection(dateKey, isChecked) {
+      if (typeof isChecked === 'boolean') {
+        if (isChecked) {
+          selectedDates.add(dateKey);
+        } else {
+          selectedDates.delete(dateKey);
+        }
+      } else {
+        // Toggle if no explicit value
+        if (selectedDates.has(dateKey)) {
+          selectedDates.delete(dateKey);
+        } else {
+          selectedDates.add(dateKey);
+        }
+      }
+      lastClickedDate = dateKey;
+      renderCalendar();
+      updateSelectionCount();
+    }
+
+    /**
+     * Update the selection count display in toolbar
+     */
+    function updateSelectionCount() {
+      const countEl = document.getElementById('selectionCount');
+      if (countEl) {
+        countEl.textContent = selectedDates.size;
+      }
+    }
+
+    /**
+     * Apply a status to all selected days
+     * @param {string} status - Status to apply ('belgium', 'spain', 'travel', 'unset')
+     */
+    function applyStatusToSelected(status) {
+      if (selectedDates.size === 0) {
+        return; // Nothing selected
+      }
+
+      selectedDates.forEach(dateKey => {
+        const existingData = calendarState.days[dateKey] || {};
+
+        if (status === 'unset') {
+          if (existingData.contracted) {
+            calendarState.days[dateKey] = { status: 'unset', contracted: true };
+          } else {
+            delete calendarState.days[dateKey];
+          }
+        } else {
+          calendarState.days[dateKey] = {
+            status: status,
+            contracted: existingData.contracted || false
+          };
+        }
+      });
+
+      // Mark as unsaved, clear selection, update UI
+      markUnsaved();
+      selectedDates.clear();
+      renderCalendar();
+      updateSelectionCount();
+      updateCountDisplays();
+    }
+
+    /**
+     * Set day status directly (for single day quick click on status display)
+     * @param {string} dateKey - ISO date key (YYYY-MM-DD)
+     * @param {string} status - New status
      */
     function setDayStatus(dateKey, status) {
       const existingData = calendarState.days[dateKey] || {};
 
       if (status === 'unset') {
-        // Clear the day but preserve contracted flag
         if (existingData.contracted) {
           calendarState.days[dateKey] = { status: 'unset', contracted: true };
         } else {
@@ -4158,7 +4431,6 @@
         };
       }
 
-      // Mark as unsaved and update UI
       markUnsaved();
       renderCalendar();
       updateCountDisplays();
@@ -4408,14 +4680,11 @@
     // ============================================================
 
     /**
-     * Select all days in a week
+     * Select all days in a week (adds to existing selection)
      * @param {string} weekStartKey - ISO date key of week's Monday
      */
     function selectWeek(weekStartKey) {
       const start = new Date(weekStartKey);
-
-      // Clear existing selection and add week's days
-      selectedDates.clear();
 
       for (let i = 0; i < 7; i++) {
         const day = new Date(start);
@@ -4428,23 +4697,17 @@
       }
 
       renderCalendar();
-      updateSelectionIndicator();
-
-      if (selectedDates.size > 0) {
-        openBulkPicker();
-      }
+      updateSelectionCount();
     }
 
     /**
-     * Select all days in a month
+     * Select all days in a month (adds to existing selection)
      * @param {number} month - Month index (0-11)
      */
     function selectMonth(month) {
       const year = 2026;
       const firstDay = new Date(year, month, 1);
-      const lastDay = new Date(year, month + 1, 0);  // Last day of month
-
-      selectedDates.clear();
+      const lastDay = new Date(year, month + 1, 0);
 
       const current = new Date(firstDay);
       while (current <= lastDay) {
@@ -4453,8 +4716,7 @@
       }
 
       renderCalendar();
-      updateSelectionIndicator();
-      openBulkPicker();
+      updateSelectionCount();
     }
 
     /**
@@ -4480,7 +4742,7 @@
     function clearSelection() {
       selectedDates.clear();
       renderCalendar();
-      updateSelectionIndicator();
+      updateSelectionCount();
     }
 
     // ============================================================
@@ -5812,49 +6074,107 @@ Generated by Autonomo Tax Calculator`;
       const leefgeld = r.netMonthly - privateCostsMonthly;
 
       const html = `
-        <h2>Results</h2>
-
-        <h3>Income</h3>
-        <div class="breakdown">
-          Monthly Revenue: ${formatEUR(r.monthlyRevenue)}<br>
-          Annual Revenue: ${formatEUR(r.annualRevenue)}
+        <!-- Key Metrics Summary -->
+        <div class="results-summary">
+          <div class="summary-card highlight">
+            <span class="summary-label">Disposable Income</span>
+            <span class="summary-value accent">${formatEUR(leefgeld)}<span class="summary-unit">/month</span></span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Net After Tax</span>
+            <span class="summary-value">${formatEUR(r.netMonthly)}<span class="summary-unit">/month</span></span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">IRPF Tax</span>
+            <span class="summary-value negative">${formatEUR(r.cuotaIntegra)}<span class="summary-unit">/year</span></span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Effective Rate</span>
+            <span class="summary-value">${formatPercent(r.effectiveRate)}</span>
+          </div>
         </div>
 
-        <h3>Deductions</h3>
-        <div class="breakdown">
-          RETA (Seguridad Social): ${formatEUR(r.retaAnnual)} (${formatEUR(r.retaMonthly)}/month) ${sourceHint('RETA')}<br>
-          Spain Deductible: ${formatEUR(totals.spainDeductible.annual)} (${formatEUR(totals.spainDeductible.monthly)}/month)<br>
-          Work Travel Costs: ${formatEUR(totals.workTravel.annual)} (${formatEUR(totals.workTravel.monthly)}/month)<br>
-          <strong>Total Deductible: ${formatEUR(r.totalDeductible)}</strong>
-        </div>
+        <!-- Detailed Breakdown Grid -->
+        <div class="results-grid">
+          <div class="results-section">
+            <h3 class="results-section-title">Income</h3>
+            <div class="results-row">
+              <span class="row-label">Monthly Revenue</span>
+              <span class="row-value">${formatEUR(r.monthlyRevenue)}</span>
+            </div>
+            <div class="results-row">
+              <span class="row-label">Annual Revenue</span>
+              <span class="row-value">${formatEUR(r.annualRevenue)}</span>
+            </div>
+          </div>
 
-        <h3>IRPF Calculation ${sourceHint('IRPF_BRACKETS')}</h3>
-        <div class="breakdown">
-          Rendimiento Neto Previo: ${formatEUR(r.rendimientoNetoPrevio)}<br>
-          Gastos Dificil Justificacion (5%, max 2000): ${formatEUR(r.gastosDificil)} ${sourceHint('GASTOS_DIFICIL')}<br>
-          <strong>Rendimiento Neto / Base Liquidable: ${formatEUR(r.baseLiquidable)}</strong>
-        </div>
+          <div class="results-section">
+            <h3 class="results-section-title">Deductions</h3>
+            <div class="results-row">
+              <span class="row-label">RETA (Social Security) ${sourceHint('RETA')}</span>
+              <span class="row-value">${formatEUR(r.retaAnnual)}</span>
+            </div>
+            <div class="results-row">
+              <span class="row-label">Spain Deductible</span>
+              <span class="row-value">${formatEUR(totals.spainDeductible.annual)}</span>
+            </div>
+            <div class="results-row">
+              <span class="row-label">Work Travel</span>
+              <span class="row-value">${formatEUR(totals.workTravel.annual)}</span>
+            </div>
+            <div class="results-row total">
+              <span class="row-label">Total Deductible</span>
+              <span class="row-value">${formatEUR(r.totalDeductible)}</span>
+            </div>
+          </div>
 
-        <h3>Minimos (reduce tax, not base) ${sourceHint('MINIMO_APPLICATION')}</h3>
-        <div class="breakdown">
-          Minimo Personal: ${formatEUR(r.minimoPersonal)} ${sourceHint('MINIMO_PERSONAL')}<br>
-          Minimo por Descendientes: ${formatEUR(r.minimoDescendientes)} ${sourceHint('MINIMO_DESCENDIENTES')}<br>
-          <strong>Total Minimos: ${formatEUR(r.minimoTotal)}</strong>
-        </div>
+          <div class="results-section">
+            <h3 class="results-section-title">IRPF Calculation ${sourceHint('IRPF_BRACKETS')}</h3>
+            <div class="results-row">
+              <span class="row-label">Rendimiento Neto Previo</span>
+              <span class="row-value">${formatEUR(r.rendimientoNetoPrevio)}</span>
+            </div>
+            <div class="results-row">
+              <span class="row-label">Gastos Dificil (5%, max 2000) ${sourceHint('GASTOS_DIFICIL')}</span>
+              <span class="row-value">-${formatEUR(r.gastosDificil)}</span>
+            </div>
+            <div class="results-row total">
+              <span class="row-label">Base Liquidable</span>
+              <span class="row-value">${formatEUR(r.baseLiquidable)}</span>
+            </div>
+          </div>
 
-        <h3>Tax</h3>
-        <div class="breakdown">
-          <strong>Cuota Integra (Annual IRPF): ${formatEUR(r.cuotaIntegra)}</strong><br>
-          Effective Tax Rate: ${formatPercent(r.effectiveRate)}
-        </div>
+          <div class="results-section">
+            <h3 class="results-section-title">Tax Reductions ${sourceHint('MINIMO_APPLICATION')}</h3>
+            <div class="results-row">
+              <span class="row-label">Minimo Personal ${sourceHint('MINIMO_PERSONAL')}</span>
+              <span class="row-value">${formatEUR(r.minimoPersonal)}</span>
+            </div>
+            <div class="results-row">
+              <span class="row-label">Minimo Descendientes ${sourceHint('MINIMO_DESCENDIENTES')}</span>
+              <span class="row-value">${formatEUR(r.minimoDescendientes)}</span>
+            </div>
+            <div class="results-row total">
+              <span class="row-label">Total Minimos</span>
+              <span class="row-value">${formatEUR(r.minimoTotal)}</span>
+            </div>
+          </div>
 
-        <h3>Net Income</h3>
-        <div class="breakdown">
-          Annual Net: ${formatEUR(r.netAnnual)}<br>
-          <strong>Monthly Net: ${formatEUR(r.netMonthly)}</strong><br>
-          <hr>
-          Private Costs: ${formatEUR(privateCostsMonthly)}/month (${formatEUR(privateCostsMonthly * 12)}/year)<br>
-          <strong style="color: var(--accent);">Disposable Income (after all costs): ${formatEUR(leefgeld)}/month</strong>
+          <div class="results-section">
+            <h3 class="results-section-title">Final Calculation</h3>
+            <div class="results-row">
+              <span class="row-label">Annual Net (after IRPF + RETA)</span>
+              <span class="row-value">${formatEUR(r.netAnnual)}</span>
+            </div>
+            <div class="results-row">
+              <span class="row-label">Monthly Net</span>
+              <span class="row-value">${formatEUR(r.netMonthly)}</span>
+            </div>
+            <div class="results-row">
+              <span class="row-label">Private Costs (non-deductible)</span>
+              <span class="row-value">-${formatEUR(privateCostsMonthly)}/mo</span>
+            </div>
+          </div>
         </div>
 
         ${createFootnotes()}
