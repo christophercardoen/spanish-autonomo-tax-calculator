@@ -5,23 +5,24 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 6 - Excel Calculator (In Progress)
+**Current focus:** Phase 6 - Excel Calculator (COMPLETE)
 
 ## Current Position
 
 Phase: 6 of 7 (Excel Calculator)
-Plan: 2 of 3 in current phase (COMPLETE)
-Status: In progress
-Last activity: 2026-02-01 - Completed 06-02-PLAN.md (Scenario Sheets)
+Plan: 3 of 3 in current phase (COMPLETE)
+Status: Phase complete
+Last activity: 2026-02-02 - Completed 06-03-PLAN.md (Overview Sheet & Finalization)
 
-Progress: [█████████░] 95%
+Progress: [██████████] 100% (Phase 6)
+Overall: [█████████░] 95% (Project)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
-- Average duration: 3.4 min
-- Total execution time: 51 min
+- Total plans completed: 16
+- Average duration: 3.5 min
+- Total execution time: 55 min
 
 **By Phase:**
 
@@ -32,11 +33,11 @@ Progress: [█████████░] 95%
 | 03-scenario-engine | 3 | 6 min | 2 min |
 | 04-belgium-calendar | 3 | 11 min | 3.7 min |
 | 05-dashboard-ui | 3 | 16 min | 5.3 min |
-| 06-excel-calculator | 2 | 4 min | 2 min |
+| 06-excel-calculator | 3 | 8 min | 2.7 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-02 (6 min), 05-03 (5 min), 06-01 (2 min), 06-02 (2 min)
-- Trend: Fast execution for Excel plans
+- Last 5 plans: 05-03 (5 min), 06-01 (2 min), 06-02 (2 min), 06-03 (4 min)
+- Trend: Consistent fast execution for Excel plans
 
 *Updated after each plan completion*
 
@@ -109,13 +110,14 @@ Recent decisions affecting current work:
 | Source notes in Constants sheet | Embedded notes for 2027 update guidance | 06-01 |
 | 6-section sheet structure | INPUTS, ANNUAL, GASTOS DIFICIL, BRACKETS, MINIMO, RESULTS | 06-02 |
 | Light blue fill for input cells | FFE0F0FF distinguishes editable from calculated cells | 06-02 |
-| Belgium dropdown validation | Data validation ensures valid values (1000 or 2500 only) | 06-02 |
 | Simplified minimo tax calculation | Minimos (7,950) fall in first bracket, so B40*0.19 is accurate | 06-02 |
 | Conditional formatting thresholds | Leefgeld <0 red, 0-500 orange, >=500 green; Tax >40% red, 30-40% orange, <30% green | 06-02 |
+| Dutch localization for Excel | User requirement for Dutch-speaking workflow | 06-03 |
+| Flexible input cells (no dropdowns) | All costs are variable; user needs to model any scenario freely | 06-03 |
+| Cross-sheet formula pattern | ='Scenario X - YK'!BNN format for consistent references | 06-03 |
 
 ### Pending Todos
 
-- Phase 6: Excel Calculator (1 more plan: 06-03 Overview Sheet)
 - Phase 7: Compliance & Documentation (10 requirements)
 
 ### Blockers/Concerns
@@ -124,8 +126,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-01T16:22:25Z
-Stopped at: Completed 06-02-PLAN.md (Scenario Sheets)
+Last session: 2026-02-02T11:40:01Z
+Stopped at: Completed 06-03-PLAN.md (Overview Sheet & Finalization)
 Resume file: None
 
 ## Key Files Created
@@ -134,8 +136,8 @@ Resume file: None
 |------|---------|
 | autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table + calendar grid with exports + tooltips + responsive layout |
 | scripts/package.json | Node.js project configuration with ExcelJS dependency |
-| scripts/generate-excel.js | Excel workbook generator with Constants sheet + 5 scenario sheets |
-| autonomo_calculator.xlsx | Generated workbook with Constants + Scenarios A-E |
+| scripts/generate-excel.js | Excel workbook generator with Constanten + Overzicht + 5 scenario sheets (Dutch localized) |
+| autonomo_calculator.xlsx | Generated workbook with Overzicht + Scenarios A-E + Constanten (Dutch labels) |
 | .planning/phases/01-fiscal-foundation/01-01-SUMMARY.md | Plan 01-01 execution summary |
 | .planning/phases/01-fiscal-foundation/01-02-SUMMARY.md | Plan 01-02 execution summary |
 | .planning/phases/02-expense-tracking/02-01-SUMMARY.md | Plan 02-01 execution summary |
@@ -151,6 +153,7 @@ Resume file: None
 | .planning/phases/05-dashboard-ui/05-03-SUMMARY.md | Plan 05-03 execution summary |
 | .planning/phases/06-excel-calculator/06-01-SUMMARY.md | Plan 06-01 execution summary |
 | .planning/phases/06-excel-calculator/06-02-SUMMARY.md | Plan 06-02 execution summary |
+| .planning/phases/06-excel-calculator/06-03-SUMMARY.md | Plan 06-03 execution summary |
 
 ## Phase 1 Complete
 
@@ -232,16 +235,32 @@ Phase 5 (Dashboard UI) delivered:
 - Responsive mobile layout with vertical comparison blocks (UI-08)
 - All UI-01 through UI-12 requirements satisfied
 
-## Phase 6 In Progress
+## Phase 6 Complete
 
-Phase 6 (Excel Calculator) progress:
-- Plan 06-01 complete: Node.js project + Constants sheet with named ranges
-- Plan 06-02 complete: 5 scenario sheets with full IRPF breakdown
-- Named ranges: RETA_MONTHLY, RETA_ANNUAL, MINIMO_PERSONAL, MINIMO_DESCENDIENTES, GASTOS_DIFICIL_RATE, GASTOS_DIFICIL_MAX, PRIVATE_COSTS
-- IRPF brackets reference table (6 brackets)
-- createScenarioSheet function with 6-section template
-- All 5 scenarios (A-E) generated with correct preset values
-- Belgium patterns: A/B=1000, C/D/E=2500
-- Step-by-step IRPF bracket rows and 4-phase minimo visible
-- Conditional formatting on leefgeld and effective tax rate
-- Ready for Plan 06-03: Overview sheet with comparison table
+Phase 6 (Excel Calculator) delivered:
+- Node.js project with ExcelJS dependency (06-01)
+- Constanten sheet with named ranges: RETA_MONTHLY, RETA_ANNUAL, MINIMO_PERSONAL, MINIMO_DESCENDIENTES, GASTOS_DIFICIL_RATE, GASTOS_DIFICIL_MAX, PRIVATE_COSTS (06-01)
+- IRPF brackets reference table (6 brackets) (06-01)
+- createScenarioSheet function with 6-section template (06-02)
+- All 5 scenarios (A-E) with correct preset values and Belgium patterns (06-02)
+- Step-by-step IRPF bracket rows and 4-phase minimo visible (06-02)
+- Conditional formatting on leefgeld and effective tax rate (06-02)
+- Overzicht sheet with comparison table and hyperlink navigation (06-03)
+- Cross-sheet formulas pulling values from all scenarios (06-03)
+- Complete Dutch localization of all labels and text (06-03)
+- Flexible input cells (no restrictive dropdowns) (06-03)
+- Print layouts and sheet protection (06-03)
+- All XLS-01 through XLS-10 requirements satisfied
+
+## Next Phase
+
+**Phase 7: Compliance & Documentation**
+- 183-day warnings
+- Spain-Belgium treaty tie-breaker provisions
+- Centro de intereses vitales explanation
+- Art. 9.1.b LIRPF family presumption
+- Documentation requirements (factura completa, electronic payment)
+- Dietas limits
+- Disclaimer
+
+Ready to start Phase 7.
