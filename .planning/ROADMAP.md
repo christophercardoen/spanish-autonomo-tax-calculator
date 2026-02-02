@@ -20,7 +20,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 6: Excel Calculator** - Multi-sheet workbook with formulas, not hardcoded values
 - [x] **Phase 7: Compliance & Documentation** - Treaty provisions, warnings, and fiscal source citations
 - [x] **Phase 7.1: Critical Bug Fixes (INSERTED)** - Fix blocking UX issues discovered in user testing
-- [ ] **Phase 7.2: UI/UX Polish & Generalization (INSERTED)** - Visual refinement, bug fixes, remove Belgium hardcoding, English localization
+- [x] **Phase 7.2: UI/UX Polish & Generalization (INSERTED)** - Visual refinement, bug fixes, remove Belgium hardcoding, English localization
 - [ ] **Phase 8: Enhanced Features** - Multi-select calendar, income tracking, official source links
 
 ## Phase Details
@@ -186,10 +186,12 @@ Plans:
   4. Official Spanish Agencia Tributaria source links added to Details and Compliance tabs
   5. All source citations verified and clickable
   6. Calendar multi-select includes visual feedback for selected ranges
-**Plans**: TBD (run /gsd:plan-phase 8)
+**Plans**: 3 plans
 
 Plans:
-- [ ] TBD
+- [x] 08-01-PLAN.md - Calendar visual feedback and expense auto-detection
+- [x] 08-02-PLAN.md - Income tracking tab with CRUD and localStorage
+- [x] 08-03-PLAN.md - Official source links throughout Details and Compliance tabs
 
 ## Progress
 
@@ -207,4 +209,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 7.2 -
 | 7. Compliance & Documentation | 2/2 | Complete | 2026-02-02 |
 | 7.1. Critical Bug Fixes (INSERTED) | 3/3 | Complete | 2026-02-02 |
 | 7.2. UI/UX Polish & Generalization (INSERTED) | 4/4 | Complete | 2026-02-02 |
-| 8. Enhanced Features | 0/? | Not started | - |
+| 8. Enhanced Features | 3/3 | Complete | 2026-02-02 |

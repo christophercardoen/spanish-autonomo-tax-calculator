@@ -113,12 +113,12 @@ Critical bug fixes and enhancements discovered during user testing.
 
 ### Enhanced Features (ENH)
 
-- [ ] **ENH-01**: Auto-detect 100% deductible expenses when user adds them
-- [ ] **ENH-02**: Add income tracking tab with client earnings, invoice numbers, and auto-calculation
-- [ ] **ENH-03**: Add official Spanish Agencia Tributaria source links to Details tab
-- [ ] **ENH-04**: Add official Spanish Agencia Tributaria source links to Compliance tab
-- [ ] **ENH-05**: Make all source citations clickable with URLs
-- [ ] **ENH-06**: Add visual feedback for multi-select calendar ranges
+- [x] **ENH-01**: Auto-detect 100% deductible expenses when user adds them
+- [x] **ENH-02**: Add income tracking tab with client earnings, invoice numbers, and auto-calculation
+- [x] **ENH-03**: Add official Spanish Agencia Tributaria source links to Details tab
+- [x] **ENH-04**: Add official Spanish Agencia Tributaria source links to Compliance tab
+- [x] **ENH-05**: Make all source citations clickable with URLs
+- [x] **ENH-06**: Add visual feedback for multi-select calendar ranges
 
 ## v2 Requirements
 
@@ -240,12 +240,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BUG-03 | Phase 7.1 | Complete |
 | BUG-04 | Phase 7.1 | Complete |
 | BUG-05 | Phase 7.1 | Complete |
-| ENH-01 | Phase 8 | Pending |
-| ENH-02 | Phase 8 | Pending |
-| ENH-03 | Phase 8 | Pending |
-| ENH-04 | Phase 8 | Pending |
-| ENH-05 | Phase 8 | Pending |
-| ENH-06 | Phase 8 | Pending |
+| ENH-01 | Phase 8 | Complete |
+| ENH-02 | Phase 8 | Complete |
+| ENH-03 | Phase 8 | Complete |
+| ENH-04 | Phase 8 | Complete |
+| ENH-05 | Phase 8 | Complete |
+| ENH-06 | Phase 8 | Complete |
 
 **Coverage:**
 - v1 requirements: 68 total (complete)
