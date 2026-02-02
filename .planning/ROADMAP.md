@@ -160,17 +160,20 @@ Plans:
 ### Phase 7.2: UI/UX Polish & Generalization (INSERTED)
 **Goal**: Comprehensive UI/UX overhaul - fix bugs, improve visual design, remove hardcoded Belgium features, ensure full English localization
 **Depends on**: Phase 7.1
-**Requirements**: POLISH-01 through POLISH-40 (TBD - comprehensive quality pass)
+**Requirements**: POLISH-01 through POLISH-10 (visual polish, English localization, expense generalization, cross-platform testing)
 **Success Criteria** (what must be TRUE):
   1. Professional visual polish with refined dark theme and consistent spacing
   2. All bugs fixed - tooltips, add expense, mobile layout work perfectly
   3. Zero Dutch text in UI - "Leefgeld" replaced with "Disposable Income"
   4. Belgium costs converted to regular expenses (not special-cased)
   5. Tested and working on desktop (1920x1080, 1440x900) and mobile (375x812, 428x926)
-**Plans**: 2-3 plans
+**Plans**: 4 plans
 
 Plans:
-- [ ] TBD (run /gsd:discuss-phase 7.2)
+- [x] 7.2-01-PLAN.md - English localization (Leefgeld replacement) and visual polish (spacing, typography, shadows)
+- [x] 7.2-02-PLAN.md - Remove Belgium hardcoding (generalize expense system)
+- [x] 7.2-03-PLAN.md - Mobile and desktop layout audit with automated fixes
+- [x] 7.2-04-PLAN.md - Human verification and bug fix cycle
 
 ### Phase 8: Enhanced Features
 **Goal**: Add missing v1 features: multi-select calendar improvements, income tracking, and official source links
@@ -203,5 +206,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 7.2 -
 | 6. Excel Calculator | 3/3 | Complete | 2026-02-02 |
 | 7. Compliance & Documentation | 2/2 | Complete | 2026-02-02 |
 | 7.1. Critical Bug Fixes (INSERTED) | 3/3 | Complete | 2026-02-02 |
-| 7.2. UI/UX Polish & Generalization (INSERTED) | 0/? | Not started | - |
+| 7.2. UI/UX Polish & Generalization (INSERTED) | 4/4 | Complete | 2026-02-02 |
 | 8. Enhanced Features | 0/? | Not started | - |
