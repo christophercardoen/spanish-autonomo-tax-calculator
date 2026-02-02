@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2026-01-29)
 ## Current Position
 
 Phase: 7.2 of 9 (UI/UX Polish)
-Plan: 1 of 4 complete
+Plan: 2 of 4 complete
 Status: In progress
-Last activity: 2026-02-02 - Completed 7.2-01-PLAN.md (English localization & visual polish)
+Last activity: 2026-02-02 - Completed 7.2-02-PLAN.md (Generalize Belgium expenses)
 
-Progress: [██░░░░░░░░] 25% (Phase 7.2)
-Overall: [████████░░] 88% (7.2/9 phases in progress)
+Progress: [█████░░░░░] 50% (Phase 7.2)
+Overall: [████████░░] 89% (7.2/9 phases in progress)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 22
-- Average duration: 3.3 min
-- Total execution time: 78 min
+- Total plans completed: 23
+- Average duration: 3.4 min
+- Total execution time: 85 min
 
 **By Phase:**
 
@@ -36,10 +36,10 @@ Overall: [████████░░] 88% (7.2/9 phases in progress)
 | 06-excel-calculator | 3 | 8 min | 2.7 min |
 | 07-compliance-documentation | 2 | 8 min | 4 min |
 | 07.1-critical-bug-fixes | 3 | 12 min | 4 min |
-| 07.2-ui-ux-polish | 1 | 3 min | 3 min |
+| 07.2-ui-ux-polish | 2 | 10 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 7.1-01 (4 min), 7.1-02 (4 min), 7.1-03 (4 min), 7.2-01 (3 min)
+- Last 5 plans: 7.1-02 (4 min), 7.1-03 (4 min), 7.2-01 (3 min), 7.2-02 (7 min)
 - Trend: Consistent execution pace
 
 *Updated after each plan completion*
@@ -129,6 +129,8 @@ Recent decisions affecting current work:
 | Preserve localStorage IDs | Keep original IDs (huur, gsm) for backwards compatibility | 7.1-01 |
 | Click-to-open tooltip modals | Native dialog element with blur backdrop for touch device support | 7.1-02 |
 | "Disposable Income" terminology | Clearer English term than "Leefgeld" for remaining money after all costs | 7.2-01 |
+| workTravelCost over belgiumPattern | Direct numeric value (1000, 2500) instead of enum - more flexible | 7.2-02 |
+| getWorkTravelCost() legacy helper | Supports both new property and old belgiumPattern for migration | 7.2-02 |
 | 6-step spacing scale | --spacing-xs to --spacing-2xl (4px to 48px) for consistent spacing | 7.2-01 |
 | 3-tier radius tokens | --radius-sm/md/lg (4px, 8px, 12px) for consistent border radius | 7.2-01 |
 | :focus-visible for accessibility | Only shows focus ring on keyboard navigation, not mouse clicks | 7.2-01 |
@@ -139,7 +141,8 @@ Recent decisions affecting current work:
 - ~~English localization (Leefgeld -> Disposable Income)~~ DONE (7.2-01)
 - ~~CSS spacing/radius tokens~~ DONE (7.2-01)
 - ~~Focus-visible accessibility~~ DONE (7.2-01)
-- Additional polish tasks (7.2-02 through 7.2-04) pending
+- ~~Generalize Belgium expenses to work-travel~~ DONE (7.2-02)
+- Additional polish tasks (7.2-03 through 7.2-04) pending
 
 **Phase 8 (Enhanced Features):**
 - Auto-detect 100% deductible expenses
@@ -148,7 +151,7 @@ Recent decisions affecting current work:
 
 ### Blockers/Concerns
 
-None - Phase 7.2-01 complete.
+None - Phase 7.2-02 complete.
 
 ### Roadmap Evolution
 
@@ -159,9 +162,9 @@ None - Phase 7.2-01 complete.
 
 ## Session Continuity
 
-Last session: 2026-02-02T19:22:00Z
-Stopped at: Completed 7.2-01-PLAN.md (English localization & visual polish)
-Resume file: .planning/phases/07.2-ui-ux-polish/7.2-02-PLAN.md
+Last session: 2026-02-02T19:26:22Z
+Stopped at: Completed 7.2-02-PLAN.md (Generalize Belgium expenses)
+Resume file: .planning/phases/07.2-ui-ux-polish/7.2-03-PLAN.md
 
 ## Key Files Created
 
@@ -193,6 +196,7 @@ Resume file: .planning/phases/07.2-ui-ux-polish/7.2-02-PLAN.md
 | .planning/phases/07.1-critical-bug-fixes/7.1-02-SUMMARY.md | Plan 7.1-02 execution summary |
 | .planning/phases/07.1-critical-bug-fixes/7.1-03-SUMMARY.md | Plan 7.1-03 execution summary |
 | .planning/phases/07.2-ui-ux-polish/7.2-01-SUMMARY.md | Plan 7.2-01 execution summary |
+| .planning/phases/07.2-ui-ux-polish/7.2-02-SUMMARY.md | Plan 7.2-02 execution summary |
 
 ## Phase 1 Complete
 
@@ -332,14 +336,19 @@ Phase 7.2 (UI/UX Polish) progress:
   - Focus-visible accessibility styles
   - Enhanced card shadows and hover effects
   - Button consistency and table hover states
+- Plan 7.2-02 complete: Generalize Belgium expenses
+  - belgiumCosts category -> workTravel with editable items
+  - Removed pill toggle (Low/High), now individual expense items
+  - Migration function for backwards compatibility
+  - workTravelCost property replaces belgiumPattern
 
 ## PROJECT STATUS
 
 **Summary:**
 - 7.2 phases in progress (7 original + 7.1 critical bug fixes + 7.2 polish)
-- 22 plans executed
+- 23 plans executed
 - 74+ requirements satisfied (59 v1 + 10 v2 + 5 bug fixes + polish)
-- Total execution time: ~78 minutes
+- Total execution time: ~85 minutes
 
 **Deliverables:**
 1. `autonomo_dashboard.html` - Single-file HTML tax calculator with:
