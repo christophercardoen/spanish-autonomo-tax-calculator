@@ -19,7 +19,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Dashboard UI** - Professional financial dashboard with Bloomberg-inspired aesthetics
 - [x] **Phase 6: Excel Calculator** - Multi-sheet workbook with formulas, not hardcoded values
 - [x] **Phase 7: Compliance & Documentation** - Treaty provisions, warnings, and fiscal source citations
-- [ ] **Phase 7.1: Critical Bug Fixes (INSERTED)** - Fix blocking UX issues discovered in user testing
+- [x] **Phase 7.1: Critical Bug Fixes (INSERTED)** - Fix blocking UX issues discovered in user testing
+- [ ] **Phase 7.2: UI/UX Polish & Generalization (INSERTED)** - Visual refinement, bug fixes, remove Belgium hardcoding, English localization
 - [ ] **Phase 8: Enhanced Features** - Multi-select calendar, income tracking, official source links
 
 ## Phase Details
@@ -156,9 +157,24 @@ Plans:
 - [x] 7.1-02-PLAN.md - Redesign tooltips as centered modals with blur backdrop
 - [x] 7.1-03-PLAN.md - Enhanced calendar multi-select with week and month selection
 
+### Phase 7.2: UI/UX Polish & Generalization (INSERTED)
+**Goal**: Comprehensive UI/UX overhaul - fix bugs, improve visual design, remove hardcoded Belgium features, ensure full English localization
+**Depends on**: Phase 7.1
+**Requirements**: POLISH-01 through POLISH-40 (TBD - comprehensive quality pass)
+**Success Criteria** (what must be TRUE):
+  1. Professional visual polish with refined dark theme and consistent spacing
+  2. All bugs fixed - tooltips, add expense, mobile layout work perfectly
+  3. Zero Dutch text in UI - "Leefgeld" replaced with "Disposable Income"
+  4. Belgium costs converted to regular expenses (not special-cased)
+  5. Tested and working on desktop (1920x1080, 1440x900) and mobile (375x812, 428x926)
+**Plans**: 2-3 plans
+
+Plans:
+- [ ] TBD (run /gsd:discuss-phase 7.2)
+
 ### Phase 8: Enhanced Features
 **Goal**: Add missing v1 features: multi-select calendar improvements, income tracking, and official source links
-**Depends on**: Phase 7.1
+**Depends on**: Phase 7.2
 **Requirements**: ENH-01, ENH-02, ENH-03, ENH-04, ENH-05, ENH-06
 **Success Criteria** (what must be TRUE):
   1. Calendar can select multiple days, full weeks, full months across date ranges
@@ -175,7 +191,7 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 8
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 7.2 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -187,4 +203,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 7.1 -> 8
 | 6. Excel Calculator | 3/3 | Complete | 2026-02-02 |
 | 7. Compliance & Documentation | 2/2 | Complete | 2026-02-02 |
 | 7.1. Critical Bug Fixes (INSERTED) | 3/3 | Complete | 2026-02-02 |
+| 7.2. UI/UX Polish & Generalization (INSERTED) | 0/? | Not started | - |
 | 8. Enhanced Features | 0/? | Not started | - |
