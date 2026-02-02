@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 7 - Compliance & Documentation (IN PROGRESS)
+**Current focus:** PROJECT COMPLETE
 
 ## Current Position
 
-Phase: 7 of 7 (Compliance & Documentation)
-Plan: 1 of 2 in current phase (COMPLETE)
-Status: In progress
-Last activity: 2026-02-02 - Completed 07-01-PLAN.md (Compliance Tab with Treaty Provisions)
+Phase: 7 of 7 (Compliance & Documentation) - COMPLETE
+Plan: 2 of 2 in current phase (COMPLETE)
+Status: PROJECT COMPLETE
+Last activity: 2026-02-02 - Completed 07-02-PLAN.md (Warning Banner and Disclaimer)
 
-Progress: [█████-----] 50% (Phase 7)
-Overall: [█████████▓] 97% (Project)
+Progress: [██████████] 100% (Phase 7)
+Overall: [██████████] 100% (Project)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 17
+- Total plans completed: 18
 - Average duration: 3.4 min
-- Total execution time: 59 min
+- Total execution time: 63 min
 
 **By Phase:**
 
@@ -34,10 +34,10 @@ Overall: [█████████▓] 97% (Project)
 | 04-belgium-calendar | 3 | 11 min | 3.7 min |
 | 05-dashboard-ui | 3 | 16 min | 5.3 min |
 | 06-excel-calculator | 3 | 8 min | 2.7 min |
-| 07-compliance-documentation | 1 | 4 min | 4 min |
+| 07-compliance-documentation | 2 | 8 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 06-01 (2 min), 06-02 (2 min), 06-03 (4 min), 07-01 (4 min)
+- Last 5 plans: 06-02 (2 min), 06-03 (4 min), 07-01 (4 min), 07-02 (4 min)
 - Trend: Consistent execution pace
 
 *Updated after each plan completion*
@@ -119,10 +119,13 @@ Recent decisions affecting current work:
 | Button+aria-expanded collapsible sections | Accessible, keyboard navigable, consistent with WCAG guidelines | 07-01 |
 | Action-phase organization | "Before Travel", "While Working", "When Filing" helps users understand timing | 07-01 |
 | Legal + plain language pattern | Spanish legal text in blockquote + plain English summary | 07-01 |
+| Session-storage for warning dismiss | Warning returns after browser close to maintain compliance awareness | 07-02 |
+| Tiered warning thresholds | 170/180/183 matching calendar warning pattern | 07-02 |
+| Conservative day counting for warning | Belgium + Travel counted toward threshold | 07-02 |
 
 ### Pending Todos
 
-- Phase 7 Plan 2: Warning banner, global disclaimer (3 requirements remaining)
+None - Project complete.
 
 ### Blockers/Concerns
 
@@ -130,15 +133,15 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-02T12:05:00Z
-Stopped at: Completed 07-01-PLAN.md (Compliance Tab with Treaty Provisions)
+Last session: 2026-02-02T13:02:00Z
+Stopped at: PROJECT COMPLETE
 Resume file: None
 
 ## Key Files Created
 
 | File | Purpose |
 |------|---------|
-| autonomo_dashboard.html | Core IRPF/RETA calculation + expense tracking + scenario cards + edit modal + comparison table + calendar grid with exports + tooltips + responsive layout + Compliance tab |
+| autonomo_dashboard.html | Complete tax calculator with IRPF/RETA calculation, expense tracking, scenario comparison, Belgium calendar, tooltips, responsive layout, and Compliance tab with warning banner and disclaimer |
 | scripts/package.json | Node.js project configuration with ExcelJS dependency |
 | scripts/generate-excel.js | Excel workbook generator with Constanten + Overzicht + 5 scenario sheets (Dutch localized) |
 | autonomo_calculator.xlsx | Generated workbook with Overzicht + Scenarios A-E + Constanten (Dutch labels) |
@@ -159,6 +162,7 @@ Resume file: None
 | .planning/phases/06-excel-calculator/06-02-SUMMARY.md | Plan 06-02 execution summary |
 | .planning/phases/06-excel-calculator/06-03-SUMMARY.md | Plan 06-03 execution summary |
 | .planning/phases/07-compliance-&-documentation.../07-01-SUMMARY.md | Plan 07-01 execution summary |
+| .planning/phases/07-compliance-&-documentation.../07-02-SUMMARY.md | Plan 07-02 execution summary |
 
 ## Phase 1 Complete
 
@@ -257,23 +261,47 @@ Phase 6 (Excel Calculator) delivered:
 - Print layouts and sheet protection (06-03)
 - All XLS-01 through XLS-10 requirements satisfied
 
-## Phase 7 In Progress
+## Phase 7 Complete
 
-Phase 7 (Compliance & Documentation) delivered so far:
+Phase 7 (Compliance & Documentation) delivered:
 - Compliance tab with 5th tab navigation (07-01)
 - CSS styles for collapsible sections, legal text, fiscal tables, tie-breaker steps (07-01)
-- Fiscal constants: DIETAS_LIMITS, TREATY_ARTICLE_4, ARTICLE_9_1_B, FACTURA_REQUIREMENTS (07-01)
-- 7 collapsible sections organized by action phase (07-01)
+- Fiscal constants: DIETAS_LIMITS, TREATY_ARTICLE_4, ARTICLE_9_1_B, FACTURA_REQUIREMENTS, DISCLAIMER (07-01, 07-02)
+- 8 collapsible sections organized by action phase (07-01, 07-02)
 - Treaty tie-breaker 5-step hierarchy with numbered list (07-01)
 - Family presumption Art. 9.1.b with Spanish legal text + plain summary (07-01)
 - Dietas limits table (91.35/48.08 EUR abroad) (07-01)
 - Factura completa requirements (13 fields) + invalid document types (4) (07-01)
 - Electronic payment requirement warning (07-01)
+- 183-day threshold section with entry/exit day warning (07-02)
+- Warning banner at 170/180/183 Belgium days with dismiss functionality (07-02)
+- Global disclaimer footer visible on all tabs (07-02)
 - All source citations (BOE references) (07-01)
+- All COMP-01 through COMP-10 requirements satisfied
 
-## Next Plan
+## PROJECT COMPLETE
 
-**Phase 7 Plan 2: Warning Banner and Disclaimer**
-- Global warning banner triggered by calendar day count >= 170
-- Session-based warning dismissal
-- Global footer disclaimer visible on all tabs
+**Summary:**
+- 7 phases completed
+- 18 plans executed
+- 69 requirements satisfied (59 v1 + 10 v2)
+- Total execution time: ~63 minutes
+
+**Deliverables:**
+1. `autonomo_dashboard.html` - Single-file HTML tax calculator with:
+   - Progressive IRPF calculation with official 2025/2026 rates
+   - RETA as fixed cuota (428.40 EUR/month)
+   - Three-category expense tracking with formula display
+   - 5 preset scenarios (A-E) with comparison table
+   - Belgium presence calendar (Feb-Dec 2026)
+   - 183-day threshold warnings
+   - Treaty compliance documentation
+   - Professional dark theme UI
+   - Responsive mobile layout
+   - Export capabilities (ICS, CSV, clipboard)
+
+2. `autonomo_calculator.xlsx` - Dutch-localized Excel workbook with:
+   - Constants sheet with named ranges
+   - 5 scenario sheets with step-by-step calculations
+   - Overview sheet with cross-sheet comparison
+   - Conditional formatting for key metrics
