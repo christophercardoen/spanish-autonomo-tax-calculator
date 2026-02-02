@@ -67,16 +67,16 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Excel Calculator (XLS)
 
-- [ ] **XLS-01**: Create multi-sheet workbook (Overview + 5 scenario sheets)
-- [ ] **XLS-02**: Overview sheet with all scenarios comparison table
-- [ ] **XLS-03**: Individual sheets per scenario (A, B, C, D, E) with detailed breakdowns
-- [ ] **XLS-04**: All calculations use Excel formulas (NO hardcoded calculated values)
-- [ ] **XLS-05**: Professional styling with color-coded headers and borders
-- [ ] **XLS-06**: Include expense breakdown tables on each sheet
-- [ ] **XLS-07**: Include RETA and IRPF step-by-step calculations
-- [ ] **XLS-08**: Workbook recalculates without errors (#REF!, #DIV/0!, #VALUE!, #NAME?)
-- [ ] **XLS-09**: Currency formatting (EUR #,##0.00 for decimals, EUR #,##0 for whole numbers)
-- [ ] **XLS-10**: Percentage formatting (0.0%) for tax rates
+- [x] **XLS-01**: Create multi-sheet workbook (Overview + 5 scenario sheets)
+- [x] **XLS-02**: Overview sheet with all scenarios comparison table
+- [x] **XLS-03**: Individual sheets per scenario (A, B, C, D, E) with detailed breakdowns
+- [x] **XLS-04**: All calculations use Excel formulas (NO hardcoded calculated values)
+- [x] **XLS-05**: Professional styling with color-coded headers and borders
+- [x] **XLS-06**: Include expense breakdown tables on each sheet
+- [x] **XLS-07**: Include RETA and IRPF step-by-step calculations
+- [x] **XLS-08**: Workbook recalculates without errors (#REF!, #DIV/0!, #VALUE!, #NAME?)
+- [x] **XLS-09**: Currency formatting (EUR #,##0.00 for decimals, EUR #,##0 for whole numbers)
+- [x] **XLS-10**: Percentage formatting (0.0%) for tax rates
 
 ### Compliance & Warnings (COMP)
 
@@ -194,16 +194,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | UI-10 | Phase 5 | Pending |
 | UI-11 | Phase 5 | Pending |
 | UI-12 | Phase 5 | Pending |
-| XLS-01 | Phase 6 | Pending |
-| XLS-02 | Phase 6 | Pending |
-| XLS-03 | Phase 6 | Pending |
-| XLS-04 | Phase 6 | Pending |
-| XLS-05 | Phase 6 | Pending |
-| XLS-06 | Phase 6 | Pending |
-| XLS-07 | Phase 6 | Pending |
-| XLS-08 | Phase 6 | Pending |
-| XLS-09 | Phase 6 | Pending |
-| XLS-10 | Phase 6 | Pending |
+| XLS-01 | Phase 6 | Complete |
+| XLS-02 | Phase 6 | Complete |
+| XLS-03 | Phase 6 | Complete |
+| XLS-04 | Phase 6 | Complete |
+| XLS-05 | Phase 6 | Complete |
+| XLS-06 | Phase 6 | Complete |
+| XLS-07 | Phase 6 | Complete |
+| XLS-08 | Phase 6 | Complete |
+| XLS-09 | Phase 6 | Complete |
+| XLS-10 | Phase 6 | Complete |
 | COMP-01 | Phase 7 | Pending |
 | COMP-02 | Phase 7 | Pending |
 | COMP-03 | Phase 7 | Pending |
