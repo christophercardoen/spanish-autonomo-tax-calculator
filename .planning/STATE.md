@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 7.1 Critical Bug Fixes
+**Current focus:** Phase 7.2 UI/UX Polish
 
 ## Current Position
 
-Phase: 7.1 of 9 (Critical Bug Fixes - INSERTED)
-Plan: 3 of 3 complete
-Status: Phase complete
-Last activity: 2026-02-02 - Completed 7.1-03-PLAN.md (calendar multi-select)
+Phase: 7.2 of 9 (UI/UX Polish)
+Plan: 1 of 4 complete
+Status: In progress
+Last activity: 2026-02-02 - Completed 7.2-01-PLAN.md (English localization & visual polish)
 
-Progress: [██████████] 100% (Phase 7.1)
-Overall: [████████  ] 85% (7.1/9 phases complete)
+Progress: [██░░░░░░░░] 25% (Phase 7.2)
+Overall: [████████░░] 88% (7.2/9 phases in progress)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 21
-- Average duration: 3.4 min
-- Total execution time: 75 min
+- Total plans completed: 22
+- Average duration: 3.3 min
+- Total execution time: 78 min
 
 **By Phase:**
 
@@ -36,9 +36,10 @@ Overall: [████████  ] 85% (7.1/9 phases complete)
 | 06-excel-calculator | 3 | 8 min | 2.7 min |
 | 07-compliance-documentation | 2 | 8 min | 4 min |
 | 07.1-critical-bug-fixes | 3 | 12 min | 4 min |
+| 07.2-ui-ux-polish | 1 | 3 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 07-01 (4 min), 07-02 (4 min), 7.1-01 (4 min), 7.1-02 (4 min), 7.1-03 (4 min)
+- Last 5 plans: 7.1-01 (4 min), 7.1-02 (4 min), 7.1-03 (4 min), 7.2-01 (3 min)
 - Trend: Consistent execution pace
 
 *Updated after each plan completion*
@@ -67,7 +68,7 @@ Recent decisions affecting current work:
 | SCENARIO_PRESETS frozen objects | Prevent accidental mutation of preset values | 03-01 |
 | calculateFullIRPFWithFiscal | Copy of Phase 1 function with fiscal parameter for what-if analysis | 03-01 |
 | Belgium patterns: A/B low, C/D/E high | A/B use 'low' (1K), C/D/E use 'high' (2.5K) per CLAUDE.md requirements | 03-01 |
-| Leefgeld-based sorting | Highest leefgeld appears first with "Highest Leefgeld" badge | 03-01 |
+| Leefgeld-based sorting | Highest leefgeld appears first with "Highest Disposable" badge | 03-01 |
 | Native dialog element over custom modal | HTML5 dialog provides focus trap, backdrop, Esc handling natively | 03-02 |
 | requestAnimationFrame debouncing | Smoother than setTimeout, syncs with browser paint cycle | 03-02 |
 | Split-view modal layout | Inputs left, results right allows instant feedback while editing | 03-02 |
@@ -127,15 +128,18 @@ Recent decisions affecting current work:
 | English expense labels | Full English names with deduction percentage in label for clarity | 7.1-01 |
 | Preserve localStorage IDs | Keep original IDs (huur, gsm) for backwards compatibility | 7.1-01 |
 | Click-to-open tooltip modals | Native dialog element with blur backdrop for touch device support | 7.1-02 |
+| "Disposable Income" terminology | Clearer English term than "Leefgeld" for remaining money after all costs | 7.2-01 |
+| 6-step spacing scale | --spacing-xs to --spacing-2xl (4px to 48px) for consistent spacing | 7.2-01 |
+| 3-tier radius tokens | --radius-sm/md/lg (4px, 8px, 12px) for consistent border radius | 7.2-01 |
+| :focus-visible for accessibility | Only shows focus ring on keyboard navigation, not mouse clicks | 7.2-01 |
 
 ### Pending Todos
 
-**Phase 7.1 (Critical Bug Fixes): COMPLETE**
-- ~~Fix add expense button (not working)~~ DONE (7.1-01)
-- ~~Fix tooltip positioning (centered modal with blur)~~ DONE (7.1-02)
-- ~~Remove all Dutch text (make everything English)~~ DONE (7.1-01)
-- ~~Redesign Belgium cost toggle (pill buttons instead of dots)~~ DONE (7.1-01)
-- ~~Add calendar multi-select (week/month selection)~~ DONE (7.1-03)
+**Phase 7.2 (UI/UX Polish): IN PROGRESS**
+- ~~English localization (Leefgeld -> Disposable Income)~~ DONE (7.2-01)
+- ~~CSS spacing/radius tokens~~ DONE (7.2-01)
+- ~~Focus-visible accessibility~~ DONE (7.2-01)
+- Additional polish tasks (7.2-02 through 7.2-04) pending
 
 **Phase 8 (Enhanced Features):**
 - Auto-detect 100% deductible expenses
@@ -144,19 +148,20 @@ Recent decisions affecting current work:
 
 ### Blockers/Concerns
 
-None - Phase 7.1 complete.
+None - Phase 7.2-01 complete.
 
 ### Roadmap Evolution
 
 - **2026-02-02:** Phase 7.1 inserted after Phase 7 (Critical Bug Fixes) - URGENT user-reported issues
 - **2026-02-02:** Phase 8 added to roadmap (Enhanced Features) - Missing v1 functionality
 - **2026-02-02:** Phase 7.1 completed - All critical bugs fixed
+- **2026-02-02:** Phase 7.2 started - UI/UX polish and generalization
 
 ## Session Continuity
 
-Last session: 2026-02-02T14:15:00Z
-Stopped at: Completed 7.1-03-PLAN.md (Phase 7.1 complete)
-Resume file: None (Phase 8 planning needed)
+Last session: 2026-02-02T19:22:00Z
+Stopped at: Completed 7.2-01-PLAN.md (English localization & visual polish)
+Resume file: .planning/phases/07.2-ui-ux-polish/7.2-02-PLAN.md
 
 ## Key Files Created
 
@@ -187,6 +192,7 @@ Resume file: None (Phase 8 planning needed)
 | .planning/phases/07.1-critical-bug-fixes/7.1-01-SUMMARY.md | Plan 7.1-01 execution summary |
 | .planning/phases/07.1-critical-bug-fixes/7.1-02-SUMMARY.md | Plan 7.1-02 execution summary |
 | .planning/phases/07.1-critical-bug-fixes/7.1-03-SUMMARY.md | Plan 7.1-03 execution summary |
+| .planning/phases/07.2-ui-ux-polish/7.2-01-SUMMARY.md | Plan 7.2-01 execution summary |
 
 ## Phase 1 Complete
 
@@ -316,13 +322,24 @@ Phase 7.1 (Critical Bug Fixes) delivered:
 - Enhanced selected day visual highlighting (7.1-03)
 - All BUG-01 through BUG-05 requirements satisfied
 
+## Phase 7.2 In Progress
+
+Phase 7.2 (UI/UX Polish) progress:
+- Plan 7.2-01 complete: English localization and visual polish
+  - All "Leefgeld" UI text replaced with "Disposable Income"
+  - CSS spacing tokens (xs/sm/md/lg/xl/2xl)
+  - CSS radius tokens (sm/md/lg)
+  - Focus-visible accessibility styles
+  - Enhanced card shadows and hover effects
+  - Button consistency and table hover states
+
 ## PROJECT STATUS
 
 **Summary:**
-- 7.1 phases completed (7 original + 7.1 critical bug fixes)
-- 21 plans executed
-- 74 requirements satisfied (59 v1 + 10 v2 + 5 bug fixes)
-- Total execution time: ~75 minutes
+- 7.2 phases in progress (7 original + 7.1 critical bug fixes + 7.2 polish)
+- 22 plans executed
+- 74+ requirements satisfied (59 v1 + 10 v2 + 5 bug fixes + polish)
+- Total execution time: ~78 minutes
 
 **Deliverables:**
 1. `autonomo_dashboard.html` - Single-file HTML tax calculator with:
@@ -333,7 +350,7 @@ Phase 7.1 (Critical Bug Fixes) delivered:
    - Belgium presence calendar (Feb-Dec 2026) with week/month multi-select
    - 183-day threshold warnings
    - Treaty compliance documentation
-   - Professional dark theme UI
+   - Professional dark theme UI with English-only interface
    - Responsive mobile layout
    - Export capabilities (ICS, CSV, clipboard)
 
