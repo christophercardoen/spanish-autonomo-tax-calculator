@@ -623,110 +623,195 @@
       gap: 0.5rem;
     }
 
-    /* Details tab layout */
-    .details-layout {
+    /* What-If Calculator Layout */
+    .calculator-header {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .calculator-header h2 {
+      margin: 0 0 var(--spacing-xs) 0;
+      color: var(--accent);
+    }
+
+    .calculator-subtitle {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: var(--size-labels);
+    }
+
+    .calculator-layout {
       display: grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 320px 1fr;
       gap: var(--spacing-xl);
       align-items: start;
     }
 
-    .details-sidebar {
+    .calculator-inputs {
       position: sticky;
       top: var(--spacing-md);
+    }
+
+    .input-section {
       background: var(--bg-surface);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--radius-md);
       padding: var(--spacing-md);
-    }
-
-    .details-input-group {
       margin-bottom: var(--spacing-md);
     }
 
-    .details-label {
-      display: block;
-      font-size: var(--size-small);
-      color: var(--text-muted);
-      margin-bottom: var(--spacing-xs);
+    .input-section-title {
+      margin: 0 0 var(--spacing-md) 0;
+      font-size: var(--size-labels);
+      font-weight: 600;
+      color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    .details-input-wrapper {
+    .input-field {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .input-field:last-child {
+      margin-bottom: 0;
+    }
+
+    .input-field label {
+      display: block;
+      font-size: var(--size-small);
+      color: var(--text);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .input-with-euro {
       display: flex;
       align-items: center;
       background: var(--bg);
       border: 1px solid rgba(255,255,255,0.2);
       border-radius: var(--radius-sm);
       overflow: hidden;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .details-currency {
-      padding: var(--spacing-sm);
-      background: rgba(255,255,255,0.05);
-      color: var(--text-muted);
-      font-size: var(--size-small);
-      font-weight: 500;
+    .input-with-euro:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2);
     }
 
-    .details-input {
+    .input-with-euro input {
       flex: 1;
-      width: 100%;
-      padding: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
       background: transparent;
       border: none;
       color: var(--text);
       font-family: var(--font-mono);
       font-size: var(--size-numbers);
       text-align: right;
+      min-width: 0;
     }
 
-    .details-input:focus {
+    .input-with-euro input:focus {
       outline: none;
     }
 
-    .details-input-wrapper:focus-within {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2);
+    .input-unit {
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: rgba(255,255,255,0.05);
+      color: var(--text-muted);
+      font-size: var(--size-small);
+      white-space: nowrap;
     }
 
-    .details-checkbox-label {
+    .input-hint {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+
+    .checkbox-field label {
+      margin-bottom: 0;
+    }
+
+    .checkbox-inline {
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
       cursor: pointer;
-      font-size: var(--size-labels);
     }
 
-    .details-hint {
-      display: block;
-      font-size: var(--size-small);
-      color: var(--text-muted);
-      margin-top: 2px;
-      margin-left: 22px;
+    .checkbox-inline input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
     }
 
-    .details-reset-btn {
-      width: 100%;
-      padding: var(--spacing-sm);
-      margin-top: var(--spacing-sm);
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: var(--radius-sm);
-      color: var(--text-muted);
-      font-size: var(--size-small);
+    /* Advanced Options */
+    .advanced-section {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .advanced-toggle {
+      padding: var(--spacing-md);
       cursor: pointer;
-      transition: all 0.15s ease;
+      font-size: var(--size-small);
+      color: var(--text-muted);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
     }
 
-    .details-reset-btn:hover {
-      border-color: var(--accent);
+    .advanced-toggle::before {
+      content: '>';
+      font-family: var(--font-mono);
+      transition: transform 0.2s ease;
+    }
+
+    .advanced-section[open] .advanced-toggle::before {
+      transform: rotate(90deg);
+    }
+
+    .advanced-toggle:hover {
       color: var(--accent);
     }
 
-    .details-results {
+    .advanced-content {
+      padding: 0 var(--spacing-md) var(--spacing-md);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--spacing-md);
+    }
+
+    .calculator-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    .calculator-actions button {
+      flex: 1;
+    }
+
+    .calculator-results {
       min-height: 400px;
+    }
+
+    /* Mobile responsive for calculator */
+    @media (max-width: 900px) {
+      .calculator-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .calculator-inputs {
+        position: static;
+      }
+
+      .calculator-actions {
+        flex-direction: column;
+      }
     }
 
     /* Results Summary Cards */
@@ -3585,32 +3670,100 @@
           </div>
         </section>
 
-        <!-- DETAILS TAB -->
+        <!-- DETAILS TAB - What-If Calculator -->
         <section class="tab-panel panel-details">
-          <div class="details-layout">
-            <!-- Left: Input Controls -->
-            <div class="details-sidebar">
-              <div class="details-input-group">
-                <label class="details-label" for="monthlyRevenue">Monthly Revenue</label>
-                <div class="details-input-wrapper">
-                  <span class="details-currency">EUR</span>
-                  <input type="number" id="monthlyRevenue" value="6000" min="0" step="100" oninput="recalculateTotals()" class="details-input">
+          <div class="calculator-header">
+            <h2>What-If Calculator</h2>
+            <p class="calculator-subtitle">Adjust any value to see how it affects your net income</p>
+          </div>
+
+          <div class="calculator-layout">
+            <!-- Input Panel -->
+            <div class="calculator-inputs">
+              <!-- Income Section -->
+              <div class="input-section">
+                <h3 class="input-section-title">Income</h3>
+                <div class="input-field">
+                  <label for="monthlyRevenue">Monthly Revenue</label>
+                  <div class="input-with-euro">
+                    <input type="number" id="monthlyRevenue" value="6000" min="0" step="100" oninput="recalculateTotals()">
+                    <span class="input-unit">EUR/mo</span>
+                  </div>
                 </div>
               </div>
 
-              <div class="details-input-group">
-                <label class="details-checkbox-label">
-                  <input type="checkbox" id="hasDescendant" checked onchange="recalculateTotals()">
-                  <span>1 Dependent Child</span>
-                </label>
-                <span class="details-hint">Adds 2,400 EUR to minimo personal</span>
+              <!-- Expenses Section -->
+              <div class="input-section">
+                <h3 class="input-section-title">Monthly Expenses</h3>
+                <div class="input-field">
+                  <label for="calcSpainDeductible">Spain Deductible</label>
+                  <div class="input-with-euro">
+                    <input type="number" id="calcSpainDeductible" value="383" min="0" step="10" oninput="recalculateTotals()">
+                    <span class="input-unit">EUR/mo</span>
+                  </div>
+                  <span class="input-hint">Home office, phone, utilities</span>
+                </div>
+                <div class="input-field">
+                  <label for="calcWorkTravel">Work Travel (Belgium)</label>
+                  <div class="input-with-euro">
+                    <input type="number" id="calcWorkTravel" value="1000" min="0" step="100" oninput="recalculateTotals()">
+                    <span class="input-unit">EUR/mo</span>
+                  </div>
+                  <span class="input-hint">Flights, hotels, transport</span>
+                </div>
+                <div class="input-field">
+                  <label for="calcPrivateCosts">Private Costs</label>
+                  <div class="input-with-euro">
+                    <input type="number" id="calcPrivateCosts" value="1727" min="0" step="50" oninput="recalculateTotals()">
+                    <span class="input-unit">EUR/mo</span>
+                  </div>
+                  <span class="input-hint">Rent, car, insurance (not deductible)</span>
+                </div>
               </div>
 
-              <button class="details-reset-btn" onclick="resetDetailsForm()">Reset</button>
+              <!-- Tax Options Section -->
+              <div class="input-section">
+                <h3 class="input-section-title">Tax Options</h3>
+                <div class="input-field checkbox-field">
+                  <label class="checkbox-inline">
+                    <input type="checkbox" id="hasDescendant" checked onchange="recalculateTotals()">
+                    <span>1 Dependent Child</span>
+                  </label>
+                  <span class="input-hint">Adds 2,400 EUR minimo</span>
+                </div>
+              </div>
+
+              <!-- Advanced Options (Collapsible) -->
+              <details class="advanced-section">
+                <summary class="advanced-toggle">Advanced Options</summary>
+                <div class="advanced-content">
+                  <div class="input-field">
+                    <label for="calcRetaMonthly">RETA (Social Security)</label>
+                    <div class="input-with-euro">
+                      <input type="number" id="calcRetaMonthly" value="428.40" min="0" step="10" oninput="recalculateTotals()">
+                      <span class="input-unit">EUR/mo</span>
+                    </div>
+                    <span class="input-hint">Fixed from registration</span>
+                  </div>
+                  <div class="input-field">
+                    <label for="calcMinimoPersonal">Minimo Personal</label>
+                    <div class="input-with-euro">
+                      <input type="number" id="calcMinimoPersonal" value="5550" min="0" step="100" oninput="recalculateTotals()">
+                      <span class="input-unit">EUR/yr</span>
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <!-- Action Buttons -->
+              <div class="calculator-actions">
+                <button class="secondary-btn" onclick="resetDetailsForm()">Reset to Defaults</button>
+                <button class="primary-btn" onclick="saveAsScenario()">Save as Scenario</button>
+              </div>
             </div>
 
-            <!-- Right: Results -->
-            <div class="details-results" id="results">
+            <!-- Results Panel -->
+            <div class="calculator-results" id="results">
               <!-- Populated by recalculateTotals() -->
             </div>
           </div>
@@ -6052,22 +6205,126 @@ Generated by Autonomo Tax Calculator`;
     }
 
     /**
+     * Reset the What-If Calculator to default values
+     */
+    function resetDetailsForm() {
+      const defaults = {
+        monthlyRevenue: 6000,
+        calcSpainDeductible: 383,
+        calcWorkTravel: 1000,
+        calcPrivateCosts: 1727,
+        calcRetaMonthly: 428.40,
+        calcMinimoPersonal: 5550,
+        hasDescendant: true
+      };
+
+      Object.entries(defaults).forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (el.type === 'checkbox') {
+            el.checked = value;
+          } else {
+            el.value = value;
+          }
+        }
+      });
+
+      recalculateTotals();
+    }
+
+    /**
+     * Save current What-If Calculator values as a new scenario
+     */
+    function saveAsScenario() {
+      const monthlyRevenue = parseFloat(document.getElementById('monthlyRevenue')?.value) || 0;
+      const spainDeductible = parseFloat(document.getElementById('calcSpainDeductible')?.value) || 0;
+      const workTravel = parseFloat(document.getElementById('calcWorkTravel')?.value) || 0;
+      const privateCosts = parseFloat(document.getElementById('calcPrivateCosts')?.value) || 0;
+      const hasDescendant = document.getElementById('hasDescendant')?.checked ?? true;
+
+      // Prompt for scenario name
+      const name = prompt('Enter a name for this scenario:', `Custom (${formatEUR(monthlyRevenue)}/mo)`);
+      if (!name) return;
+
+      // Create new scenario
+      const newScenario = {
+        id: crypto.randomUUID(),
+        name: name,
+        monthlyRevenue: monthlyRevenue,
+        monthlyExpenses: spainDeductible,
+        workTravelCost: workTravel,
+        hasDescendant: hasDescendant,
+        isCustom: true
+      };
+
+      // Add to scenario state
+      scenarioState.scenarios[newScenario.id] = newScenario;
+      scenarioState.customOrder.push(newScenario.id);
+      saveScenarioState();
+
+      // Re-render scenarios
+      renderScenarioCards();
+      renderComparisonTable();
+
+      // Notify user
+      alert(`Scenario "${name}" saved! Switch to the Scenarios tab to view it.`);
+    }
+
+    /**
      * Recalculate totals and update IRPF results
-     * KEY INTEGRATION: Expense changes trigger full IRPF recalculation
+     * Uses What-If Calculator inputs if available, falls back to expense data
      */
     function recalculateTotals() {
-      const totals = getExpenseTotals();
-      const monthlyRevenue = parseFloat(document.getElementById('monthlyRevenue').value) || 0;
-      const hasDescendant = document.getElementById('hasDescendant').checked;
+      // Get inputs - use calculator fields if they exist, otherwise use expense totals
+      const monthlyRevenue = parseFloat(document.getElementById('monthlyRevenue')?.value) || 0;
+      const hasDescendant = document.getElementById('hasDescendant')?.checked ?? true;
 
-      // totalDeductible = Spain + Belgium (private is not deductible)
-      const totalDeductible = totals.totalDeductible.monthly;
+      // Calculator inputs (What-If mode)
+      const calcSpainEl = document.getElementById('calcSpainDeductible');
+      const calcTravelEl = document.getElementById('calcWorkTravel');
+      const calcPrivateEl = document.getElementById('calcPrivateCosts');
+      const calcRetaEl = document.getElementById('calcRetaMonthly');
+      const calcMinimoEl = document.getElementById('calcMinimoPersonal');
 
-      // Calculate IRPF with expense totals
-      const r = calculateFullIRPF(monthlyRevenue, totalDeductible, hasDescendant);
+      let spainDeductible, workTravel, privateCostsMonthly, retaMonthly, minimoPersonal;
 
-      // Get private costs from expense data (dynamic, not fixed)
-      const privateCostsMonthly = totals.private.monthly;
+      if (calcSpainEl && calcTravelEl && calcPrivateEl) {
+        // Use calculator inputs
+        spainDeductible = parseFloat(calcSpainEl.value) || 0;
+        workTravel = parseFloat(calcTravelEl.value) || 0;
+        privateCostsMonthly = parseFloat(calcPrivateEl.value) || 0;
+        retaMonthly = calcRetaEl ? parseFloat(calcRetaEl.value) || FISCAL_2025.RETA_MONTHLY : FISCAL_2025.RETA_MONTHLY;
+        minimoPersonal = calcMinimoEl ? parseFloat(calcMinimoEl.value) || FISCAL_2025.MINIMO_PERSONAL : FISCAL_2025.MINIMO_PERSONAL;
+      } else {
+        // Fallback to expense data totals
+        const totals = getExpenseTotals();
+        spainDeductible = totals.spainDeductible.monthly;
+        workTravel = totals.workTravel.monthly;
+        privateCostsMonthly = totals.private.monthly;
+        retaMonthly = FISCAL_2025.RETA_MONTHLY;
+        minimoPersonal = FISCAL_2025.MINIMO_PERSONAL;
+      }
+
+      const totalDeductible = spainDeductible + workTravel;
+
+      // Create fiscal config with possible overrides
+      const fiscalConfig = {
+        ...FISCAL_2025,
+        RETA_MONTHLY: retaMonthly,
+        RETA_ANNUAL: retaMonthly * 12,
+        MINIMO_PERSONAL: minimoPersonal
+      };
+
+      // Calculate IRPF with custom fiscal config
+      const r = calculateFullIRPFWithConfig(monthlyRevenue, totalDeductible, hasDescendant, fiscalConfig);
+
+      // Override with our calculated values for display
+      const totals = {
+        spainDeductible: { monthly: spainDeductible, annual: spainDeductible * 12 },
+        workTravel: { monthly: workTravel, annual: workTravel * 12 },
+        private: { monthly: privateCostsMonthly, annual: privateCostsMonthly * 12 }
+      };
+
       const leefgeld = r.netMonthly - privateCostsMonthly;
 
       const html = `
@@ -6330,6 +6587,61 @@ Generated by Autonomo Tax Calculator`;
 
         // Private costs (for reference)
         privateCostsMonthly: FISCAL_2025.PRIVATE_COSTS_MONTHLY
+      };
+    }
+
+    /**
+     * Calculate IRPF with custom fiscal configuration
+     * Allows overriding RETA, minimos for what-if analysis
+     *
+     * @param {number} monthlyRevenue - Gross monthly revenue
+     * @param {number} monthlyDeductibleExpenses - Monthly deductible expenses
+     * @param {boolean} hasDescendant - Has dependent child
+     * @param {object} fiscal - Custom fiscal config (merged with FISCAL_2025)
+     * @returns {object} - Complete calculation breakdown
+     */
+    function calculateFullIRPFWithConfig(monthlyRevenue, monthlyDeductibleExpenses = 0, hasDescendant = true, fiscal = FISCAL_2025) {
+      const annualRevenue = monthlyRevenue * 12;
+      const annualExpenses = monthlyDeductibleExpenses * 12;
+
+      const retaAnnual = fiscal.RETA_ANNUAL || FISCAL_2025.RETA_ANNUAL;
+      const retaMonthly = fiscal.RETA_MONTHLY || FISCAL_2025.RETA_MONTHLY;
+      const totalDeductible = annualExpenses + retaAnnual;
+
+      const rendimientoNetoPrevio = annualRevenue - totalDeductible;
+      const gastosDificil = calculateGastosDificil(rendimientoNetoPrevio);
+      const rendimientoNeto = rendimientoNetoPrevio - gastosDificil;
+      const baseLiquidable = Math.max(0, rendimientoNeto);
+
+      const minimoPersonal = fiscal.MINIMO_PERSONAL || FISCAL_2025.MINIMO_PERSONAL;
+      const minimoDescendientes = hasDescendant ? (fiscal.MINIMO_DESCENDIENTES_PRIMERO || FISCAL_2025.MINIMO_DESCENDIENTES_PRIMERO) : 0;
+      const minimoTotal = minimoPersonal + minimoDescendientes;
+
+      const cuotaIntegra = calculateCuotaIntegra(baseLiquidable, minimoTotal);
+      const effectiveRate = rendimientoNeto > 0 ? (cuotaIntegra / rendimientoNeto) : 0;
+
+      const netAnnual = annualRevenue - totalDeductible - gastosDificil - cuotaIntegra;
+      const netMonthly = netAnnual / 12;
+
+      return {
+        monthlyRevenue,
+        annualRevenue,
+        monthlyExpenses: monthlyDeductibleExpenses,
+        annualExpenses,
+        retaMonthly,
+        retaAnnual,
+        totalDeductible,
+        rendimientoNetoPrevio,
+        gastosDificil,
+        rendimientoNeto,
+        baseLiquidable,
+        minimoPersonal,
+        minimoDescendientes,
+        minimoTotal,
+        cuotaIntegra,
+        effectiveRate,
+        netAnnual,
+        netMonthly
       };
     }
 
