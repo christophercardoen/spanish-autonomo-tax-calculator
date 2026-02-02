@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2026-01-29)
 ## Current Position
 
 Phase: 7.1 of 9 (Critical Bug Fixes - INSERTED)
-Plan: 1 of 3 complete
-Status: In progress
-Last activity: 2026-02-02 - Completed 7.1-01-PLAN.md (expense fixes)
+Plan: 3 of 3 complete
+Status: Phase complete
+Last activity: 2026-02-02 - Completed 7.1-03-PLAN.md (calendar multi-select)
 
-Progress: [███       ] 33% (Phase 7.1)
-Overall: [███████▌  ] 78% (7/9 phases complete, 7.1 in progress)
+Progress: [██████████] 100% (Phase 7.1)
+Overall: [████████  ] 85% (7.1/9 phases complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 18
+- Total plans completed: 21
 - Average duration: 3.4 min
-- Total execution time: 63 min
+- Total execution time: 75 min
 
 **By Phase:**
 
@@ -35,9 +35,10 @@ Overall: [███████▌  ] 78% (7/9 phases complete, 7.1 in progress)
 | 05-dashboard-ui | 3 | 16 min | 5.3 min |
 | 06-excel-calculator | 3 | 8 min | 2.7 min |
 | 07-compliance-documentation | 2 | 8 min | 4 min |
+| 07.1-critical-bug-fixes | 3 | 12 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 06-02 (2 min), 06-03 (4 min), 07-01 (4 min), 07-02 (4 min)
+- Last 5 plans: 07-01 (4 min), 07-02 (4 min), 7.1-01 (4 min), 7.1-02 (4 min), 7.1-03 (4 min)
 - Trend: Consistent execution pace
 
 *Updated after each plan completion*
@@ -128,39 +129,39 @@ Recent decisions affecting current work:
 
 ### Pending Todos
 
-**Phase 7.1 (Critical Bug Fixes):**
+**Phase 7.1 (Critical Bug Fixes): COMPLETE**
 - ~~Fix add expense button (not working)~~ DONE (7.1-01)
-- Fix tooltip positioning (centered modal with blur)
+- ~~Fix tooltip positioning (centered modal with blur)~~ DONE (7.1-02)
 - ~~Remove all Dutch text (make everything English)~~ DONE (7.1-01)
 - ~~Redesign Belgium cost toggle (pill buttons instead of dots)~~ DONE (7.1-01)
-- Add calendar multi-select (shift-click range working, need week/month selection)
+- ~~Add calendar multi-select (week/month selection)~~ DONE (7.1-03)
 
 **Phase 8 (Enhanced Features):**
 - Auto-detect 100% deductible expenses
 - Add income tracking tab with client earnings
 - Add official Agencia Tributaria source links
-- Enhanced calendar multi-select with visual feedback
 
 ### Blockers/Concerns
 
-**BLOCKER:** Phase 7.1 must complete before v1.0 milestone completion. Critical bugs prevent user from using core features (add expense broken, tooltips unreadable).
+None - Phase 7.1 complete.
 
 ### Roadmap Evolution
 
 - **2026-02-02:** Phase 7.1 inserted after Phase 7 (Critical Bug Fixes) - URGENT user-reported issues
 - **2026-02-02:** Phase 8 added to roadmap (Enhanced Features) - Missing v1 functionality
+- **2026-02-02:** Phase 7.1 completed - All critical bugs fixed
 
 ## Session Continuity
 
-Last session: 2026-02-02T14:14:00Z
-Stopped at: Completed 7.1-01-PLAN.md
-Resume file: .planning/phases/07.1-critical-bug-fixes/7.1-02-PLAN.md
+Last session: 2026-02-02T14:15:00Z
+Stopped at: Completed 7.1-03-PLAN.md (Phase 7.1 complete)
+Resume file: None (Phase 8 planning needed)
 
 ## Key Files Created
 
 | File | Purpose |
 |------|---------|
-| autonomo_dashboard.html | Complete tax calculator with IRPF/RETA calculation, expense tracking, scenario comparison, Belgium calendar, tooltips, responsive layout, and Compliance tab with warning banner and disclaimer |
+| autonomo_dashboard.html | Complete tax calculator with IRPF/RETA calculation, expense tracking, scenario comparison, Belgium calendar with multi-select, tooltips, responsive layout, and Compliance tab |
 | scripts/package.json | Node.js project configuration with ExcelJS dependency |
 | scripts/generate-excel.js | Excel workbook generator with Constanten + Overzicht + 5 scenario sheets (Dutch localized) |
 | autonomo_calculator.xlsx | Generated workbook with Overzicht + Scenarios A-E + Constanten (Dutch labels) |
@@ -183,6 +184,8 @@ Resume file: .planning/phases/07.1-critical-bug-fixes/7.1-02-PLAN.md
 | .planning/phases/07-compliance-&-documentation.../07-01-SUMMARY.md | Plan 07-01 execution summary |
 | .planning/phases/07-compliance-&-documentation.../07-02-SUMMARY.md | Plan 07-02 execution summary |
 | .planning/phases/07.1-critical-bug-fixes/7.1-01-SUMMARY.md | Plan 7.1-01 execution summary |
+| .planning/phases/07.1-critical-bug-fixes/7.1-02-SUMMARY.md | Plan 7.1-02 execution summary |
+| .planning/phases/07.1-critical-bug-fixes/7.1-03-SUMMARY.md | Plan 7.1-03 execution summary |
 
 ## Phase 1 Complete
 
@@ -299,13 +302,26 @@ Phase 7 (Compliance & Documentation) delivered:
 - All source citations (BOE references) (07-01)
 - All COMP-01 through COMP-10 requirements satisfied
 
-## PROJECT COMPLETE
+## Phase 7.1 Complete
+
+Phase 7.1 (Critical Bug Fixes) delivered:
+- Fixed add expense button functionality (7.1-01)
+- Fixed tooltip positioning with centered modal and backdrop blur (7.1-02)
+- Removed all Dutch text, made UI fully English (7.1-01)
+- Redesigned Belgium cost toggle with pill buttons (7.1-01)
+- Added calendar week selection with "W" buttons (7.1-03)
+- Added calendar month "Select All" button (7.1-03)
+- Added selection indicator with count and clear functionality (7.1-03)
+- Enhanced selected day visual highlighting (7.1-03)
+- All BUG-01 through BUG-05 requirements satisfied
+
+## PROJECT STATUS
 
 **Summary:**
-- 7 phases completed
-- 18 plans executed
-- 69 requirements satisfied (59 v1 + 10 v2)
-- Total execution time: ~63 minutes
+- 7.1 phases completed (7 original + 7.1 critical bug fixes)
+- 21 plans executed
+- 74 requirements satisfied (59 v1 + 10 v2 + 5 bug fixes)
+- Total execution time: ~75 minutes
 
 **Deliverables:**
 1. `autonomo_dashboard.html` - Single-file HTML tax calculator with:
@@ -313,7 +329,7 @@ Phase 7 (Compliance & Documentation) delivered:
    - RETA as fixed cuota (428.40 EUR/month)
    - Three-category expense tracking with formula display
    - 5 preset scenarios (A-E) with comparison table
-   - Belgium presence calendar (Feb-Dec 2026)
+   - Belgium presence calendar (Feb-Dec 2026) with week/month multi-select
    - 183-day threshold warnings
    - Treaty compliance documentation
    - Professional dark theme UI
