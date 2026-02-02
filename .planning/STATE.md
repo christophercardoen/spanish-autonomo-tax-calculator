@@ -126,6 +126,7 @@ Recent decisions affecting current work:
 | Pill toggle pattern | Two-button pill design for Belgium cost selector, better UX than checkbox slider | 7.1-01 |
 | English expense labels | Full English names with deduction percentage in label for clarity | 7.1-01 |
 | Preserve localStorage IDs | Keep original IDs (huur, gsm) for backwards compatibility | 7.1-01 |
+| Click-to-open tooltip modals | Native dialog element with blur backdrop for touch device support | 7.1-02 |
 
 ### Pending Todos
 
