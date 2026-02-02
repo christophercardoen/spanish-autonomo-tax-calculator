@@ -251,20 +251,31 @@
     }
 
     /* ===========================================
-       PHASE 7: COMPLIANCE TAB STYLES
+       PHASE 7: COMPLIANCE TAB STYLES - COMPACT
        =========================================== */
 
-    .compliance-section {
-      margin-bottom: var(--spacing-md);
-      background: var(--bg-surface);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      transition: border-color 0.2s ease;
+    /* Compliance panel - reduced padding */
+    .panel-compliance {
+      padding: var(--spacing-md);
     }
 
-    .compliance-section:hover {
-      border-color: rgba(255,255,255,0.15);
+    .panel-compliance h2 {
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    /* Compliance sections - minimal spacing */
+    .compliance-section {
+      margin-bottom: 4px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .compliance-section:last-child {
+      margin-bottom: 0;
     }
 
     .compliance-section .section-header {
@@ -272,30 +283,30 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: var(--spacing-md) var(--spacing-lg);
-      background: transparent;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.02);
       border: none;
       color: var(--text);
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 0.875rem;
+      font-weight: 500;
       text-align: left;
       transition: background 0.15s ease;
     }
 
     .compliance-section .section-header:hover {
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.05);
     }
 
     .compliance-section .section-header[aria-expanded="true"] {
-      background: rgba(74, 222, 128, 0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(74, 222, 128, 0.08);
     }
 
     .compliance-section .section-icon {
-      font-size: 1rem;
-      transition: transform 0.2s ease;
+      font-size: 0.7rem;
+      transition: transform 0.15s ease;
       color: var(--text-muted);
+      flex-shrink: 0;
     }
 
     .compliance-section .section-header[aria-expanded="true"] .section-icon {
@@ -303,92 +314,111 @@
       color: var(--accent);
     }
 
+    /* Compact content area */
     .compliance-section .section-content {
-      padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
-      animation: slideDown 0.2s ease;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      padding: 10px 12px 12px;
+      background: rgba(0,0,0,0.15);
+      font-size: 0.85rem;
+      line-height: 1.5;
     }
 
     .compliance-section .section-content[hidden] {
       display: none;
     }
 
+    /* Legal text - compact quote style */
     .legal-text {
-      background: rgba(255,255,255,0.03);
-      border-left: 3px solid var(--accent);
-      padding: var(--spacing-md) var(--spacing-lg);
-      margin: 0 0 var(--spacing-md) 0;
+      background: rgba(255,255,255,0.02);
+      border-left: 2px solid var(--accent);
+      padding: 8px 12px;
+      margin: 0 0 8px 0;
       font-style: italic;
-      font-size: var(--size-small);
-      line-height: 1.7;
+      font-size: 0.8rem;
+      line-height: 1.5;
       color: var(--text-muted);
     }
 
+    /* Plain summary - tighter */
     .plain-summary {
-      font-size: var(--size-body);
-      line-height: 1.7;
+      font-size: 0.85rem;
+      line-height: 1.5;
       color: var(--text);
-      padding: var(--spacing-sm) 0;
+      margin: 0 0 8px 0;
+      padding: 0;
+    }
+
+    .plain-summary:last-child {
+      margin-bottom: 0;
     }
 
     .plain-summary strong {
       color: var(--accent);
     }
 
-    .compliance-grid {
-      display: grid;
-      gap: var(--spacing-md);
+    /* Two-column layout for compliance content on wide screens */
+    .compliance-columns {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
     }
 
+    @media (min-width: 900px) {
+      .compliance-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+      }
+    }
+
+    .compliance-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* Action phase grouping - minimal headers */
     .action-phase {
-      margin-bottom: var(--spacing-xl);
+      margin-bottom: 2px;
     }
 
     .action-phase h3 {
-      font-size: 1rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      margin: 0 0 var(--spacing-md) 0;
-      padding-bottom: var(--spacing-sm);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin: 0 0 4px 0;
+      padding: 4px 8px;
+      background: rgba(255,255,255,0.02);
+      border-radius: 4px;
     }
 
-    /* Compliance panel padding */
-    .panel-compliance {
-      padding: var(--spacing-lg);
+    .compliance-grid {
+      display: grid;
+      gap: 8px;
     }
 
-    .panel-compliance h2 {
-      margin-top: 0;
-    }
-
+    /* Compact fiscal table */
     .fiscal-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 1rem 0;
-      font-size: 0.9rem;
+      margin: 6px 0;
+      font-size: 0.8rem;
     }
 
     .fiscal-table th,
     .fiscal-table td {
-      padding: 0.75rem;
+      padding: 6px 8px;
       text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .fiscal-table th {
       color: var(--text-muted);
       font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     .fiscal-table td.highlight {
@@ -400,14 +430,17 @@
       background: rgba(255,255,255,0.03);
     }
 
+    /* Source citation - minimal */
     .panel-compliance .source-citation {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
-      margin-top: 0.5rem;
+      margin-top: 6px;
       font-style: normal;
+      opacity: 0.7;
     }
 
+    /* Requirements list - compact */
     .requirements-list {
       list-style: none;
       padding: 0;
@@ -415,10 +448,12 @@
     }
 
     .requirements-list li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
       display: flex;
-      gap: 0.5rem;
+      gap: 4px;
+      font-size: 0.75rem;
+      line-height: 1.3;
     }
 
     .requirements-list li:last-child {
@@ -427,20 +462,22 @@
 
     .requirements-list .field-name {
       color: var(--accent);
+      flex-shrink: 0;
       font-weight: 500;
-      min-width: 180px;
+      min-width: 120px;
     }
 
+    /* Invalid list - compact */
     .invalid-list {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     .invalid-list h5 {
       color: var(--negative);
-      margin: 0 0 0.75rem 0;
-      font-size: 0.9rem;
+      margin: 0 0 6px 0;
+      font-size: 0.8rem;
     }
 
     .invalid-list li {
@@ -452,29 +489,34 @@
       font-weight: 500;
     }
 
+    /* Tie-breaker steps - ultra-compact numbered list */
     .tie-breaker-steps {
       list-style: none;
       padding: 0;
+      margin: 0;
       counter-reset: step;
     }
 
     .tie-breaker-steps li {
-      padding: 1rem;
-      margin-bottom: 0.5rem;
-      background: rgba(255,255,255,0.03);
-      border-radius: 4px;
+      padding: 4px 4px 4px 24px;
+      margin-bottom: 2px;
       counter-increment: step;
       position: relative;
-      padding-left: 3rem;
+      font-size: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .tie-breaker-steps li:last-child {
+      margin-bottom: 0;
     }
 
     .tie-breaker-steps li::before {
       content: counter(step);
       position: absolute;
-      left: 1rem;
-      top: 1rem;
-      width: 1.5rem;
-      height: 1.5rem;
+      left: 0;
+      top: 4px;
+      width: 16px;
+      height: 16px;
       background: var(--accent);
       color: var(--bg);
       border-radius: 50%;
@@ -482,39 +524,65 @@
       align-items: center;
       justify-content: center;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.65rem;
     }
 
     .tie-breaker-steps .step-name {
       font-weight: 600;
       color: var(--text);
-      display: block;
-      margin-bottom: 0.5rem;
+      display: inline;
+      font-size: 0.75rem;
     }
 
-    .tie-breaker-steps .step-legal {
-      font-style: italic;
+    .tie-breaker-steps .step-name::after {
+      content: " - ";
       color: var(--text-muted);
-      font-size: 0.85rem;
-      display: block;
-      margin-bottom: 0.5rem;
     }
 
     .tie-breaker-steps .step-plain {
-      font-size: 0.9rem;
-      line-height: 1.5;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: inline;
     }
 
+    /* Payment warning - compact */
     .payment-warning {
       background: rgba(248, 113, 113, 0.1);
-      border-left: 3px solid var(--negative);
-      padding: 1rem;
-      margin-top: 1rem;
+      border-left: 2px solid var(--negative);
+      padding: 8px 10px;
+      margin-top: 8px;
       border-radius: 0 4px 4px 0;
+      font-size: 0.8rem;
     }
 
     .payment-warning strong {
       color: var(--negative);
+    }
+
+    .payment-warning p {
+      margin: 4px 0 0 0;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Entry/exit warning - similar to payment warning */
+    .entry-exit-warning {
+      background: rgba(251, 146, 60, 0.1);
+      border-left: 2px solid var(--warning);
+      padding: 8px 10px;
+      margin-top: 8px;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.8rem;
+    }
+
+    .entry-exit-warning strong {
+      color: var(--warning);
+    }
+
+    .entry-exit-warning p {
+      margin: 4px 0 0 0;
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
 
     /* Compliance Warning Banner (COMP-01) */
@@ -7663,7 +7731,7 @@ Generated by Autonomo Tax Calculator`;
 
     /**
      * Render the Compliance tab content with collapsible sections
-     * Content organized by action: Before Travel, While Working, When Filing
+     * Two-column layout: Left = Working requirements, Right = Tax residence rules
      */
     function renderComplianceContent() {
       const panel = document.getElementById('compliancePanel');
@@ -7672,209 +7740,116 @@ Generated by Autonomo Tax Calculator`;
       panel.innerHTML = `
         <h2>Compliance Information</h2>
 
-        <!-- SECTION 1: Before You Travel -->
-        <div class="action-phase">
-          <h3>Before You Travel</h3>
-
-          <div class="compliance-section">
-            <button class="section-header" aria-expanded="false" aria-controls="content-treaty-overview">
-              <span>Spain-Belgium Tax Treaty Overview</span>
-              <span class="section-icon">&#9654;</span>
-            </button>
-            <div class="section-content" id="content-treaty-overview" hidden>
-              <p class="plain-summary">
-                Spain and Belgium have a tax treaty (BOE-A-2003-13375) to prevent double taxation.
-                If both countries claim you as a tax resident, the treaty provides "tie-breaker" rules
-                to determine which country has primary taxation rights.
-              </p>
-              <cite class="source-citation">${TREATY_ARTICLE_4.source}</cite>
-            </div>
-          </div>
-        </div>
-
-        <!-- SECTION 2: While Working in Belgium -->
-        <div class="action-phase">
-          <h3>While Working in Belgium</h3>
-
-          <div class="compliance-section">
-            <button class="section-header" aria-expanded="false" aria-controls="content-dietas">
-              <span>Dietas Limits (Meal Allowances)</span>
-              <span class="section-icon">&#9654;</span>
-            </button>
-            <div class="section-content" id="content-dietas" hidden>
-              <p class="plain-summary">
-                Spanish tax law allows deduction of meal expenses ("dietas") up to fixed daily limits
-                when working in a different municipality from your residence. Higher limits apply abroad.
-              </p>
-              <table class="fiscal-table">
-                <thead>
-                  <tr>
-                    <th>Location</th>
-                    <th>With Overnight</th>
-                    <th>Without Overnight</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Spain</td>
-                    <td>${formatEUR(DIETAS_LIMITS.spain.withOvernight)}/day</td>
-                    <td>${formatEUR(DIETAS_LIMITS.spain.withoutOvernight)}/day</td>
-                  </tr>
-                  <tr>
-                    <td>Belgium (Abroad)</td>
-                    <td class="highlight">${formatEUR(DIETAS_LIMITS.abroad.withOvernight)}/day</td>
-                    <td>${formatEUR(DIETAS_LIMITS.abroad.withoutOvernight)}/day</td>
-                  </tr>
-                </tbody>
-              </table>
-              <cite class="source-citation">${DIETAS_LIMITS.source}</cite>
-            </div>
-          </div>
-
-          <div class="compliance-section">
-            <button class="section-header" aria-expanded="false" aria-controls="content-factura">
-              <span>Factura Completa Requirements</span>
-              <span class="section-icon">&#9654;</span>
-            </button>
-            <div class="section-content" id="content-factura" hidden>
-              <p class="plain-summary">
-                <strong>To deduct an expense, you need a "factura completa" (complete invoice)</strong>,
-                not just a ticket or receipt. The invoice must include both the supplier's AND your fiscal data.
-              </p>
-              <ul class="requirements-list">
-                ${FACTURA_REQUIREMENTS.required.map(r => `
-                  <li>
-                    <span class="field-name">${r.field}</span>
-                    <span class="field-desc">${r.description}</span>
-                  </li>
-                `).join('')}
-              </ul>
-              <div class="invalid-list">
-                <h5>NOT Valid for Deduction:</h5>
-                <ul class="requirements-list">
-                  ${FACTURA_REQUIREMENTS.notValid.map(r => `
-                    <li>
-                      <span class="invalid-type">${r.type}</span>
-                      <span class="field-desc">- ${r.reason}</span>
-                    </li>
-                  `).join('')}
-                </ul>
+        <div class="compliance-columns">
+          <!-- LEFT COLUMN: Working in Belgium -->
+          <div class="compliance-col">
+            <div class="action-phase">
+              <h3>While Working in Belgium</h3>
+              <div class="compliance-section">
+                <button class="section-header" aria-expanded="false" aria-controls="content-dietas">
+                  <span>Dietas Limits</span>
+                  <span class="section-icon">&#9654;</span>
+                </button>
+                <div class="section-content" id="content-dietas" hidden>
+                  <table class="fiscal-table">
+                    <thead><tr><th>Location</th><th>Overnight</th><th>Day only</th></tr></thead>
+                    <tbody>
+                      <tr><td>Spain</td><td>${formatEUR(DIETAS_LIMITS.spain.withOvernight)}</td><td>${formatEUR(DIETAS_LIMITS.spain.withoutOvernight)}</td></tr>
+                      <tr><td>Belgium</td><td class="highlight">${formatEUR(DIETAS_LIMITS.abroad.withOvernight)}</td><td>${formatEUR(DIETAS_LIMITS.abroad.withoutOvernight)}</td></tr>
+                    </tbody>
+                  </table>
+                  <cite class="source-citation">${DIETAS_LIMITS.source}</cite>
+                </div>
               </div>
-              <cite class="source-citation">${FACTURA_REQUIREMENTS.source}</cite>
-            </div>
-          </div>
-
-          <div class="compliance-section">
-            <button class="section-header" aria-expanded="false" aria-controls="content-payment">
-              <span>Electronic Payment Requirement</span>
-              <span class="section-icon">&#9654;</span>
-            </button>
-            <div class="section-content" id="content-payment" hidden>
-              <p class="plain-summary">
-                Since 2018, meal/maintenance expenses (dietas) must be paid via electronic means to be deductible.
-              </p>
-              <div class="payment-warning">
-                <strong>Cash payments for dietas are NOT deductible.</strong>
-                <p>Acceptable payment methods: bank card, bank transfer, Bizum, or other traceable electronic payment.</p>
+              <div class="compliance-section">
+                <button class="section-header" aria-expanded="false" aria-controls="content-factura">
+                  <span>Factura Completa</span>
+                  <span class="section-icon">&#9654;</span>
+                </button>
+                <div class="section-content" id="content-factura" hidden>
+                  <p class="plain-summary"><strong>Required for deduction:</strong> complete invoice (not just receipt)</p>
+                  <ul class="requirements-list">
+                    ${FACTURA_REQUIREMENTS.required.map(r => `<li><span class="field-name">${r.field}</span><span class="field-desc">${r.description}</span></li>`).join('')}
+                  </ul>
+                  <div class="invalid-list">
+                    <h5>NOT Valid:</h5>
+                    <ul class="requirements-list">
+                      ${FACTURA_REQUIREMENTS.notValid.map(r => `<li><span class="invalid-type">${r.type}</span> - ${r.reason}</li>`).join('')}
+                    </ul>
+                  </div>
+                  <cite class="source-citation">${FACTURA_REQUIREMENTS.source}</cite>
+                </div>
               </div>
-              <cite class="source-citation">Ley 6/2017 (AEAT)</cite>
-            </div>
-          </div>
-        </div>
-
-        <!-- SECTION 3: When Filing Taxes -->
-        <div class="action-phase">
-          <h3>When Filing Taxes</h3>
-
-          <div class="compliance-section">
-            <button class="section-header" aria-expanded="false" aria-controls="content-tiebreaker">
-              <span>Treaty Tie-Breaker Rules (Article 4)</span>
-              <span class="section-icon">&#9654;</span>
-            </button>
-            <div class="section-content" id="content-tiebreaker" hidden>
-              <p class="plain-summary">
-                When both Spain and Belgium claim you as a tax resident, the treaty resolves the conflict
-                using a 5-step hierarchy. <strong>The first criterion that produces a clear answer determines your residence.</strong>
-              </p>
-              <ol class="tie-breaker-steps">
-                ${TREATY_ARTICLE_4.steps.map(s => `
-                  <li>
-                    <span class="step-name">${s.name}</span>
-                    <span class="step-legal">"${s.legal}"</span>
-                    <span class="step-plain">${s.plain}</span>
-                  </li>
-                `).join('')}
-              </ol>
-              <cite class="source-citation">${TREATY_ARTICLE_4.source}</cite>
-            </div>
-          </div>
-
-          <div class="compliance-section">
-            <button class="section-header" aria-expanded="false" aria-controls="content-centro">
-              <span>Centro de Intereses Vitales (Center of Vital Interests)</span>
-              <span class="section-icon">&#9654;</span>
-            </button>
-            <div class="section-content" id="content-centro" hidden>
-              <p class="plain-summary">
-                The "center of vital interests" considers BOTH personal ties (family, social connections)
-                AND economic ties (work, assets). Per OECD Commentary, <strong>personal ties receive special weight</strong>.
-              </p>
-              <p class="plain-summary">
-                <strong>Personal relations include:</strong> Family location, social relationships, where you "live your life"
-              </p>
-              <p class="plain-summary">
-                <strong>Economic relations include:</strong> Work location, income source, property ownership
-              </p>
-              <p class="plain-summary">
-                For a person with family in one country but working extensively in another:
-                The family location often tips the balance, especially when combined with maintained family home,
-                regular returns, and social ties in the home country.
-              </p>
-              <cite class="source-citation">OECD Model Tax Convention Commentary, Art. 4</cite>
-            </div>
-          </div>
-
-          <div class="compliance-section">
-            <button class="section-header" aria-expanded="false" aria-controls="content-family">
-              <span>Family Presumption (Art. 9.1.b LIRPF)</span>
-              <span class="section-icon">&#9654;</span>
-            </button>
-            <div class="section-content" id="content-family" hidden>
-              <blockquote class="legal-text" cite="BOE-A-2006-20764">
-                "${ARTICLE_9_1_B.legalText}"
-              </blockquote>
-              <p class="plain-summary">
-                <strong>In plain language:</strong> ${ARTICLE_9_1_B.plainSummary}
-              </p>
-              <p class="plain-summary" style="margin-top: 1rem;">
-                <strong>Practical implication:</strong> ${ARTICLE_9_1_B.implication}
-              </p>
-              <cite class="source-citation">${ARTICLE_9_1_B.source}</cite>
-            </div>
-          </div>
-
-          <div class="compliance-section">
-            <button class="section-header" aria-expanded="false" aria-controls="content-183">
-              <span>The 183-Day Threshold</span>
-              <span class="section-icon">&#9654;</span>
-            </button>
-            <div class="section-content" id="content-183" hidden>
-              <p class="plain-summary">
-                The 183-day rule determines tax residence under <strong>domestic law</strong>.
-                If you spend more than 183 days in Spain, Spanish law considers you a Spanish tax resident.
-                Similarly, Belgium counts days for its own residency determination.
-              </p>
-              <p class="plain-summary">
-                <strong>For treaty purposes:</strong> The Spain-Belgium treaty uses a 12-month rolling period
-                (not calendar year) when determining where employment income can be taxed.
-              </p>
-              <div class="entry-exit-warning">
-                <strong>Entry and exit days count in BOTH countries.</strong>
-                <p>When you fly from Spain to Belgium, that day counts toward your presence in both countries.
-                This means your total "days" may exceed 365 when added together. Tax authorities use "day of presence"
-                rules that count any partial day as a full day in that country.</p>
+              <div class="compliance-section">
+                <button class="section-header" aria-expanded="false" aria-controls="content-payment">
+                  <span>Payment Method</span>
+                  <span class="section-icon">&#9654;</span>
+                </button>
+                <div class="section-content" id="content-payment" hidden>
+                  <div class="payment-warning">
+                    <strong>Cash = NOT deductible</strong>
+                    <p>Use: bank card, transfer, Bizum, or traceable electronic payment</p>
+                  </div>
+                  <cite class="source-citation">Ley 6/2017 (AEAT)</cite>
+                </div>
               </div>
-              <cite class="source-citation">LIRPF Art. 9.1.a, Spain-Belgium Treaty Art. 15</cite>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Tax Residence -->
+          <div class="compliance-col">
+            <div class="action-phase">
+              <h3>Tax Residence Rules</h3>
+              <div class="compliance-section">
+                <button class="section-header" aria-expanded="false" aria-controls="content-183">
+                  <span>183-Day Threshold</span>
+                  <span class="section-icon">&#9654;</span>
+                </button>
+                <div class="section-content" id="content-183" hidden>
+                  <p class="plain-summary">183+ days in Spain = Spanish tax resident (domestic law)</p>
+                  <div class="entry-exit-warning">
+                    <strong>Entry/exit days count in BOTH countries</strong>
+                    <p>Travel day counts in both Spain and Belgium simultaneously</p>
+                  </div>
+                  <cite class="source-citation">LIRPF Art. 9.1.a</cite>
+                </div>
+              </div>
+              <div class="compliance-section">
+                <button class="section-header" aria-expanded="false" aria-controls="content-family">
+                  <span>Family Presumption</span>
+                  <span class="section-icon">&#9654;</span>
+                </button>
+                <div class="section-content" id="content-family" hidden>
+                  <p class="plain-summary"><strong>Art. 9.1.b LIRPF:</strong> ${ARTICLE_9_1_B.plainSummary}</p>
+                  <p class="plain-summary"><strong>Implication:</strong> ${ARTICLE_9_1_B.implication}</p>
+                  <cite class="source-citation">${ARTICLE_9_1_B.source}</cite>
+                </div>
+              </div>
+              <div class="compliance-section">
+                <button class="section-header" aria-expanded="false" aria-controls="content-tiebreaker">
+                  <span>Treaty Tie-Breaker</span>
+                  <span class="section-icon">&#9654;</span>
+                </button>
+                <div class="section-content" id="content-tiebreaker" hidden>
+                  <p class="plain-summary">When both countries claim you, treaty resolves via 5-step hierarchy:</p>
+                  <ol class="tie-breaker-steps">
+                    ${TREATY_ARTICLE_4.steps.map(s => `<li><span class="step-name">${s.name}</span><span class="step-plain">${s.plain}</span></li>`).join('')}
+                  </ol>
+                  <cite class="source-citation">${TREATY_ARTICLE_4.source}</cite>
+                </div>
+              </div>
+              <div class="compliance-section">
+                <button class="section-header" aria-expanded="false" aria-controls="content-centro">
+                  <span>Vital Interests</span>
+                  <span class="section-icon">&#9654;</span>
+                </button>
+                <div class="section-content" id="content-centro" hidden>
+                  <p class="plain-summary"><strong>Personal:</strong> Family, social ties, "where you live your life"</p>
+                  <p class="plain-summary"><strong>Economic:</strong> Work, income, property</p>
+                  <p class="plain-summary">Family location often tips the balance when combined with maintained home and regular returns.</p>
+                  <cite class="source-citation">OECD Model Tax Convention Commentary, Art. 4</cite>
+                </div>
+              </div>
             </div>
           </div>
         </div>
