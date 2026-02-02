@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** Phase 7.2 UI/UX Polish
+**Current focus:** Phase 8 Enhanced Features
 
 ## Current Position
 
-Phase: 7.2 of 9 (UI/UX Polish)
-Plan: 4 of 4 complete
-Status: Phase complete
-Last activity: 2026-02-02 - Completed 7.2-04-PLAN.md (Human verification & bug fixes)
+Phase: 8 of 9 (Enhanced Features)
+Plan: 1 of 3 complete
+Status: In progress
+Last activity: 2026-02-02 - Completed 08-01-PLAN.md (Calendar selection visuals + Expense auto-detection)
 
-Progress: [██████████] 100% (Phase 7.2 COMPLETE)
-Overall: [█████████░] 95% (Ready for Phase 8)
+Progress: [███░░░░░░░] 33% (Plan 1 of 3)
+Overall: [█████████░] 96% (Phase 8 in progress)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 25
-- Average duration: 3.7 min
-- Total execution time: 134 min
+- Total plans completed: 26
+- Average duration: 3.6 min
+- Total execution time: 137 min
 
 **By Phase:**
 
@@ -37,10 +37,11 @@ Overall: [█████████░] 95% (Ready for Phase 8)
 | 07-compliance-documentation | 2 | 8 min | 4 min |
 | 07.1-critical-bug-fixes | 3 | 12 min | 4 min |
 | 07.2-ui-ux-polish | 4 | 59 min | 14.75 min |
+| 08-enhanced-features | 1 | 3 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 7.2-01 (3 min), 7.2-02 (7 min), 7.2-03 (4 min), 7.2-04 (45 min)
-- Trend: 7.2-04 extended due to iterative user verification (4 rounds)
+- Last 5 plans: 7.2-02 (7 min), 7.2-03 (4 min), 7.2-04 (45 min), 08-01 (3 min)
+- Trend: 08-01 executed efficiently with no verification rounds needed
 
 *Updated after each plan completion*
 
@@ -146,6 +147,10 @@ Recent decisions affecting current work:
 | 2-column Compliance layout | Better horizontal space utilization, reduces scrolling | 7.2-04 |
 | Native dialog for all modals | Consistent pattern: add expense, tooltips, all use HTML5 dialog | 7.2-04 |
 | margin:auto dialog centering | More reliable than transform-based centering with showModal() | 7.2-04 |
+| Selection badge pill styling | border-radius: 999px for count badge, more prominent than plain text | 08-01 |
+| HIGH confidence auto-fills 100% | Reduces manual entry for obvious categories like "Adobe" | 08-01 |
+| Detection only for Spain Deductible | Work Travel and Private don't need percentage fields | 08-01 |
+| Detection state tracking | currentDetection, userOverrodeDetection for proper override handling | 08-01 |
 
 ### Pending Todos
 
@@ -157,14 +162,15 @@ Recent decisions affecting current work:
 - ~~Responsive layout audit~~ DONE (7.2-03)
 - ~~Human verification & bug fixes~~ DONE (7.2-04)
 
-**Phase 8 (Enhanced Features): READY TO START**
-- Auto-detect 100% deductible expenses
+**Phase 8 (Enhanced Features): IN PROGRESS**
+- ~~Auto-detect 100% deductible expenses~~ DONE (08-01)
+- ~~Enhanced calendar selection visual feedback~~ DONE (08-01)
 - Add income tracking tab with client earnings
 - Add official Agencia Tributaria source links
 
 ### Blockers/Concerns
 
-None - Phase 7.2 complete. Ready for Phase 8.
+None - Plan 08-01 complete. Ready for 08-02 or 08-03.
 
 ### Roadmap Evolution
 
@@ -175,9 +181,9 @@ None - Phase 7.2 complete. Ready for Phase 8.
 
 ## Session Continuity
 
-Last session: 2026-02-02T21:45:00Z
-Stopped at: Completed 7.2-04-PLAN.md (Human verification & bug fixes)
-Resume file: None - Phase 7.2 complete, ready for Phase 8
+Last session: 2026-02-02T21:03:22Z
+Stopped at: Completed 08-01-PLAN.md (Calendar selection visuals + Expense auto-detection)
+Resume file: None - continue with 08-02 or 08-03
 
 ## Key Files Created
 
@@ -212,6 +218,7 @@ Resume file: None - Phase 7.2 complete, ready for Phase 8
 | .planning/phases/07.2-ui-ux-polish/7.2-02-SUMMARY.md | Plan 7.2-02 execution summary |
 | .planning/phases/07.2-ui-ux-polish/7.2-03-SUMMARY.md | Plan 7.2-03 execution summary |
 | .planning/phases/07.2-ui-ux-polish/7.2-04-SUMMARY.md | Plan 7.2-04 execution summary |
+| .planning/phases/08-enhanced-features/08-01-SUMMARY.md | Plan 08-01 execution summary |
 
 ## Phase 1 Complete
 
@@ -395,3 +402,15 @@ Phase 7.2 (UI/UX Polish) delivered:
    - 5 scenario sheets with step-by-step calculations
    - Overview sheet with cross-sheet comparison
    - Conditional formatting for key metrics
+
+## Phase 8 In Progress
+
+Phase 8 (Enhanced Features) - Plan 1 of 3 complete:
+- Plan 08-01: UX Enhancements (COMPLETE)
+  - Enhanced calendar selection with green overlay, 2px border, glow effect
+  - Selection count badge with pill styling
+  - DEDUCTIBLE_100_CATEGORIES constant with IT/consulting keywords
+  - Expense auto-detection for Spain Deductible category
+  - HIGH confidence: green badge + auto-fill 100%
+  - MEDIUM confidence: orange badge (no auto-fill)
+  - ENH-01 and ENH-06 complete
