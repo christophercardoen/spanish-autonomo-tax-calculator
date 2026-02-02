@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Accurate, real-time calculation of net monthly income after all taxes (RETA + IRPF), with Belgium work cost tracking and 183-day residency management
-**Current focus:** PROJECT COMPLETE
+**Current focus:** Phase 7.1 Critical Bug Fixes
 
 ## Current Position
 
 Phase: 7.1 of 9 (Critical Bug Fixes - INSERTED)
-Plan: Not started
-Status: Ready to plan Phase 7.1
-Last activity: 2026-02-02 - Inserted Phase 7.1 and Phase 8 for user-reported issues
+Plan: 1 of 3 complete
+Status: In progress
+Last activity: 2026-02-02 - Completed 7.1-01-PLAN.md (expense fixes)
 
-Progress: [          ] 0% (Phase 7.1)
-Overall: [███████▌  ] 78% (7/9 phases complete)
+Progress: [███       ] 33% (Phase 7.1)
+Overall: [███████▌  ] 78% (7/9 phases complete, 7.1 in progress)
 
 ## Performance Metrics
 
@@ -122,14 +122,17 @@ Recent decisions affecting current work:
 | Session-storage for warning dismiss | Warning returns after browser close to maintain compliance awareness | 07-02 |
 | Tiered warning thresholds | 170/180/183 matching calendar warning pattern | 07-02 |
 | Conservative day counting for warning | Belgium + Travel counted toward threshold | 07-02 |
+| Pill toggle pattern | Two-button pill design for Belgium cost selector, better UX than checkbox slider | 7.1-01 |
+| English expense labels | Full English names with deduction percentage in label for clarity | 7.1-01 |
+| Preserve localStorage IDs | Keep original IDs (huur, gsm) for backwards compatibility | 7.1-01 |
 
 ### Pending Todos
 
 **Phase 7.1 (Critical Bug Fixes):**
-- Fix add expense button (not working)
+- ~~Fix add expense button (not working)~~ DONE (7.1-01)
 - Fix tooltip positioning (centered modal with blur)
-- Remove all Dutch text (make everything English)
-- Redesign Belgium cost toggle (pill buttons instead of dots)
+- ~~Remove all Dutch text (make everything English)~~ DONE (7.1-01)
+- ~~Redesign Belgium cost toggle (pill buttons instead of dots)~~ DONE (7.1-01)
 - Add calendar multi-select (shift-click range working, need week/month selection)
 
 **Phase 8 (Enhanced Features):**
@@ -149,9 +152,9 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-02T13:02:00Z
-Stopped at: PROJECT COMPLETE
-Resume file: None
+Last session: 2026-02-02T14:14:00Z
+Stopped at: Completed 7.1-01-PLAN.md
+Resume file: .planning/phases/07.1-critical-bug-fixes/7.1-02-PLAN.md
 
 ## Key Files Created
 
@@ -179,6 +182,7 @@ Resume file: None
 | .planning/phases/06-excel-calculator/06-03-SUMMARY.md | Plan 06-03 execution summary |
 | .planning/phases/07-compliance-&-documentation.../07-01-SUMMARY.md | Plan 07-01 execution summary |
 | .planning/phases/07-compliance-&-documentation.../07-02-SUMMARY.md | Plan 07-02 execution summary |
+| .planning/phases/07.1-critical-bug-fixes/7.1-01-SUMMARY.md | Plan 7.1-01 execution summary |
 
 ## Phase 1 Complete
 
