@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 12 of 29 (Data Architecture Foundation)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-02-03 - Completed 12-01-PLAN.md (Database Foundation)
+Last activity: 2026-02-03 - Completed 12-02-PLAN.md (Soft Delete & Sync Queue)
 
-Progress: [#-----------------] 6% (1/18 phases partially complete)
+Progress: [##----------------] 11% (2/18 phases partially complete)
 
 ## Performance Metrics
 
@@ -27,7 +27,7 @@ Progress: [#-----------------] 6% (1/18 phases partially complete)
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 1
+- Plans completed: 2
 
 *Updated after each plan completion*
 
@@ -47,14 +47,17 @@ Recent decisions affecting current work:
 - [12-01]: Store all monetary values as integer cents, convert at UI boundary
 - [12-01]: 12 tables defined upfront for v2.0 schema consistency
 - [12-01]: Banker's rounding for tax calculations via MoneyUtils
+- [12-02]: 30-day restore window for soft-deleted records
+- [12-02]: 4-year retention policy for Spanish tax compliance
+- [12-02]: SyncQueue thresholds at 100/500/1000 for progressive warnings
 
 ### Pending Todos
 
-- Complete Phase 12 plans 02 and 03 (CRUD operations, soft delete)
+- Complete Phase 12 plan 03 (CRUD operations)
 
 ### Blockers/Concerns
 
-None - Phase 12 Plan 01 complete, ready for Plan 02.
+None - Phase 12 Plan 02 complete, ready for Plan 03.
 
 ### Research Flags
 
@@ -69,9 +72,9 @@ Phases needing `/gsd:research-phase`:
 ## Session Continuity
 
 Last session: 2026-02-03
-Stopped at: Completed 12-01-PLAN.md (Database Foundation with Dexie.js + MoneyUtils)
-Resume file: .planning/phases/12-data-architecture-foundation/12-02-PLAN.md
+Stopped at: Completed 12-02-PLAN.md (Soft Delete & Sync Queue)
+Resume file: .planning/phases/12-data-architecture-foundation/12-03-PLAN.md
 
 ---
-*Plan 12-01 completed: 2026-02-03*
-*Next step: `/gsd:execute-plan 12-02` or continue phase execution*
+*Plan 12-02 completed: 2026-02-03*
+*Next step: `/gsd:execute-plan 12-03` or continue phase execution*
