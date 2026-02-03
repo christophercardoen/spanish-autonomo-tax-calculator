@@ -4845,6 +4845,141 @@
     .profile-tab-content.active {
       display: block;
     }
+
+    /* MFA Modal Styles - Phase 14-04 */
+    .mfa-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    .mfa-modal.hidden {
+      display: none;
+    }
+
+    .mfa-content {
+      background: var(--bg-secondary, #242424);
+      border: 1px solid var(--border-color, #333);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .mfa-content h3 {
+      margin: 0 0 8px 0;
+      font-size: 20px;
+      color: var(--text-primary, #fff);
+    }
+
+    .mfa-content p {
+      color: var(--text-secondary, #888);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .mfa-qr-code {
+      background: #fff;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .mfa-qr-code img,
+    .mfa-qr-code svg {
+      width: 180px;
+      height: 180px;
+    }
+
+    .mfa-secret {
+      background: var(--bg-primary, #1a1a1a);
+      padding: 12px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-secondary, #888);
+      margin-bottom: 20px;
+      word-break: break-all;
+    }
+
+    .mfa-secret-label {
+      font-size: 11px;
+      color: var(--text-tertiary, #666);
+      margin-bottom: 4px;
+    }
+
+    .mfa-code-input {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .mfa-code-input input {
+      width: 48px;
+      height: 56px;
+      text-align: center;
+      font-size: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-primary, #1a1a1a);
+      border: 1px solid var(--border-color, #333);
+      border-radius: 8px;
+      color: var(--text-primary, #fff);
+    }
+
+    .mfa-code-input input:focus {
+      outline: none;
+      border-color: var(--accent-color, #3b82f6);
+    }
+
+    .mfa-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mfa-btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .mfa-btn-primary {
+      background: var(--accent-color, #3b82f6);
+      color: #fff;
+      border: none;
+    }
+
+    .mfa-btn-primary:hover {
+      background: #2563eb;
+    }
+
+    .mfa-btn-primary:disabled {
+      background: #4b5563;
+      cursor: not-allowed;
+    }
+
+    .mfa-btn-secondary {
+      background: transparent;
+      color: var(--text-secondary, #888);
+      border: 1px solid var(--border-color, #333);
+    }
+
+    .mfa-btn-secondary:hover {
+      background: var(--bg-tertiary, #2a2a2a);
+    }
   </style>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
@@ -4951,6 +5086,71 @@
 
       <div class="auth-footer">
         <span class="auth-link" onclick="AuthUI.showView('reset')">Forgot password?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 14-04: MFA Challenge Modal (shown during login when 2FA required) -->
+  <div id="mfa-challenge-modal" class="mfa-modal hidden">
+    <div class="mfa-content">
+      <h3>Two-Factor Authentication</h3>
+      <p>Enter the 6-digit code from your authenticator app.</p>
+
+      <div class="mfa-code-input" id="mfa-challenge-code">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="0">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="1">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="2">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="3">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="4">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="5">
+      </div>
+
+      <div id="mfa-challenge-message" class="auth-message" style="display: none;"></div>
+
+      <div class="mfa-actions">
+        <button class="mfa-btn mfa-btn-primary" onclick="MFAUI.verifyChallenge()">
+          Verify
+        </button>
+        <button class="mfa-btn mfa-btn-secondary" onclick="MFAUI.cancelChallenge()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 14-04: MFA Enrollment Modal -->
+  <div id="mfa-enroll-modal" class="mfa-modal hidden">
+    <div class="mfa-content">
+      <h3>Set Up Two-Factor Authentication</h3>
+      <p>Scan this QR code with your authenticator app (Google Authenticator, Authy, etc.)</p>
+
+      <div class="mfa-qr-code" id="mfa-qr-container">
+        <!-- QR code will be inserted here -->
+      </div>
+
+      <div class="mfa-secret-label">Or enter this code manually:</div>
+      <div class="mfa-secret" id="mfa-secret-code">Loading...</div>
+
+      <p style="margin-top: 20px;">Enter the 6-digit code to verify:</p>
+
+      <div class="mfa-code-input" id="mfa-enroll-code">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="0">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="1">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="2">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="3">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="4">
+        <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-index="5">
+      </div>
+
+      <div id="mfa-enroll-message" class="auth-message" style="display: none;"></div>
+
+      <div class="mfa-actions">
+        <button class="mfa-btn mfa-btn-primary" onclick="MFAUI.completeEnrollment()">
+          Enable 2FA
+        </button>
+        <button class="mfa-btn mfa-btn-secondary" onclick="MFAUI.cancelEnrollment()">
+          Cancel
+        </button>
       </div>
     </div>
   </div>
@@ -11112,6 +11312,12 @@ Generated by Autonomo Tax Calculator`;
         }
 
         if (AuthManager.isAuthenticated() || AuthManager.isOfflineMode()) {
+          // Check for pending MFA challenge (Phase 14-04)
+          if (AuthManager.pendingMFAFactorId) {
+            MFAUI.showChallenge(AuthManager.pendingMFAFactorId);
+            return; // Don't show main app until MFA verified
+          }
+
           // User authenticated or offline mode - show main app
           if (authScreen) authScreen.classList.add('hidden');
           if (dashboard) dashboard.style.display = '';
@@ -11504,6 +11710,251 @@ Generated by Autonomo Tax Calculator`;
               el.style.display = 'none';
             }, 3000);
           }
+        }
+      }
+    };
+
+    /**
+     * MFAUI - MFA enrollment and challenge UI controller
+     * Phase 14-04 - AUTH-05, AUTH-06
+     */
+    const MFAUI = {
+      enrollmentData: null,
+
+      /**
+       * Setup code input auto-advance behavior
+       * @param {string} containerId - Container element ID
+       */
+      initCodeInputs(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const inputs = container.querySelectorAll('input');
+        inputs.forEach((input, index) => {
+          // Auto-advance on input
+          input.addEventListener('input', (e) => {
+            const value = e.target.value;
+            if (value && index < inputs.length - 1) {
+              inputs[index + 1].focus();
+            }
+          });
+
+          // Handle backspace
+          input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !e.target.value && index > 0) {
+              inputs[index - 1].focus();
+            }
+          });
+
+          // Handle paste
+          input.addEventListener('paste', (e) => {
+            e.preventDefault();
+            const paste = (e.clipboardData || window.clipboardData).getData('text');
+            const digits = paste.replace(/\D/g, '').split('');
+            digits.slice(0, 6).forEach((digit, i) => {
+              if (inputs[i]) inputs[i].value = digit;
+            });
+            // Focus last filled or next empty
+            const lastIndex = Math.min(digits.length - 1, 5);
+            inputs[lastIndex]?.focus();
+          });
+        });
+      },
+
+      /**
+       * Get code from inputs
+       * @param {string} containerId - Container element ID
+       * @returns {string} 6-digit code
+       */
+      getCode(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return '';
+        return Array.from(container.querySelectorAll('input'))
+          .map(i => i.value)
+          .join('');
+      },
+
+      /**
+       * Clear code inputs
+       * @param {string} containerId - Container element ID
+       */
+      clearCode(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.querySelectorAll('input').forEach(i => {
+          i.value = '';
+        });
+        container.querySelector('input')?.focus();
+      },
+
+      /**
+       * Show message in modal
+       * @param {string} elementId - Message element ID
+       * @param {string} message - Message text
+       * @param {string} type - 'success' or 'error'
+       */
+      showMessage(elementId, message, type) {
+        const el = document.getElementById(elementId);
+        if (el) {
+          el.textContent = message;
+          el.className = `auth-message ${type}`;
+          el.style.display = 'block';
+        }
+      },
+
+      /**
+       * Start enrollment flow (AUTH-05)
+       */
+      async startEnrollment() {
+        if (AuthManager.isOfflineMode()) {
+          alert('2FA requires online mode with Supabase configured.');
+          return;
+        }
+
+        try {
+          this.enrollmentData = await MFAManager.enroll();
+
+          // Show QR code
+          const qrContainer = document.getElementById('mfa-qr-container');
+          if (qrContainer && this.enrollmentData.qrCode) {
+            qrContainer.innerHTML = `<img src="${this.enrollmentData.qrCode}" alt="QR Code">`;
+          }
+
+          // Show secret for manual entry
+          const secretEl = document.getElementById('mfa-secret-code');
+          if (secretEl) {
+            secretEl.textContent = this.enrollmentData.secret;
+          }
+
+          // Show modal
+          const modal = document.getElementById('mfa-enroll-modal');
+          if (modal) modal.classList.remove('hidden');
+
+          // Init code inputs
+          this.initCodeInputs('mfa-enroll-code');
+          this.clearCode('mfa-enroll-code');
+
+        } catch (error) {
+          console.error('MFA enrollment error:', error);
+          alert('Failed to start 2FA setup: ' + error.message);
+        }
+      },
+
+      /**
+       * Complete enrollment
+       */
+      async completeEnrollment() {
+        const code = this.getCode('mfa-enroll-code');
+        if (code.length !== 6) {
+          this.showMessage('mfa-enroll-message', 'Please enter all 6 digits', 'error');
+          return;
+        }
+
+        try {
+          await MFAManager.verifyEnrollment(this.enrollmentData.factorId, code);
+
+          this.showMessage('mfa-enroll-message', '2FA enabled successfully!', 'success');
+
+          // Close modal after delay
+          setTimeout(() => {
+            this.closeEnrollmentModal();
+          }, 1500);
+
+        } catch (error) {
+          console.error('MFA verify error:', error);
+          this.showMessage('mfa-enroll-message', 'Invalid code. Please try again.', 'error');
+          this.clearCode('mfa-enroll-code');
+        }
+      },
+
+      /**
+       * Cancel enrollment
+       */
+      cancelEnrollment() {
+        this.enrollmentData = null;
+        this.closeEnrollmentModal();
+      },
+
+      /**
+       * Close enrollment modal
+       */
+      closeEnrollmentModal() {
+        const modal = document.getElementById('mfa-enroll-modal');
+        if (modal) modal.classList.add('hidden');
+        this.enrollmentData = null;
+      },
+
+      /**
+       * Show MFA challenge (during login)
+       * @param {string} factorId - Factor ID to challenge
+       */
+      showChallenge(factorId) {
+        AuthManager.pendingMFAFactorId = factorId;
+        const modal = document.getElementById('mfa-challenge-modal');
+        if (modal) modal.classList.remove('hidden');
+
+        this.initCodeInputs('mfa-challenge-code');
+        this.clearCode('mfa-challenge-code');
+      },
+
+      /**
+       * Verify challenge
+       */
+      async verifyChallenge() {
+        const code = this.getCode('mfa-challenge-code');
+        if (code.length !== 6) {
+          this.showMessage('mfa-challenge-message', 'Please enter all 6 digits', 'error');
+          return;
+        }
+
+        try {
+          await MFAManager.verifyChallenge(AuthManager.pendingMFAFactorId, code);
+
+          // Close modal and proceed to app
+          this.closeChallengeModal();
+          AuthUI.updateAuthState();
+
+        } catch (error) {
+          console.error('MFA challenge error:', error);
+          this.showMessage('mfa-challenge-message', 'Invalid code. Please try again.', 'error');
+          this.clearCode('mfa-challenge-code');
+        }
+      },
+
+      /**
+       * Cancel challenge (sign out)
+       */
+      async cancelChallenge() {
+        await AuthManager.signOut();
+        this.closeChallengeModal();
+      },
+
+      /**
+       * Close challenge modal
+       */
+      closeChallengeModal() {
+        const modal = document.getElementById('mfa-challenge-modal');
+        if (modal) modal.classList.add('hidden');
+        AuthManager.pendingMFAFactorId = null;
+      },
+
+      /**
+       * Disable 2FA
+       */
+      async disable() {
+        if (!confirm('Are you sure you want to disable 2FA? This will make your account less secure.')) {
+          return;
+        }
+
+        try {
+          const factors = await MFAManager.getFactors();
+          if (factors.length > 0) {
+            await MFAManager.unenroll(factors[0].id);
+            alert('2FA has been disabled.');
+          }
+        } catch (error) {
+          console.error('MFA disable error:', error);
+          alert('Failed to disable 2FA: ' + error.message);
         }
       }
     };
