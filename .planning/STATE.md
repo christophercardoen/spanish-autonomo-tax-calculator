@@ -11,24 +11,24 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 14 of 29 (Authentication & Permissions)
-Plan: 1 of 3 in current phase (14-01 complete)
+Plan: 2 of 3 in current phase (14-02 complete)
 Status: In progress
-Last activity: 2026-02-03 - Completed 14-01-PLAN.md (Auth Database Schema)
+Last activity: 2026-02-03 - Completed 14-02-PLAN.md (Auth Client Integration)
 
-Progress: [########----------] 50% (9/18 v2.0 plans complete)
+Progress: [#########---------] 56% (10/18 v2.0 plans complete)
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 35
-- Average duration: 3.4 min
-- Total execution time: 176 min
+- Total plans completed: 36
+- Average duration: 3.3 min
+- Total execution time: 178 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 9 (Phase 12 complete, Phase 13 complete, 14-01 complete)
-- Phase 14 duration: ~2 min (1 plan so far)
+- Plans completed: 10 (Phase 12 complete, Phase 13 complete, 14-01 & 14-02 complete)
+- Phase 14 duration: ~4 min (2 plans)
 
 *Updated after each plan completion*
 
@@ -69,14 +69,18 @@ Recent decisions affecting current work:
 - [14-01]: profiles.id is UUID (not auto-increment) to match auth.users
 - [14-01]: Three-tier roles: gestor (read-only), accountant (read-write), partner (full admin)
 - [14-01]: 7-day invitation expiry period for security
+- [14-02]: Supabase CDN for single-file HTML architecture
+- [14-02]: Graceful degradation to offline mode when SUPABASE_CONFIG empty
+- [14-02]: Permission matrix: owner > partner > accountant > gestor
+- [14-02]: New entities get owner_id from current authenticated user
 
 ### Pending Todos
 
-None - continue with Phase 14-02.
+None - continue with Phase 14-03.
 
 ### Blockers/Concerns
 
-None - 14-01 completed successfully.
+None - 14-02 completed successfully.
 
 ### Research Flags
 
@@ -92,8 +96,8 @@ Phases needing `/gsd:research-phase`:
 | Plan | Deliverable | Commit |
 |------|-------------|--------|
 | 14-01 | DB schema v2, ProfileManager, EntityShareManager, InvitationManager, SessionManager | `a9b59c5`, `d404650` |
-| 14-02 | (pending) Login UI implementation |
-| 14-03 | (pending) Permission UI and enforcement |
+| 14-02 | Supabase client, AuthManager (magic link, OAuth, password reset), EntityAccessManager | `be1e7f7`, `6cb7184` |
+| 14-03 | (pending) Login UI and permission enforcement |
 
 **Phase 14 Success Criteria:**
 - [x] Database schema extended with auth tables
@@ -102,18 +106,21 @@ Phases needing `/gsd:research-phase`:
 - [x] EntityShareManager module with role constants
 - [x] InvitationManager module with expiry handling
 - [x] SessionManager module with device detection
+- [x] Supabase client with offline fallback
+- [x] AuthManager with magic link, Google OAuth, password reset
+- [x] EntityAccessManager with role-based permissions
 - [ ] Magic link authentication UI
-- [ ] Google OAuth integration
+- [ ] Google OAuth integration UI
 - [ ] TOTP 2FA enrollment UI
 - [ ] Entity sharing UI
 - [ ] Permission enforcement in UI
 
 ## Session Continuity
 
-Last session: 2026-02-03 20:11 UTC
-Stopped at: Completed 14-01-PLAN.md (Auth Database Schema)
-Resume file: None - continue with 14-02-PLAN.md
+Last session: 2026-02-03 20:15 UTC
+Stopped at: Completed 14-02-PLAN.md (Auth Client Integration)
+Resume file: None - continue with 14-03-PLAN.md
 
 ---
-*Plan 14-01 completed: 2026-02-03*
-*Next step: /gsd:execute-plan 14-02*
+*Plan 14-02 completed: 2026-02-03*
+*Next step: /gsd:execute-plan 14-03*
