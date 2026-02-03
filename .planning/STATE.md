@@ -5,30 +5,30 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 13 in progress
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 13 COMPLETE
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
-Phase: 13 of 29 (Multi-Entity Architecture)
-Plan: 4 of 5 in current phase (13-04 complete)
-Status: In progress
-Last activity: 2026-02-03 - Completed 13-04-PLAN.md (Entity Switcher UI)
+Phase: 13 of 29 (Multi-Entity Architecture) - COMPLETE
+Plan: 5 of 5 in current phase (13-05 complete)
+Status: Phase complete - ready for Phase 14
+Last activity: 2026-02-03 - Completed 13-05-PLAN.md (Dual Activity Detection)
 
-Progress: [######------------] 39% (7/18 v2.0 plans complete)
+Progress: [########----------] 44% (8/18 v2.0 plans complete)
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 33
-- Average duration: 3.4 min
-- Total execution time: 169 min
+- Total plans completed: 34
+- Average duration: 3.5 min
+- Total execution time: 174 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 7 (Phase 12 complete, Phase 13 at 4/5)
-- Phase 13 duration: ~13 min (4 plans)
+- Plans completed: 8 (Phase 12 complete, Phase 13 complete)
+- Phase 13 duration: ~18 min (5 plans)
 
 *Updated after each plan completion*
 
@@ -63,19 +63,21 @@ Recent decisions affecting current work:
 - [13-03]: Duplicate tax ID detection prevents creating entities with same NIF/CIF
 - [13-04]: ARIA combobox pattern for entity switcher accessibility
 - [13-04]: EntityContext.subscribe() for reactive UI updates
+- [13-05]: Session-based dismissal for dual activity warning (resets on new session)
+- [13-05]: DualActivityDetector triggers on entity create/archive/restore for immediate feedback
 
 ### Pending Todos
 
-None - continue with Phase 13 plans.
+None - Phase 13 complete, ready for Phase 14.
 
 ### Blockers/Concerns
 
-None - Phase 13 progressing smoothly.
+None - Phase 13 completed successfully.
 
 ### Research Flags
 
 Phases needing `/gsd:research-phase`:
-- Phase 15: Client Management (VIES API) - MEDIUM
+- Phase 14: Client Management (VIES API) - MEDIUM (next phase)
 - Phase 19: Receipt OCR (Mindee API) - HIGH
 - Phase 21: Tax Automation - SL (IS calculation, BINs) - HIGH
 - Phase 22: SL Accounting (Cuentas Anuales generation) - HIGH
@@ -89,7 +91,7 @@ Phases needing `/gsd:research-phase`:
 | 13-02 | EntityContext integration with initializeDatabase | `dee30a4` |
 | 13-03 | EntityManager CRUD, EntityModal creation form | `aa7b354`, `fc79e3b` |
 | 13-04 | EntitySwitcher UI component in header | `e2dc52f`, `d49fbdf` |
-| 13-05 | (pending) Dual activity detection | - |
+| 13-05 | DualActivityDetector module and warning banner | `7799f51`, `ef21b71` |
 
 **Phase 13 Success Criteria:**
 - [x] NIF validation with modulo 23 algorithm
@@ -101,14 +103,14 @@ Phases needing `/gsd:research-phase`:
 - [x] Entity creation forms
 - [x] Entity CRUD operations
 - [x] Entity type switching (via EntitySwitcher dropdown)
-- [ ] Dual activity detection
+- [x] Dual activity detection
 
 ## Session Continuity
 
-Last session: 2026-02-03 16:45 UTC
-Stopped at: Completed 13-04-PLAN.md (Entity Switcher UI)
-Resume file: None - proceed to 13-05-PLAN.md
+Last session: 2026-02-03 19:21 UTC
+Stopped at: Completed 13-05-PLAN.md (Dual Activity Detection)
+Resume file: None - Phase 13 complete, proceed to Phase 14
 
 ---
-*Phase 13 started: 2026-02-03*
-*Next step: Execute 13-05-PLAN.md*
+*Phase 13 completed: 2026-02-03*
+*Next step: /gsd:plan-phase 14 or /gsd:research-phase 14*
