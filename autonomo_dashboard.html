@@ -4644,6 +4644,207 @@
       font-size: 13px;
       margin-bottom: 24px;
     }
+
+    /* ===========================================
+       PHASE 14-03: USER MENU
+       =========================================== */
+
+    .user-menu {
+      position: relative;
+      margin-left: auto;
+    }
+
+    .user-menu-trigger {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--bg-surface, #242424);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: var(--text, #eaeaea);
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    .user-menu-trigger:hover {
+      background: var(--bg-elevated, #2d2d44);
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent, #4ade80);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .user-menu-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--bg-surface, #242424);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      min-width: 200px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      display: none;
+    }
+
+    .user-menu-dropdown.open {
+      display: block;
+    }
+
+    .user-menu-item {
+      padding: 12px 16px;
+      color: var(--text, #eaeaea);
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-menu-item:first-child {
+      border-radius: 8px 8px 0 0;
+    }
+
+    .user-menu-item:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+
+    .user-menu-item:hover {
+      background: var(--bg-elevated, #2d2d44);
+    }
+
+    .user-menu-item.danger {
+      color: var(--negative, #f87171);
+    }
+
+    .user-menu-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 4px 0;
+    }
+
+    /* ===========================================
+       PHASE 14-03: PROFILE SECTION
+       =========================================== */
+
+    .profile-section {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .profile-avatar-large {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--accent, #4ade80);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .profile-info h2 {
+      margin: 0 0 4px 0;
+      font-size: 24px;
+      color: var(--text, #eaeaea);
+    }
+
+    .profile-info p {
+      margin: 0;
+      color: var(--text-muted, #a0a0a0);
+      font-size: 14px;
+    }
+
+    .profile-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .profile-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .profile-field label {
+      font-size: 13px;
+      color: var(--text-muted, #a0a0a0);
+      font-weight: 500;
+    }
+
+    .profile-field input {
+      background: var(--bg, #1a1a1a);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 15px;
+      color: var(--text, #eaeaea);
+      transition: border-color 0.2s;
+    }
+
+    .profile-field input:focus {
+      outline: none;
+      border-color: var(--accent, #4ade80);
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .profile-save-btn {
+      background: var(--accent, #4ade80);
+      color: #1a1a1a;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .profile-save-btn:hover {
+      background: #22c55e;
+    }
+
+    .profile-save-btn:disabled {
+      background: #4b5563;
+      cursor: not-allowed;
+    }
+
+    /* Profile Tab Content */
+    .profile-tab-content {
+      display: none;
+    }
+
+    .profile-tab-content.active {
+      display: block;
+    }
   </style>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
@@ -4775,6 +4976,38 @@
         </div>
         <!-- Phase 13-04: Entity Switcher -->
         <div id="entity-switcher-container" class="entity-switcher-container"></div>
+
+        <!-- Phase 14-03: User Menu (shown when authenticated) -->
+        <div id="user-menu" class="user-menu" style="display: none;">
+          <button class="user-menu-trigger" onclick="UserMenuUI.toggle()">
+            <div class="user-avatar" id="user-avatar-initial">?</div>
+            <span id="user-menu-name">User</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+              <path d="M6 8L2 4h8L6 8z"/>
+            </svg>
+          </button>
+          <div id="user-menu-dropdown" class="user-menu-dropdown">
+            <div class="user-menu-item" onclick="UserMenuUI.showProfile()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 8a3 3 0 100-6 3 3 0 000 6zm0 2c-3.314 0-6 1.343-6 3v1h12v-1c0-1.657-2.686-3-6-3z"/>
+              </svg>
+              Profile
+            </div>
+            <div class="user-menu-item" onclick="UserMenuUI.showSessions()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1zm0 2v6h12V5H2z"/>
+              </svg>
+              Active Sessions
+            </div>
+            <div class="user-menu-divider"></div>
+            <div class="user-menu-item danger" onclick="UserMenuUI.signOut()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M11 3v2h2v6h-2v2h4V3h-4zM3 8l4-4v3h4v2H7v3L3 8z"/>
+              </svg>
+              Sign Out
+            </div>
+          </div>
+        </div>
       </header>
 
       <!-- Compliance Warning Banner (COMP-01) -->
@@ -5124,6 +5357,47 @@
         </section>
 
       </div><!-- end .tab-panels -->
+
+      <!-- Phase 14-03: Profile Section (shown via user menu) -->
+      <div id="profile-tab" class="profile-tab-content">
+        <div class="profile-section">
+          <div class="profile-header">
+            <div class="profile-avatar-large" id="profile-avatar">?</div>
+            <div class="profile-info">
+              <h2 id="profile-display-name">User</h2>
+              <p id="profile-email">user@example.com</p>
+            </div>
+          </div>
+
+          <form class="profile-form" onsubmit="ProfileUI.save(event)">
+            <div class="profile-field">
+              <label for="profile-name">Full Name</label>
+              <input type="text" id="profile-name" placeholder="Your full name">
+            </div>
+
+            <div class="profile-field">
+              <label for="profile-nif">NIF/CIF</label>
+              <input type="text" id="profile-nif" placeholder="12345678A">
+            </div>
+
+            <div class="profile-field">
+              <label for="profile-phone">Phone</label>
+              <input type="tel" id="profile-phone" placeholder="+34 600 000 000">
+            </div>
+
+            <div class="profile-field">
+              <label for="profile-address">Address</label>
+              <input type="text" id="profile-address" placeholder="Street, City, Postal Code">
+            </div>
+
+            <div class="profile-actions">
+              <button type="submit" class="profile-save-btn">Save Changes</button>
+            </div>
+
+            <div id="profile-message" class="auth-message" style="display: none;"></div>
+          </form>
+        </div>
+      </div>
 
       <!-- Global Disclaimer Footer (COMP-08) -->
       <footer class="global-disclaimer" id="globalDisclaimer">
@@ -10862,6 +11136,226 @@ Generated by Autonomo Tax Calculator`;
     };
 
     /**
+     * UserMenuUI - User menu dropdown interactions
+     * Phase 14-03
+     */
+    const UserMenuUI = {
+      /**
+       * Toggle dropdown visibility
+       */
+      toggle() {
+        const dropdown = document.getElementById('user-menu-dropdown');
+        if (dropdown) {
+          dropdown.classList.toggle('open');
+        }
+      },
+
+      /**
+       * Close dropdown
+       */
+      close() {
+        const dropdown = document.getElementById('user-menu-dropdown');
+        if (dropdown) {
+          dropdown.classList.remove('open');
+        }
+      },
+
+      /**
+       * Update user menu with current user info
+       */
+      update() {
+        const user = AuthManager.getUser();
+        const menu = document.getElementById('user-menu');
+
+        if (!menu) return;
+
+        if (user) {
+          menu.style.display = '';
+          const name = user.user_metadata?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User';
+          const initial = name.charAt(0).toUpperCase();
+
+          document.getElementById('user-avatar-initial').textContent = initial;
+          document.getElementById('user-menu-name').textContent = name;
+        } else if (AuthManager.isOfflineMode()) {
+          // Show simplified menu in offline mode
+          menu.style.display = '';
+          document.getElementById('user-avatar-initial').textContent = 'O';
+          document.getElementById('user-menu-name').textContent = 'Offline';
+        } else {
+          menu.style.display = 'none';
+        }
+      },
+
+      /**
+       * Navigate to profile section
+       */
+      showProfile() {
+        this.close();
+        // Hide tab panels, show profile
+        document.querySelector('.tab-panels').style.display = 'none';
+        document.querySelector('.tab-nav').style.display = 'none';
+        const profileTab = document.getElementById('profile-tab');
+        if (profileTab) {
+          profileTab.classList.add('active');
+          profileTab.style.display = 'block';
+        }
+        ProfileUI.load();
+      },
+
+      /**
+       * Return from profile to main dashboard
+       */
+      hideProfile() {
+        document.querySelector('.tab-panels').style.display = '';
+        document.querySelector('.tab-nav').style.display = '';
+        const profileTab = document.getElementById('profile-tab');
+        if (profileTab) {
+          profileTab.classList.remove('active');
+          profileTab.style.display = 'none';
+        }
+      },
+
+      /**
+       * Show sessions modal (to be implemented in future plan)
+       */
+      showSessions() {
+        this.close();
+        console.log('Sessions - to be implemented in future plan');
+        // TODO: Show sessions modal
+      },
+
+      /**
+       * Sign out
+       */
+      async signOut() {
+        this.close();
+        try {
+          await AuthManager.signOut('local');
+        } catch (error) {
+          console.error('Sign out error:', error);
+        }
+        // AuthUI will handle showing login screen
+      },
+
+      /**
+       * Initialize user menu
+       */
+      init() {
+        // Update menu when auth state changes
+        AuthManager.onAuthStateChange(() => {
+          this.update();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('user-menu');
+          if (menu && !menu.contains(e.target)) {
+            this.close();
+          }
+        });
+
+        // Initial update
+        this.update();
+      }
+    };
+
+    /**
+     * ProfileUI - Profile page interactions
+     * Phase 14-03
+     */
+    const ProfileUI = {
+      /**
+       * Load profile data into form
+       */
+      async load() {
+        const user = AuthManager.getUser();
+        if (!user && !AuthManager.isOfflineMode()) return;
+
+        let profile = null;
+        if (user) {
+          profile = await ProfileManager.getProfile(user.id);
+        }
+
+        // Update header
+        const name = profile?.name || user?.user_metadata?.name || user?.email?.split('@')[0] || 'Offline User';
+        document.getElementById('profile-display-name').textContent = name;
+        document.getElementById('profile-email').textContent = user?.email || 'Offline mode';
+        document.getElementById('profile-avatar').textContent = name.charAt(0).toUpperCase();
+
+        // Fill form
+        document.getElementById('profile-name').value = profile?.name || '';
+        document.getElementById('profile-nif').value = profile?.nif_cif || '';
+        document.getElementById('profile-phone').value = profile?.phone || '';
+        document.getElementById('profile-address').value = profile?.address || '';
+      },
+
+      /**
+       * Save profile changes
+       * @param {Event} event - Form submit event
+       */
+      async save(event) {
+        event.preventDefault();
+        const user = AuthManager.getUser();
+        if (!user) {
+          this.showMessage('Profile cannot be saved in offline mode', 'error');
+          return;
+        }
+
+        const data = {
+          name: document.getElementById('profile-name').value.trim(),
+          nif_cif: document.getElementById('profile-nif').value.trim(),
+          phone: document.getElementById('profile-phone').value.trim(),
+          address: document.getElementById('profile-address').value.trim()
+        };
+
+        // Validate NIF/CIF if provided
+        if (data.nif_cif) {
+          const validation = SpanishTaxIdValidator.validate(data.nif_cif);
+          if (!validation.valid) {
+            this.showMessage(validation.error, 'error');
+            return;
+          }
+          data.nif_cif = validation.normalized;
+        }
+
+        try {
+          await ProfileManager.upsertProfile(user.id, data);
+          this.showMessage('Profile updated successfully', 'success');
+
+          // Update user menu
+          UserMenuUI.update();
+
+          // Update display name
+          document.getElementById('profile-display-name').textContent = data.name || user.email?.split('@')[0] || 'User';
+        } catch (error) {
+          console.error('Profile save error:', error);
+          this.showMessage('Failed to save profile', 'error');
+        }
+      },
+
+      /**
+       * Show message in profile form
+       * @param {string} message - Message text
+       * @param {string} type - 'success' or 'error'
+       */
+      showMessage(message, type) {
+        const el = document.getElementById('profile-message');
+        if (el) {
+          el.textContent = message;
+          el.className = `auth-message ${type}`;
+          el.style.display = 'block';
+
+          // Auto-hide success messages
+          if (type === 'success') {
+            setTimeout(() => {
+              el.style.display = 'none';
+            }, 3000);
+          }
+        }
+      }
+    };
+
+    /**
      * EntityAccessManager - Entity ownership and permission checks
      * Handles access control for multi-user entity sharing
      */
@@ -12991,6 +13485,9 @@ Generated by Autonomo Tax Calculator`;
 
       // Phase 14-03: Initialize Auth UI
       AuthUI.init();
+
+      // Phase 14-03: Initialize User Menu
+      UserMenuUI.init();
 
       // Phase 13-04: Initialize entity switcher
       const switcherContainer = document.getElementById('entity-switcher-container');
