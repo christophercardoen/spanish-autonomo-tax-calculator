@@ -5,30 +5,30 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 12 complete, ready for Phase 13
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 13 in progress
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
-Phase: 12 of 29 (Data Architecture Foundation) - COMPLETE
-Plan: 3 of 3 in current phase (all complete)
-Status: Phase complete
-Last activity: 2026-02-03 - Completed 12-03-PLAN.md (Invoice Sequence Manager)
+Phase: 13 of 29 (Multi-Entity Architecture)
+Plan: 1 of 3 in current phase (13-01 complete)
+Status: In progress
+Last activity: 2026-02-03 - Completed 13-01-PLAN.md (Spanish Tax ID Validator)
 
-Progress: [###---------------] 17% (3/18 v2.0 plans complete, Phase 12 done)
+Progress: [####--------------] 22% (4/18 v2.0 plans complete)
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 29
-- Average duration: 3.7 min
-- Total execution time: 156 min
+- Total plans completed: 30
+- Average duration: 3.5 min
+- Total execution time: 157 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 3 (Phase 12 complete)
-- Phase 12 duration: ~14 min total
+- Plans completed: 4 (Phase 12 complete, Phase 13 started)
+- Phase 13 duration: ~1 min (1 plan)
 
 *Updated after each plan completion*
 
@@ -53,48 +53,50 @@ Recent decisions affecting current work:
 - [12-02]: SyncQueue thresholds at 100/500/1000 for progressive warnings
 - [12-03]: Invoice format {series}-{year}-{4-digit} with F/R/S series separation
 - [12-03]: Only draft invoices can be archived; sent/paid require factura rectificativa
+- [13-01]: All tax ID error messages in Spanish for AEAT compliance
+- [13-01]: CIF control type varies by organization letter (A/B/E/H=number, K/P/Q/S=letter)
+- [13-01]: Tax ID auto-detect by format prefix (X/Y/Z=NIE, A-W=CIF, digit=NIF)
 
 ### Pending Todos
 
-None for Phase 12 - ready to proceed to Phase 13.
+None - continue with Phase 13 plans.
 
 ### Blockers/Concerns
 
-None - Phase 12 Data Architecture Foundation complete.
+None - Phase 13 progressing smoothly.
 
 ### Research Flags
 
 Phases needing `/gsd:research-phase`:
-- Phase 13: Multi-Entity Architecture (RLS patterns) - HIGH - NEXT
 - Phase 15: Client Management (VIES API) - MEDIUM
 - Phase 19: Receipt OCR (Mindee API) - HIGH
 - Phase 21: Tax Automation - SL (IS calculation, BINs) - HIGH
 - Phase 22: SL Accounting (Cuentas Anuales generation) - HIGH
 - Phase 27: Cloud Sync (PWA, conflict resolution) - HIGH
 
-## Phase 12 Deliverables Summary
+## Phase 13 Deliverables Summary
 
 | Plan | Deliverable | Commit |
 |------|-------------|--------|
-| 12-01 | Dexie.js database schema (12 tables), MoneyUtils | `5d59b3e` |
-| 12-02 | DataManager (soft delete), SyncQueue (offline-first) | `81c9068` |
-| 12-03 | InvoiceManager (VeriFactu-compliant sequencing) | `e9ab5ca` |
+| 13-01 | SpanishTaxIdValidator, ENTITY_TYPE constants | `aca2656` |
+| 13-02 | (pending) | - |
+| 13-03 | (pending) | - |
 
-**Phase 12 Success Criteria Met:**
-- [x] User data persists in IndexedDB across browser sessions
-- [x] All currency amounts stored as integers (cents)
-- [x] Deleted records retained with deleted_at timestamp (4-year retention)
-- [x] Offline changes queued for future sync
-- [x] Schema migrations handle version upgrades gracefully
-- [x] Invoice sequencing is VeriFactu-compliant (no gaps)
-- [x] Human verified complete data architecture
+**Phase 13 Success Criteria:**
+- [x] NIF validation with modulo 23 algorithm
+- [x] CIF validation with organization-type-specific control
+- [x] NIE validation with X/Y/Z prefix handling
+- [x] ENTITY_TYPE constants for type-safe routing
+- [ ] Entity creation forms
+- [ ] Entity CRUD operations
+- [ ] Entity type switching
 
 ## Session Continuity
 
-Last session: 2026-02-03
-Stopped at: Completed Phase 12 Data Architecture Foundation (all 3 plans)
-Resume file: None - proceed to Phase 13
+Last session: 2026-02-03 16:31:45 UTC
+Stopped at: Completed 13-01-PLAN.md (Spanish Tax ID Validator)
+Resume file: None - proceed to 13-02-PLAN.md
 
 ---
-*Phase 12 completed: 2026-02-03*
-*Next step: `/gsd:plan-phase 13` or `/gsd:research-phase 13` for Multi-Entity Architecture*
+*Phase 13 started: 2026-02-03*
+*Next step: Execute 13-02-PLAN.md*
