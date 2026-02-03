@@ -14,64 +14,86 @@ When financial decisions arise (taking on a new project, planning trips, adjusti
 
 ### Validated
 
-(None yet — ship to validate)
+All requirements from v1.1 milestone (shipped 2026-02-03):
+
+**Tax Calculations:**
+- ✓ Calculate RETA contributions using actual registered cuota (€428.40/month fixed) — v1.1
+- ✓ Calculate IRPF using official 2025/2026 progressive tax brackets (19%-47%) — v1.1
+- ✓ Apply mínimo personal (€5,550) — v1.1
+- ✓ Apply mínimo por descendientes (€2,400 for 1 daughter) — v1.1
+- ✓ Apply 5% gastos de difícil justificación (max €2,000/year) — v1.1
+- ✓ Apply 7% reducción rendimientos — v1.1
+- ✓ Calculate effective tax rate — v1.1
+- ✓ Show net income monthly and annually — v1.1
+
+**Expense Tracking:**
+- ✓ Track deductible Spanish business expenses (huur 30%, GSM 50%, elektriciteit 9%) — v1.1
+- ✓ Track work travel costs with formula display — v1.1 (generalized from Belgium-specific)
+- ✓ Track non-deductible private expenses for disposable income calculation — v1.1
+- ✓ Categorize expenses clearly (deductible vs private) — v1.1
+- ✓ Auto-detect 100% deductible expenses (IT/consulting keywords) — v1.1
+
+**Scenario Planning:**
+- ✓ Pre-configured scenarios A-E (€3K to €18K monthly revenue) — v1.1
+- ✓ Custom scenario creation with user-defined values — v1.1
+- ✓ Live editing of any value with auto-recalculation — v1.1
+- ✓ Side-by-side scenario comparison — v1.1
+- ✓ Highlight optimal scenarios based on disposable income — v1.1
+- ✓ Reset to defaults functionality — v1.1
+
+**Belgium Work Calendar:**
+- ✓ Interactive calendar Feb-Dec 2026 with exact dates — v1.1
+- ✓ Toggle days between Belgium, Spain, Travel — v1.1
+- ✓ Auto-count days per month and annually — v1.1
+- ✓ 183-day threshold warning system — v1.1
+- ✓ Pre-fill with contracted pattern (Mon-Tue, first-week Wed-Fri) — v1.1
+- ✓ Visual indication of contractual vs flexible days — v1.1
+- ✓ Multi-select (week/month selection, checkbox interface) — v1.1
+- ✓ Export (ICS, CSV, clipboard) — v1.1
+
+**Interactive Dashboard:**
+- ✓ Professional financial dashboard (Bloomberg-inspired dark theme) — v1.1
+- ✓ Scenario cards with hover effects and drill-down — v1.1
+- ✓ Expandable cost breakdowns with formula details — v1.1
+- ✓ Comparison table with sticky headers — v1.1
+- ✓ Responsive design (desktop + mobile) — v1.1
+- ✓ Export to print, clipboard — v1.1
+- ✓ DM Sans + JetBrains Mono typography — v1.1
+- ✓ Interactive What-If Calculator tab — v1.1
+
+**Excel Calculator:**
+- ✓ Multi-sheet workbook (Overview + 5 scenarios + Constants) — v1.1
+- ✓ Overview sheet with comparison table — v1.1
+- ✓ Detailed sheets per scenario (A-E) — v1.1
+- ✓ All formulas (NO hardcoded calculated values) — v1.1
+- ✓ Professional styling with conditional formatting — v1.1
+- ✓ Recalculates correctly (no errors) — v1.1
+- ✓ Dutch localization — v1.1
+
+**Fiscal Compliance:**
+- ✓ Verified calculations with official Spanish sources (13 AEAT/BOE/SS links) — v1.1
+- ✓ Spain-Belgium treaty Article 4 tie-breaker provisions — v1.1
+- ✓ Centro de intereses vitales + Art. 9.1.b family presumption — v1.1
+- ✓ Dietas extranjero limits (€91.35/€48.08) — v1.1
+- ✓ 183-day threshold warning system — v1.1
+- ✓ Documentation requirements (factura completa, electronic payment) — v1.1
+- ✓ Disclaimer — v1.1
+
+**Additional Features:**
+- ✓ Income tracking tab with client/invoice management — v1.1
+- ✓ Clickable official source citations throughout UI — v1.1
 
 ### Active
 
-**Tax Calculations:**
-- [ ] Calculate RETA contributions using actual registered cuota (€428.40/month fixed)
-- [ ] Calculate IRPF using official 2025/2026 progressive tax brackets
-- [ ] Apply mínimo personal (€5,550 or verified 2026 amount)
-- [ ] Apply mínimo por descendientes for 1 daughter
-- [ ] Apply 5% gastos de difícil justificación (max €2,000/year)
-- [ ] Apply 7% reducción rendimientos (generic SS expenses)
-- [ ] Calculate effective tax rate
-- [ ] Show net income monthly and annually
+Requirements for next milestone (to be defined):
 
-**Expense Tracking:**
-- [ ] Track deductible Spanish business expenses (huur 30%, GSM 50%, elektriciteit 9%)
-- [ ] Track Belgium work costs (flights, accommodation, local transport, dietas)
-- [ ] Track non-deductible private expenses for leefgeld calculation
-- [ ] Categorize expenses clearly (deductible vs private)
-- [ ] Support two Belgium cost patterns (€1,000 vs €2,500/month)
-
-**Scenario Planning:**
-- [ ] Pre-configured scenarios A-E (€3K to €18K monthly revenue)
-- [ ] Custom scenario creation with user-defined values
-- [ ] Live editing of any value with auto-recalculation
-- [ ] Side-by-side scenario comparison
-- [ ] Highlight optimal scenarios based on goals
-
-**Belgium Work Calendar:**
-- [ ] Interactive calendar Feb-Dec 2026 with exact dates
-- [ ] Toggle days between Belgium (🇧🇪), Spain (🇪🇸), Travel (✈️)
-- [ ] Auto-count days per month in each location
-- [ ] Annual total with 183-day threshold warning
-- [ ] Pre-fill with contracted pattern (Mon-Tue, first-week Wed-Fri)
-- [ ] Visual indication of contractual obligations vs flexible days
-
-**Interactive Dashboard:**
-- [ ] Financial dashboard aesthetic (professional, Bloomberg-inspired)
-- [ ] Scenario cards with hover effects and drill-down
-- [ ] Expandable cost breakdowns showing formula details
-- [ ] Comparison table with sticky headers
-- [ ] Responsive design (desktop primary, mobile functional)
-- [ ] Export to print, PDF, clipboard
-
-**Excel Calculator:**
-- [ ] Professional multi-sheet workbook
-- [ ] Overview sheet with all scenarios
-- [ ] Detailed sheets per scenario (A-E)
-- [ ] All formulas (NO hardcoded calculated values)
-- [ ] Professional styling with color-coding
-- [ ] Recalculates correctly (no #REF!, #DIV/0! errors)
-
-**Fiscal Compliance:**
-- [ ] Verify all calculations with official Spanish sources
-- [ ] Document Spain-Belgium tax treaty tie-breaker provisions
-- [ ] Calculate dietas extranjero with official 2025/2026 rates
-- [ ] Warning system for 183-day threshold proximity
-- [ ] Disclaimer that this is not official tax advice
+- [ ] Quarterly Modelo 130 calculation and payment tracking
+- [ ] RETA regularization estimator
+- [ ] VeriFactu compliance checker (July 2026)
+- [ ] Belgian IVA recovery (Modelo 360) tracker
+- [ ] Historical data tracking (2026 vs 2027)
+- [ ] Multi-year projection
+- [ ] Calendar sync with Google Calendar/iCal
 
 ### Out of Scope
 
@@ -82,6 +104,38 @@ When financial decisions arise (taking on a new project, planning trips, adjusti
 - **Gestor API integration** — Standalone tool, not integrated with tax advisors' systems
 - **Multi-user accounts** — Single-user tool for personal use
 - **Mobile native apps** — Web-based responsive design only
+
+## Current State
+
+**Version Shipped:** v1.1 (2026-02-03)
+
+**Deliverables:**
+- `autonomo_dashboard.html` - Single-file tax calculator (8,980 lines)
+- `autonomo_calculator.xlsx` - Excel workbook with formulas
+- Complete compliance documentation with official source links
+
+**Codebase:**
+- ~10,000 lines of code (HTML/JS + Excel generator)
+- 79 requirements satisfied
+- 11 phases complete (29 plans executed)
+- Production-ready
+
+**Tech Stack:**
+- Vanilla JavaScript (no frameworks)
+- DM Sans + JetBrains Mono typography
+- Dark theme (#1a1a1a charcoal background)
+- Responsive design (44px touch targets)
+- localStorage for data persistence
+- ExcelJS for workbook generation
+
+**Known Tech Debt (LOW severity):**
+- Excel generation requires manual Node.js execution
+- Three similar IRPF functions (intentional for flexibility)
+
+**User Feedback Themes:**
+- Initial testing revealed need for English localization (completed)
+- Calendar UX improved with checkbox multi-select (completed)
+- Expense auto-detection highly valued (completed)
 
 ## Context
 
@@ -158,13 +212,17 @@ When financial decisions arise (taking on a new project, planning trips, adjusti
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Sequential phased approach | Four clear phases: calculations → design → interactivity → calendar. Ensures solid foundation before adding complexity. | — Pending |
-| Fixed RETA cuota vs tramo calculation | Use actual registered €428.40/month regardless of theoretical tramo. Reflects real-world payment. | — Pending |
-| Belgium costs 100% deductible | All Belgium work costs (flights, accommodation, dietas) treated as fully deductible based on contractual on-site requirements. | — Pending |
-| Spain-Belgium treaty reliance | Use treaty tie-breaker provisions (Art. 4) as defense for Spanish residency despite >183 days in Belgium. Family situation is strongest argument. | — Pending |
-| Interactive calendar essential | Calendar is core feature, not nice-to-have. Needed to actively manage 183-day compliance and plan trips. | — Pending |
-| Single-file HTML design | No build tools or frameworks. Keeps tool portable, inspectable, and easy to maintain. | — Pending |
-| Ralph Loop integration | Use for both auto-improvement cycles and context preservation across sessions. | — Pending |
+| Sequential phased approach | 11 phases: calculations → expenses → scenarios → calendar → UI → Excel → compliance → bug fixes → polish → enhancements. Solid foundation before complexity. | ✓ Good - Clear progression enabled quality |
+| Fixed RETA cuota (€428.40/month) | Use actual registered amount regardless of theoretical tramo. Reflects real-world payment. | ✓ Good - Matches user's tax obligations |
+| Work travel costs deductible | All work travel costs (flights, accommodation, dietas) treated as deductible based on contractual on-site requirements. | ✓ Good - Generalized from Belgium-specific |
+| Spain-Belgium treaty reliance | Treaty Article 4 + Art. 9.1.b family presumption as defense for Spanish residency despite >183 days abroad. | ✓ Good - Comprehensive compliance documentation |
+| Interactive calendar essential | Calendar is core feature with 183-day management, multi-select, export. | ✓ Good - Highly valued by user |
+| Single-file HTML design | No build tools or frameworks. Portable, inspectable, easy to maintain. | ✓ Good - 8,980 lines, production-ready |
+| 4-phase AEAT mínimo method | Minimos reduce TAX liability, not taxable BASE. Official methodology. | ✓ Good - Legally correct calculations |
+| Native dialog elements | HTML5 dialog for all modals (tooltips, edit forms, day picker). | ✓ Good - Accessibility built-in |
+| DM Sans + JetBrains Mono | Professional financial typography (Bloomberg-inspired). | ✓ Good - Distinctive aesthetic |
+| "Disposable Income" over "Leefgeld" | English terminology for international clarity. | ✓ Good - User testing confirmed improvement |
+| Checkbox multi-select calendar | Gmail-style pattern more intuitive than shift-click ranges. | ✓ Good - User testing confirmed improvement |
 
 ---
-*Last updated: 2026-01-29 after initialization*
+*Last updated: 2026-02-03 after v1.1 milestone completion*
