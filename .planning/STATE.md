@@ -11,24 +11,24 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 13 of 29 (Multi-Entity Architecture)
-Plan: 3 of 5 in current phase (13-03 complete)
+Plan: 4 of 5 in current phase (13-04 complete)
 Status: In progress
-Last activity: 2026-02-03 - Completed 13-03-PLAN.md (EntityManager CRUD & Creation Modal)
+Last activity: 2026-02-03 - Completed 13-04-PLAN.md (Entity Switcher UI)
 
-Progress: [#####-------------] 33% (6/18 v2.0 plans complete)
+Progress: [######------------] 39% (7/18 v2.0 plans complete)
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 32
+- Total plans completed: 33
 - Average duration: 3.4 min
-- Total execution time: 164 min
+- Total execution time: 169 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 6 (Phase 12 complete, Phase 13 at 3/5)
-- Phase 13 duration: ~8 min (3 plans)
+- Plans completed: 7 (Phase 12 complete, Phase 13 at 4/5)
+- Phase 13 duration: ~13 min (4 plans)
 
 *Updated after each plan completion*
 
@@ -61,6 +61,8 @@ Recent decisions affecting current work:
 - [13-03]: Entity modal uses HTML entity codes for cross-browser icon compatibility
 - [13-03]: SL minimum capital social 3000 EUR (Spanish legal minimum)
 - [13-03]: Duplicate tax ID detection prevents creating entities with same NIF/CIF
+- [13-04]: ARIA combobox pattern for entity switcher accessibility
+- [13-04]: EntityContext.subscribe() for reactive UI updates
 
 ### Pending Todos
 
@@ -86,8 +88,8 @@ Phases needing `/gsd:research-phase`:
 | 13-01 | SpanishTaxIdValidator, ENTITY_TYPE constants, EntityContext module | `aca2656` |
 | 13-02 | EntityContext integration with initializeDatabase | `dee30a4` |
 | 13-03 | EntityManager CRUD, EntityModal creation form | `aa7b354`, `fc79e3b` |
-| 13-04 | (pending) Entity list/grid display | - |
-| 13-05 | (pending) Entity switcher UI | - |
+| 13-04 | EntitySwitcher UI component in header | `e2dc52f`, `d49fbdf` |
+| 13-05 | (pending) Dual activity detection | - |
 
 **Phase 13 Success Criteria:**
 - [x] NIF validation with modulo 23 algorithm
@@ -98,14 +100,15 @@ Phases needing `/gsd:research-phase`:
 - [x] Session restoration from persisted entity selection
 - [x] Entity creation forms
 - [x] Entity CRUD operations
-- [ ] Entity type switching
+- [x] Entity type switching (via EntitySwitcher dropdown)
+- [ ] Dual activity detection
 
 ## Session Continuity
 
-Last session: 2026-02-03 16:41 UTC
-Stopped at: Completed 13-03-PLAN.md (EntityManager CRUD & Creation Modal)
-Resume file: None - proceed to 13-04-PLAN.md
+Last session: 2026-02-03 16:45 UTC
+Stopped at: Completed 13-04-PLAN.md (Entity Switcher UI)
+Resume file: None - proceed to 13-05-PLAN.md
 
 ---
 *Phase 13 started: 2026-02-03*
-*Next step: Execute 13-04-PLAN.md*
+*Next step: Execute 13-05-PLAN.md*
