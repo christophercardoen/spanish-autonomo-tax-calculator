@@ -81,7 +81,13 @@ Plans:
   3. Autonomo entity stores NIF, nombre, domicilio fiscal, IAE, alta date
   4. SL entity stores CIF, razon social, Registro Mercantil (Tomo/Folio/Hoja), constitution date, share capital
   5. System detects dual activity (user has both autonomo + SL admin role)
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 13-01-PLAN.md - SpanishTaxIdValidator and ENTITY_TYPE constants
+- [ ] 13-02-PLAN.md - EntityContext singleton with observer pattern
+- [ ] 13-03-PLAN.md - EntityManager CRUD and create entity modal
+- [ ] 13-04-PLAN.md - Entity switcher dropdown component
+- [ ] 13-05-PLAN.md - Dual activity detection and verification
 
 ### Phase 14: Authentication & Permissions
 **Goal**: Secure multi-user access with role-based permissions per entity
