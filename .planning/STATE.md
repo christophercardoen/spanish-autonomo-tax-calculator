@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 12 ready to plan
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 12 in progress
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 12 of 29 (Data Architecture Foundation)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-02-03 - Roadmap created for v2.0 milestone
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-02-03 - Completed 12-01-PLAN.md (Database Foundation)
 
-Progress: [------------------] 0% (0/18 phases complete)
+Progress: [#-----------------] 6% (1/18 phases partially complete)
 
 ## Performance Metrics
 
@@ -27,7 +27,7 @@ Progress: [------------------] 0% (0/18 phases complete)
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 0
+- Plans completed: 1
 
 *Updated after each plan completion*
 
@@ -44,14 +44,17 @@ Recent decisions affecting current work:
 - [v2.0]: Supabase + Dexie.js for offline-first with cloud sync
 - [v2.0]: Entity-type polymorphism (single codebase, type-based routing)
 - [v2.0]: Dual tax engines (preserve v1.1 IRPF, add parallel IS engine)
+- [12-01]: Store all monetary values as integer cents, convert at UI boundary
+- [12-01]: 12 tables defined upfront for v2.0 schema consistency
+- [12-01]: Banker's rounding for tax calculations via MoneyUtils
 
 ### Pending Todos
 
-None yet - v2.0 roadmap just created.
+- Complete Phase 12 plans 02 and 03 (CRUD operations, soft delete)
 
 ### Blockers/Concerns
 
-None - roadmap created, ready to start Phase 12.
+None - Phase 12 Plan 01 complete, ready for Plan 02.
 
 ### Research Flags
 
@@ -66,9 +69,9 @@ Phases needing `/gsd:research-phase`:
 ## Session Continuity
 
 Last session: 2026-02-03
-Stopped at: Roadmap created for v2.0 milestone (223 requirements, 18 phases)
-Resume file: None
+Stopped at: Completed 12-01-PLAN.md (Database Foundation with Dexie.js + MoneyUtils)
+Resume file: .planning/phases/12-data-architecture-foundation/12-02-PLAN.md
 
 ---
-*v2.0 roadmap ready: 2026-02-03*
-*Next step: `/gsd:plan-phase 12` or `/gsd:discuss-phase 12`*
+*Plan 12-01 completed: 2026-02-03*
+*Next step: `/gsd:execute-plan 12-02` or continue phase execution*
