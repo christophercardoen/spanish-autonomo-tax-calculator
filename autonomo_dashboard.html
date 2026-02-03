@@ -5128,6 +5128,371 @@
       padding: 32px;
       font-size: 14px;
     }
+
+    /* Invite Modal Styles - Phase 14-05 */
+    .invite-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    .invite-modal.hidden {
+      display: none;
+    }
+
+    .invite-content {
+      background: var(--bg-secondary, #242424);
+      border: 1px solid var(--border-color, #333);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 480px;
+      width: 90%;
+    }
+
+    .invite-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .invite-header h3 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--text-primary, #fff);
+    }
+
+    .invite-close {
+      background: none;
+      border: none;
+      color: var(--text-secondary, #888);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 20px;
+    }
+
+    .invite-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .invite-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .invite-field label {
+      font-size: 13px;
+      color: var(--text-secondary, #888);
+      font-weight: 500;
+    }
+
+    .invite-field input,
+    .invite-field select {
+      background: var(--bg-primary, #1a1a1a);
+      border: 1px solid var(--border-color, #333);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 15px;
+      color: var(--text-primary, #fff);
+      transition: border-color 0.2s;
+    }
+
+    .invite-field input:focus,
+    .invite-field select:focus {
+      outline: none;
+      border-color: var(--accent-color, #3b82f6);
+    }
+
+    .invite-field select {
+      cursor: pointer;
+    }
+
+    .invite-field .help-text {
+      font-size: 12px;
+      color: var(--text-tertiary, #666);
+      margin-top: 4px;
+    }
+
+    .invite-submit {
+      background: var(--accent-color, #3b82f6);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-top: 8px;
+    }
+
+    .invite-submit:hover {
+      background: #2563eb;
+    }
+
+    .invite-submit:disabled {
+      background: #4b5563;
+      cursor: not-allowed;
+    }
+
+    /* Invite result (link/code) */
+    .invite-result {
+      margin-top: 20px;
+      padding: 16px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: 8px;
+    }
+
+    .invite-result-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #22c55e;
+      margin-bottom: 12px;
+    }
+
+    .invite-result-field {
+      margin-bottom: 12px;
+    }
+
+    .invite-result-label {
+      font-size: 12px;
+      color: var(--text-tertiary, #666);
+      margin-bottom: 4px;
+    }
+
+    .invite-result-value {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .invite-result-value input {
+      flex: 1;
+      background: var(--bg-primary, #1a1a1a);
+      border: 1px solid var(--border-color, #333);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--text-primary, #fff);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .invite-copy-btn {
+      background: var(--bg-tertiary, #2a2a2a);
+      border: 1px solid var(--border-color, #333);
+      border-radius: 6px;
+      padding: 10px 14px;
+      color: var(--text-primary, #fff);
+      cursor: pointer;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .invite-copy-btn:hover {
+      background: var(--border-color, #333);
+    }
+
+    /* Sharing Section Styles - Phase 14-05 */
+    .sharing-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color, #333);
+    }
+
+    .sharing-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .sharing-header h4 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--text-primary, #fff);
+    }
+
+    .sharing-invite-btn {
+      background: var(--accent-color, #3b82f6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .sharing-invite-btn:hover {
+      background: #2563eb;
+    }
+
+    .sharing-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sharing-item {
+      background: var(--bg-primary, #1a1a1a);
+      border: 1px solid var(--border-color, #333);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sharing-item.pending {
+      border-style: dashed;
+      opacity: 0.8;
+    }
+
+    .sharing-user {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sharing-user-name {
+      font-size: 14px;
+      color: var(--text-primary, #fff);
+    }
+
+    .sharing-user-email {
+      font-size: 12px;
+      color: var(--text-secondary, #888);
+    }
+
+    .sharing-user-status {
+      font-size: 11px;
+      color: var(--text-tertiary, #666);
+      font-style: italic;
+    }
+
+    .sharing-role {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sharing-role-badge {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    .sharing-role-badge.owner {
+      background: rgba(168, 85, 247, 0.2);
+      color: #a855f7;
+    }
+
+    .sharing-role-badge.partner {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .sharing-role-badge.accountant {
+      background: rgba(59, 130, 246, 0.2);
+      color: #3b82f6;
+    }
+
+    .sharing-role-badge.gestor {
+      background: rgba(234, 179, 8, 0.2);
+      color: #eab308;
+    }
+
+    .sharing-revoke {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+
+    .sharing-revoke:hover {
+      text-decoration: underline;
+    }
+
+    .sharing-empty {
+      text-align: center;
+      color: var(--text-tertiary, #666);
+      padding: 24px;
+      font-size: 14px;
+    }
+
+    /* Accept Invite Banner - Phase 14-05 */
+    .invite-accept-banner {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .invite-accept-banner.hidden {
+      display: none;
+    }
+
+    .invite-accept-info h4 {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+      color: var(--text-primary, #fff);
+    }
+
+    .invite-accept-info p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-secondary, #888);
+    }
+
+    .invite-accept-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .invite-accept-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .invite-accept-btn.accept {
+      background: var(--accent-color, #3b82f6);
+      color: #fff;
+      border: none;
+    }
+
+    .invite-accept-btn.accept:hover {
+      background: #2563eb;
+    }
+
+    .invite-accept-btn.decline {
+      background: transparent;
+      color: var(--text-secondary, #888);
+      border: 1px solid var(--border-color, #333);
+    }
+
+    .invite-accept-btn.decline:hover {
+      background: var(--bg-tertiary, #2a2a2a);
+    }
   </style>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
