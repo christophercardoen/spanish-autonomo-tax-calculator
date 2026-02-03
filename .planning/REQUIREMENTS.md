@@ -17,14 +17,14 @@
 
 ### Multi-Entity Management (ENTITY)
 
-- [ ] **ENTITY-01**: User can create multiple business entities
-- [ ] **ENTITY-02**: User selects entity type: Autónomo or SL (Sociedad Limitada)
-- [ ] **ENTITY-03**: Autónomo entity stores: NIF, nombre, domicilio fiscal, IAE, date of alta
-- [ ] **ENTITY-04**: SL entity stores: CIF, razón social, domicilio social, Registro Mercantil data (Tomo/Folio/Hoja), constitution date, share capital
-- [ ] **ENTITY-05**: User can switch between entities via entity switcher
-- [ ] **ENTITY-06**: Each entity has independent data (clients, invoices, expenses, calendar)
-- [ ] **ENTITY-07**: User can archive inactive entities
-- [ ] **ENTITY-08**: System detects dual activity (user is both autónomo + SL administrador)
+- [x] **ENTITY-01**: User can create multiple business entities
+- [x] **ENTITY-02**: User selects entity type: Autónomo or SL (Sociedad Limitada)
+- [x] **ENTITY-03**: Autónomo entity stores: NIF, nombre, domicilio fiscal, IAE, date of alta
+- [x] **ENTITY-04**: SL entity stores: CIF, razón social, domicilio social, Registro Mercantil data (Tomo/Folio/Hoja), constitution date, share capital
+- [x] **ENTITY-05**: User can switch between entities via entity switcher
+- [x] **ENTITY-06**: Each entity has independent data (clients, invoices, expenses, calendar)
+- [x] **ENTITY-07**: User can archive inactive entities
+- [x] **ENTITY-08**: System detects dual activity (user is both autónomo + SL administrador)
 
 ### Permissions & Sharing (PERM)
 

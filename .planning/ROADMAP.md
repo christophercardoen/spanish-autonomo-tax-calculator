@@ -34,8 +34,8 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for archived phase details.
 
 ---
 
-- [ ] **Phase 12: Data Architecture Foundation** - IndexedDB/Dexie.js setup, float precision, soft delete, sync queue
-- [ ] **Phase 13: Multi-Entity Architecture** - Entity type selection, RLS policies, entity switcher
+- [x] **Phase 12: Data Architecture Foundation** - IndexedDB/Dexie.js setup, float precision, soft delete, sync queue
+- [x] **Phase 13: Multi-Entity Architecture** - Entity type selection, RLS policies, entity switcher
 - [ ] **Phase 14: Authentication & Permissions** - User accounts, roles, entity-level access control
 - [ ] **Phase 15: Client Management** - CRM with NIF/VIES validation, country categorization
 - [ ] **Phase 16: Calendar Enhancement** - Client tagging, 183-day preservation, work patterns
@@ -83,11 +83,11 @@ Plans:
   5. System detects dual activity (user has both autonomo + SL admin role)
 **Plans**: 5 plans
 Plans:
-- [ ] 13-01-PLAN.md - SpanishTaxIdValidator and ENTITY_TYPE constants
-- [ ] 13-02-PLAN.md - EntityContext singleton with observer pattern
-- [ ] 13-03-PLAN.md - EntityManager CRUD and create entity modal
-- [ ] 13-04-PLAN.md - Entity switcher dropdown component
-- [ ] 13-05-PLAN.md - Dual activity detection and verification
+- [x] 13-01-PLAN.md - SpanishTaxIdValidator and ENTITY_TYPE constants
+- [x] 13-02-PLAN.md - EntityContext singleton with observer pattern
+- [x] 13-03-PLAN.md - EntityManager CRUD and create entity modal
+- [x] 13-04-PLAN.md - Entity switcher dropdown component
+- [x] 13-05-PLAN.md - Dual activity detection and verification
 
 ### Phase 14: Authentication & Permissions
 **Goal**: Secure multi-user access with role-based permissions per entity
@@ -289,7 +289,7 @@ Phases 12-29 execute sequentially with dependencies as noted.
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 12. Data Architecture | v2.0 | 3/3 | ✓ Complete | 2026-02-03 |
-| 13. Multi-Entity Architecture | v2.0 | 0/TBD | Not started | - |
+| 13. Multi-Entity Architecture | v2.0 | 5/5 | ✓ Complete | 2026-02-03 |
 | 14. Authentication & Permissions | v2.0 | 0/TBD | Not started | - |
 | 15. Client Management | v2.0 | 0/TBD | Not started | - |
 | 16. Calendar Enhancement | v2.0 | 0/TBD | Not started | - |
