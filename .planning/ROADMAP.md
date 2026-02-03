@@ -99,7 +99,14 @@ Plans:
   3. Entity owner can invite users with role: Gestor (read-only), Accountant (read-write), Partner (full)
   4. Invited user sees only entities they have been granted access to
   5. Gestor can view and export but not modify; Accountant can edit but not delete invoices
-**Plans**: TBD
+**Plans**: 6 plans
+Plans:
+- [ ] 14-01-PLAN.md - Database schema extension with auth tables (profiles, entity_shares, invitations, sessions)
+- [ ] 14-02-PLAN.md - Supabase Auth client with magic link and Google OAuth
+- [ ] 14-03-PLAN.md - Login/auth UI, profile page, user menu
+- [ ] 14-04-PLAN.md - 2FA (TOTP) enrollment and session management
+- [ ] 14-05-PLAN.md - Invitation system for entity sharing with roles
+- [ ] 14-06-PLAN.md - Permission enforcement in UI and verification checkpoint
 
 ### Phase 15: Client Management
 **Goal**: Users can manage clients with proper tax ID validation and categorization
@@ -290,7 +297,7 @@ Phases 12-29 execute sequentially with dependencies as noted.
 |-------|-----------|----------------|--------|-----------|
 | 12. Data Architecture | v2.0 | 3/3 | ✓ Complete | 2026-02-03 |
 | 13. Multi-Entity Architecture | v2.0 | 5/5 | ✓ Complete | 2026-02-03 |
-| 14. Authentication & Permissions | v2.0 | 0/TBD | Not started | - |
+| 14. Authentication & Permissions | v2.0 | 0/6 | Planned | - |
 | 15. Client Management | v2.0 | 0/TBD | Not started | - |
 | 16. Calendar Enhancement | v2.0 | 0/TBD | Not started | - |
 | 17. Expense Management | v2.0 | 0/TBD | Not started | - |
