@@ -65,7 +65,11 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for archived phase details.
   3. Deleted records retained with deleted_at timestamp (soft delete for 4-year retention)
   4. Offline changes queued for future sync
   5. Schema migrations handle version upgrades gracefully
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [x] 12-01-PLAN.md - Database schema and MoneyUtils initialization
+- [x] 12-02-PLAN.md - Soft delete system and sync queue infrastructure
+- [x] 12-03-PLAN.md - Invoice sequence manager and verification checkpoint
 
 ### Phase 13: Multi-Entity Architecture
 **Goal**: Users can manage multiple business entities (Autonomo and/or SL) from single account
@@ -278,7 +282,7 @@ Phases 12-29 execute sequentially with dependencies as noted.
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 12. Data Architecture | v2.0 | 0/TBD | Not started | - |
+| 12. Data Architecture | v2.0 | 3/3 | ✓ Complete | 2026-02-03 |
 | 13. Multi-Entity Architecture | v2.0 | 0/TBD | Not started | - |
 | 14. Authentication & Permissions | v2.0 | 0/TBD | Not started | - |
 | 15. Client Management | v2.0 | 0/TBD | Not started | - |

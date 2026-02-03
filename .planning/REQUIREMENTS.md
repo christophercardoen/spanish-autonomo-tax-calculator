@@ -511,7 +511,7 @@
 | MIGRATION-08 | Phase 26 | Pending |
 | MIGRATION-09 | Phase 26 | Pending |
 | MIGRATION-10 | Phase 26 | Pending |
-| SYNC-01 | Phase 12 | Pending |
+| SYNC-01 | Phase 12 | Complete |
 | SYNC-02 | Phase 27 | Pending |
 | SYNC-03 | Phase 27 | Pending |
 | SYNC-04 | Phase 27 | Pending |
