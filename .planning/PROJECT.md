@@ -85,15 +85,37 @@ All requirements from v1.1 milestone (shipped 2026-02-03):
 
 ### Active
 
-Requirements for next milestone (to be defined):
+**Current Milestone:** v2.0 Multi-Entity Business Management System
 
-- [ ] Quarterly Modelo 130 calculation and payment tracking
-- [ ] RETA regularization estimator
-- [ ] VeriFactu compliance checker (July 2026)
-- [ ] Belgian IVA recovery (Modelo 360) tracker
-- [ ] Historical data tracking (2026 vs 2027)
-- [ ] Multi-year projection
-- [ ] Calendar sync with Google Calendar/iCal
+**Goal:** Transform from simulation tool to production multi-tenant business management system supporting Spanish SMEs (autónomo + Sociedad Limitada) with multi-entity support, client CRM, invoice generation, receipt OCR, and dual tax automation engines.
+
+**Target features (223 requirements across 18 phases):**
+
+**Core Infrastructure:**
+- Multi-entity management (autónomo + SL with entity type selection)
+- Authentication & permissions (multi-user with roles: Owner, Gestor, Accountant, Partner)
+- Offline-first data architecture (IndexedDB/Dexie.js with cloud sync)
+
+**CRM & Operations:**
+- Client management with NIF/VIES validation and global categorization (EU/UK/US/CA/AU)
+- Project tracking per client with rates and work patterns
+- Invoice generation (factura completa + VeriFactu QR codes)
+- Receipt upload with OCR (Mindee API, 90-95% accuracy on European receipts)
+- Enhanced calendar with client tagging (preserves 183-day tracking)
+
+**Tax Automation:**
+- Autónomo: Modelo 130 quarterly, IRPF progressive (19-47%), RETA regularization, gastos difícil 5%
+- SL: Modelo 202/200, Impuesto de Sociedades (15-25%), BINs carry-forward, NO gastos difícil
+- SL Accounting: P&L, balance sheet, Cuentas Anuales (Registro Mercantil filing)
+- Cross-entity integration: Dual activity detection, related-party transactions, salary vs dividend optimizer
+- IVA multi-jurisdiction: Modelo 303/390/349, inversión sujeto pasivo, VIES, W-8BEN tracking
+
+**Platform:**
+- Progressive Web App (PWA) with service worker
+- Mobile-optimized UX (camera upload, offline queue, 44px touch targets)
+- Cloud sync (Supabase) with conflict resolution
+- Data migration from v1.1 localStorage
+- Comprehensive reports & analytics
 
 ### Out of Scope
 
@@ -225,4 +247,4 @@ Requirements for next milestone (to be defined):
 | Checkbox multi-select calendar | Gmail-style pattern more intuitive than shift-click ranges. | ✓ Good - User testing confirmed improvement |
 
 ---
-*Last updated: 2026-02-03 after v1.1 milestone completion*
+*Last updated: 2026-02-03 after v2.0 milestone initialization*
