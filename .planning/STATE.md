@@ -5,30 +5,30 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 14 COMPLETE
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 14 COMPLETE (with 2FA)
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 14 of 29 (Authentication & Permissions) - COMPLETE
-Plan: 3 of 3 in current phase (14-03 complete)
+Plan: 4 of 4 in current phase (14-04 complete)
 Status: Phase complete
-Last activity: 2026-02-03 - Completed 14-03-PLAN.md (Authentication UI)
+Last activity: 2026-02-03 - Completed 14-04-PLAN.md (2FA and Sessions)
 
-Progress: [##########--------] 61% (11/18 v2.0 plans complete)
+Progress: [###########-------] 63% (12/19 v2.0 plans complete)
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 37
-- Average duration: 3.3 min
-- Total execution time: 181 min
+- Total plans completed: 38
+- Average duration: 3.4 min
+- Total execution time: 186 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 11 (Phase 12 complete, Phase 13 complete, Phase 14 complete)
-- Phase 14 duration: ~7 min (3 plans)
+- Plans completed: 12 (Phase 12 complete, Phase 13 complete, Phase 14 complete)
+- Phase 14 duration: ~12 min (4 plans)
 
 *Updated after each plan completion*
 
@@ -77,6 +77,12 @@ Recent decisions affecting current work:
 - [14-03]: Profile accessed via user menu dropdown, hides tab navigation
 - [14-03]: NIF/CIF validation reuses SpanishTaxIdValidator from Phase 13
 - [14-03]: Offline mode shows 'O' avatar and 'Offline' label in user menu
+- [14-04]: MFA uses Supabase AAL (Authenticator Assurance Level) for session security
+- [14-04]: 6-digit code input with auto-advance and paste support for UX
+- [14-04]: MFA challenge intercepts auth state before dashboard access
+- [14-04]: Sessions list shows device name and relative time (Just now, 5m ago, etc.)
+- [14-04]: 2FA toggle hidden in offline mode (requires Supabase)
+- [14-04]: XSS prevention via escapeHtml on session device names
 
 ### Pending Todos
 
@@ -102,6 +108,7 @@ Phases needing `/gsd:research-phase`:
 | 14-01 | DB schema v2, ProfileManager, EntityShareManager, InvitationManager, SessionManager | `a9b59c5`, `d404650` |
 | 14-02 | Supabase client, AuthManager (magic link, OAuth, password reset), EntityAccessManager | `be1e7f7`, `6cb7184` |
 | 14-03 | Login screen UI, AuthUI controller, User menu, Profile page | `89bfcb3`, `7396717`, `08c3bb5` |
+| 14-04 | MFAManager, MFAUI, SessionsUI, 2FA profile toggle | `7f4005d`, `92df45d`, `9119a1c` |
 
 **Phase 14 Success Criteria:**
 - [x] Database schema extended with auth tables
@@ -115,17 +122,18 @@ Phases needing `/gsd:research-phase`:
 - [x] EntityAccessManager with role-based permissions
 - [x] Magic link authentication UI
 - [x] Google OAuth integration UI
-- [ ] TOTP 2FA enrollment UI (deferred - not in v2.0 scope)
+- [x] TOTP 2FA enrollment UI (AUTH-05)
+- [x] Active sessions list with revocation (AUTH-06)
 - [ ] Entity sharing UI (deferred to Phase 15)
 - [ ] Permission enforcement in UI (deferred to Phase 15)
 
 ## Session Continuity
 
-Last session: 2026-02-03 20:21 UTC
-Stopped at: Completed 14-03-PLAN.md (Authentication UI)
+Last session: 2026-02-03 20:28 UTC
+Stopped at: Completed 14-04-PLAN.md (2FA and Sessions)
 Resume file: None - Phase 14 complete
 
 ---
-*Plan 14-03 completed: 2026-02-03*
+*Plan 14-04 completed: 2026-02-03*
 *Phase 14 complete*
 *Next step: /gsd:plan-phase 15 or /gsd:execute-phase 15*
