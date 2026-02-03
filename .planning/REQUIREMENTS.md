@@ -287,13 +287,13 @@
 ### Payroll & Employees
 - **PAY-01**: SL can add employees with payroll tracking
 - **PAY-02**: Calculate employee IRPF retention and SS contributions
-- **PAY-03**: Generate payroll receipts (nóminas)
+- **PAY-03**: Generate payroll receipts (nominas)
 - **PAY-04**: Track Modelo 111 (employee IRPF retention quarterly)
 
 ### Advanced Accounting
 - **ACC-01**: Full chart of accounts (Plan General Contable PYMES)
 - **ACC-02**: Double-entry bookkeeping with debits/credits
-- **ACC-03**: Asset depreciation tracking (amortización)
+- **ACC-03**: Asset depreciation tracking (amortizacion)
 - **ACC-04**: Inventory management for product businesses
 
 ### Bank Integration
@@ -317,14 +317,263 @@
 
 ## Traceability
 
-*To be filled by roadmapper during roadmap creation.*
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| AUTH-01 | Phase 14 | Pending |
+| AUTH-02 | Phase 14 | Pending |
+| AUTH-03 | Phase 14 | Pending |
+| AUTH-04 | Phase 14 | Pending |
+| AUTH-05 | Phase 14 | Pending |
+| AUTH-06 | Phase 14 | Pending |
+| AUTH-07 | Phase 14 | Pending |
+| ENTITY-01 | Phase 13 | Pending |
+| ENTITY-02 | Phase 13 | Pending |
+| ENTITY-03 | Phase 13 | Pending |
+| ENTITY-04 | Phase 13 | Pending |
+| ENTITY-05 | Phase 13 | Pending |
+| ENTITY-06 | Phase 13 | Pending |
+| ENTITY-07 | Phase 13 | Pending |
+| ENTITY-08 | Phase 13 | Pending |
+| PERM-01 | Phase 14 | Pending |
+| PERM-02 | Phase 14 | Pending |
+| PERM-03 | Phase 14 | Pending |
+| PERM-04 | Phase 14 | Pending |
+| PERM-05 | Phase 14 | Pending |
+| PERM-06 | Phase 14 | Pending |
+| PERM-07 | Phase 14 | Pending |
+| CLIENT-01 | Phase 15 | Pending |
+| CLIENT-02 | Phase 15 | Pending |
+| CLIENT-03 | Phase 15 | Pending |
+| CLIENT-04 | Phase 15 | Pending |
+| CLIENT-05 | Phase 15 | Pending |
+| CLIENT-06 | Phase 15 | Pending |
+| CLIENT-07 | Phase 15 | Pending |
+| CLIENT-08 | Phase 15 | Pending |
+| CLIENT-09 | Phase 15 | Pending |
+| CLIENT-10 | Phase 15 | Pending |
+| CLIENT-11 | Phase 15 | Pending |
+| CLIENT-12 | Phase 15 | Pending |
+| CLIENT-13 | Phase 15 | Pending |
+| CLIENT-14 | Phase 15 | Pending |
+| CALENDAR-01 | Phase 16 | Pending |
+| CALENDAR-02 | Phase 16 | Pending |
+| CALENDAR-03 | Phase 16 | Pending |
+| CALENDAR-04 | Phase 16 | Pending |
+| CALENDAR-05 | Phase 16 | Pending |
+| CALENDAR-06 | Phase 16 | Pending |
+| CALENDAR-07 | Phase 16 | Pending |
+| CALENDAR-08 | Phase 16 | Pending |
+| CALENDAR-09 | Phase 16 | Pending |
+| CALENDAR-10 | Phase 16 | Pending |
+| CALENDAR-11 | Phase 16 | Pending |
+| CALENDAR-12 | Phase 16 | Pending |
+| CALENDAR-13 | Phase 16 | Pending |
+| CALENDAR-14 | Phase 16 | Pending |
+| CALENDAR-15 | Phase 16 | Pending |
+| CALENDAR-16 | Phase 16 | Pending |
+| EXPENSE-01 | Phase 17 | Pending |
+| EXPENSE-02 | Phase 17 | Pending |
+| EXPENSE-03 | Phase 17 | Pending |
+| EXPENSE-04 | Phase 17 | Pending |
+| EXPENSE-05 | Phase 17 | Pending |
+| EXPENSE-06 | Phase 17 | Pending |
+| EXPENSE-07 | Phase 17 | Pending |
+| EXPENSE-08 | Phase 17 | Pending |
+| EXPENSE-09 | Phase 17 | Pending |
+| EXPENSE-10 | Phase 17 | Pending |
+| EXPENSE-11 | Phase 17 | Pending |
+| EXPENSE-12 | Phase 17 | Pending |
+| EXPENSE-13 | Phase 17 | Pending |
+| EXPENSE-14 | Phase 17 | Pending |
+| EXPENSE-15 | Phase 17 | Pending |
+| INVOICE-01 | Phase 18 | Pending |
+| INVOICE-02 | Phase 18 | Pending |
+| INVOICE-03 | Phase 18 | Pending |
+| INVOICE-04 | Phase 18 | Pending |
+| INVOICE-05 | Phase 18 | Pending |
+| INVOICE-06 | Phase 18 | Pending |
+| INVOICE-07 | Phase 18 | Pending |
+| INVOICE-08 | Phase 18 | Pending |
+| INVOICE-09 | Phase 18 | Pending |
+| INVOICE-10 | Phase 18 | Pending |
+| INVOICE-11 | Phase 18 | Pending |
+| INVOICE-12 | Phase 18 | Pending |
+| INVOICE-13 | Phase 18 | Pending |
+| INVOICE-14 | Phase 18 | Pending |
+| INVOICE-15 | Phase 18 | Pending |
+| INVOICE-16 | Phase 18 | Pending |
+| INVOICE-17 | Phase 18 | Pending |
+| INVOICE-18 | Phase 18 | Pending |
+| INVOICE-19 | Phase 18 | Pending |
+| INVOICE-20 | Phase 18 | Pending |
+| INVOICE-21 | Phase 18 | Pending |
+| INVOICE-22 | Phase 18 | Pending |
+| INVOICE-23 | Phase 18 | Pending |
+| RECEIPT-01 | Phase 19 | Pending |
+| RECEIPT-02 | Phase 19 | Pending |
+| RECEIPT-03 | Phase 19 | Pending |
+| RECEIPT-04 | Phase 19 | Pending |
+| RECEIPT-05 | Phase 19 | Pending |
+| RECEIPT-06 | Phase 19 | Pending |
+| RECEIPT-07 | Phase 19 | Pending |
+| RECEIPT-08 | Phase 19 | Pending |
+| RECEIPT-09 | Phase 19 | Pending |
+| RECEIPT-10 | Phase 19 | Pending |
+| RECEIPT-11 | Phase 19 | Pending |
+| RECEIPT-12 | Phase 19 | Pending |
+| RECEIPT-13 | Phase 19 | Pending |
+| RECEIPT-14 | Phase 19 | Pending |
+| RECEIPT-15 | Phase 19 | Pending |
+| RECEIPT-16 | Phase 19 | Pending |
+| TAX-AUTO-01 | Phase 20 | Pending |
+| TAX-AUTO-02 | Phase 20 | Pending |
+| TAX-AUTO-03 | Phase 20 | Pending |
+| TAX-AUTO-04 | Phase 20 | Pending |
+| TAX-AUTO-05 | Phase 20 | Pending |
+| TAX-AUTO-06 | Phase 20 | Pending |
+| TAX-AUTO-07 | Phase 20 | Pending |
+| TAX-AUTO-08 | Phase 20 | Pending |
+| TAX-AUTO-09 | Phase 20 | Pending |
+| TAX-AUTO-10 | Phase 20 | Pending |
+| TAX-AUTO-11 | Phase 20 | Pending |
+| TAX-AUTO-12 | Phase 20 | Pending |
+| TAX-AUTO-13 | Phase 20 | Pending |
+| TAX-AUTO-14 | Phase 20 | Pending |
+| TAX-AUTO-15 | Phase 20 | Pending |
+| TAX-AUTO-16 | Phase 20 | Pending |
+| TAX-AUTO-17 | Phase 20 | Pending |
+| TAX-AUTO-18 | Phase 20 | Pending |
+| TAX-AUTO-19 | Phase 20 | Pending |
+| TAX-AUTO-20 | Phase 20 | Pending |
+| TAX-SL-01 | Phase 21 | Pending |
+| TAX-SL-02 | Phase 21 | Pending |
+| TAX-SL-03 | Phase 21 | Pending |
+| TAX-SL-04 | Phase 21 | Pending |
+| TAX-SL-05 | Phase 21 | Pending |
+| TAX-SL-06 | Phase 21 | Pending |
+| TAX-SL-07 | Phase 21 | Pending |
+| TAX-SL-08 | Phase 21 | Pending |
+| TAX-SL-09 | Phase 21 | Pending |
+| TAX-SL-10 | Phase 21 | Pending |
+| TAX-SL-11 | Phase 21 | Pending |
+| TAX-SL-12 | Phase 21 | Pending |
+| TAX-SL-13 | Phase 21 | Pending |
+| TAX-SL-14 | Phase 21 | Pending |
+| ACCOUNTING-01 | Phase 22 | Pending |
+| ACCOUNTING-02 | Phase 22 | Pending |
+| ACCOUNTING-03 | Phase 22 | Pending |
+| ACCOUNTING-04 | Phase 22 | Pending |
+| ACCOUNTING-05 | Phase 22 | Pending |
+| ACCOUNTING-06 | Phase 22 | Pending |
+| ACCOUNTING-07 | Phase 22 | Pending |
+| ACCOUNTING-08 | Phase 22 | Pending |
+| ACCOUNTING-09 | Phase 22 | Pending |
+| ACCOUNTING-10 | Phase 22 | Pending |
+| ACCOUNTING-11 | Phase 22 | Pending |
+| ACCOUNTING-12 | Phase 22 | Pending |
+| CROSS-01 | Phase 23 | Pending |
+| CROSS-02 | Phase 23 | Pending |
+| CROSS-03 | Phase 23 | Pending |
+| CROSS-04 | Phase 23 | Pending |
+| CROSS-05 | Phase 23 | Pending |
+| CROSS-06 | Phase 23 | Pending |
+| CROSS-07 | Phase 23 | Pending |
+| CROSS-08 | Phase 23 | Pending |
+| CROSS-09 | Phase 23 | Pending |
+| IVA-01 | Phase 24 | Pending |
+| IVA-02 | Phase 24 | Pending |
+| IVA-03 | Phase 24 | Pending |
+| IVA-04 | Phase 24 | Pending |
+| IVA-05 | Phase 24 | Pending |
+| IVA-06 | Phase 24 | Pending |
+| IVA-07 | Phase 24 | Pending |
+| IVA-08 | Phase 24 | Pending |
+| IVA-09 | Phase 24 | Pending |
+| IVA-10 | Phase 24 | Pending |
+| IVA-11 | Phase 24 | Pending |
+| REPORTS-01 | Phase 25 | Pending |
+| REPORTS-02 | Phase 25 | Pending |
+| REPORTS-03 | Phase 25 | Pending |
+| REPORTS-04 | Phase 25 | Pending |
+| REPORTS-05 | Phase 25 | Pending |
+| REPORTS-06 | Phase 25 | Pending |
+| REPORTS-07 | Phase 25 | Pending |
+| REPORTS-08 | Phase 25 | Pending |
+| REPORTS-09 | Phase 25 | Pending |
+| REPORTS-10 | Phase 25 | Pending |
+| MIGRATION-01 | Phase 26 | Pending |
+| MIGRATION-02 | Phase 26 | Pending |
+| MIGRATION-03 | Phase 26 | Pending |
+| MIGRATION-04 | Phase 26 | Pending |
+| MIGRATION-05 | Phase 26 | Pending |
+| MIGRATION-06 | Phase 26 | Pending |
+| MIGRATION-07 | Phase 26 | Pending |
+| MIGRATION-08 | Phase 26 | Pending |
+| MIGRATION-09 | Phase 26 | Pending |
+| MIGRATION-10 | Phase 26 | Pending |
+| SYNC-01 | Phase 12 | Pending |
+| SYNC-02 | Phase 27 | Pending |
+| SYNC-03 | Phase 27 | Pending |
+| SYNC-04 | Phase 27 | Pending |
+| SYNC-05 | Phase 27 | Pending |
+| SYNC-06 | Phase 27 | Pending |
+| SYNC-07 | Phase 27 | Pending |
+| SYNC-08 | Phase 27 | Pending |
+| SYNC-09 | Phase 27 | Pending |
+| SYNC-10 | Phase 27 | Pending |
+| SYNC-11 | Phase 27 | Pending |
+| MOBILE-01 | Phase 28 | Pending |
+| MOBILE-02 | Phase 28 | Pending |
+| MOBILE-03 | Phase 28 | Pending |
+| MOBILE-04 | Phase 28 | Pending |
+| MOBILE-05 | Phase 28 | Pending |
+| MOBILE-06 | Phase 28 | Pending |
+| MOBILE-07 | Phase 28 | Pending |
+| MOBILE-08 | Phase 28 | Pending |
+| MOBILE-09 | Phase 28 | Pending |
+| MOBILE-10 | Phase 28 | Pending |
+| SETTINGS-01 | Phase 29 | Pending |
+| SETTINGS-02 | Phase 29 | Pending |
+| SETTINGS-03 | Phase 29 | Pending |
+| SETTINGS-04 | Phase 29 | Pending |
+| SETTINGS-05 | Phase 29 | Pending |
+| SETTINGS-06 | Phase 29 | Pending |
+| SETTINGS-07 | Phase 29 | Pending |
+| SETTINGS-08 | Phase 29 | Pending |
+| SETTINGS-09 | Phase 29 | Pending |
+| SETTINGS-10 | Phase 29 | Pending |
 
 ## Coverage
 
-**v2.0 requirements:** TBD (count after complete)
-**Mapped to phases:** TBD
-**Unmapped:** TBD
+**v2.0 requirements:** 223
+**Mapped to phases:** 223/223 (100%)
+**Unmapped:** 0
+
+### Coverage by Phase
+
+| Phase | Requirements | Count |
+|-------|--------------|-------|
+| Phase 12: Data Architecture | SYNC-01 | 1 |
+| Phase 13: Multi-Entity Architecture | ENTITY-01 to ENTITY-08 | 8 |
+| Phase 14: Authentication & Permissions | AUTH-01 to AUTH-07, PERM-01 to PERM-07 | 14 |
+| Phase 15: Client Management | CLIENT-01 to CLIENT-14 | 14 |
+| Phase 16: Calendar Enhancement | CALENDAR-01 to CALENDAR-16 | 16 |
+| Phase 17: Expense Management | EXPENSE-01 to EXPENSE-15 | 15 |
+| Phase 18: Invoice Generation | INVOICE-01 to INVOICE-23 | 23 |
+| Phase 19: Receipt Upload & OCR | RECEIPT-01 to RECEIPT-16 | 16 |
+| Phase 20: Tax Automation - Autonomo | TAX-AUTO-01 to TAX-AUTO-20 | 20 |
+| Phase 21: Tax Automation - SL | TAX-SL-01 to TAX-SL-14 | 14 |
+| Phase 22: SL Accounting | ACCOUNTING-01 to ACCOUNTING-12 | 12 |
+| Phase 23: Cross-Entity Integration | CROSS-01 to CROSS-09 | 9 |
+| Phase 24: IVA & Multi-Jurisdiction | IVA-01 to IVA-11 | 11 |
+| Phase 25: Reports & Analytics | REPORTS-01 to REPORTS-10 | 10 |
+| Phase 26: Data Migration | MIGRATION-01 to MIGRATION-10 | 10 |
+| Phase 27: Cloud Sync | SYNC-02 to SYNC-11 | 10 |
+| Phase 28: Mobile & PWA | MOBILE-01 to MOBILE-10 | 10 |
+| Phase 29: Settings & Preferences | SETTINGS-01 to SETTINGS-10 | 10 |
+| **Total** | | **223** |
 
 ---
 *Requirements defined: 2026-02-03*
-*Last updated: 2026-02-03 after v2.0 scope expansion with SL support*
+*Traceability updated: 2026-02-03 after roadmap creation*
+*Last updated: 2026-02-03*
