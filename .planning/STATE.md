@@ -5,30 +5,30 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 14 COMPLETE (with 2FA)
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 14 COMPLETE (with sharing UI)
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 14 of 29 (Authentication & Permissions) - COMPLETE
-Plan: 4 of 4 in current phase (14-04 complete)
+Plan: 5 of 5 in current phase (14-05 complete)
 Status: Phase complete
-Last activity: 2026-02-03 - Completed 14-04-PLAN.md (2FA and Sessions)
+Last activity: 2026-02-03 - Completed 14-05-PLAN.md (Entity Sharing UI)
 
-Progress: [###########-------] 63% (12/19 v2.0 plans complete)
+Progress: [############------] 68% (13/19 v2.0 plans complete)
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 38
+- Total plans completed: 39
 - Average duration: 3.4 min
-- Total execution time: 186 min
+- Total execution time: 190 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 12 (Phase 12 complete, Phase 13 complete, Phase 14 complete)
-- Phase 14 duration: ~12 min (4 plans)
+- Plans completed: 13 (Phase 12 complete, Phase 13 complete, Phase 14 complete)
+- Phase 14 duration: ~16 min (5 plans)
 
 *Updated after each plan completion*
 
@@ -83,6 +83,11 @@ Recent decisions affecting current work:
 - [14-04]: Sessions list shows device name and relative time (Just now, 5m ago, etc.)
 - [14-04]: 2FA toggle hidden in offline mode (requires Supabase)
 - [14-04]: XSS prevention via escapeHtml on session device names
+- [14-05]: InviteUI creates both shareable link and code for flexibility
+- [14-05]: Sharing section located in profile tab (accessed via user menu)
+- [14-05]: Only owner and partner roles can invite or revoke users
+- [14-05]: Pending invitations shown with dashed border and expiry countdown
+- [14-05]: EntityContext subscriber updates sharing section on entity change
 
 ### Pending Todos
 
@@ -90,7 +95,7 @@ None - Phase 14 complete. Ready for Phase 15.
 
 ### Blockers/Concerns
 
-None - Phase 14 completed successfully.
+None - Phase 14 completed successfully with all sharing UI.
 
 ### Research Flags
 
@@ -109,6 +114,7 @@ Phases needing `/gsd:research-phase`:
 | 14-02 | Supabase client, AuthManager (magic link, OAuth, password reset), EntityAccessManager | `be1e7f7`, `6cb7184` |
 | 14-03 | Login screen UI, AuthUI controller, User menu, Profile page | `89bfcb3`, `7396717`, `08c3bb5` |
 | 14-04 | MFAManager, MFAUI, SessionsUI, 2FA profile toggle | `7f4005d`, `92df45d`, `9119a1c` |
+| 14-05 | Invite modal, InviteUI, SharingUI, team access section | `3aad83b`, `242e1eb`, `d9da2e5` |
 
 **Phase 14 Success Criteria:**
 - [x] Database schema extended with auth tables
@@ -124,16 +130,17 @@ Phases needing `/gsd:research-phase`:
 - [x] Google OAuth integration UI
 - [x] TOTP 2FA enrollment UI (AUTH-05)
 - [x] Active sessions list with revocation (AUTH-06)
-- [ ] Entity sharing UI (deferred to Phase 15)
-- [ ] Permission enforcement in UI (deferred to Phase 15)
+- [x] Entity sharing invitation UI (PERM-01, PERM-02, PERM-03)
+- [x] Sharing management with revocation (PERM-05)
+- [ ] Permission enforcement in UI (Phase 15)
 
 ## Session Continuity
 
-Last session: 2026-02-03 20:28 UTC
-Stopped at: Completed 14-04-PLAN.md (2FA and Sessions)
+Last session: 2026-02-03 20:35 UTC
+Stopped at: Completed 14-05-PLAN.md (Entity Sharing UI)
 Resume file: None - Phase 14 complete
 
 ---
-*Plan 14-04 completed: 2026-02-03*
+*Plan 14-05 completed: 2026-02-03*
 *Phase 14 complete*
 *Next step: /gsd:plan-phase 15 or /gsd:execute-phase 15*
