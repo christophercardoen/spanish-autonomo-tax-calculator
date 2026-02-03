@@ -4980,6 +4980,154 @@
     .mfa-btn-secondary:hover {
       background: var(--bg-tertiary, #2a2a2a);
     }
+
+    /* Sessions Modal Styles - Phase 14-04 */
+    .sessions-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    .sessions-modal.hidden {
+      display: none;
+    }
+
+    .sessions-content {
+      background: var(--bg-secondary, #242424);
+      border: 1px solid var(--border-color, #333);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .sessions-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .sessions-header h3 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--text-primary, #fff);
+    }
+
+    .sessions-close {
+      background: none;
+      border: none;
+      color: var(--text-secondary, #888);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 20px;
+    }
+
+    .sessions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .session-item {
+      background: var(--bg-primary, #1a1a1a);
+      border: 1px solid var(--border-color, #333);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .session-item.current {
+      border-color: var(--accent-color, #3b82f6);
+    }
+
+    .session-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .session-device {
+      font-size: 14px;
+      color: var(--text-primary, #fff);
+      font-weight: 500;
+    }
+
+    .session-details {
+      font-size: 12px;
+      color: var(--text-secondary, #888);
+    }
+
+    .session-current-badge {
+      font-size: 11px;
+      background: var(--accent-color, #3b82f6);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    .session-revoke {
+      background: transparent;
+      border: 1px solid #ef4444;
+      color: #ef4444;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .session-revoke:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    .sessions-actions {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color, #333);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sessions-action-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .sessions-action-btn.danger {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+    }
+
+    .sessions-action-btn.danger:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .sessions-empty {
+      text-align: center;
+      color: var(--text-secondary, #888);
+      padding: 32px;
+      font-size: 14px;
+    }
   </style>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
@@ -5150,6 +5298,26 @@
         </button>
         <button class="mfa-btn mfa-btn-secondary" onclick="MFAUI.cancelEnrollment()">
           Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 14-04: Sessions Modal (AUTH-06) -->
+  <div id="sessions-modal" class="sessions-modal hidden">
+    <div class="sessions-content">
+      <div class="sessions-header">
+        <h3>Active Sessions</h3>
+        <button class="sessions-close" onclick="SessionsUI.close()">&times;</button>
+      </div>
+
+      <div id="sessions-list" class="sessions-list">
+        <!-- Sessions will be populated dynamically -->
+      </div>
+
+      <div class="sessions-actions">
+        <button class="sessions-action-btn danger" onclick="SessionsUI.signOutOthers()">
+          Sign out all other devices
         </button>
       </div>
     </div>
@@ -5588,6 +5756,17 @@
             <div class="profile-field">
               <label for="profile-address">Address</label>
               <input type="text" id="profile-address" placeholder="Street, City, Postal Code">
+            </div>
+
+            <!-- 2FA Settings - Phase 14-04 -->
+            <div class="profile-field" id="profile-2fa-section">
+              <label>Two-Factor Authentication</label>
+              <div id="profile-2fa-status" style="display: flex; align-items: center; gap: 12px; margin-top: 8px;">
+                <span id="profile-2fa-text">Loading...</span>
+                <button type="button" id="profile-2fa-btn" class="auth-link" onclick="ProfileUI.toggle2FA()">
+                  Enable
+                </button>
+              </div>
             </div>
 
             <div class="profile-actions">
@@ -11575,12 +11754,11 @@ Generated by Autonomo Tax Calculator`;
       },
 
       /**
-       * Show sessions modal (to be implemented in future plan)
+       * Show sessions modal (Phase 14-04)
        */
       showSessions() {
         this.close();
-        console.log('Sessions - to be implemented in future plan');
-        // TODO: Show sessions modal
+        SessionsUI.open();
       },
 
       /**
@@ -11646,6 +11824,9 @@ Generated by Autonomo Tax Calculator`;
         document.getElementById('profile-nif').value = profile?.nif_cif || '';
         document.getElementById('profile-phone').value = profile?.phone || '';
         document.getElementById('profile-address').value = profile?.address || '';
+
+        // Update 2FA status (Phase 14-04)
+        await this.update2FAStatus();
       },
 
       /**
@@ -11711,6 +11892,45 @@ Generated by Autonomo Tax Calculator`;
             }, 3000);
           }
         }
+      },
+
+      /**
+       * Update 2FA status display - Phase 14-04
+       */
+      async update2FAStatus() {
+        const statusEl = document.getElementById('profile-2fa-text');
+        const btnEl = document.getElementById('profile-2fa-btn');
+        const sectionEl = document.getElementById('profile-2fa-section');
+
+        if (AuthManager.isOfflineMode()) {
+          if (sectionEl) sectionEl.style.display = 'none';
+          return;
+        }
+
+        const enabled = await MFAManager.isMFAEnabled();
+
+        if (statusEl) {
+          statusEl.textContent = enabled ? 'Enabled' : 'Disabled';
+          statusEl.style.color = enabled ? '#22c55e' : 'var(--text-secondary)';
+        }
+
+        if (btnEl) {
+          btnEl.textContent = enabled ? 'Disable' : 'Enable';
+        }
+      },
+
+      /**
+       * Toggle 2FA - Phase 14-04
+       */
+      async toggle2FA() {
+        const enabled = await MFAManager.isMFAEnabled();
+        if (enabled) {
+          await MFAUI.disable();
+        } else {
+          await MFAUI.startEnrollment();
+        }
+        // Refresh status after modal closes
+        setTimeout(() => this.update2FAStatus(), 500);
       }
     };
 
@@ -11956,6 +12176,165 @@ Generated by Autonomo Tax Calculator`;
           console.error('MFA disable error:', error);
           alert('Failed to disable 2FA: ' + error.message);
         }
+      }
+    };
+
+    /**
+     * SessionsUI - Active sessions list UI controller
+     * Phase 14-04 - AUTH-06
+     */
+    const SessionsUI = {
+      /**
+       * Open sessions modal
+       */
+      async open() {
+        const modal = document.getElementById('sessions-modal');
+        if (modal) modal.classList.remove('hidden');
+        await this.load();
+      },
+
+      /**
+       * Close modal
+       */
+      close() {
+        const modal = document.getElementById('sessions-modal');
+        if (modal) modal.classList.add('hidden');
+      },
+
+      /**
+       * Load sessions list
+       */
+      async load() {
+        const container = document.getElementById('sessions-list');
+        if (!container) return;
+
+        const user = AuthManager.getUser();
+        if (!user) {
+          container.innerHTML = '<div class="sessions-empty">Please sign in to view sessions.</div>';
+          return;
+        }
+
+        const sessions = await SessionManager.getSessions(user.id);
+        const currentSessionId = AuthManager.localSessionId;
+
+        if (sessions.length === 0) {
+          container.innerHTML = '<div class="sessions-empty">No active sessions found.</div>';
+          return;
+        }
+
+        container.innerHTML = sessions.map(session => {
+          const isCurrent = session.id === currentSessionId;
+          const lastActive = this.formatLastActive(session.last_active_at);
+
+          return `
+            <div class="session-item ${isCurrent ? 'current' : ''}">
+              <div class="session-info">
+                <div class="session-device">
+                  ${this.escapeHtml(session.device_name || 'Unknown Device')}
+                  ${isCurrent ? '<span class="session-current-badge">Current</span>' : ''}
+                </div>
+                <div class="session-details">
+                  Last active: ${lastActive}
+                  ${session.location ? ` &bull; ${this.escapeHtml(session.location)}` : ''}
+                </div>
+              </div>
+              ${!isCurrent ? `
+                <button class="session-revoke" onclick="SessionsUI.revoke('${session.id}')">
+                  Revoke
+                </button>
+              ` : ''}
+            </div>
+          `;
+        }).join('');
+      },
+
+      /**
+       * Revoke individual session
+       * @param {string} sessionId - Session ID to revoke
+       */
+      async revoke(sessionId) {
+        if (!confirm('Are you sure you want to revoke this session?')) {
+          return;
+        }
+
+        try {
+          await SessionManager.revokeSession(sessionId);
+          await this.load(); // Refresh list
+        } catch (error) {
+          console.error('Revoke session error:', error);
+          alert('Failed to revoke session');
+        }
+      },
+
+      /**
+       * Sign out all other devices
+       */
+      async signOutOthers() {
+        if (!confirm('This will sign out all other devices. Continue?')) {
+          return;
+        }
+
+        try {
+          const user = AuthManager.getUser();
+          if (!user) return;
+
+          await SessionManager.revokeOtherSessions(user.id, AuthManager.localSessionId);
+
+          // Also sign out via Supabase if available
+          if (!AuthManager.isOfflineMode()) {
+            await AuthManager.signOut('others');
+          }
+
+          await this.load(); // Refresh list
+          alert('All other sessions have been revoked.');
+        } catch (error) {
+          console.error('Sign out others error:', error);
+          alert('Failed to sign out other devices');
+        }
+      },
+
+      /**
+       * Format last active time
+       * @param {string} isoString - ISO timestamp
+       * @returns {string} Formatted time
+       */
+      formatLastActive(isoString) {
+        if (!isoString) return 'Unknown';
+
+        const date = new Date(isoString);
+        const now = new Date();
+        const diff = now - date;
+
+        const minutes = Math.floor(diff / (1000 * 60));
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+        if (minutes < 1) return 'Just now';
+        if (minutes < 60) return `${minutes}m ago`;
+        if (hours < 24) return `${hours}h ago`;
+        if (days < 7) return `${days}d ago`;
+
+        return date.toLocaleDateString('es-ES', {
+          day: 'numeric',
+          month: 'short',
+          year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+        });
+      },
+
+      /**
+       * Escape HTML to prevent XSS
+       * @param {string} str - String to escape
+       * @returns {string} Escaped string
+       */
+      escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>"']/g, char => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[char]));
       }
     };
 
