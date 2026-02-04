@@ -136,7 +136,15 @@ Plans:
   3. User can assign work pattern template to client and auto-apply to calendar
   4. Calendar day shows: client tag, location icon, linked expenses count
   5. User can export to ICS/CSV and optionally sync with Google Calendar
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [ ] 16-01-PLAN.md - CalendarManager module and localStorage migration
+- [ ] 16-02-PLAN.md - Day editor modal with client/project/location tagging
+- [ ] 16-03-PLAN.md - Work pattern system for recurring schedules
+- [ ] 16-04-PLAN.md - 183-day threshold tracking and multi-year navigation
+- [ ] 16-05-PLAN.md - Enhanced ICS/CSV export and expense linking infrastructure
+- [ ] 16-06-PLAN.md - Google Calendar OAuth sync
+- [ ] 16-07-PLAN.md - Verification checkpoint
 
 ### Phase 17: Expense Management
 **Goal**: Users can track expenses with entity-type-aware deduction rules
@@ -305,7 +313,7 @@ Phases 12-29 execute sequentially with dependencies as noted.
 | 13. Multi-Entity Architecture | v2.0 | 5/5 | ✓ Complete | 2026-02-03 |
 | 14. Authentication & Permissions | v2.0 | 6/6 | ✓ Complete | 2026-02-04 |
 | 15. Client Management | v2.0 | 5/5 | ✓ Complete | 2026-02-04 |
-| 16. Calendar Enhancement | v2.0 | 0/TBD | Ready | - |
+| 16. Calendar Enhancement | v2.0 | 0/7 | Ready | - |
 | 17. Expense Management | v2.0 | 0/TBD | Not started | - |
 | 18. Invoice Generation | v2.0 | 0/TBD | Not started | - |
 | 19. Receipt Upload & OCR | v2.0 | 0/TBD | Not started | - |
