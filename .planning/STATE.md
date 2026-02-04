@@ -5,30 +5,30 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 15 IN PROGRESS (Client Management)
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 15 COMPLETE (Client Management)
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
-Phase: 15 of 29 (Client Management) - IN PROGRESS
-Plan: 4 of 6 in current phase (15-04 complete)
-Status: In progress
-Last activity: 2026-02-04 - Completed 15-04-PLAN.md (Client List UI and Client Form Modal)
+Phase: 15 of 29 (Client Management) - COMPLETE
+Plan: 5 of 5 in current phase (all complete)
+Status: Phase complete
+Last activity: 2026-02-04 - Completed 15-05-PLAN.md (Client Detail UI and Contact/Project Forms)
 
-Progress: [#############-----] 85% (17/20 v2.0 plans complete)
+Progress: [###############---] 90% (18/20 v2.0 plans complete)
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 43
-- Average duration: 3.4 min
-- Total execution time: 208 min
+- Total plans completed: 44
+- Average duration: 3.5 min
+- Total execution time: 253 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 17 (Phase 12 complete, Phase 13 complete, Phase 14 complete, Phase 15 in progress)
-- Phase 15 duration: ~12 min (3 plans)
+- Plans completed: 18 (Phase 12 complete, Phase 13 complete, Phase 14 complete, Phase 15 complete)
+- Phase 15 duration: ~57 min (5 plans + bug fixes)
 
 *Updated after each plan completion*
 
@@ -105,24 +105,27 @@ Recent decisions affecting current work:
 - [15-03]: Project status auto-calculated from dates, manual override takes precedence
 - [15-03]: Projects denormalize entity_id for faster entity-level queries
 - [15-03]: Four rate types: daily, hourly, fixed, monthly_retainer
-- [15-04]: Client row click opens edit form via stub until Plan 15-05 adds detail panel
-- [15-04]: ProjectManager stub returns 0 active projects until Plan 15-03 implements CRUD
+- [15-04]: Client row click opens detail view (not edit form)
 - [15-04]: VIES verification optional with confirmation prompt for EU B2B clients
+- [15-05]: Database version 3 adds contacts table with client_id index
+- [15-05]: Contact entity_id denormalized for faster entity-scoped queries
+- [15-05]: Custom checkbox styling with green checkmark when checked
+- [15-05]: All UI text must be in English (user requirement)
 
 ### Pending Todos
 
-None - continue with Phase 15 plans.
+None - Phase 15 complete. Ready for Phase 16.
 
 ### Blockers/Concerns
 
-None - Phase 15 Plan 04 completed successfully.
+None - Phase 15 completed successfully.
 
 User setup required: Deploy vies-validate Edge Function to Supabase for online EU VAT validation.
 
 ### Research Flags
 
 Phases needing `/gsd:research-phase`:
-- Phase 15: Client Management - COMPLETE (research done)
+- Phase 15: Client Management - COMPLETE
 - Phase 19: Receipt OCR (Mindee API) - HIGH
 - Phase 21: Tax Automation - SL (IS calculation, BINs) - HIGH
 - Phase 22: SL Accounting (Cuentas Anuales generation) - HIGH
@@ -136,8 +139,9 @@ Phases needing `/gsd:research-phase`:
 | 15-02 | VIESValidator, ClientManager, VIES Edge Function | `d1a4f49`, `fc0efaf`, `c97c24d` |
 | 15-03 | ContactManager, ProjectManager, CONTACT_ROLE, RATE_TYPE, PROJECT_STATUS | `053d3c6`, `c6624a3` |
 | 15-04 | ClientListUI, ClientFormUI, ProjectManager stub, Clientes tab | `2253f05`, `9676b6c` |
+| 15-05 | ClientDetailUI, ContactFormUI, ProjectFormUI, DB v3 | `5469154`, `fe33866`, `ed32e8d`, `3263025`, `2bd4942` |
 
-**Phase 15 Success Criteria (Progress):**
+**Phase 15 Success Criteria (All Complete):**
 - [x] EU VAT format validation for all 27 EU countries plus XI
 - [x] Greece uses EL country code per VIES specification
 - [x] CLIENT_CATEGORY constants for IVA treatment routing
@@ -148,15 +152,16 @@ Phases needing `/gsd:research-phase`:
 - [x] ProjectManager CRUD with auto-status calculation (15-03)
 - [x] Client form UI with country-aware validation (15-04)
 - [x] Client list with search and filters (15-04)
-- [ ] Client detail panel (15-05)
-- [ ] Project form and list UI (15-06)
+- [x] Client detail panel with tabs (15-05)
+- [x] Contact form and list UI (15-05)
+- [x] Project form and list UI (15-05)
 
 ## Session Continuity
 
 Last session: 2026-02-04
-Stopped at: Completed 15-04-PLAN.md (Client List UI and Client Form Modal)
-Resume file: None - proceed to 15-05-PLAN.md
+Stopped at: Completed Phase 15 (Client Management)
+Resume file: None - Phase 15 complete
 
 ---
-*Phase 15 started: 2026-02-04*
-*Next step: /gsd:execute-phase 15 (continue with 15-05)*
+*Phase 15 completed: 2026-02-04*
+*Next step: /gsd:plan-phase 16 (Calendar Integration)*
