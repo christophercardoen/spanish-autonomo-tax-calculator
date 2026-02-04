@@ -5,30 +5,30 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 14 COMPLETE (all 6 plans)
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 15 IN PROGRESS (Client Management)
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
-Phase: 14 of 29 (Authentication & Permissions) - COMPLETE
-Plan: 6 of 6 in current phase (14-06 complete)
-Status: Phase complete - ready for Phase 15
-Last activity: 2026-02-04 - Completed 14-06-PLAN.md (Permission Enforcement in UI)
+Phase: 15 of 29 (Client Management) - IN PROGRESS
+Plan: 1 of 6 in current phase (15-01 complete)
+Status: In progress
+Last activity: 2026-02-04 - Completed 15-01-PLAN.md (EU VAT Format Patterns and Country Utilities)
 
-Progress: [############------] 70% (14/20 v2.0 plans complete)
+Progress: [############------] 75% (15/20 v2.0 plans complete)
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 40
-- Average duration: 3.4 min
-- Total execution time: 196 min
+- Total plans completed: 41
+- Average duration: 3.3 min
+- Total execution time: 198 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 14 (Phase 12 complete, Phase 13 complete, Phase 14 complete)
-- Phase 14 duration: ~22 min (6 plans)
+- Plans completed: 15 (Phase 12 complete, Phase 13 complete, Phase 14 complete, Phase 15 started)
+- Phase 15 duration: ~2 min (1 plan)
 
 *Updated after each plan completion*
 
@@ -93,59 +93,51 @@ Recent decisions affecting current work:
 - [14-06]: Offline mode grants full access (local data only)
 - [14-06]: Gestor read-only banner prominently indicates restricted access
 - [14-06]: Entity list shows role badges for non-owner entities
+- [15-01]: Greece uses EL country code per EU VIES specification (not GR)
+- [15-01]: UK and XI categorized as non-EU post-Brexit
+- [15-01]: EU countries return intermediate 'eu' value requiring B2B/B2C clarification
 
 ### Pending Todos
 
-None - Phase 14 complete. Ready for Phase 15.
+None - continue with Phase 15 plans.
 
 ### Blockers/Concerns
 
-None - Phase 14 completed successfully with full permission enforcement.
+None - Phase 15 Plan 01 completed successfully.
 
 ### Research Flags
 
 Phases needing `/gsd:research-phase`:
-- Phase 14: Authentication & Permissions - COMPLETE (research done)
+- Phase 15: Client Management - COMPLETE (research done)
 - Phase 19: Receipt OCR (Mindee API) - HIGH
 - Phase 21: Tax Automation - SL (IS calculation, BINs) - HIGH
 - Phase 22: SL Accounting (Cuentas Anuales generation) - HIGH
 - Phase 27: Cloud Sync (PWA, conflict resolution) - HIGH
 
-## Phase 14 Deliverables Summary
+## Phase 15 Deliverables Summary
 
 | Plan | Deliverable | Commit |
 |------|-------------|--------|
-| 14-01 | DB schema v2, ProfileManager, EntityShareManager, InvitationManager, SessionManager | `a9b59c5`, `d404650` |
-| 14-02 | Supabase client, AuthManager (magic link, OAuth, password reset), EntityAccessManager | `be1e7f7`, `6cb7184` |
-| 14-03 | Login screen UI, AuthUI controller, User menu, Profile page | `89bfcb3`, `7396717`, `08c3bb5` |
-| 14-04 | MFAManager, MFAUI, SessionsUI, 2FA profile toggle | `7f4005d`, `92df45d`, `9119a1c` |
-| 14-05 | Invite modal, InviteUI, SharingUI, team access section | `3aad83b`, `242e1eb`, `d9da2e5` |
-| 14-06 | PermissionUI, data-permission attributes, entity list filtering | `da52869`, `f877736`, `d7643e4` |
+| 15-01 | EU_VAT_PATTERNS, getFlagEmoji, CLIENT_CATEGORY, getClientCategoryByCountry | `004dbc6`, `bd9cd7c` |
 
-**Phase 14 Success Criteria:**
-- [x] Database schema extended with auth tables
-- [x] owner_id added to entities table
-- [x] ProfileManager module functional
-- [x] EntityShareManager module with role constants
-- [x] InvitationManager module with expiry handling
-- [x] SessionManager module with device detection
-- [x] Supabase client with offline fallback
-- [x] AuthManager with magic link, Google OAuth, password reset
-- [x] EntityAccessManager with role-based permissions
-- [x] Magic link authentication UI
-- [x] Google OAuth integration UI
-- [x] TOTP 2FA enrollment UI (AUTH-05)
-- [x] Active sessions list with revocation (AUTH-06)
-- [x] Entity sharing invitation UI (PERM-01, PERM-02, PERM-03)
-- [x] Sharing management with revocation (PERM-05)
-- [x] Permission enforcement in UI (PERM-04, PERM-06, PERM-07)
+**Phase 15 Success Criteria (Progress):**
+- [x] EU VAT format validation for all 27 EU countries plus XI
+- [x] Greece uses EL country code per VIES specification
+- [x] CLIENT_CATEGORY constants for IVA treatment routing
+- [x] Country flag emoji function working
+- [ ] VIESValidator with format and API validation (15-02)
+- [ ] ClientManager CRUD operations (15-02)
+- [ ] ProjectManager CRUD operations (15-03)
+- [ ] Client form UI with country-aware validation (15-04)
+- [ ] Client list with search and filters (15-05)
+- [ ] Project form and list UI (15-06)
 
 ## Session Continuity
 
 Last session: 2026-02-04
-Stopped at: Completed 14-06-PLAN.md (Permission Enforcement in UI)
-Resume file: None - Phase 14 complete, proceed to Phase 15
+Stopped at: Completed 15-01-PLAN.md (EU VAT Format Patterns and Country Utilities)
+Resume file: None - proceed to 15-02-PLAN.md
 
 ---
-*Phase 14 completed: 2026-02-04*
-*Next step: /gsd:discuss-phase 15 or /gsd:plan-phase 15*
+*Phase 15 started: 2026-02-04*
+*Next step: /gsd:execute-phase 15 (continue with 15-02)*
