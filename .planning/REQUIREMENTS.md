@@ -7,13 +7,13 @@
 
 ### Multi-User & Authentication (AUTH)
 
-- [ ] **AUTH-01**: User can sign up with email and password
-- [ ] **AUTH-02**: User receives email verification after signup
-- [ ] **AUTH-03**: User can reset password via email link
-- [ ] **AUTH-04**: User session persists across browser refresh
-- [ ] **AUTH-05**: User can enable two-factor authentication (2FA)
-- [ ] **AUTH-06**: User can view active sessions and revoke access
-- [ ] **AUTH-07**: User profile includes name, email, NIF/CIF, phone, address
+- [x] **AUTH-01**: User can sign up with email and password
+- [x] **AUTH-02**: User receives email verification after signup
+- [x] **AUTH-03**: User can reset password via email link
+- [x] **AUTH-04**: User session persists across browser refresh
+- [x] **AUTH-05**: User can enable two-factor authentication (2FA)
+- [x] **AUTH-06**: User can view active sessions and revoke access
+- [x] **AUTH-07**: User profile includes name, email, NIF/CIF, phone, address
 
 ### Multi-Entity Management (ENTITY)
 
@@ -28,13 +28,13 @@
 
 ### Permissions & Sharing (PERM)
 
-- [ ] **PERM-01**: Entity owner can invite users with email
-- [ ] **PERM-02**: Owner assigns role: Gestor (read-only), Accountant (read-write), or Partner (full access)
-- [ ] **PERM-03**: Invited user receives email with accept/decline link
-- [ ] **PERM-04**: User sees only entities they own or have been granted access to
-- [ ] **PERM-05**: Owner can revoke access at any time
-- [ ] **PERM-06**: Accountant role cannot delete invoices/expenses (only edit)
-- [ ] **PERM-07**: Gestor role can view and export reports but not modify data
+- [x] **PERM-01**: Entity owner can invite users with email
+- [x] **PERM-02**: Owner assigns role: Gestor (read-only), Accountant (read-write), or Partner (full access)
+- [x] **PERM-03**: Invited user receives email with accept/decline link
+- [x] **PERM-04**: User sees only entities they own or have been granted access to
+- [x] **PERM-05**: Owner can revoke access at any time
+- [x] **PERM-06**: Accountant role cannot delete invoices/expenses (only edit)
+- [x] **PERM-07**: Gestor role can view and export reports but not modify data
 
 ### Client Management (CLIENT)
 

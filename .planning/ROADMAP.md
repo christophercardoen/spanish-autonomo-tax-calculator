@@ -36,7 +36,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for archived phase details.
 
 - [x] **Phase 12: Data Architecture Foundation** - IndexedDB/Dexie.js setup, float precision, soft delete, sync queue
 - [x] **Phase 13: Multi-Entity Architecture** - Entity type selection, RLS policies, entity switcher
-- [ ] **Phase 14: Authentication & Permissions** - User accounts, roles, entity-level access control
+- [x] **Phase 14: Authentication & Permissions** - User accounts, roles, entity-level access control
 - [ ] **Phase 15: Client Management** - CRM with NIF/VIES validation, country categorization
 - [ ] **Phase 16: Calendar Enhancement** - Client tagging, 183-day preservation, work patterns
 - [ ] **Phase 17: Expense Management** - Entity-type deduction rules, categories, linking
@@ -101,12 +101,12 @@ Plans:
   5. Gestor can view and export but not modify; Accountant can edit but not delete invoices
 **Plans**: 6 plans
 Plans:
-- [ ] 14-01-PLAN.md - Database schema extension with auth tables (profiles, entity_shares, invitations, sessions)
-- [ ] 14-02-PLAN.md - Supabase Auth client with magic link and Google OAuth
-- [ ] 14-03-PLAN.md - Login/auth UI, profile page, user menu
-- [ ] 14-04-PLAN.md - 2FA (TOTP) enrollment and session management
-- [ ] 14-05-PLAN.md - Invitation system for entity sharing with roles
-- [ ] 14-06-PLAN.md - Permission enforcement in UI and verification checkpoint
+- [x] 14-01-PLAN.md - Database schema extension with auth tables (profiles, entity_shares, invitations, sessions)
+- [x] 14-02-PLAN.md - Supabase Auth client with magic link and Google OAuth
+- [x] 14-03-PLAN.md - Login/auth UI, profile page, user menu
+- [x] 14-04-PLAN.md - 2FA (TOTP) enrollment and session management
+- [x] 14-05-PLAN.md - Invitation system for entity sharing with roles
+- [x] 14-06-PLAN.md - Permission enforcement in UI and verification checkpoint
 
 ### Phase 15: Client Management
 **Goal**: Users can manage clients with proper tax ID validation and categorization
@@ -297,7 +297,7 @@ Phases 12-29 execute sequentially with dependencies as noted.
 |-------|-----------|----------------|--------|-----------|
 | 12. Data Architecture | v2.0 | 3/3 | ✓ Complete | 2026-02-03 |
 | 13. Multi-Entity Architecture | v2.0 | 5/5 | ✓ Complete | 2026-02-03 |
-| 14. Authentication & Permissions | v2.0 | 0/6 | Planned | - |
+| 14. Authentication & Permissions | v2.0 | 6/6 | ✓ Complete | 2026-02-04 |
 | 15. Client Management | v2.0 | 0/TBD | Not started | - |
 | 16. Calendar Enhancement | v2.0 | 0/TBD | Not started | - |
 | 17. Expense Management | v2.0 | 0/TBD | Not started | - |
