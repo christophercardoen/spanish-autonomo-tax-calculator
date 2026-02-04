@@ -11,24 +11,24 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 16 of 29 (Calendar Enhancement) - IN PROGRESS
-Plan: 3 of 7 in current phase (3 complete)
+Plan: 4 of 7 in current phase (4 complete)
 Status: In progress
-Last activity: 2026-02-04 - Completed 16-03-PLAN.md (Work Pattern System)
+Last activity: 2026-02-04 - Completed 16-04-PLAN.md (Threshold Tracking)
 
-Progress: Phases 12-15 complete (19 plans), Phase 16: 3/7 plans complete
+Progress: Phases 12-15 complete (19 plans), Phase 16: 4/7 plans complete
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 47
+- Total plans completed: 48
 - Average duration: 3.4 min
-- Total execution time: 260 min
+- Total execution time: 264 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 22 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 3)
-- Phase 16 progress: 3/7 plans complete
+- Plans completed: 23 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 4)
+- Phase 16 progress: 4/7 plans complete
 
 *Updated after each plan completion*
 
@@ -123,14 +123,18 @@ Recent decisions affecting current work:
 - [16-03]: First week defined as days 1-7 of month for extra day patterns
 - [16-03]: Pattern application skips days with existing location (respects manual edits)
 - [16-03]: Preview shows up to 15 dates inline, remainder as count
+- [16-04]: CALENDAR_RANGE object defines year-specific month boundaries
+- [16-04]: Calendar state version 2 adds currentYear for multi-year support
+- [16-04]: Belgium + Travel days count toward 183-day threshold (conservative approach)
+- [16-04]: Progressive WARNING_LEVELS at 170 (caution), 180 (warning), 183 (danger)
 
 ### Pending Todos
 
-None - Plan 16-03 complete. Ready for Plan 16-04.
+None - Plan 16-04 complete. Ready for Plan 16-05.
 
 ### Blockers/Concerns
 
-None - Plan 16-03 completed successfully.
+None - Plan 16-04 completed successfully.
 
 User setup required: Deploy vies-validate Edge Function to Supabase for online EU VAT validation.
 
@@ -150,6 +154,7 @@ Phases needing `/gsd:research-phase`:
 | 16-01 | CalendarManager, LOCATION_TYPE, migrateCalendarToIndexedDB | `6e91bf8` |
 | 16-02 | Day editor modal, bulk tag modal, async calendar rendering | `26a1420` |
 | 16-03 | WorkPatternManager, pattern form fields, Apply Pattern modal | `e32f234` |
+| 16-04 | calculateThresholdCounts, WARNING_LEVELS, multi-year navigation | `7ec08db` |
 
 **Phase 16 Success Criteria (In Progress):**
 - [x] CalendarManager provides all CRUD operations for calendar days (16-01)
@@ -160,17 +165,19 @@ Phases needing `/gsd:research-phase`:
 - [x] Day editor modal for location/client/project tagging (16-02)
 - [x] Bulk tag feature for multi-day client tagging (16-02)
 - [x] Work pattern system for bulk calendar tagging (16-03)
-- [ ] Client/project picker for day assignment (16-04)
-- [ ] 183-day warning system (16-05)
-- [ ] Contracted pattern auto-fill (16-06)
-- [ ] Export/reporting features (16-07)
+- [x] 183-day threshold warnings at 170/180/183 days (16-04)
+- [x] Multi-year calendar navigation (2026-2027) (16-04)
+- [x] Year summary with per-year counts (16-04)
+- [ ] Contracted pattern auto-fill (16-05)
+- [ ] Export/reporting features (16-06)
+- [ ] Client/project calendar integration (16-07)
 
 ## Session Continuity
 
 Last session: 2026-02-04
-Stopped at: Completed 16-03-PLAN.md (Work Pattern System)
-Resume file: None - ready for 16-04-PLAN.md
+Stopped at: Completed 16-04-PLAN.md (Threshold Tracking)
+Resume file: None - ready for 16-05-PLAN.md
 
 ---
-*Plan 16-03 completed: 2026-02-04*
-*Next step: /gsd:execute-phase 16-04 (Client/Project Day Assignment)*
+*Plan 16-04 completed: 2026-02-04*
+*Next step: /gsd:execute-phase 16-05 (Contracted Pattern Auto-fill)*
