@@ -5717,6 +5717,238 @@
       background: rgba(234, 179, 8, 0.2);
       color: #eab308;
     }
+
+    /* ===========================================
+       PHASE 15: CLIENT FORM MODAL STYLES
+       =========================================== */
+
+    /* Client Form Modal */
+    .client-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    .client-modal.hidden {
+      display: none;
+    }
+
+    .client-modal-content {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .client-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .client-modal-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .client-modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.5rem;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    .client-modal-close:hover {
+      color: var(--text);
+    }
+
+    .client-modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      padding: var(--spacing-lg);
+    }
+
+    .client-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .client-form-row.full-width {
+      grid-template-columns: 1fr;
+    }
+
+    .client-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+
+    .client-form-group label {
+      font-size: var(--size-small);
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .client-form-group input,
+    .client-form-group select,
+    .client-form-group textarea {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: var(--size-labels);
+      font-family: var(--font-ui);
+    }
+
+    .client-form-group input:focus,
+    .client-form-group select:focus,
+    .client-form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .client-form-group textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .client-form-group .form-help {
+      font-size: var(--size-small);
+      color: var(--text-muted);
+    }
+
+    /* Tax ID input with VIES button */
+    .tax-id-input-group {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    .tax-id-input-group input {
+      flex: 1;
+    }
+
+    .tax-id-input-group .vies-btn {
+      padding: 0.5rem 0.75rem;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: var(--size-small);
+      white-space: nowrap;
+    }
+
+    .tax-id-input-group .vies-btn:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .tax-id-input-group .vies-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Validation message */
+    .validation-message {
+      font-size: var(--size-small);
+      margin-top: var(--spacing-xs);
+    }
+
+    .validation-message.valid {
+      color: var(--positive);
+    }
+
+    .validation-message.invalid {
+      color: var(--negative);
+    }
+
+    .validation-message.warning {
+      color: var(--warning);
+    }
+
+    /* Checkbox label */
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      cursor: pointer;
+      font-size: var(--size-labels);
+      color: var(--text);
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+
+    /* Modal actions */
+    .client-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .client-modal-actions .btn {
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      cursor: pointer;
+      font-size: var(--size-labels);
+    }
+
+    .client-modal-actions .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .client-modal-actions .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .client-modal-actions .btn-primary {
+      background: var(--accent);
+      border: none;
+      color: #000;
+    }
+
+    .client-modal-actions .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    /* Responsive: stack form rows on mobile */
+    @media (max-width: 600px) {
+      .client-form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .tax-id-input-group {
+        flex-direction: column;
+      }
+    }
   </style>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
@@ -5990,6 +6222,102 @@
       <button class="invite-accept-btn decline" onclick="InviteUI.declineBanner()">
         Decline
       </button>
+    </div>
+  </div>
+
+  <!-- Phase 15: Client Form Modal -->
+  <div id="client-modal" class="client-modal hidden">
+    <div class="client-modal-content">
+      <div class="client-modal-header">
+        <h3 id="client-modal-title">Nuevo Cliente</h3>
+        <button class="client-modal-close" onclick="ClientFormUI.close()">&times;</button>
+      </div>
+
+      <form id="client-form" class="client-modal-form">
+        <div class="client-form-row full-width">
+          <div class="client-form-group">
+            <label for="client-name">Nombre / Razon Social *</label>
+            <input type="text" id="client-name" required placeholder="Nombre de la empresa o persona">
+          </div>
+        </div>
+
+        <div class="client-form-row">
+          <div class="client-form-group">
+            <label for="client-country">Pais *</label>
+            <select id="client-country" required>
+              <option value="ES">Espana</option>
+              <option value="BE">Belgica</option>
+              <option value="NL">Paises Bajos</option>
+              <option value="DE">Alemania</option>
+              <option value="FR">Francia</option>
+              <option value="IT">Italia</option>
+              <option value="PT">Portugal</option>
+              <option value="AT">Austria</option>
+              <option value="IE">Irlanda</option>
+              <option value="LU">Luxemburgo</option>
+              <option value="GB">Reino Unido</option>
+              <option value="US">Estados Unidos</option>
+              <option value="CA">Canada</option>
+              <option value="AU">Australia</option>
+            </select>
+          </div>
+
+          <div class="client-form-group">
+            <label for="client-tax-id">NIF / CIF / VAT</label>
+            <div class="tax-id-input-group">
+              <input type="text" id="client-tax-id" placeholder="Ej: B12345678">
+              <button type="button" id="vies-verify-btn" class="vies-btn hidden">
+                Verificar VIES
+              </button>
+            </div>
+            <span id="tax-id-validation" class="validation-message"></span>
+          </div>
+        </div>
+
+        <div id="eu-b2b-section" class="client-form-row hidden">
+          <div class="client-form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="client-is-b2b" checked>
+              Cliente B2B (inversion del sujeto pasivo)
+            </label>
+            <span class="form-help">Desmarcar si es consumidor final (B2C)</span>
+          </div>
+        </div>
+
+        <div id="w8ben-section" class="client-form-row hidden">
+          <div class="client-form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="client-w8ben">
+              W-8BEN en archivo (retencion 0%)
+            </label>
+            <span class="form-help">Para clientes estadounidenses con convenio de doble imposicion</span>
+          </div>
+        </div>
+
+        <div class="client-form-row">
+          <div class="client-form-group">
+            <label for="client-email">Email</label>
+            <input type="email" id="client-email" placeholder="facturacion@empresa.com">
+          </div>
+
+          <div class="client-form-group">
+            <label for="client-phone">Telefono</label>
+            <input type="tel" id="client-phone" placeholder="+34 600 000 000">
+          </div>
+        </div>
+
+        <div class="client-form-row full-width">
+          <div class="client-form-group">
+            <label for="client-address">Direccion</label>
+            <textarea id="client-address" rows="2" placeholder="Calle, numero, codigo postal, ciudad"></textarea>
+          </div>
+        </div>
+      </form>
+
+      <div class="client-modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="ClientFormUI.close()">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="client-submit-btn" onclick="ClientFormUI.handleSubmit(event)">Crear Cliente</button>
+      </div>
     </div>
   </div>
 
@@ -15915,6 +16243,276 @@ Generated by Autonomo Tax Calculator`;
     };
 
     // =====================================================
+    // Client Form UI Module
+    // =====================================================
+
+    /**
+     * ClientFormUI - Create/Edit client modal
+     * Handles tax ID validation based on country:
+     * - Spanish: uses SpanishTaxIdValidator on blur
+     * - EU: format validation + VIES button
+     * - Third country: stores as-is
+     */
+    const ClientFormUI = {
+      modal: null,
+      form: null,
+      editingId: null,
+      viesValidated: false,
+
+      init() {
+        this.modal = document.getElementById('client-modal');
+        this.form = document.getElementById('client-form');
+
+        if (!this.form) return;
+
+        // Country change handler
+        const countrySelect = document.getElementById('client-country');
+        if (countrySelect) {
+          countrySelect.addEventListener('change', () => {
+            this.updateCountryDependentFields();
+            this.clearValidation();
+          });
+        }
+
+        // Tax ID blur validation
+        const taxIdInput = document.getElementById('client-tax-id');
+        if (taxIdInput) {
+          taxIdInput.addEventListener('blur', () => {
+            this.validateTaxId();
+          });
+        }
+
+        // VIES verify button
+        const viesBtn = document.getElementById('vies-verify-btn');
+        if (viesBtn) {
+          viesBtn.addEventListener('click', () => {
+            this.verifyVIES();
+          });
+        }
+      },
+
+      openCreate() {
+        this.editingId = null;
+        this.viesValidated = false;
+        this.form?.reset();
+        document.getElementById('client-modal-title').textContent = 'Nuevo Cliente';
+        document.getElementById('client-submit-btn').textContent = 'Crear Cliente';
+        this.updateCountryDependentFields();
+        this.clearValidation();
+        this.modal?.classList.remove('hidden');
+        document.getElementById('client-name')?.focus();
+      },
+
+      async openEdit(clientId) {
+        const client = await ClientManager.getClient(clientId);
+        if (!client) return;
+
+        this.editingId = clientId;
+        this.viesValidated = client.tax_id_validated;
+
+        document.getElementById('client-modal-title').textContent = 'Editar Cliente';
+        document.getElementById('client-submit-btn').textContent = 'Guardar Cambios';
+
+        // Populate form
+        document.getElementById('client-name').value = client.name || '';
+        document.getElementById('client-country').value = client.country_code || 'ES';
+        document.getElementById('client-tax-id').value = client.tax_id || '';
+        document.getElementById('client-email').value = client.email || '';
+        document.getElementById('client-phone').value = client.phone || '';
+        document.getElementById('client-address').value = client.address || '';
+        document.getElementById('client-is-b2b').checked = client.is_b2b !== false;
+        document.getElementById('client-w8ben').checked = client.w8ben_uploaded;
+
+        this.updateCountryDependentFields();
+
+        if (client.tax_id_validated) {
+          this.showValidation('NIF-IVA verificado con VIES', 'valid');
+        }
+
+        this.modal?.classList.remove('hidden');
+      },
+
+      close() {
+        this.modal?.classList.add('hidden');
+        this.editingId = null;
+        this.viesValidated = false;
+      },
+
+      updateCountryDependentFields() {
+        const country = document.getElementById('client-country')?.value;
+        const euB2BSection = document.getElementById('eu-b2b-section');
+        const w8benSection = document.getElementById('w8ben-section');
+        const viesBtn = document.getElementById('vies-verify-btn');
+
+        // Show B2B toggle for EU countries (not Spain)
+        const isEU = VIESValidator.isVIESCountry(country) && country !== 'ES';
+        euB2BSection?.classList.toggle('hidden', !isEU);
+
+        // Show W-8BEN for US
+        w8benSection?.classList.toggle('hidden', country !== 'US');
+
+        // Show VIES button for EU countries (not Spain)
+        viesBtn?.classList.toggle('hidden', !isEU);
+      },
+
+      validateTaxId() {
+        const country = document.getElementById('client-country')?.value;
+        const taxId = document.getElementById('client-tax-id')?.value?.trim();
+
+        if (!taxId) {
+          this.clearValidation();
+          return { valid: true, empty: true };
+        }
+
+        if (country === 'ES') {
+          // Spanish validation
+          const result = SpanishTaxIdValidator.validate(taxId);
+          if (result.valid) {
+            this.showValidation(`${result.type} valido`, 'valid');
+          } else {
+            this.showValidation(result.error, 'invalid');
+          }
+          return result;
+        } else if (VIESValidator.isVIESCountry(country)) {
+          // EU format validation
+          const result = VIESValidator.validateFormat(country, taxId);
+          if (result.valid) {
+            this.showValidation('Formato valido. Verificar con VIES para confirmar.', 'warning');
+            this.viesValidated = false;
+          } else {
+            this.showValidation(result.error, 'invalid');
+          }
+          return result;
+        }
+
+        // Third country - no validation
+        this.clearValidation();
+        return { valid: true };
+      },
+
+      async verifyVIES() {
+        const country = document.getElementById('client-country')?.value;
+        const taxId = document.getElementById('client-tax-id')?.value?.trim();
+
+        if (!taxId || !VIESValidator.isVIESCountry(country)) return;
+
+        const viesBtn = document.getElementById('vies-verify-btn');
+        viesBtn.disabled = true;
+        viesBtn.textContent = 'Verificando...';
+
+        try {
+          const result = await VIESValidator.validateWithVIES(country, taxId);
+
+          if (result.valid === true) {
+            this.showValidation(`VIES valido: ${result.name || 'Verificado'}`, 'valid');
+            this.viesValidated = true;
+          } else if (result.valid === false) {
+            this.showValidation(result.error || 'NIF-IVA no valido en VIES', 'invalid');
+            this.viesValidated = false;
+          } else if (result.warning) {
+            this.showValidation(result.warning, 'warning');
+            this.viesValidated = false;
+          }
+        } catch (err) {
+          this.showValidation('Error al conectar con VIES', 'warning');
+        } finally {
+          viesBtn.disabled = false;
+          viesBtn.textContent = 'Verificar VIES';
+        }
+      },
+
+      showValidation(message, type) {
+        const el = document.getElementById('tax-id-validation');
+        if (el) {
+          el.textContent = message;
+          el.className = `validation-message ${type}`;
+        }
+      },
+
+      clearValidation() {
+        const el = document.getElementById('tax-id-validation');
+        if (el) {
+          el.textContent = '';
+          el.className = 'validation-message';
+        }
+      },
+
+      async handleSubmit(e) {
+        if (e) e.preventDefault();
+
+        const country = document.getElementById('client-country')?.value;
+        const taxId = document.getElementById('client-tax-id')?.value?.trim();
+        const isB2B = document.getElementById('client-is-b2b')?.checked;
+        const name = document.getElementById('client-name')?.value?.trim();
+
+        // Validate required fields
+        if (!name) {
+          alert('El nombre del cliente es obligatorio');
+          return;
+        }
+
+        // For EU B2B clients, require VIES validation
+        const isEUB2B = VIESValidator.isVIESCountry(country) && country !== 'ES' && isB2B;
+        if (isEUB2B && taxId && !this.viesValidated) {
+          // Check if format at least valid
+          const formatResult = VIESValidator.validateFormat(country, taxId);
+          if (!formatResult.valid) {
+            alert(formatResult.error);
+            return;
+          }
+
+          // Warn about VIES
+          const proceed = confirm(
+            'El NIF-IVA no ha sido verificado con VIES. ' +
+            'Para aplicar inversion del sujeto pasivo, se requiere verificacion VIES. ' +
+            'Desea continuar sin verificacion?'
+          );
+          if (!proceed) return;
+        }
+
+        const clientData = {
+          name: name,
+          country_code: country,
+          tax_id: taxId || null,
+          email: document.getElementById('client-email')?.value?.trim() || null,
+          phone: document.getElementById('client-phone')?.value?.trim() || null,
+          address: document.getElementById('client-address')?.value?.trim() || null,
+          is_b2b: isB2B,
+          w8ben_uploaded: document.getElementById('client-w8ben')?.checked || false
+        };
+
+        try {
+          if (this.editingId) {
+            await ClientManager.updateClient(this.editingId, clientData);
+
+            // Update VIES validation status
+            if (this.viesValidated && VIESValidator.isVIESCountry(country)) {
+              await ClientManager.setVIESValidation(this.editingId, {
+                valid: true,
+                validatedAt: new Date().toISOString()
+              });
+            }
+          } else {
+            const id = await ClientManager.createClient(clientData);
+
+            // If VIES validated during creation, update status
+            if (this.viesValidated) {
+              await ClientManager.setVIESValidation(id, {
+                valid: true,
+                validatedAt: new Date().toISOString()
+              });
+            }
+          }
+
+          this.close();
+          await ClientListUI.refresh();
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+    };
+
+    // =====================================================
     // Entity Context (Current Entity State Management)
     // =====================================================
 
@@ -16942,8 +17540,9 @@ Generated by Autonomo Tax Calculator`;
       // Phase 14-06: Initialize Permission UI
       PermissionUI.init();
 
-      // Phase 15: Initialize Client List UI
+      // Phase 15: Initialize Client UI
       ClientListUI.init();
+      ClientFormUI.init();
 
       // Phase 14-05: Subscribe to entity changes for sharing section
       EntityContext.subscribe(async (entity) => {
