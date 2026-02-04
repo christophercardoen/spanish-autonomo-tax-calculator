@@ -3487,6 +3487,45 @@
       align-items: center;
     }
 
+    /* Phase 16-06: Google Calendar Sync Section */
+    .gcal-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 1rem;
+    }
+
+    .gcal-section h4 {
+      width: 100%;
+      margin-bottom: 0.25rem;
+    }
+
+    .gcal-not-configured {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .gcal-status {
+      color: var(--positive);
+      font-size: 0.85rem;
+      margin-right: 0.5rem;
+    }
+
+    #gcalConnected {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    #gcalConnected .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+    }
+
     /* Notification Toast */
     .notification {
       position: fixed;
@@ -4209,6 +4248,22 @@
         width: 100%;
         min-height: 44px;
         justify-content: center;
+      }
+
+      /* Phase 16-06: GCal section responsive */
+      .gcal-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      #gcalConnected {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      #gcalConnected .btn {
+        width: 100%;
+        min-height: 44px;
       }
 
       /* Dialog full width on mobile */
@@ -7647,6 +7702,34 @@
           <button class="secondary-btn" onclick="copyToClipboard()">
             <span style="margin-right: 0.5rem;">&#128203;</span>
             Copy Summary
+          </button>
+        </div>
+      </div>
+
+      <!-- Phase 16-06: Google Calendar Sync Section -->
+      <div class="gcal-section">
+        <h4 style="margin: 0; opacity: 0.8;">Google Calendar Sync</h4>
+
+        <!-- State: Not configured (no CLIENT_ID) -->
+        <div id="gcalNotConfigured" class="gcal-not-configured">
+          <span class="text-muted">Google Calendar sync requires configuration. Set CLIENT_ID in code.</span>
+        </div>
+
+        <!-- State: Configured but not connected -->
+        <div id="gcalDisconnected" style="display: none;">
+          <button type="button" id="gcalConnectBtn" class="btn btn-secondary" onclick="GCalSync.authorize()" disabled>
+            &#128279; Connect Google Calendar
+          </button>
+        </div>
+
+        <!-- State: Connected -->
+        <div id="gcalConnected" style="display: none;">
+          <span class="gcal-status">&#10003; Connected to Google Calendar</span>
+          <button type="button" id="gcalSyncBtn" class="btn btn-primary" onclick="syncToGCal()">
+            &#128260; Sync Now
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="GCalSync.revoke()">
+            Disconnect
           </button>
         </div>
       </div>
