@@ -3342,6 +3342,75 @@
 
     .warning-banner.hidden, .warning-badge.hidden { display: none; }
 
+    /* Threshold Warning Banner (Phase 16-04) */
+    .threshold-banner {
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .threshold-banner.safe {
+      display: none;
+    }
+
+    .threshold-banner.caution {
+      background: rgba(250, 204, 21, 0.15);
+      border: 1px solid rgba(250, 204, 21, 0.3);
+      color: #fbbf24;
+    }
+
+    .threshold-banner.warning {
+      background: rgba(251, 146, 60, 0.15);
+      border: 1px solid rgba(251, 146, 60, 0.3);
+      color: #f97316;
+    }
+
+    .threshold-banner.danger {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+    }
+
+    .threshold-banner .warning-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .threshold-banner .warning-message {
+      flex: 1;
+      font-weight: 500;
+    }
+
+    .threshold-banner .warning-count {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    .threshold-banner .warning-count strong {
+      font-size: 1rem;
+    }
+
+    .threshold-banner .warning-dismiss {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      padding: 0.25rem;
+      color: inherit;
+      line-height: 1;
+    }
+
+    .threshold-banner .warning-dismiss:hover {
+      opacity: 1;
+    }
+
     /* Export Section */
     .export-section {
       margin-top: 1.5rem;
@@ -7443,6 +7512,17 @@
           <span id="warningBadge" class="warning-badge hidden"></span>
         </div>
       </div>
+
+      <!-- Progressive Threshold Warning Banner (Phase 16-04) -->
+      <div id="thresholdWarningBanner" class="threshold-banner" style="display: none;">
+        <span class="warning-icon"></span>
+        <span class="warning-message"></span>
+        <span class="warning-count">
+          <strong id="thresholdCount">0</strong> of 183 days
+        </span>
+        <button type="button" class="warning-dismiss" onclick="dismissThresholdWarning()" aria-label="Dismiss warning">&times;</button>
+      </div>
+
       <div id="warningBanner" class="warning-banner hidden"></div>
 
       <!-- Calendar Toolbar - Always visible for bulk operations -->
@@ -9062,7 +9142,19 @@
     });
 
     /**
-     * Calculate all day counts for current month and year
+     * WARNING_LEVELS - Progressive warning system for 183-day threshold
+     * Three-tier warning at 170, 180, and 183+ days
+     */
+    const WARNING_LEVELS = Object.freeze({
+      SAFE: { threshold: 0, class: 'safe', icon: '', message: '' },
+      CAUTION: { threshold: 170, class: 'caution', icon: '\u26A0\uFE0F', message: 'Approaching 183-day threshold' },
+      WARNING: { threshold: 180, class: 'warning', icon: '\uD83D\uDD36', message: 'Very close to 183-day threshold' },
+      DANGER: { threshold: 183, class: 'danger', icon: '\uD83D\uDEA8', message: 'EXCEEDED 183-day threshold!' }
+    });
+
+    /**
+     * Calculate all day counts for current month and year (SYNC VERSION - LEGACY)
+     * Falls back to localStorage when IndexedDB not available
      * @returns {object} - Monthly and annual counts
      */
     function calculateCounts() {
@@ -9098,9 +9190,89 @@
     }
 
     /**
+     * Calculate threshold counts using IndexedDB data (ASYNC VERSION)
+     * Provides monthly and annual breakdowns for 183-day tracking
+     * @param {number} year - Year to calculate for (e.g., 2026)
+     * @returns {Promise<object>} - { annual: {...}, monthly: {...} }
+     */
+    async function calculateThresholdCounts(year) {
+      // Try to get days from IndexedDB
+      let days = [];
+      try {
+        days = await CalendarManager.getDaysForYear(year);
+      } catch (err) {
+        console.warn('calculateThresholdCounts: IndexedDB unavailable, falling back to localStorage');
+      }
+
+      // If no IndexedDB data, check localStorage (migration may be pending)
+      if (days.length === 0 && calendarState && calendarState.days) {
+        const localDays = Object.entries(calendarState.days);
+        const yearStr = String(year);
+        const hasLocalData = localDays.some(([k]) => k.startsWith(yearStr));
+
+        if (hasLocalData) {
+          // Convert localStorage format to array format for counting
+          // (Migration prompt would appear here in full implementation)
+          const fallbackCounts = calculateCounts();
+          return {
+            annual: {
+              belgium: fallbackCounts.annualBelgium,
+              spain: fallbackCounts.annualSpain,
+              travel: fallbackCounts.annualTravel,
+              other: 0,
+              threshold: fallbackCounts.annualThreshold
+            },
+            monthly: {}  // Monthly breakdown not available in fallback
+          };
+        }
+      }
+
+      let belgium = 0, spain = 0, travel = 0, other = 0;
+      const monthCounts = {};
+
+      // Initialize month counts (month is 1-12 for display)
+      for (let m = 1; m <= 12; m++) {
+        monthCounts[m] = { belgium: 0, spain: 0, travel: 0 };
+      }
+
+      days.forEach(d => {
+        const month = parseInt(d.date.split('-')[1], 10);
+
+        switch (d.location) {
+          case 'belgium':
+            belgium++;
+            monthCounts[month].belgium++;
+            break;
+          case 'spain':
+            spain++;
+            monthCounts[month].spain++;
+            break;
+          case 'travel':
+            travel++;
+            monthCounts[month].travel++;
+            break;
+          case 'other':
+            other++;
+            break;
+        }
+      });
+
+      return {
+        annual: {
+          belgium,
+          spain,
+          travel,
+          other,
+          threshold: belgium + travel  // Both count toward 183
+        },
+        monthly: monthCounts
+      };
+    }
+
+    /**
      * Get warning level based on threshold count
      * @param {number} thresholdCount - Number of Belgium + Travel days
-     * @returns {string|null} - 'red', 'orange', 'yellow', or null
+     * @returns {string|null} - 'red', 'orange', 'yellow', or null (legacy API)
      */
     function getWarningLevel(thresholdCount) {
       if (thresholdCount >= WARNING_THRESHOLDS.RED) return 'red';
@@ -9110,7 +9282,111 @@
     }
 
     /**
-     * Update count displays and warning banners
+     * Get progressive warning level object for threshold count
+     * Returns WARNING_LEVELS entry for appropriate tier
+     * @param {number} thresholdCount - Number of Belgium + Travel days
+     * @returns {object} - WARNING_LEVELS entry
+     */
+    function getProgressiveWarningLevel(thresholdCount) {
+      if (thresholdCount >= WARNING_LEVELS.DANGER.threshold) return WARNING_LEVELS.DANGER;
+      if (thresholdCount >= WARNING_LEVELS.WARNING.threshold) return WARNING_LEVELS.WARNING;
+      if (thresholdCount >= WARNING_LEVELS.CAUTION.threshold) return WARNING_LEVELS.CAUTION;
+      return WARNING_LEVELS.SAFE;
+    }
+
+    /**
+     * Update threshold warning banner with progressive styling
+     * @param {number} thresholdCount - Current threshold count
+     */
+    function updateThresholdWarning(thresholdCount) {
+      const banner = document.getElementById('thresholdWarningBanner');
+      if (!banner) return;
+
+      const level = getProgressiveWarningLevel(thresholdCount);
+
+      if (level === WARNING_LEVELS.SAFE) {
+        banner.style.display = 'none';
+        return;
+      }
+
+      banner.className = `threshold-banner ${level.class}`;
+      const iconEl = banner.querySelector('.warning-icon');
+      const msgEl = banner.querySelector('.warning-message');
+      const countEl = document.getElementById('thresholdCount');
+
+      if (iconEl) iconEl.textContent = level.icon;
+      if (msgEl) msgEl.textContent = level.message;
+      if (countEl) countEl.textContent = thresholdCount;
+
+      banner.style.display = 'flex';
+    }
+
+    /**
+     * Dismiss threshold warning banner
+     * Banner reappears when count changes
+     */
+    function dismissThresholdWarning() {
+      const banner = document.getElementById('thresholdWarningBanner');
+      if (banner) banner.style.display = 'none';
+    }
+
+    /**
+     * Update count displays and warning banners (ASYNC VERSION)
+     * Loads data from IndexedDB and updates all count displays
+     */
+    async function updateCountDisplaysAsync() {
+      const year = calendarState?.year || 2026;
+      const currentMonth = calendarState?.currentMonth ?? 1;
+
+      try {
+        const counts = await calculateThresholdCounts(year);
+
+        // Update monthly count (current month display)
+        const monthCountEl = document.getElementById('monthBelgiumCount');
+        if (monthCountEl) {
+          // currentMonth is 0-indexed, monthCounts uses 1-indexed
+          const monthData = counts.monthly[currentMonth + 1] || { belgium: 0 };
+          monthCountEl.textContent = monthData.belgium;
+        }
+
+        // Update annual count
+        const annualCountEl = document.getElementById('annualBelgiumCount');
+        if (annualCountEl) {
+          annualCountEl.textContent = counts.annual.threshold;
+        }
+
+        // Update progressive warning banner
+        updateThresholdWarning(counts.annual.threshold);
+
+        // Update legacy warning elements (badge and banner)
+        const warningLevel = getWarningLevel(counts.annual.threshold);
+        const badge = document.getElementById('warningBadge');
+        const banner = document.getElementById('warningBanner');
+
+        // Reset classes
+        if (badge) badge.className = 'warning-badge hidden';
+        if (banner) banner.className = 'warning-banner hidden';
+
+        if (warningLevel && badge && banner) {
+          badge.className = `warning-badge ${warningLevel}`;
+          badge.textContent = warningLevel === 'red' ? 'EXCEEDED' : 'WARNING';
+
+          banner.className = `warning-banner ${warningLevel}`;
+          const messages = {
+            yellow: `Approaching threshold: ${counts.annual.threshold} days in Belgium (183 triggers residency review)`,
+            orange: `Very close to threshold: ${counts.annual.threshold} days in Belgium (183 triggers residency review)`,
+            red: `Threshold exceeded: ${counts.annual.threshold} days in Belgium (exceeds 183-day limit)`
+          };
+          banner.textContent = messages[warningLevel];
+        }
+      } catch (err) {
+        console.warn('updateCountDisplaysAsync failed, using sync fallback:', err.message);
+        updateCountDisplays();
+      }
+    }
+
+    /**
+     * Update count displays and warning banners (SYNC VERSION - LEGACY)
      * Called after any day status change
      */
     function updateCountDisplays() {
@@ -9120,6 +9396,9 @@
       const annualCountEl = document.getElementById('annualBelgiumCount');
       if (monthCountEl) monthCountEl.textContent = counts.monthBelgium;
       if (annualCountEl) annualCountEl.textContent = counts.annualThreshold;
+
+      // Update progressive warning banner
+      updateThresholdWarning(counts.annualThreshold);
 
       const warningLevel = getWarningLevel(counts.annualThreshold);
       const badge = document.getElementById('warningBadge');
