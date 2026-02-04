@@ -5,30 +5,30 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 15 COMPLETE (Client Management)
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 16 IN PROGRESS (Calendar Enhancement)
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
-Phase: 15 of 29 (Client Management) - COMPLETE
-Plan: 5 of 5 in current phase (all complete)
-Status: Phase complete
-Last activity: 2026-02-04 - Completed 15-05-PLAN.md (Client Detail UI and Contact/Project Forms)
+Phase: 16 of 29 (Calendar Enhancement) - IN PROGRESS
+Plan: 1 of 7 in current phase (1 complete)
+Status: In progress
+Last activity: 2026-02-04 - Completed 16-01-PLAN.md (CalendarManager Module)
 
-Progress: Phases 12-15 complete (19 plans), Phase 16 ready
+Progress: Phases 12-15 complete (19 plans), Phase 16: 1/7 plans complete
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 44
-- Average duration: 3.5 min
-- Total execution time: 253 min
+- Total plans completed: 45
+- Average duration: 3.4 min
+- Total execution time: 255 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 19 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5)
-- Phase 15 duration: ~57 min (5 plans + bug fixes)
+- Plans completed: 20 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 1)
+- Phase 16 progress: 1/7 plans complete
 
 *Updated after each plan completion*
 
@@ -111,57 +111,54 @@ Recent decisions affecting current work:
 - [15-05]: Contact entity_id denormalized for faster entity-scoped queries
 - [15-05]: Custom checkbox styling with green checkmark when checked
 - [15-05]: All UI text must be in English (user requirement)
+- [16-01]: LOCATION_TYPE keeps UNSET value for v1 compatibility during migration
+- [16-01]: Migration is per-entity via localStorage flag (calendar_migrated_v2_entity_{entityId})
+- [16-01]: getLinkedExpenseCount is placeholder returning 0 until Phase 17
+- [16-01]: Calendar migration runs in Step 5.5 of initializeDatabase()
 
 ### Pending Todos
 
-None - Phase 15 complete. Ready for Phase 16.
+None - Plan 16-01 complete. Ready for Plan 16-02.
 
 ### Blockers/Concerns
 
-None - Phase 15 completed successfully.
+None - Plan 16-01 completed successfully.
 
 User setup required: Deploy vies-validate Edge Function to Supabase for online EU VAT validation.
 
 ### Research Flags
 
 Phases needing `/gsd:research-phase`:
-- Phase 15: Client Management - COMPLETE
+- Phase 16: Calendar Enhancement - COMPLETE (research done)
 - Phase 19: Receipt OCR (Mindee API) - HIGH
 - Phase 21: Tax Automation - SL (IS calculation, BINs) - HIGH
 - Phase 22: SL Accounting (Cuentas Anuales generation) - HIGH
 - Phase 27: Cloud Sync (PWA, conflict resolution) - HIGH
 
-## Phase 15 Deliverables Summary
+## Phase 16 Deliverables Summary
 
 | Plan | Deliverable | Commit |
 |------|-------------|--------|
-| 15-01 | EU_VAT_PATTERNS, getFlagEmoji, CLIENT_CATEGORY, getClientCategoryByCountry | `004dbc6`, `bd9cd7c` |
-| 15-02 | VIESValidator, ClientManager, VIES Edge Function | `d1a4f49`, `fc0efaf`, `c97c24d` |
-| 15-03 | ContactManager, ProjectManager, CONTACT_ROLE, RATE_TYPE, PROJECT_STATUS | `053d3c6`, `c6624a3` |
-| 15-04 | ClientListUI, ClientFormUI, ProjectManager stub, Clientes tab | `2253f05`, `9676b6c` |
-| 15-05 | ClientDetailUI, ContactFormUI, ProjectFormUI, DB v3 | `5469154`, `fe33866`, `ed32e8d`, `3263025`, `2bd4942` |
+| 16-01 | CalendarManager, LOCATION_TYPE, migrateCalendarToIndexedDB | `6e91bf8` |
 
-**Phase 15 Success Criteria (All Complete):**
-- [x] EU VAT format validation for all 27 EU countries plus XI
-- [x] Greece uses EL country code per VIES specification
-- [x] CLIENT_CATEGORY constants for IVA treatment routing
-- [x] Country flag emoji function working
-- [x] VIESValidator with format and API validation (15-02)
-- [x] ClientManager CRUD operations (15-02)
-- [x] ContactManager with roles and primary contact (15-03)
-- [x] ProjectManager CRUD with auto-status calculation (15-03)
-- [x] Client form UI with country-aware validation (15-04)
-- [x] Client list with search and filters (15-04)
-- [x] Client detail panel with tabs (15-05)
-- [x] Contact form and list UI (15-05)
-- [x] Project form and list UI (15-05)
+**Phase 16 Success Criteria (In Progress):**
+- [x] CalendarManager provides all CRUD operations for calendar days (16-01)
+- [x] Migration preserves all v1 calendar entries in IndexedDB (16-01)
+- [x] Entity-scoping isolates calendar data per business entity (16-01)
+- [x] Placeholder for expense linking ready for Phase 17 (16-01)
+- [ ] Calendar UI uses CalendarManager for persistence (16-02)
+- [ ] Multi-select UI for bulk day operations (16-03)
+- [ ] Client/project picker for day assignment (16-04)
+- [ ] 183-day warning system (16-05)
+- [ ] Contracted pattern auto-fill (16-06)
+- [ ] Export/reporting features (16-07)
 
 ## Session Continuity
 
 Last session: 2026-02-04
-Stopped at: Completed Phase 15 (Client Management)
-Resume file: None - Phase 15 complete
+Stopped at: Completed 16-01-PLAN.md (CalendarManager Module)
+Resume file: None - ready for 16-02-PLAN.md
 
 ---
-*Phase 15 completed: 2026-02-04*
-*Next step: Discuss Phase 16 scope, then /gsd:plan-phase 16 (Calendar Enhancement)*
+*Plan 16-01 completed: 2026-02-04*
+*Next step: /gsd:execute-phase 16-02 (Calendar UI Migration)*
