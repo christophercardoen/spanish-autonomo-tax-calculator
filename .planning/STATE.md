@@ -101,6 +101,10 @@ Recent decisions affecting current work:
 - [15-02]: ClientManager routes tax ID validation by country code (ES/EU/third)
 - [15-02]: EU VAT format validation immediate; VIES API validation deferred to UI button
 - [15-02]: Third country tax IDs stored as-is with no external validation
+- [15-03]: Contact roles fixed to four: billing, project_manager, technical, general
+- [15-03]: Project status auto-calculated from dates, manual override takes precedence
+- [15-03]: Projects denormalize entity_id for faster entity-level queries
+- [15-03]: Four rate types: daily, hourly, fixed, monthly_retainer
 - [15-04]: Client row click opens edit form via stub until Plan 15-05 adds detail panel
 - [15-04]: ProjectManager stub returns 0 active projects until Plan 15-03 implements CRUD
 - [15-04]: VIES verification optional with confirmation prompt for EU B2B clients
@@ -130,6 +134,7 @@ Phases needing `/gsd:research-phase`:
 |------|-------------|--------|
 | 15-01 | EU_VAT_PATTERNS, getFlagEmoji, CLIENT_CATEGORY, getClientCategoryByCountry | `004dbc6`, `bd9cd7c` |
 | 15-02 | VIESValidator, ClientManager, VIES Edge Function | `d1a4f49`, `fc0efaf`, `c97c24d` |
+| 15-03 | ContactManager, ProjectManager, CONTACT_ROLE, RATE_TYPE, PROJECT_STATUS | `053d3c6`, `c6624a3` |
 | 15-04 | ClientListUI, ClientFormUI, ProjectManager stub, Clientes tab | `2253f05`, `9676b6c` |
 
 **Phase 15 Success Criteria (Progress):**
@@ -139,7 +144,8 @@ Phases needing `/gsd:research-phase`:
 - [x] Country flag emoji function working
 - [x] VIESValidator with format and API validation (15-02)
 - [x] ClientManager CRUD operations (15-02)
-- [ ] ProjectManager CRUD operations (15-03)
+- [x] ContactManager with roles and primary contact (15-03)
+- [x] ProjectManager CRUD with auto-status calculation (15-03)
 - [x] Client form UI with country-aware validation (15-04)
 - [x] Client list with search and filters (15-04)
 - [ ] Client detail panel (15-05)
