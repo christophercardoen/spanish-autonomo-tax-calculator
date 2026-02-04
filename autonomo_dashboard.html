@@ -6670,6 +6670,131 @@
     </div>
   </div>
 
+  <!-- Phase 15-05: Contact Form Modal -->
+  <div id="contact-modal" class="client-modal hidden">
+    <div class="client-modal-content">
+      <div class="client-modal-header">
+        <h3 id="contact-modal-title">Nuevo Contacto</h3>
+        <button class="client-modal-close" onclick="ContactFormUI.close()">&times;</button>
+      </div>
+
+      <form id="contact-form" class="client-modal-form">
+        <input type="hidden" id="contact-client-id">
+
+        <div class="client-form-row full-width">
+          <div class="client-form-group">
+            <label for="contact-name">Nombre *</label>
+            <input type="text" id="contact-name" required placeholder="Nombre del contacto">
+          </div>
+        </div>
+
+        <div class="client-form-row">
+          <div class="client-form-group">
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" placeholder="email@empresa.com">
+          </div>
+          <div class="client-form-group">
+            <label for="contact-phone">Telefono</label>
+            <input type="tel" id="contact-phone" placeholder="+34 600 000 000">
+          </div>
+        </div>
+
+        <div class="client-form-row">
+          <div class="client-form-group">
+            <label for="contact-role">Rol</label>
+            <select id="contact-role">
+              <option value="general">General</option>
+              <option value="billing">Facturacion</option>
+              <option value="project_manager">Gestor de proyecto</option>
+              <option value="technical">Tecnico</option>
+            </select>
+          </div>
+          <div class="client-form-group">
+            <label class="checkbox-label" style="margin-top: 1.5rem;">
+              <input type="checkbox" id="contact-primary">
+              Contacto principal
+            </label>
+          </div>
+        </div>
+      </form>
+
+      <div class="client-modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="ContactFormUI.close()">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="contact-submit-btn" onclick="ContactFormUI.handleSubmit(event)">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 15-05: Project Form Modal -->
+  <div id="project-modal" class="client-modal hidden">
+    <div class="client-modal-content">
+      <div class="client-modal-header">
+        <h3 id="project-modal-title">Nuevo Proyecto</h3>
+        <button class="client-modal-close" onclick="ProjectFormUI.close()">&times;</button>
+      </div>
+
+      <form id="project-form" class="client-modal-form">
+        <input type="hidden" id="project-client-id">
+
+        <div class="client-form-row full-width">
+          <div class="client-form-group">
+            <label for="project-name">Nombre del proyecto *</label>
+            <input type="text" id="project-name" required placeholder="Ej: Consultoria IT Q1 2026">
+          </div>
+        </div>
+
+        <div class="client-form-row">
+          <div class="client-form-group">
+            <label for="project-rate-type">Tipo de tarifa</label>
+            <select id="project-rate-type">
+              <option value="daily">Diario</option>
+              <option value="hourly">Por hora</option>
+              <option value="fixed">Precio fijo</option>
+              <option value="monthly_retainer">Retainer mensual</option>
+            </select>
+          </div>
+          <div class="client-form-group">
+            <label for="project-rate">Tarifa (EUR)</label>
+            <input type="number" id="project-rate" step="0.01" min="0" placeholder="650.00">
+          </div>
+        </div>
+
+        <div class="client-form-row">
+          <div class="client-form-group">
+            <label for="project-start">Fecha inicio</label>
+            <input type="date" id="project-start">
+          </div>
+          <div class="client-form-group">
+            <label for="project-end">Fecha fin</label>
+            <input type="date" id="project-end">
+          </div>
+        </div>
+
+        <div class="client-form-row">
+          <div class="client-form-group">
+            <label for="project-status-override">Estado (manual)</label>
+            <select id="project-status-override">
+              <option value="">Auto (basado en fechas)</option>
+              <option value="cancelled">Cancelado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="client-form-row full-width">
+          <div class="client-form-group">
+            <label for="project-notes">Notas</label>
+            <textarea id="project-notes" rows="2" placeholder="Notas adicionales sobre el proyecto"></textarea>
+          </div>
+        </div>
+      </form>
+
+      <div class="client-modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="ProjectFormUI.close()">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="project-submit-btn" onclick="ProjectFormUI.handleSubmit(event)">Guardar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Phase 12: Loading Screen for Database Initialization -->
   <div id="loading-screen" class="loading-screen">
     <div class="loading-content">
@@ -17454,6 +17579,190 @@ Generated by Autonomo Tax Calculator`;
     };
 
     // =====================================================
+    // Contact Form UI Module
+    // =====================================================
+
+    /**
+     * ContactFormUI - Create/Edit contact modal
+     * Handles contact creation and editing for clients
+     */
+    const ContactFormUI = {
+      modal: null,
+      form: null,
+      editingId: null,
+
+      init() {
+        this.modal = document.getElementById('contact-modal');
+        this.form = document.getElementById('contact-form');
+
+        // Form submission via button (form doesn't have submit event since button is outside)
+        document.getElementById('contact-submit-btn')?.addEventListener('click', (e) => this.handleSubmit(e));
+      },
+
+      openCreate(clientId) {
+        this.editingId = null;
+        this.form?.reset();
+        document.getElementById('contact-client-id').value = clientId;
+        document.getElementById('contact-modal-title').textContent = 'Nuevo Contacto';
+        document.getElementById('contact-submit-btn').textContent = 'Crear';
+        this.modal?.classList.remove('hidden');
+        document.getElementById('contact-name')?.focus();
+      },
+
+      async openEdit(contactId) {
+        const contact = await db.contacts.get(contactId);
+        if (!contact) return;
+
+        this.editingId = contactId;
+        document.getElementById('contact-client-id').value = contact.client_id;
+        document.getElementById('contact-modal-title').textContent = 'Editar Contacto';
+        document.getElementById('contact-submit-btn').textContent = 'Guardar';
+
+        document.getElementById('contact-name').value = contact.name || '';
+        document.getElementById('contact-email').value = contact.email || '';
+        document.getElementById('contact-phone').value = contact.phone || '';
+        document.getElementById('contact-role').value = contact.role || 'general';
+        document.getElementById('contact-primary').checked = contact.is_primary || false;
+
+        this.modal?.classList.remove('hidden');
+        document.getElementById('contact-name')?.focus();
+      },
+
+      close() {
+        this.modal?.classList.add('hidden');
+        this.editingId = null;
+      },
+
+      async handleSubmit(e) {
+        if (e) e.preventDefault();
+
+        const clientId = parseInt(document.getElementById('contact-client-id').value, 10);
+        const name = document.getElementById('contact-name')?.value?.trim();
+
+        if (!name) {
+          alert('El nombre del contacto es obligatorio');
+          return;
+        }
+
+        const contactData = {
+          name: name,
+          email: document.getElementById('contact-email')?.value?.trim() || null,
+          phone: document.getElementById('contact-phone')?.value?.trim() || null,
+          role: document.getElementById('contact-role')?.value || 'general',
+          is_primary: document.getElementById('contact-primary')?.checked || false
+        };
+
+        try {
+          if (this.editingId) {
+            await ContactManager.updateContact(this.editingId, contactData);
+          } else {
+            await ContactManager.createContact(clientId, contactData);
+          }
+
+          this.close();
+          await ClientDetailUI.renderContacts();
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+    };
+
+    // =====================================================
+    // Project Form UI Module
+    // =====================================================
+
+    /**
+     * ProjectFormUI - Create/Edit project modal
+     * Handles project creation and editing for clients
+     */
+    const ProjectFormUI = {
+      modal: null,
+      form: null,
+      editingId: null,
+
+      init() {
+        this.modal = document.getElementById('project-modal');
+        this.form = document.getElementById('project-form');
+
+        // Form submission via button
+        document.getElementById('project-submit-btn')?.addEventListener('click', (e) => this.handleSubmit(e));
+      },
+
+      openCreate(clientId) {
+        this.editingId = null;
+        this.form?.reset();
+        document.getElementById('project-client-id').value = clientId;
+        document.getElementById('project-modal-title').textContent = 'Nuevo Proyecto';
+        document.getElementById('project-submit-btn').textContent = 'Crear';
+        this.modal?.classList.remove('hidden');
+        document.getElementById('project-name')?.focus();
+      },
+
+      async openEdit(projectId) {
+        const project = await ProjectManager.getProject(projectId);
+        if (!project) return;
+
+        this.editingId = projectId;
+        document.getElementById('project-client-id').value = project.client_id;
+        document.getElementById('project-modal-title').textContent = 'Editar Proyecto';
+        document.getElementById('project-submit-btn').textContent = 'Guardar';
+
+        document.getElementById('project-name').value = project.name || '';
+        document.getElementById('project-rate-type').value = project.rate_type || 'daily';
+        document.getElementById('project-rate').value = project.rate_cents ? (project.rate_cents / 100).toFixed(2) : '';
+        document.getElementById('project-start').value = project.start_date || '';
+        document.getElementById('project-end').value = project.end_date || '';
+        document.getElementById('project-status-override').value = project.status_override || '';
+        document.getElementById('project-notes').value = project.notes || '';
+
+        this.modal?.classList.remove('hidden');
+        document.getElementById('project-name')?.focus();
+      },
+
+      close() {
+        this.modal?.classList.add('hidden');
+        this.editingId = null;
+      },
+
+      async handleSubmit(e) {
+        if (e) e.preventDefault();
+
+        const clientId = parseInt(document.getElementById('project-client-id').value, 10);
+        const name = document.getElementById('project-name')?.value?.trim();
+
+        if (!name) {
+          alert('El nombre del proyecto es obligatorio');
+          return;
+        }
+
+        const rateValue = document.getElementById('project-rate')?.value;
+
+        const projectData = {
+          name: name,
+          rate_type: document.getElementById('project-rate-type')?.value || 'daily',
+          rate_cents: rateValue ? MoneyUtils.eurosToCents(parseFloat(rateValue)) : 0,
+          start_date: document.getElementById('project-start')?.value || null,
+          end_date: document.getElementById('project-end')?.value || null,
+          status_override: document.getElementById('project-status-override')?.value || null,
+          notes: document.getElementById('project-notes')?.value?.trim() || null
+        };
+
+        try {
+          if (this.editingId) {
+            await ProjectManager.updateProject(this.editingId, projectData);
+          } else {
+            await ProjectManager.createProject(clientId, projectData);
+          }
+
+          this.close();
+          await ClientDetailUI.renderProjects();
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+    };
+
+    // =====================================================
     // Entity Context (Current Entity State Management)
     // =====================================================
 
@@ -18485,6 +18794,8 @@ Generated by Autonomo Tax Calculator`;
       ClientListUI.init();
       ClientFormUI.init();
       ClientDetailUI.init();
+      ContactFormUI.init();
+      ProjectFormUI.init();
 
       // Phase 14-05: Subscribe to entity changes for sharing section
       EntityContext.subscribe(async (entity) => {
