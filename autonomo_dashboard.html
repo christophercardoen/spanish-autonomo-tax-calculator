@@ -6588,34 +6588,34 @@
   <div id="client-modal" class="client-modal hidden">
     <div class="client-modal-content">
       <div class="client-modal-header">
-        <h3 id="client-modal-title">Nuevo Cliente</h3>
+        <h3 id="client-modal-title">New Client</h3>
         <button class="client-modal-close" onclick="ClientFormUI.close()">&times;</button>
       </div>
 
       <form id="client-form" class="client-modal-form">
         <div class="client-form-row full-width">
           <div class="client-form-group">
-            <label for="client-name">Nombre / Razon Social *</label>
-            <input type="text" id="client-name" required placeholder="Nombre de la empresa o persona">
+            <label for="client-name">Name / Company *</label>
+            <input type="text" id="client-name" required placeholder="Company or person name">
           </div>
         </div>
 
         <div class="client-form-row">
           <div class="client-form-group">
-            <label for="client-country">Pais *</label>
+            <label for="client-country">Country *</label>
             <select id="client-country" required>
-              <option value="ES">Espana</option>
-              <option value="BE">Belgica</option>
-              <option value="NL">Paises Bajos</option>
-              <option value="DE">Alemania</option>
-              <option value="FR">Francia</option>
-              <option value="IT">Italia</option>
+              <option value="ES">Spain</option>
+              <option value="BE">Belgium</option>
+              <option value="NL">Countryes Bajos</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="IT">Italy</option>
               <option value="PT">Portugal</option>
               <option value="AT">Austria</option>
               <option value="IE">Irlanda</option>
               <option value="LU">Luxemburgo</option>
-              <option value="GB">Reino Unido</option>
-              <option value="US">Estados Unidos</option>
+              <option value="GB">United Kingdom</option>
+              <option value="US">United States</option>
               <option value="CA">Canada</option>
               <option value="AU">Australia</option>
             </select>
@@ -6626,7 +6626,7 @@
             <div class="tax-id-input-group">
               <input type="text" id="client-tax-id" placeholder="Ej: B12345678">
               <button type="button" id="vies-verify-btn" class="vies-btn hidden">
-                Verificar VIES
+                Verify VIES
               </button>
             </div>
             <span id="tax-id-validation" class="validation-message"></span>
@@ -6637,9 +6637,9 @@
           <div class="client-form-group">
             <label class="checkbox-label">
               <input type="checkbox" id="client-is-b2b" checked>
-              Cliente B2B (inversion del sujeto pasivo)
+              B2B Client (reverse charge)
             </label>
-            <span class="form-help">Desmarcar si es consumidor final (B2C)</span>
+            <span class="form-help">Uncheck if consumer (B2C)</span>
           </div>
         </div>
 
@@ -6647,35 +6647,35 @@
           <div class="client-form-group">
             <label class="checkbox-label">
               <input type="checkbox" id="client-w8ben">
-              W-8BEN en archivo (retencion 0%)
+              W-8BEN on file (0% withholding)
             </label>
-            <span class="form-help">Para clientes estadounidenses con convenio de doble imposicion</span>
+            <span class="form-help">For US clients with tax treaty</span>
           </div>
         </div>
 
         <div class="client-form-row">
           <div class="client-form-group">
             <label for="client-email">Email</label>
-            <input type="email" id="client-email" placeholder="facturacion@empresa.com">
+            <input type="email" id="client-email" placeholder="billing@company.com">
           </div>
 
           <div class="client-form-group">
-            <label for="client-phone">Telefono</label>
+            <label for="client-phone">Phone</label>
             <input type="tel" id="client-phone" placeholder="+34 600 000 000">
           </div>
         </div>
 
         <div class="client-form-row full-width">
           <div class="client-form-group">
-            <label for="client-address">Direccion</label>
+            <label for="client-address">Address</label>
             <textarea id="client-address" rows="2" placeholder="Calle, numero, codigo postal, ciudad"></textarea>
           </div>
         </div>
       </form>
 
       <div class="client-modal-actions">
-        <button type="button" class="btn btn-secondary" onclick="ClientFormUI.close()">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="client-submit-btn" onclick="ClientFormUI.handleSubmit(event)">Crear Cliente</button>
+        <button type="button" class="btn btn-secondary" onclick="ClientFormUI.close()">Cancel</button>
+        <button type="button" class="btn btn-primary" id="client-submit-btn" onclick="ClientFormUI.handleSubmit(event)">Create Client</button>
       </div>
     </div>
   </div>
@@ -6684,7 +6684,7 @@
   <div id="contact-modal" class="client-modal hidden">
     <div class="client-modal-content">
       <div class="client-modal-header">
-        <h3 id="contact-modal-title">Nuevo Contacto</h3>
+        <h3 id="contact-modal-title">New Contact</h3>
         <button class="client-modal-close" onclick="ContactFormUI.close()">&times;</button>
       </div>
 
@@ -6693,44 +6693,44 @@
 
         <div class="client-form-row full-width">
           <div class="client-form-group">
-            <label for="contact-name">Nombre *</label>
-            <input type="text" id="contact-name" required placeholder="Nombre del contacto">
+            <label for="contact-name">Name *</label>
+            <input type="text" id="contact-name" required placeholder="Contact name">
           </div>
         </div>
 
         <div class="client-form-row">
           <div class="client-form-group">
             <label for="contact-email">Email</label>
-            <input type="email" id="contact-email" placeholder="email@empresa.com">
+            <input type="email" id="contact-email" placeholder="email@company.com">
           </div>
           <div class="client-form-group">
-            <label for="contact-phone">Telefono</label>
+            <label for="contact-phone">Phone</label>
             <input type="tel" id="contact-phone" placeholder="+34 600 000 000">
           </div>
         </div>
 
         <div class="client-form-row">
           <div class="client-form-group">
-            <label for="contact-role">Rol</label>
+            <label for="contact-role">Role</label>
             <select id="contact-role">
               <option value="general">General</option>
-              <option value="billing">Facturacion</option>
-              <option value="project_manager">Gestor de proyecto</option>
-              <option value="technical">Tecnico</option>
+              <option value="billing">Billing</option>
+              <option value="project_manager">Project Manager</option>
+              <option value="technical">Technical</option>
             </select>
           </div>
           <div class="client-form-group">
             <label class="checkbox-label" style="margin-top: 1.5rem;">
               <input type="checkbox" id="contact-primary">
-              Contacto principal
+              Primary contact
             </label>
           </div>
         </div>
       </form>
 
       <div class="client-modal-actions">
-        <button type="button" class="btn btn-secondary" onclick="ContactFormUI.close()">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="contact-submit-btn" onclick="ContactFormUI.handleSubmit(event)">Guardar</button>
+        <button type="button" class="btn btn-secondary" onclick="ContactFormUI.close()">Cancel</button>
+        <button type="button" class="btn btn-primary" id="contact-submit-btn" onclick="ContactFormUI.handleSubmit(event)">Save</button>
       </div>
     </div>
   </div>
@@ -6739,7 +6739,7 @@
   <div id="project-modal" class="client-modal hidden">
     <div class="client-modal-content">
       <div class="client-modal-header">
-        <h3 id="project-modal-title">Nuevo Proyecto</h3>
+        <h3 id="project-modal-title">New Project</h3>
         <button class="client-modal-close" onclick="ProjectFormUI.close()">&times;</button>
       </div>
 
@@ -6748,59 +6748,59 @@
 
         <div class="client-form-row full-width">
           <div class="client-form-group">
-            <label for="project-name">Nombre del proyecto *</label>
-            <input type="text" id="project-name" required placeholder="Ej: Consultoria IT Q1 2026">
+            <label for="project-name">Project name *</label>
+            <input type="text" id="project-name" required placeholder="E.g.: IT Consulting Q1 2026">
           </div>
         </div>
 
         <div class="client-form-row">
           <div class="client-form-group">
-            <label for="project-rate-type">Tipo de tarifa</label>
+            <label for="project-rate-type">Rate type</label>
             <select id="project-rate-type">
-              <option value="daily">Diario</option>
-              <option value="hourly">Por hora</option>
-              <option value="fixed">Precio fijo</option>
-              <option value="monthly_retainer">Retainer mensual</option>
+              <option value="daily">Daily</option>
+              <option value="hourly">Hourly</option>
+              <option value="fixed">Fixed price</option>
+              <option value="monthly_retainer">Monthly retainer</option>
             </select>
           </div>
           <div class="client-form-group">
-            <label for="project-rate">Tarifa (EUR)</label>
+            <label for="project-rate">Rate (EUR)</label>
             <input type="number" id="project-rate" step="0.01" min="0" placeholder="650.00">
           </div>
         </div>
 
         <div class="client-form-row">
           <div class="client-form-group">
-            <label for="project-start">Fecha inicio</label>
+            <label for="project-start">Start date</label>
             <input type="date" id="project-start">
           </div>
           <div class="client-form-group">
-            <label for="project-end">Fecha fin</label>
+            <label for="project-end">End date</label>
             <input type="date" id="project-end">
           </div>
         </div>
 
         <div class="client-form-row">
           <div class="client-form-group">
-            <label for="project-status-override">Estado (manual)</label>
+            <label for="project-status-override">Status (manual)</label>
             <select id="project-status-override">
-              <option value="">Auto (basado en fechas)</option>
-              <option value="cancelled">Cancelado</option>
+              <option value="">Auto (based on dates)</option>
+              <option value="cancelled">Cancelled</option>
             </select>
           </div>
         </div>
 
         <div class="client-form-row full-width">
           <div class="client-form-group">
-            <label for="project-notes">Notas</label>
-            <textarea id="project-notes" rows="2" placeholder="Notas adicionales sobre el proyecto"></textarea>
+            <label for="project-notes">Notes</label>
+            <textarea id="project-notes" rows="2" placeholder="Additional notes about the project"></textarea>
           </div>
         </div>
       </form>
 
       <div class="client-modal-actions">
-        <button type="button" class="btn btn-secondary" onclick="ProjectFormUI.close()">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="project-submit-btn" onclick="ProjectFormUI.handleSubmit(event)">Guardar</button>
+        <button type="button" class="btn btn-secondary" onclick="ProjectFormUI.close()">Cancel</button>
+        <button type="button" class="btn btn-primary" id="project-submit-btn" onclick="ProjectFormUI.handleSubmit(event)">Save</button>
       </div>
     </div>
   </div>
@@ -6889,7 +6889,7 @@
         <label for="tab-expenses" class="tab-label">Expenses</label>
         <label for="tab-details" class="tab-label">Details</label>
         <label for="tab-income" class="tab-label">Income</label>
-        <label for="tab-clients" class="tab-label">Clientes</label>
+        <label for="tab-clients" class="tab-label">Clients</label>
         <label for="tab-compliance" class="tab-label">Compliance</label>
       </nav>
 
@@ -7213,31 +7213,31 @@
         <!-- CLIENTS TAB (Phase 15) -->
         <section class="tab-panel panel-clients">
           <div class="clients-header">
-            <h2>Clientes</h2>
+            <h2>Clients</h2>
             <div class="clients-actions">
               <button id="add-client-btn" class="add-btn" data-permission="create" data-permission-type="client">
-                + Nuevo Cliente
+                + New Client
               </button>
             </div>
           </div>
 
           <div class="clients-filters">
-            <input type="text" id="client-search" class="search-input" placeholder="Buscar por nombre, NIF...">
+            <input type="text" id="client-search" class="search-input" placeholder="Search by name, tax ID...">
             <select id="client-country-filter" class="filter-select">
-              <option value="">Todos los paises</option>
-              <option value="ES">Espana</option>
-              <option value="BE">Belgica</option>
-              <option value="NL">Paises Bajos</option>
-              <option value="DE">Alemania</option>
-              <option value="FR">Francia</option>
-              <option value="IT">Italia</option>
+              <option value="">All countries</option>
+              <option value="ES">Spain</option>
+              <option value="BE">Belgium</option>
+              <option value="NL">Netherlands</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="IT">Italy</option>
               <option value="PT">Portugal</option>
-              <option value="GB">Reino Unido</option>
-              <option value="US">Estados Unidos</option>
+              <option value="GB">United Kingdom</option>
+              <option value="US">United States</option>
             </select>
             <label class="filter-checkbox">
               <input type="checkbox" id="client-active-filter">
-              Solo con proyectos activos
+              Only with active projects
             </label>
           </div>
 
@@ -7246,12 +7246,12 @@
           </div>
 
           <div id="client-empty-state" class="clients-empty-state hidden">
-            <p>No hay clientes. Crea tu primer cliente para comenzar.</p>
+            <p>No clients yet. Create your first client to get started.</p>
           </div>
 
           <!-- Client Detail View (replaces list when viewing detail) -->
           <div id="client-detail-view" class="detail-view hidden">
-            <button class="back-btn" id="client-back-btn">&larr; Volver a clientes</button>
+            <button class="back-btn" id="client-back-btn">&larr; Back to clients</button>
 
             <div class="client-detail-header">
               <div class="client-detail-main">
@@ -7267,78 +7267,78 @@
               </div>
               <div class="client-detail-summary">
                 <div class="summary-item">
-                  <span class="summary-label">Total facturado</span>
+                  <span class="summary-label">Total invoiced</span>
                   <span class="summary-value" id="detail-total-invoiced">0,00 EUR</span>
                 </div>
                 <div class="summary-item">
-                  <span class="summary-label">Pendiente</span>
+                  <span class="summary-label">Outstanding</span>
                   <span class="summary-value" id="detail-outstanding">0,00 EUR</span>
                 </div>
                 <div class="summary-item">
-                  <span class="summary-label">Beneficio</span>
+                  <span class="summary-label">Profit</span>
                   <span class="summary-value" id="detail-profit">0,00 EUR</span>
                 </div>
               </div>
               <div class="client-detail-actions">
-                <button class="btn btn-secondary" id="edit-client-btn" data-permission="edit">Editar</button>
-                <button class="btn btn-danger" id="archive-client-btn" data-permission="delete">Archivar</button>
+                <button class="btn btn-secondary" id="edit-client-btn" data-permission="edit">Edit</button>
+                <button class="btn btn-danger" id="archive-client-btn" data-permission="delete">Archive</button>
               </div>
             </div>
 
             <div class="client-detail-tabs">
-              <button class="detail-tab active" data-detail-tab="contacts">Contactos</button>
-              <button class="detail-tab" data-detail-tab="projects">Proyectos</button>
-              <button class="detail-tab" data-detail-tab="invoices">Facturas</button>
-              <button class="detail-tab" data-detail-tab="expenses">Gastos</button>
-              <button class="detail-tab" data-detail-tab="calendar">Calendario</button>
+              <button class="detail-tab active" data-detail-tab="contacts">Contacts</button>
+              <button class="detail-tab" data-detail-tab="projects">Projects</button>
+              <button class="detail-tab" data-detail-tab="invoices">Invoices</button>
+              <button class="detail-tab" data-detail-tab="expenses">Expenses</button>
+              <button class="detail-tab" data-detail-tab="calendar">Calendar</button>
             </div>
 
             <div id="detail-contacts-panel" class="detail-panel">
               <div class="panel-header">
-                <h3>Contactos</h3>
-                <button class="btn btn-small" id="add-contact-btn" data-permission="create">+ Contacto</button>
+                <h3>Contacts</h3>
+                <button class="btn btn-small" id="add-contact-btn" data-permission="create">+ Contact</button>
               </div>
               <div id="contacts-list" class="contacts-list"></div>
               <div id="contacts-empty" class="empty-state hidden">
-                <p>No hay contactos. Anade un contacto para este cliente.</p>
+                <p>No contacts. Add a contact for this client.</p>
               </div>
             </div>
 
             <div id="detail-projects-panel" class="detail-panel hidden">
               <div class="panel-header">
-                <h3>Proyectos</h3>
-                <button class="btn btn-small" id="add-project-btn" data-permission="create">+ Proyecto</button>
+                <h3>Projects</h3>
+                <button class="btn btn-small" id="add-project-btn" data-permission="create">+ Project</button>
               </div>
               <div id="projects-list" class="projects-list"></div>
               <div id="projects-empty" class="empty-state hidden">
-                <p>No hay proyectos. Crea un proyecto para este cliente.</p>
+                <p>No projects. Create a project for this client.</p>
               </div>
             </div>
 
             <div id="detail-invoices-panel" class="detail-panel hidden">
               <div class="panel-header">
-                <h3>Facturas</h3>
+                <h3>Invoices</h3>
               </div>
               <div id="invoices-list" class="invoices-list">
-                <p class="coming-soon">Las facturas estaran disponibles en la fase 18.</p>
+                <p class="coming-soon">Invoices will be available in phase 18.</p>
               </div>
             </div>
 
             <div id="detail-expenses-panel" class="detail-panel hidden">
               <div class="panel-header">
-                <h3>Gastos vinculados</h3>
+                <h3>Linked expenses</h3>
               </div>
               <div id="expenses-list" class="expenses-list">
-                <p class="coming-soon">Los gastos vinculados estaran disponibles en la fase 17.</p>
+                <p class="coming-soon">Linked expenses will be available in phase 17.</p>
               </div>
             </div>
 
             <div id="detail-calendar-panel" class="detail-panel hidden">
               <div class="panel-header">
-                <h3>Dias trabajados</h3>
+                <h3>Days worked</h3>
               </div>
               <div id="client-mini-calendar" class="mini-calendar">
-                <p class="coming-soon">El calendario de cliente estara disponible en la fase 16.</p>
+                <p class="coming-soon">Client calendar will be available in phase 16.</p>
               </div>
             </div>
           </div>
@@ -7785,7 +7785,7 @@
       RETA_MONTHLY: 428.40,
       RETA_ANNUAL: 5140.80,
 
-      // Gastos dificil justificacion (Estimacion Directa Simplificada)
+      // Expenses dificil justificacion (Estimacion Directa Simplificada)
       // Source: AEAT Estimacion Directa Simplificada
       // https://sede.agenciatributaria.gob.es/Sede/irpf/empresarios-individuales-profesionales/regimenes-determinar-rendimiento-actividad/estimacion-directa-simplificada.html
       // Note: Was 7% in 2023, reverted to 5% for 2024 onwards
@@ -8997,7 +8997,7 @@ Generated by Autonomo Tax Calculator`;
         confidence: "HIGH"
       },
       GASTOS_DIFICIL: {
-        name: "Gastos de Dificil Justificacion",
+        name: "Expenses de Dificil Justificacion",
         source: "AEAT Estimacion Directa Simplificada",
         url: "https://sede.agenciatributaria.gob.es/Sede/irpf/empresarios-individuales-profesionales/regimenes-determinar-rendimiento-actividad/estimacion-directa-simplificada.html",
         note: "5% of rendimiento neto, maximum 2,000 EUR/year. Was 7% only in 2023.",
@@ -9011,7 +9011,7 @@ Generated by Autonomo Tax Calculator`;
         confidence: "HIGH"
       },
       DIETAS: {
-        name: "Dietas y Asignaciones para Gastos de Viaje",
+        name: "Dietas y Asignaciones para Expenses de Viaje",
         source: "Reglamento IRPF Art. 9",
         url: "https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820&tn=1&p=20231228#a9",
         note: "Abroad: 91.35 EUR/day with overnight, 48.08 EUR without. Spain: 53.34 EUR/day with overnight, 26.67 EUR without.",
@@ -9041,7 +9041,7 @@ Generated by Autonomo Tax Calculator`;
         description: 'Self-employed taxpayer information'
       },
 
-      // Estimation Methods - Gastos Dificil
+      // Estimation Methods - Expenses Dificil
       AEAT_ESTIMACION_DIRECTA: {
         name: 'Estimacion Directa Simplificada - AEAT',
         url: 'https://sede.agenciatributaria.gob.es/Sede/irpf/empresarios-individuales-profesionales/regimenes-determinar-rendimiento-actividad/estimacion-directa-simplificada.html',
@@ -9078,7 +9078,7 @@ Generated by Autonomo Tax Calculator`;
 
       // Dietas
       AEAT_DIETAS: {
-        name: 'Dietas y Gastos de Viaje - AEAT',
+        name: 'Dietas y Expenses de Viaje - AEAT',
         url: 'https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-ayuda-presentacion/irpf-2023/7-cumplimentacion-irpf/7_1-rendimientos-trabajo-personal/7_1_1-rendimientos-integros/7_1_1_2-dietas-gastos-viaje/asignaciones-gastos-manutencion-estancia.html',
         description: '91.35 EUR/day abroad with overnight'
       },
@@ -9092,14 +9092,14 @@ Generated by Autonomo Tax Calculator`;
 
       // Spain-Belgium Treaty
       BOE_TREATY: {
-        name: 'Convenio Espana-Belgica - BOE',
+        name: 'Convenio Spain-Belgium - BOE',
         url: 'https://www.boe.es/buscar/act.php?id=BOE-A-2003-13375',
         description: 'Double taxation treaty (BOE-A-2003-13375)'
       },
 
       // AEAT Treaty Page for Belgium
       AEAT_TREATY_BELGIUM: {
-        name: 'CDI Belgica - AEAT',
+        name: 'CDI Belgium - AEAT',
         url: 'https://sede.agenciatributaria.gob.es/Sede/normativa-criterios-interpretativos/fiscalidad-internacional/convenios-doble-imposicion-firmados-espana/belgica.html',
         description: 'AEAT treaty information page for Belgium'
       },
@@ -9257,7 +9257,7 @@ Generated by Autonomo Tax Calculator`;
     const ARTICLE_9_1_B = Object.freeze({
       title: 'Art. 9.1.b LIRPF: Family Presumption',
       source: 'Ley 35/2006, Art. 9.1.b (BOE-A-2006-20764)',
-      legalText: 'Se presumira, salvo prueba en contrario, que el contribuyente tiene su residencia habitual en territorio espanol cuando, de acuerdo con los criterios anteriores, resida habitualmente en Espana el conyuge no separado legalmente y los hijos menores de edad que dependan de aquel.',
+      legalText: 'Se presumira, salvo prueba en contrario, que el contribuyente tiene su residencia habitual en territorio espanol cuando, de acuerdo con los criterios anteriores, resida habitualmente en Spain el conyuge no separado legalmente y los hijos menores de edad que dependan de aquel.',
       plainSummary: 'If your non-legally-separated spouse AND/OR dependent minor children habitually reside in Spain, Spanish law PRESUMES you are also a Spanish tax resident. This presumption is "rebuttable" (can be challenged), but the burden of proof shifts to you to demonstrate your tax residence is elsewhere.',
       implication: 'For a person with family in Spain, this presumption operates in your FAVOR when another country might claim tax residency. Spain starts from the position that you are Spanish resident based on family ties, making it easier to defend Spanish tax residence under treaty tie-breaker rules.'
     });
@@ -9322,7 +9322,7 @@ Generated by Autonomo Tax Calculator`;
         text: 'Child allowance (2,400 EUR for first child). Reduces tax liability after rate application.'
       },
       gastos: {
-        title: 'Gastos de Dificil Justificacion',
+        title: 'Expenses de Dificil Justificacion',
         text: '5% deduction on net income for hard-to-document expenses. Capped at 2,000 EUR annually.'
       },
       leefgeld: {
@@ -9897,8 +9897,8 @@ Generated by Autonomo Tax Calculator`;
       // Step 3: Rendimiento Neto Previo (before gastos dificil)
       const rendimientoNetoPrevio = annualRevenue - totalDeductible;
 
-      // Step 4: Gastos dificil justificacion (use FISCAL_2025 rates - these don't change)
-      const gastosDificil = calculateGastosDificil(rendimientoNetoPrevio);
+      // Step 4: Expenses dificil justificacion (use FISCAL_2025 rates - these don't change)
+      const gastosDificil = calculateExpensesDificil(rendimientoNetoPrevio);
 
       // Step 5: Rendimiento Neto = Base Liquidable (for autonomo)
       const rendimientoNeto = rendimientoNetoPrevio - gastosDificil;
@@ -10613,7 +10613,7 @@ Generated by Autonomo Tax Calculator`;
               <span class="row-value">${formatEUR(r.rendimientoNetoPrevio)}</span>
             </div>
             <div class="results-row">
-              <span class="row-label">Gastos Dificil (5%, max 2000) ${sourceHint('GASTOS_DIFICIL')}</span>
+              <span class="row-label">Expenses Dificil (5%, max 2000) ${sourceHint('GASTOS_DIFICIL')}</span>
               <span class="row-value">-${formatEUR(r.gastosDificil)}</span>
             </div>
             <div class="results-row total">
@@ -10711,7 +10711,7 @@ Generated by Autonomo Tax Calculator`;
     }
 
     /**
-     * Calculate Gastos de Dificil Justificacion
+     * Calculate Expenses de Dificil Justificacion
      * For Estimacion Directa Simplificada: 5% with 2000 EUR annual cap
      *
      * Source: AEAT Estimacion Directa Simplificada
@@ -10720,7 +10720,7 @@ Generated by Autonomo Tax Calculator`;
      * @param {number} rendimientoNetoPrevio - Net income before gastos dificil
      * @returns {number} - Deductible amount in EUR
      */
-    function calculateGastosDificil(rendimientoNetoPrevio) {
+    function calculateExpensesDificil(rendimientoNetoPrevio) {
       if (rendimientoNetoPrevio <= 0) return 0;
       const calculated = rendimientoNetoPrevio * FISCAL_2025.GASTOS_DIFICIL_RATE;
       return Math.round(Math.min(calculated, FISCAL_2025.GASTOS_DIFICIL_MAX) * 100) / 100;
@@ -10752,8 +10752,8 @@ Generated by Autonomo Tax Calculator`;
       // Step 3: Rendimiento Neto Previo (before gastos dificil)
       const rendimientoNetoPrevio = annualRevenue - totalDeductible;
 
-      // Step 4: Gastos dificil justificacion
-      const gastosDificil = calculateGastosDificil(rendimientoNetoPrevio);
+      // Step 4: Expenses dificil justificacion
+      const gastosDificil = calculateExpensesDificil(rendimientoNetoPrevio);
 
       // Step 5: Rendimiento Neto = Base Liquidable (for autonomo)
       const rendimientoNeto = rendimientoNetoPrevio - gastosDificil;
@@ -10833,7 +10833,7 @@ Generated by Autonomo Tax Calculator`;
       const totalDeductible = annualExpenses + retaAnnual;
 
       const rendimientoNetoPrevio = annualRevenue - totalDeductible;
-      const gastosDificil = calculateGastosDificil(rendimientoNetoPrevio);
+      const gastosDificil = calculateExpensesDificil(rendimientoNetoPrevio);
       const rendimientoNeto = rendimientoNetoPrevio - gastosDificil;
       const baseLiquidable = Math.max(0, rendimientoNeto);
 
@@ -11142,7 +11142,7 @@ Generated by Autonomo Tax Calculator`;
         { label: 'Total Deductible', getValue: (s) => s.results.totalDeductible, format: formatEUR, valueClass: 'value-negative' },
         { divider: true },
         { label: 'Rendimiento Neto Previo', getValue: (s) => s.results.rendimientoNetoPrevio, format: formatEUR, valueClass: '' },
-        { label: createTooltip('gastos', 'Gastos Dificil (5%)'), getValue: (s) => s.results.gastosDificil, format: formatEUR, valueClass: '' },
+        { label: createTooltip('gastos', 'Expenses Dificil (5%)'), getValue: (s) => s.results.gastosDificil, format: formatEUR, valueClass: '' },
         { label: 'Base Liquidable', getValue: (s) => s.results.baseLiquidable, format: formatEUR, valueClass: '' },
         { divider: true },
         { label: createTooltip('minimo', 'Minimo Personal'), getValue: (s) => s.results.minimoPersonal, format: formatEUR, valueClass: '' },
@@ -11575,7 +11575,7 @@ Generated by Autonomo Tax Calculator`;
           <span class="value">${formatEUR(results.rendimientoNeto)}</span>
         </div>
         <div class="live-result-row">
-          <span class="label">Gastos Dificil (5%)</span>
+          <span class="label">Expenses Dificil (5%)</span>
           <span class="value">${formatEUR(results.gastosDificil)}</span>
         </div>
         <div class="live-result-row">
@@ -13332,17 +13332,18 @@ Generated by Autonomo Tax Calculator`;
 
           // Check if we have any entities, if not create a demo one
           const entities = await db.entities.toArray();
-          const activeEntities = entities.filter(e => !e.deleted_at);
+          const activeEntities = entities.filter(e => !e.deleted_at && e.is_active !== false);
 
           if (activeEntities.length === 0) {
             console.log('Creating demo entity...');
             const demoEntityId = await db.entities.add({
               type: 'autonomo',
-              name: 'Demo Autónomo',
+              name: 'Demo Business',
               tax_id: '12345678Z',
               email: 'demo@example.com',
               address: 'Calle Demo 123, Madrid',
               owner_id: null,
+              is_active: true,
               created_at: new Date().toISOString(),
               updated_at: new Date().toISOString(),
               deleted_at: null
@@ -13350,19 +13351,19 @@ Generated by Autonomo Tax Calculator`;
 
             // Set as current entity
             if (typeof EntityContext !== 'undefined') {
-              await EntityContext.setCurrentEntity(demoEntityId);
+              await EntityContext.setEntity(demoEntityId);
             }
             console.log('Demo entity created with ID:', demoEntityId);
           } else {
             // Use first existing entity
             if (typeof EntityContext !== 'undefined' && !EntityContext.entityId) {
-              await EntityContext.setCurrentEntity(activeEntities[0].id);
+              await EntityContext.setEntity(activeEntities[0].id);
             }
           }
 
           // Refresh UI components
-          if (typeof EntitySwitcherUI !== 'undefined' && EntitySwitcherUI.refresh) {
-            await EntitySwitcherUI.refresh();
+          if (entitySwitcher && entitySwitcher.refresh) {
+            await entitySwitcher.refresh();
           }
           if (typeof ClientListUI !== 'undefined' && ClientListUI.refresh) {
             await ClientListUI.refresh();
@@ -15787,7 +15788,7 @@ Generated by Autonomo Tax Calculator`;
      *   Format: 8 digits + 1 control letter
      *   Algorithm: letter = NIF_LETTERS[number % 23]
      *
-     * NIE (Numero de Identidad de Extranjero): For foreign residents
+     * NIE (Numero de Identity de Extranjero): For foreign residents
      *   Format: X/Y/Z + 7 digits + 1 control letter
      *   Algorithm: Replace prefix (X=0, Y=1, Z=2), then NIF algorithm
      *
@@ -15819,17 +15820,17 @@ Generated by Autonomo Tax Calculator`;
         'G': 'Asociacion o Fundacion',
         'H': 'Comunidad de Propietarios',
         'J': 'Sociedad Civil',
-        'K': 'Entidad Extranjera (Espana)',
-        'L': 'Entidad Extranjera (Sin Establecimiento)',
-        'M': 'Entidad Extranjera (Con Establecimiento)',
-        'N': 'Entidad Extranjera',
+        'K': 'Entity Extranjera (Spain)',
+        'L': 'Entity Extranjera (Sin Establecimiento)',
+        'M': 'Entity Extranjera (Con Establecimiento)',
+        'N': 'Entity Extranjera',
         'P': 'Corporacion Local',
         'Q': 'Organismo Publico',
         'R': 'Congregacion o Institucion Religiosa',
         'S': 'Organo de la Administracion del Estado',
         'U': 'Union Temporal de Empresas',
         'V': 'Otros tipos no definidos',
-        'W': 'Establecimientos permanentes de entidades no residentes'
+        'W': 'Establecimientos permanentes de entityes no residentes'
       },
 
       /**
@@ -15861,14 +15862,14 @@ Generated by Autonomo Tax Calculator`;
         const cleaned = this._clean(nif);
 
         if (!cleaned) {
-          return { valid: false, error: 'NIF requerido' };
+          return { valid: false, error: 'NIF required' };
         }
 
         // Format: 8 digits + 1 letter
         const match = cleaned.match(/^(\d{8})([A-Z])$/);
 
         if (!match) {
-          return { valid: false, error: 'Formato NIF invalido (8 digitos + letra)' };
+          return { valid: false, error: 'Invalid NIF format (8 digits + letter)' };
         }
 
         const [, digits, letter] = match;
@@ -15877,7 +15878,7 @@ Generated by Autonomo Tax Calculator`;
         if (letter !== expectedLetter) {
           return {
             valid: false,
-            error: `Letra de control incorrecta (esperada: ${expectedLetter})`
+            error: `Incorrect control letter (expected: ${expectedLetter})`
           };
         }
 
@@ -15894,14 +15895,14 @@ Generated by Autonomo Tax Calculator`;
         const cleaned = this._clean(nie);
 
         if (!cleaned) {
-          return { valid: false, error: 'NIE requerido' };
+          return { valid: false, error: 'NIE required' };
         }
 
         // Format: X/Y/Z + 7 digits + 1 letter
         const match = cleaned.match(/^([XYZ])(\d{7})([A-Z])$/);
 
         if (!match) {
-          return { valid: false, error: 'Formato NIE invalido (X/Y/Z + 7 digitos + letra)' };
+          return { valid: false, error: 'Invalid NIE format (X/Y/Z + 7 digits + letter)' };
         }
 
         const [, prefix, digits, letter] = match;
@@ -15914,7 +15915,7 @@ Generated by Autonomo Tax Calculator`;
         if (letter !== expectedLetter) {
           return {
             valid: false,
-            error: `Letra de control incorrecta (esperada: ${expectedLetter})`
+            error: `Incorrect control letter (expected: ${expectedLetter})`
           };
         }
 
@@ -15931,14 +15932,14 @@ Generated by Autonomo Tax Calculator`;
         const cleaned = this._clean(cif);
 
         if (!cleaned) {
-          return { valid: false, error: 'CIF requerido' };
+          return { valid: false, error: 'CIF required' };
         }
 
         // Format: org letter + 7 digits + control (letter or digit)
         const match = cleaned.match(/^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/);
 
         if (!match) {
-          return { valid: false, error: 'Formato CIF invalido (letra + 7 digitos + control)' };
+          return { valid: false, error: 'Invalid CIF format (letter + 7 digits + control)' };
         }
 
         const [, orgLetter, digits, control] = match;
@@ -15985,7 +15986,7 @@ Generated by Autonomo Tax Calculator`;
         if (!isValid) {
           return {
             valid: false,
-            error: `Digito de control incorrecto (esperado: ${expectedControl})`
+            error: `Incorrect control digit (expected: ${expectedControl})`
           };
         }
 
@@ -16005,7 +16006,7 @@ Generated by Autonomo Tax Calculator`;
         const cleaned = this._clean(taxId);
 
         if (!cleaned) {
-          return { valid: false, error: 'Identificador fiscal requerido' };
+          return { valid: false, error: 'Tax ID required' };
         }
 
         // Detect type by format
@@ -16027,7 +16028,7 @@ Generated by Autonomo Tax Calculator`;
           return { ...result, type: 'NIF' };
         }
 
-        return { valid: false, error: 'Formato de identificador fiscal no reconocido' };
+        return { valid: false, error: 'Unrecognized tax ID format' };
       }
     };
 
@@ -16177,7 +16178,7 @@ Generated by Autonomo Tax Calculator`;
        */
       validateFormat(countryCode, vatNumber) {
         if (!countryCode || !vatNumber) {
-          return { valid: false, error: 'Codigo de pais y NIF-IVA requeridos' };
+          return { valid: false, error: 'Country code and VAT number required' };
         }
 
         const code = countryCode.toUpperCase();
@@ -16188,7 +16189,7 @@ Generated by Autonomo Tax Calculator`;
 
         const pattern = EU_VAT_PATTERNS[lookupCode];
         if (!pattern) {
-          return { valid: false, error: 'Pais no soportado para validacion VIES' };
+          return { valid: false, error: 'Country not supported for VIES validation' };
         }
 
         // Construct full VAT number with country prefix
@@ -16197,7 +16198,7 @@ Generated by Autonomo Tax Calculator`;
         if (!pattern.test(fullVat)) {
           return {
             valid: false,
-            error: `Formato de NIF-IVA invalido para ${lookupCode}`
+            error: `Invalid VAT format for ${lookupCode}`
           };
         }
 
@@ -16248,14 +16249,14 @@ Generated by Autonomo Tax Calculator`;
           if (data.error === 'SERVICE_UNAVAILABLE') {
             return {
               ...formatResult,
-              warning: 'Servicio VIES temporalmente no disponible. Formato verificado.'
+              warning: 'VIES service temporarily unavailable. Format verified.'
             };
           }
 
           if (data.error) {
             return {
               valid: false,
-              error: data.message || 'Error de validacion VIES'
+              error: data.message || 'VIES validation error'
             };
           }
 
@@ -16271,7 +16272,7 @@ Generated by Autonomo Tax Calculator`;
           console.warn('VIES validation failed:', err);
           return {
             ...formatResult,
-            warning: 'No se pudo conectar con VIES. Solo se valido el formato.'
+            warning: 'Could not connect to VIES. Solo se valido el formato.'
           };
         }
       },
@@ -16308,7 +16309,7 @@ Generated by Autonomo Tax Calculator`;
       async createClient(clientData) {
         const entityId = EntityContext.entityId;
         if (!entityId) {
-          throw new Error('No hay entidad seleccionada');
+          throw new Error('No entity selected');
         }
 
         // Normalize input
@@ -16325,7 +16326,7 @@ Generated by Autonomo Tax Calculator`;
         };
 
         if (!normalized.name) {
-          throw new Error('El nombre del cliente es obligatorio');
+          throw new Error('Client name is required');
         }
 
         // Tax ID validation based on country
@@ -16449,7 +16450,7 @@ Generated by Autonomo Tax Calculator`;
       async updateClient(clientId, updates) {
         const client = await this.getClient(clientId);
         if (!client) {
-          throw new Error('Cliente no encontrado');
+          throw new Error('Client not found');
         }
 
         // If tax_id changed, revalidate
@@ -16547,7 +16548,7 @@ Generated by Autonomo Tax Calculator`;
 
     const CONTACT_ROLE_LABELS = Object.freeze({
       [CONTACT_ROLE.BILLING]: 'Facturacion',
-      [CONTACT_ROLE.PROJECT_MANAGER]: 'Gestor de proyecto',
+      [CONTACT_ROLE.PROJECT_MANAGER]: 'Project Manager',
       [CONTACT_ROLE.TECHNICAL]: 'Tecnico',
       [CONTACT_ROLE.GENERAL]: 'General'
     });
@@ -16571,7 +16572,7 @@ Generated by Autonomo Tax Calculator`;
         // Verify client exists and belongs to current entity
         const client = await ClientManager.getClient(clientId);
         if (!client) {
-          throw new Error('Cliente no encontrado');
+          throw new Error('Client not found');
         }
 
         const normalized = {
@@ -16585,7 +16586,7 @@ Generated by Autonomo Tax Calculator`;
         };
 
         if (!normalized.name) {
-          throw new Error('El nombre del contacto es obligatorio');
+          throw new Error('Contact name is required');
         }
 
         // If marking as primary, unset other primaries for this client
@@ -16639,13 +16640,13 @@ Generated by Autonomo Tax Calculator`;
       async updateContact(contactId, updates) {
         const contact = await db.contacts.get(contactId);
         if (!contact) {
-          throw new Error('Contacto no encontrado');
+          throw new Error('Contact not found');
         }
 
         // Verify client access
         const client = await ClientManager.getClient(contact.client_id);
         if (!client) {
-          throw new Error('Acceso denegado');
+          throw new Error('Access denied');
         }
 
         // If marking as primary, unset other primaries
@@ -16671,7 +16672,7 @@ Generated by Autonomo Tax Calculator`;
         // Verify client access
         const client = await ClientManager.getClient(contact.client_id);
         if (!client) {
-          throw new Error('Acceso denegado');
+          throw new Error('Access denied');
         }
 
         await db.contacts.delete(contactId);
@@ -16719,10 +16720,10 @@ Generated by Autonomo Tax Calculator`;
     });
 
     const RATE_TYPE_LABELS = Object.freeze({
-      [RATE_TYPE.DAILY]: 'Diario',
-      [RATE_TYPE.HOURLY]: 'Por hora',
-      [RATE_TYPE.FIXED]: 'Precio fijo',
-      [RATE_TYPE.MONTHLY_RETAINER]: 'Retainer mensual'
+      [RATE_TYPE.DAILY]: 'Daily',
+      [RATE_TYPE.HOURLY]: 'Hourly',
+      [RATE_TYPE.FIXED]: 'Fixed price',
+      [RATE_TYPE.MONTHLY_RETAINER]: 'Monthly retainer'
     });
 
     const PROJECT_STATUS = Object.freeze({
@@ -16733,10 +16734,10 @@ Generated by Autonomo Tax Calculator`;
     });
 
     const PROJECT_STATUS_LABELS = Object.freeze({
-      [PROJECT_STATUS.UPCOMING]: 'Proximo',
-      [PROJECT_STATUS.ACTIVE]: 'Activo',
-      [PROJECT_STATUS.COMPLETED]: 'Completado',
-      [PROJECT_STATUS.CANCELLED]: 'Cancelado'
+      [PROJECT_STATUS.UPCOMING]: 'Upcoming',
+      [PROJECT_STATUS.ACTIVE]: 'Active',
+      [PROJECT_STATUS.COMPLETED]: 'Completed',
+      [PROJECT_STATUS.CANCELLED]: 'Cancelled'
     });
 
     // =====================================================
@@ -16759,7 +16760,7 @@ Generated by Autonomo Tax Calculator`;
         // Verify client exists
         const client = await ClientManager.getClient(clientId);
         if (!client) {
-          throw new Error('Cliente no encontrado');
+          throw new Error('Client not found');
         }
 
         const entityId = EntityContext.entityId;
@@ -16779,18 +16780,18 @@ Generated by Autonomo Tax Calculator`;
         };
 
         if (!normalized.name) {
-          throw new Error('El nombre del proyecto es obligatorio');
+          throw new Error('Project name is required');
         }
 
         // Validate rate_type
         if (!Object.values(RATE_TYPE).includes(normalized.rate_type)) {
-          throw new Error('Tipo de tarifa invalido');
+          throw new Error('Invalid rate type');
         }
 
         // Validate dates
         if (normalized.start_date && normalized.end_date) {
           if (normalized.end_date < normalized.start_date) {
-            throw new Error('La fecha de fin no puede ser anterior a la fecha de inicio');
+            throw new Error('End date cannot be before start date');
           }
         }
 
@@ -16901,7 +16902,7 @@ Generated by Autonomo Tax Calculator`;
       async updateProject(projectId, updates) {
         const project = await this.getProject(projectId);
         if (!project) {
-          throw new Error('Proyecto no encontrado');
+          throw new Error('Project not found');
         }
 
         // Validate dates if both are being set
@@ -16909,13 +16910,13 @@ Generated by Autonomo Tax Calculator`;
         const endDate = updates.end_date !== undefined ? updates.end_date : project.end_date;
 
         if (startDate && endDate && endDate < startDate) {
-          throw new Error('La fecha de fin no puede ser anterior a la fecha de inicio');
+          throw new Error('End date cannot be before start date');
         }
 
         // Validate rate_type if changing
         if (updates.rate_type !== undefined) {
           if (!Object.values(RATE_TYPE).includes(updates.rate_type)) {
-            throw new Error('Tipo de tarifa invalido');
+            throw new Error('Invalid rate type');
           }
         }
 
@@ -17179,8 +17180,8 @@ Generated by Autonomo Tax Calculator`;
         this.editingId = null;
         this.viesValidated = false;
         this.form?.reset();
-        document.getElementById('client-modal-title').textContent = 'Nuevo Cliente';
-        document.getElementById('client-submit-btn').textContent = 'Crear Cliente';
+        document.getElementById('client-modal-title').textContent = 'New Client';
+        document.getElementById('client-submit-btn').textContent = 'Create Client';
         this.updateCountryDependentFields();
         this.clearValidation();
         this.modal?.classList.remove('hidden');
@@ -17194,8 +17195,8 @@ Generated by Autonomo Tax Calculator`;
         this.editingId = clientId;
         this.viesValidated = client.tax_id_validated;
 
-        document.getElementById('client-modal-title').textContent = 'Editar Cliente';
-        document.getElementById('client-submit-btn').textContent = 'Guardar Cambios';
+        document.getElementById('client-modal-title').textContent = 'Edit Client';
+        document.getElementById('client-submit-btn').textContent = 'Save Changes';
 
         // Populate form
         document.getElementById('client-name').value = client.name || '';
@@ -17210,7 +17211,7 @@ Generated by Autonomo Tax Calculator`;
         this.updateCountryDependentFields();
 
         if (client.tax_id_validated) {
-          this.showValidation('NIF-IVA verificado con VIES', 'valid');
+          this.showValidation('VAT verified with VIES', 'valid');
         }
 
         this.modal?.classList.remove('hidden');
@@ -17261,7 +17262,7 @@ Generated by Autonomo Tax Calculator`;
           // EU format validation
           const result = VIESValidator.validateFormat(country, taxId);
           if (result.valid) {
-            this.showValidation('Formato valido. Verificar con VIES para confirmar.', 'warning');
+            this.showValidation('Valid format. Verify with VIES to confirm.', 'warning');
             this.viesValidated = false;
           } else {
             this.showValidation(result.error, 'invalid');
@@ -17282,26 +17283,26 @@ Generated by Autonomo Tax Calculator`;
 
         const viesBtn = document.getElementById('vies-verify-btn');
         viesBtn.disabled = true;
-        viesBtn.textContent = 'Verificando...';
+        viesBtn.textContent = 'Verifying...';
 
         try {
           const result = await VIESValidator.validateWithVIES(country, taxId);
 
           if (result.valid === true) {
-            this.showValidation(`VIES valido: ${result.name || 'Verificado'}`, 'valid');
+            this.showValidation(`VIES valid: ${result.name || 'Verified'}`, 'valid');
             this.viesValidated = true;
           } else if (result.valid === false) {
-            this.showValidation(result.error || 'NIF-IVA no valido en VIES', 'invalid');
+            this.showValidation(result.error || 'VAT number not valid in VIES', 'invalid');
             this.viesValidated = false;
           } else if (result.warning) {
             this.showValidation(result.warning, 'warning');
             this.viesValidated = false;
           }
         } catch (err) {
-          this.showValidation('Error al conectar con VIES', 'warning');
+          this.showValidation('Error connecting to VIES', 'warning');
         } finally {
           viesBtn.disabled = false;
-          viesBtn.textContent = 'Verificar VIES';
+          viesBtn.textContent = 'Verify VIES';
         }
       },
 
@@ -17331,7 +17332,7 @@ Generated by Autonomo Tax Calculator`;
 
         // Validate required fields
         if (!name) {
-          alert('El nombre del cliente es obligatorio');
+          alert('Client name is required');
           return;
         }
 
@@ -17347,9 +17348,9 @@ Generated by Autonomo Tax Calculator`;
 
           // Warn about VIES
           const proceed = confirm(
-            'El NIF-IVA no ha sido verificado con VIES. ' +
-            'Para aplicar inversion del sujeto pasivo, se requiere verificacion VIES. ' +
-            'Desea continuar sin verificacion?'
+            'The VAT number has not been verified with VIES. ' +
+            'To apply reverse charge, VIES verification is required. ' +
+            'Do you want to continue without verification?'
           );
           if (!proceed) return;
         }
@@ -17462,7 +17463,7 @@ Generated by Autonomo Tax Calculator`;
         this.client = await ClientManager.getClient(clientId);
 
         if (!this.client) {
-          alert('Cliente no encontrado');
+          alert('Client not found');
           return;
         }
 
@@ -17499,15 +17500,15 @@ Generated by Autonomo Tax Calculator`;
 
         document.getElementById('detail-flag').textContent = getFlagEmoji(client.country_code);
         document.getElementById('detail-name').textContent = client.name;
-        document.getElementById('detail-tax-id').textContent = client.tax_id || 'Sin NIF';
+        document.getElementById('detail-tax-id').textContent = client.tax_id || 'No tax ID';
 
         // Category badge
         const categoryEl = document.getElementById('detail-category');
         const categoryLabels = {
-          spain: 'Espana',
-          eu_b2b: 'UE B2B',
-          eu_b2c: 'UE B2C',
-          uk: 'Reino Unido',
+          spain: 'Spain',
+          eu_b2b: 'EU B2B',
+          eu_b2c: 'EU B2C',
+          uk: 'United Kingdom',
           third_country: 'Tercer pais'
         };
         categoryEl.textContent = categoryLabels[client.category] || client.category;
@@ -17516,7 +17517,7 @@ Generated by Autonomo Tax Calculator`;
         const viesEl = document.getElementById('detail-vies-status');
         if (client.tax_id_type === 'eu_vat') {
           viesEl.classList.remove('hidden');
-          viesEl.textContent = client.tax_id_validated ? 'VIES OK' : 'VIES pendiente';
+          viesEl.textContent = client.tax_id_validated ? 'VIES OK' : 'VIES pending';
           viesEl.className = `vies-badge ${client.tax_id_validated ? 'valid' : 'invalid'}`;
         } else {
           viesEl.classList.add('hidden');
@@ -17607,8 +17608,8 @@ Generated by Autonomo Tax Calculator`;
                 ${contact.phone ? escapeHtml(contact.phone) : ''}
               </div>
             </div>
-            <button class="btn btn-icon" onclick="ContactFormUI.openEdit(${contact.id})" data-permission="edit" title="Editar">&#9998;</button>
-            <button class="btn btn-icon btn-danger" onclick="ClientDetailUI.deleteContact(${contact.id})" data-permission="delete" title="Eliminar">&times;</button>
+            <button class="btn btn-icon" onclick="ContactFormUI.openEdit(${contact.id})" data-permission="edit" title="Edit">&#9998;</button>
+            <button class="btn btn-icon btn-danger" onclick="ClientDetailUI.deleteContact(${contact.id})" data-permission="delete" title="Delete">&times;</button>
           </div>
         `).join('');
 
@@ -17640,7 +17641,7 @@ Generated by Autonomo Tax Calculator`;
               ${project.start_date || '?'} - ${project.end_date || '?'}
             </span>
             <span class="status-badge ${project.status}">${PROJECT_STATUS_LABELS[project.status]}</span>
-            <button class="btn btn-icon" onclick="ProjectFormUI.openEdit(${project.id})" data-permission="edit" title="Editar">&#9998;</button>
+            <button class="btn btn-icon" onclick="ProjectFormUI.openEdit(${project.id})" data-permission="edit" title="Edit">&#9998;</button>
           </div>
         `).join('');
 
@@ -17650,7 +17651,7 @@ Generated by Autonomo Tax Calculator`;
       },
 
       async deleteContact(contactId) {
-        if (!confirm('Eliminar este contacto?')) return;
+        if (!confirm('Delete this contact?')) return;
 
         try {
           await ContactManager.deleteContact(contactId);
@@ -17661,7 +17662,7 @@ Generated by Autonomo Tax Calculator`;
       },
 
       async archiveClient() {
-        if (!confirm('Archivar este cliente? El cliente quedara oculto pero sus datos se conservan.')) return;
+        if (!confirm('Archive this client? The client will be hidden but their data is preserved.')) return;
 
         try {
           await ClientManager.archiveClient(this.clientId);
@@ -17707,8 +17708,8 @@ Generated by Autonomo Tax Calculator`;
         this.editingId = null;
         this.form?.reset();
         document.getElementById('contact-client-id').value = clientId;
-        document.getElementById('contact-modal-title').textContent = 'Nuevo Contacto';
-        document.getElementById('contact-submit-btn').textContent = 'Crear';
+        document.getElementById('contact-modal-title').textContent = 'New Contact';
+        document.getElementById('contact-submit-btn').textContent = 'Create';
         this.modal?.classList.remove('hidden');
         document.getElementById('contact-name')?.focus();
       },
@@ -17719,8 +17720,8 @@ Generated by Autonomo Tax Calculator`;
 
         this.editingId = contactId;
         document.getElementById('contact-client-id').value = contact.client_id;
-        document.getElementById('contact-modal-title').textContent = 'Editar Contacto';
-        document.getElementById('contact-submit-btn').textContent = 'Guardar';
+        document.getElementById('contact-modal-title').textContent = 'Edit Contact';
+        document.getElementById('contact-submit-btn').textContent = 'Save';
 
         document.getElementById('contact-name').value = contact.name || '';
         document.getElementById('contact-email').value = contact.email || '';
@@ -17744,7 +17745,7 @@ Generated by Autonomo Tax Calculator`;
         const name = document.getElementById('contact-name')?.value?.trim();
 
         if (!name) {
-          alert('El nombre del contacto es obligatorio');
+          alert('Contact name is required');
           return;
         }
 
@@ -17796,8 +17797,8 @@ Generated by Autonomo Tax Calculator`;
         this.editingId = null;
         this.form?.reset();
         document.getElementById('project-client-id').value = clientId;
-        document.getElementById('project-modal-title').textContent = 'Nuevo Proyecto';
-        document.getElementById('project-submit-btn').textContent = 'Crear';
+        document.getElementById('project-modal-title').textContent = 'New Project';
+        document.getElementById('project-submit-btn').textContent = 'Create';
         this.modal?.classList.remove('hidden');
         document.getElementById('project-name')?.focus();
       },
@@ -17808,8 +17809,8 @@ Generated by Autonomo Tax Calculator`;
 
         this.editingId = projectId;
         document.getElementById('project-client-id').value = project.client_id;
-        document.getElementById('project-modal-title').textContent = 'Editar Proyecto';
-        document.getElementById('project-submit-btn').textContent = 'Guardar';
+        document.getElementById('project-modal-title').textContent = 'Edit Project';
+        document.getElementById('project-submit-btn').textContent = 'Save';
 
         document.getElementById('project-name').value = project.name || '';
         document.getElementById('project-rate-type').value = project.rate_type || 'daily';
@@ -17835,7 +17836,7 @@ Generated by Autonomo Tax Calculator`;
         const name = document.getElementById('project-name')?.value?.trim();
 
         if (!name) {
-          alert('El nombre del proyecto es obligatorio');
+          alert('Project name is required');
           return;
         }
 
@@ -17971,7 +17972,7 @@ Generated by Autonomo Tax Calculator`;
 
         // Validate entity type
         if (!Object.values(ENTITY_TYPE).includes(type)) {
-          throw new Error(`Tipo de entidad inválido: ${type}`);
+          throw new Error(`Invalid entity type: ${type}`);
         }
 
         // Validate tax ID based on type
@@ -17979,14 +17980,14 @@ Generated by Autonomo Tax Calculator`;
         if (type === ENTITY_TYPE.AUTONOMO) {
           const result = SpanishTaxIdValidator.validateNIF(data.nif);
           if (!result.valid) {
-            throw new Error(`NIF inválido: ${result.error}`);
+            throw new Error(`NIF invalid: ${result.error}`);
           }
           validatedTaxId = result.formatted;
           taxIdField = 'nif';
         } else {
           const result = SpanishTaxIdValidator.validateCIF(data.cif);
           if (!result.valid) {
-            throw new Error(`CIF inválido: ${result.error}`);
+            throw new Error(`CIF invalid: ${result.error}`);
           }
           validatedTaxId = result.formatted;
           taxIdField = 'cif';
@@ -18000,7 +18001,7 @@ Generated by Autonomo Tax Calculator`;
           .first();
 
         if (existing) {
-          throw new Error(`Ya existe una entidad con este ${taxIdField.toUpperCase()}`);
+          throw new Error(`An entity with this ${taxIdField.toUpperCase()} already exists`);
         }
 
         // Build entity record
@@ -18085,15 +18086,15 @@ Generated by Autonomo Tax Calculator`;
       // Update entity
       async updateEntity(entityId, updates) {
         const entity = await this.getEntity(entityId);
-        if (!entity) throw new Error('Entidad no encontrada');
-        if (entity.deleted_at) throw new Error('Entidad eliminada');
+        if (!entity) throw new Error('Entity not found');
+        if (entity.deleted_at) throw new Error('Entity is deleted');
 
         // If updating tax ID, validate it
         if (updates.nif || updates.cif) {
           const taxId = updates.nif || updates.cif;
           const result = SpanishTaxIdValidator.validate(taxId);
           if (!result.valid) {
-            throw new Error(`Identificador fiscal inválido: ${result.error}`);
+            throw new Error(`Invalid tax ID: ${result.error}`);
           }
           updates.nif_cif = result.formatted;
         }
@@ -18120,8 +18121,8 @@ Generated by Autonomo Tax Calculator`;
       // Archive entity (soft deactivate)
       async archiveEntity(entityId) {
         const entity = await this.getEntity(entityId);
-        if (!entity) throw new Error('Entidad no encontrada');
-        if (!entity.is_active) throw new Error('Entidad ya archivada');
+        if (!entity) throw new Error('Entity not found');
+        if (!entity.is_active) throw new Error('Entity already archived');
 
         // If archiving current entity, switch to another
         if (EntityContext.entityId === entityId) {
@@ -18152,9 +18153,9 @@ Generated by Autonomo Tax Calculator`;
       // Restore archived entity
       async restoreEntity(entityId) {
         const entity = await this.getEntity(entityId);
-        if (!entity) throw new Error('Entidad no encontrada');
-        if (entity.is_active) throw new Error('Entidad ya esta activa');
-        if (entity.deleted_at) throw new Error('Entidad eliminada, no se puede restaurar');
+        if (!entity) throw new Error('Entity not found');
+        if (entity.is_active) throw new Error('Entity is already active');
+        if (entity.deleted_at) throw new Error('Entity is deleted and cannot be restored');
 
         await db.entities.update(entityId, {
           is_active: true,
@@ -18306,7 +18307,7 @@ Generated by Autonomo Tax Calculator`;
             const domicilio = document.getElementById('entity-domicilio-fiscal').value.trim();
 
             if (!nif || !nombre || !domicilio) {
-              alert('Por favor, completa todos los campos obligatorios.');
+              alert('Please complete all required fields.');
               return;
             }
 
@@ -18332,7 +18333,7 @@ Generated by Autonomo Tax Calculator`;
             const domicilio = document.getElementById('entity-domicilio-social').value.trim();
 
             if (!cif || !razonSocial || !domicilio) {
-              alert('Por favor, completa todos los campos obligatorios.');
+              alert('Please complete all required fields.');
               return;
             }
 
@@ -18374,7 +18375,7 @@ Generated by Autonomo Tax Calculator`;
           }
 
           // Show success notification
-          showNotification(`Entidad "${entityData.name}" creada correctamente.`, 'success');
+          showNotification(`Entity "${entityData.name}" creada correctamente.`, 'success');
 
         } catch (error) {
           console.error('Error creating entity:', error);
@@ -18430,13 +18431,13 @@ Generated by Autonomo Tax Calculator`;
       container.innerHTML = `
         <div class="entity-switcher" role="combobox" aria-expanded="false"
              aria-haspopup="listbox" aria-labelledby="entity-switcher-label">
-          <span id="entity-switcher-label" class="visually-hidden">Seleccionar entidad</span>
+          <span id="entity-switcher-label" class="visually-hidden">Select entity</span>
 
           <button class="entity-switcher__trigger"
                   aria-describedby="entity-switcher-label"
                   type="button">
             <span class="entity-switcher__icon" aria-hidden="true">&#128203;</span>
-            <span class="entity-switcher__name">Seleccionar entidad...</span>
+            <span class="entity-switcher__name">Select entity...</span>
             <span class="entity-switcher__type"></span>
             <svg class="entity-switcher__chevron" aria-hidden="true"
                  viewBox="0 0 24 24" width="16" height="16">
@@ -18512,7 +18513,7 @@ Generated by Autonomo Tax Calculator`;
         if (entities.length === 0) {
           menu.innerHTML = `
             <li class="entity-switcher__empty">
-              No hay entidades creadas
+              No entities created
             </li>
             <li class="entity-switcher__divider" role="separator"></li>
             <li class="entity-switcher__option entity-switcher__option--action"
@@ -18520,7 +18521,7 @@ Generated by Autonomo Tax Calculator`;
                 data-action="create"
                 tabindex="-1">
               <span class="entity-switcher__option-icon" aria-hidden="true">&#10133;</span>
-              <span class="entity-switcher__option-name">Crear nueva entidad</span>
+              <span class="entity-switcher__option-name">Create new entity</span>
             </li>
           `;
           return;
@@ -18552,9 +18553,10 @@ Generated by Autonomo Tax Calculator`;
               data-action="create"
               tabindex="-1">
             <span class="entity-switcher__option-icon" aria-hidden="true">&#10133;</span>
-            <span class="entity-switcher__option-name">Crear nueva entidad</span>
+            <span class="entity-switcher__option-name">Create new entity</span>
           </li>
         `;
+
       }
 
       // Update trigger display
@@ -18564,7 +18566,7 @@ Generated by Autonomo Tax Calculator`;
           typeEl.textContent = entity.type === 'autonomo' ? 'Autonomo' : 'S.L.';
           iconEl.innerHTML = entity.type === 'autonomo' ? '&#128100;' : '&#127970;';
         } else {
-          nameEl.textContent = 'Seleccionar entidad...';
+          nameEl.textContent = 'Select entity...';
           typeEl.textContent = '';
           iconEl.innerHTML = '&#128203;';
         }
@@ -18596,7 +18598,7 @@ Generated by Autonomo Tax Calculator`;
             await EntityContext.setEntity(entityId);
           } catch (error) {
             console.error('Failed to switch entity:', error);
-            alert(`Error al cambiar entidad: ${error.message}`);
+            alert(`Error switching entity: ${error.message}`);
           }
         }
       }
@@ -18710,15 +18712,15 @@ Generated by Autonomo Tax Calculator`;
             autonomoEntities,
             slEntities,
             totalEntities: entities.length,
-            message: 'Actividad dual detectada',
-            explanation: 'Como autonomo que tambien administra una Sociedad Limitada, ' +
-                         'te consideran "autonomo societario". Esto implica una base minima ' +
-                         'de cotizacion de 1.000 EUR/mes (cuota ~315 EUR/mes) en lugar de ' +
-                         'la base segun tus ingresos reales.',
+            message: 'Dual activity detected',
+            explanation: 'As an autonomo who also manages a Sociedad Limitada, ' +
+                         'you are considered an "autonomo societario". This means a minimum ' +
+                         'contribution base of 1,000 EUR/month (quota ~315 EUR/month) instead of ' +
+                         'the base according to your actual income.',
             impact: {
               minimumBaseCents: 100000,     // 1000 EUR
               minimumCuotaCents: 31500,     // 315 EUR (31.5% of 1000)
-              note: 'La cuota exacta depende del tipo de cotizacion adicional elegido.'
+              note: 'The exact quota depends on the additional contribution type chosen.'
             }
           };
         }
@@ -18765,7 +18767,7 @@ Generated by Autonomo Tax Calculator`;
               </span>
             </div>
           </div>
-          <button class="dual-activity-warning__dismiss" onclick="DualActivityDetector.dismissBanner()" aria-label="Cerrar aviso">
+          <button class="dual-activity-warning__dismiss" onclick="DualActivityDetector.dismissBanner()" aria-label="Close notice">
             &#10005;
           </button>
         `;
@@ -18984,24 +18986,24 @@ Generated by Autonomo Tax Calculator`;
   <div id="entity-modal-overlay" class="entity-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="entity-modal-title">
     <div class="entity-modal">
       <div class="entity-modal__header">
-        <h2 id="entity-modal-title" class="entity-modal__title">Crear Nueva Entidad</h2>
-        <button class="entity-modal__close" aria-label="Cerrar" onclick="EntityModal.close()">&times;</button>
+        <h2 id="entity-modal-title" class="entity-modal__title">Create New Entity</h2>
+        <button class="entity-modal__close" aria-label="Close" onclick="EntityModal.close()">&times;</button>
       </div>
 
       <div class="entity-modal__body">
         <!-- Entity Type Selection -->
         <div class="entity-modal__section">
-          <div class="entity-modal__section-title">Tipo de Entidad</div>
+          <div class="entity-modal__section-title">Entity Type</div>
           <div class="entity-type-selector">
             <div class="entity-type-option" data-type="autonomo" onclick="EntityModal.selectType('autonomo')">
               <div class="entity-type-option__icon">&#128100;</div>
               <div class="entity-type-option__name">Autonomo</div>
-              <div class="entity-type-option__desc">Persona fisica</div>
+              <div class="entity-type-option__desc">Individual / Sole trader</div>
             </div>
             <div class="entity-type-option" data-type="sociedad_limitada" onclick="EntityModal.selectType('sociedad_limitada')">
               <div class="entity-type-option__icon">&#127970;</div>
               <div class="entity-type-option__name">Sociedad Limitada</div>
-              <div class="entity-type-option__desc">Persona juridica</div>
+              <div class="entity-type-option__desc">Limited company</div>
             </div>
           </div>
         </div>
@@ -19017,21 +19019,21 @@ Generated by Autonomo Tax Calculator`;
                 <div id="entity-nif-error" class="entity-form__error" style="display: none;"></div>
               </div>
               <div class="entity-form__group">
-                <label class="entity-form__label entity-form__label--required" for="entity-nombre">Nombre Completo</label>
+                <label class="entity-form__label entity-form__label--required" for="entity-nombre">Full Name</label>
                 <input type="text" id="entity-nombre" class="entity-form__input" placeholder="Juan Garcia Lopez">
               </div>
               <div class="entity-form__group">
-                <label class="entity-form__label entity-form__label--required" for="entity-domicilio-fiscal">Domicilio Fiscal</label>
+                <label class="entity-form__label entity-form__label--required" for="entity-domicilio-fiscal">Tax Address</label>
                 <input type="text" id="entity-domicilio-fiscal" class="entity-form__input" placeholder="Calle Mayor 1, 28001 Madrid">
               </div>
               <div class="entity-form__row">
                 <div class="entity-form__group">
-                  <label class="entity-form__label" for="entity-iae">Epigrafe IAE Principal</label>
+                  <label class="entity-form__label" for="entity-iae">Main IAE Code</label>
                   <input type="text" id="entity-iae" class="entity-form__input" placeholder="841">
-                  <div class="entity-form__hint">Codigo de actividad economica</div>
+                  <div class="entity-form__hint">Economic activity code</div>
                 </div>
                 <div class="entity-form__group">
-                  <label class="entity-form__label" for="entity-fecha-alta">Fecha de Alta</label>
+                  <label class="entity-form__label" for="entity-fecha-alta">Registration Date</label>
                   <input type="date" id="entity-fecha-alta" class="entity-form__input">
                 </div>
               </div>
@@ -19045,11 +19047,11 @@ Generated by Autonomo Tax Calculator`;
                 <div id="entity-cif-error" class="entity-form__error" style="display: none;"></div>
               </div>
               <div class="entity-form__group">
-                <label class="entity-form__label entity-form__label--required" for="entity-razon-social">Razon Social</label>
+                <label class="entity-form__label entity-form__label--required" for="entity-razon-social">Company Name</label>
                 <input type="text" id="entity-razon-social" class="entity-form__input" placeholder="Empresa Ejemplo SL">
               </div>
               <div class="entity-form__group">
-                <label class="entity-form__label entity-form__label--required" for="entity-domicilio-social">Domicilio Social</label>
+                <label class="entity-form__label entity-form__label--required" for="entity-domicilio-social">Registered Address</label>
                 <input type="text" id="entity-domicilio-social" class="entity-form__input" placeholder="Paseo de la Castellana 100, 28046 Madrid">
               </div>
               <div class="entity-form__group">
@@ -19087,13 +19089,13 @@ Generated by Autonomo Tax Calculator`;
               </div>
               <div class="entity-form__row">
                 <div class="entity-form__group">
-                  <label class="entity-form__label" for="entity-fecha-constitucion">Fecha Constitucion</label>
+                  <label class="entity-form__label" for="entity-fecha-constitucion">Date of Incorporation</label>
                   <input type="date" id="entity-fecha-constitucion" class="entity-form__input">
                 </div>
                 <div class="entity-form__group">
-                  <label class="entity-form__label" for="entity-capital-social">Capital Social (EUR)</label>
+                  <label class="entity-form__label" for="entity-capital-social">Share Capital (EUR)</label>
                   <input type="number" id="entity-capital-social" class="entity-form__input" placeholder="3000" min="3000" step="1" value="3000">
-                  <div class="entity-form__hint">Minimo 3.000 EUR para SL</div>
+                  <div class="entity-form__hint">Minimum 3,000 EUR for SL</div>
                 </div>
               </div>
             </div>
@@ -19102,8 +19104,8 @@ Generated by Autonomo Tax Calculator`;
       </div>
 
       <div class="entity-modal__footer">
-        <button class="entity-modal__btn entity-modal__btn--secondary" onclick="EntityModal.close()">Cancelar</button>
-        <button id="entity-modal-submit" class="entity-modal__btn entity-modal__btn--primary" onclick="EntityModal.submit()" disabled>Crear Entidad</button>
+        <button class="entity-modal__btn entity-modal__btn--secondary" onclick="EntityModal.close()">Cancel</button>
+        <button id="entity-modal-submit" class="entity-modal__btn entity-modal__btn--primary" onclick="EntityModal.submit()" disabled>Create Entity</button>
       </div>
     </div>
   </div>
