@@ -38,20 +38,20 @@
 
 ### Client Management (CLIENT)
 
-- [ ] **CLIENT-01**: User can create client with name, email, NIF/CIF, address, country, phone
-- [ ] **CLIENT-02**: System validates Spanish NIF/CIF format (8 digits + letter)
-- [ ] **CLIENT-03**: For EU clients with VAT number, system validates via VIES API
-- [ ] **CLIENT-04**: System categorizes client: Spain, EU (intracomunitario), UK (third country, post-Brexit), US/CA/AU (third country)
-- [ ] **CLIENT-05**: User can mark EU client as B2B (inversion sujeto pasivo) or B2C (IVA applies)
-- [ ] **CLIENT-06**: For US clients, user can upload W-8BEN form (0% withholding treaty)
-- [ ] **CLIENT-07**: User can add multiple contacts per client (billing contact, project manager)
-- [ ] **CLIENT-08**: User can create projects per client with: name, rate, start/end dates, status
-- [ ] **CLIENT-09**: User can assign work pattern to client-project: specific weekdays, recurring schedule
-- [ ] **CLIENT-10**: Client list view shows: name, country flag, active projects, total invoiced, last invoice date
-- [ ] **CLIENT-11**: User can search clients by name, NIF, country
-- [ ] **CLIENT-12**: User can archive clients (soft delete, data retained)
-- [ ] **CLIENT-13**: Client detail page shows: contact info, projects, invoices, expenses, calendar days, profitability
-- [ ] **CLIENT-14**: System calculates client profitability: total invoiced - client-specific expenses
+- [x] **CLIENT-01**: User can create client with name, email, NIF/CIF, address, country, phone
+- [x] **CLIENT-02**: System validates Spanish NIF/CIF format (8 digits + letter)
+- [x] **CLIENT-03**: For EU clients with VAT number, system validates via VIES API
+- [x] **CLIENT-04**: System categorizes client: Spain, EU (intracomunitario), UK (third country, post-Brexit), US/CA/AU (third country)
+- [x] **CLIENT-05**: User can mark EU client as B2B (inversion sujeto pasivo) or B2C (IVA applies)
+- [x] **CLIENT-06**: For US clients, user can upload W-8BEN form (0% withholding treaty)
+- [x] **CLIENT-07**: User can add multiple contacts per client (billing contact, project manager)
+- [x] **CLIENT-08**: User can create projects per client with: name, rate, start/end dates, status
+- [ ] **CLIENT-09**: User can assign work pattern to client-project: specific weekdays, recurring schedule *(deferred to Phase 16)*
+- [x] **CLIENT-10**: Client list view shows: name, country flag, active projects, total invoiced, last invoice date
+- [x] **CLIENT-11**: User can search clients by name, NIF, country
+- [x] **CLIENT-12**: User can archive clients (soft delete, data retained)
+- [x] **CLIENT-13**: Client detail page shows: contact info, projects, invoices, expenses, calendar days, profitability
+- [x] **CLIENT-14**: System calculates client profitability: total invoiced - client-specific expenses
 
 ### Invoice Generation (INVOICE)
 
@@ -319,42 +319,42 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | Phase 14 | Pending |
-| AUTH-02 | Phase 14 | Pending |
-| AUTH-03 | Phase 14 | Pending |
-| AUTH-04 | Phase 14 | Pending |
-| AUTH-05 | Phase 14 | Pending |
-| AUTH-06 | Phase 14 | Pending |
-| AUTH-07 | Phase 14 | Pending |
-| ENTITY-01 | Phase 13 | Pending |
-| ENTITY-02 | Phase 13 | Pending |
-| ENTITY-03 | Phase 13 | Pending |
-| ENTITY-04 | Phase 13 | Pending |
-| ENTITY-05 | Phase 13 | Pending |
-| ENTITY-06 | Phase 13 | Pending |
-| ENTITY-07 | Phase 13 | Pending |
-| ENTITY-08 | Phase 13 | Pending |
-| PERM-01 | Phase 14 | Pending |
-| PERM-02 | Phase 14 | Pending |
-| PERM-03 | Phase 14 | Pending |
-| PERM-04 | Phase 14 | Pending |
-| PERM-05 | Phase 14 | Pending |
-| PERM-06 | Phase 14 | Pending |
-| PERM-07 | Phase 14 | Pending |
-| CLIENT-01 | Phase 15 | Pending |
-| CLIENT-02 | Phase 15 | Pending |
-| CLIENT-03 | Phase 15 | Pending |
-| CLIENT-04 | Phase 15 | Pending |
-| CLIENT-05 | Phase 15 | Pending |
-| CLIENT-06 | Phase 15 | Pending |
-| CLIENT-07 | Phase 15 | Pending |
-| CLIENT-08 | Phase 15 | Pending |
-| CLIENT-09 | Phase 15 | Pending |
-| CLIENT-10 | Phase 15 | Pending |
-| CLIENT-11 | Phase 15 | Pending |
-| CLIENT-12 | Phase 15 | Pending |
-| CLIENT-13 | Phase 15 | Pending |
-| CLIENT-14 | Phase 15 | Pending |
+| AUTH-01 | Phase 14 | Complete |
+| AUTH-02 | Phase 14 | Complete |
+| AUTH-03 | Phase 14 | Complete |
+| AUTH-04 | Phase 14 | Complete |
+| AUTH-05 | Phase 14 | Complete |
+| AUTH-06 | Phase 14 | Complete |
+| AUTH-07 | Phase 14 | Complete |
+| ENTITY-01 | Phase 13 | Complete |
+| ENTITY-02 | Phase 13 | Complete |
+| ENTITY-03 | Phase 13 | Complete |
+| ENTITY-04 | Phase 13 | Complete |
+| ENTITY-05 | Phase 13 | Complete |
+| ENTITY-06 | Phase 13 | Complete |
+| ENTITY-07 | Phase 13 | Complete |
+| ENTITY-08 | Phase 13 | Complete |
+| PERM-01 | Phase 14 | Complete |
+| PERM-02 | Phase 14 | Complete |
+| PERM-03 | Phase 14 | Complete |
+| PERM-04 | Phase 14 | Complete |
+| PERM-05 | Phase 14 | Complete |
+| PERM-06 | Phase 14 | Complete |
+| PERM-07 | Phase 14 | Complete |
+| CLIENT-01 | Phase 15 | Complete |
+| CLIENT-02 | Phase 15 | Complete |
+| CLIENT-03 | Phase 15 | Complete |
+| CLIENT-04 | Phase 15 | Complete |
+| CLIENT-05 | Phase 15 | Complete |
+| CLIENT-06 | Phase 15 | Complete |
+| CLIENT-07 | Phase 15 | Complete |
+| CLIENT-08 | Phase 15 | Complete |
+| CLIENT-09 | Phase 16 | Pending |
+| CLIENT-10 | Phase 15 | Complete |
+| CLIENT-11 | Phase 15 | Complete |
+| CLIENT-12 | Phase 15 | Complete |
+| CLIENT-13 | Phase 15 | Complete |
+| CLIENT-14 | Phase 15 | Complete |
 | CALENDAR-01 | Phase 16 | Pending |
 | CALENDAR-02 | Phase 16 | Pending |
 | CALENDAR-03 | Phase 16 | Pending |
