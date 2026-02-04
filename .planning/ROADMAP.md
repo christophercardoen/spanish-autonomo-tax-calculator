@@ -111,13 +111,13 @@ Plans:
 ### Phase 15: Client Management
 **Goal**: Users can manage clients with proper tax ID validation and categorization
 **Depends on**: Phase 13
-**Requirements**: CLIENT-01, CLIENT-02, CLIENT-03, CLIENT-04, CLIENT-05, CLIENT-06, CLIENT-07, CLIENT-08, CLIENT-09, CLIENT-10, CLIENT-11, CLIENT-12, CLIENT-13, CLIENT-14
+**Requirements**: CLIENT-01 through CLIENT-08, CLIENT-10 through CLIENT-14 (CLIENT-09 work patterns deferred to Phase 16)
 **Success Criteria** (what must be TRUE):
   1. User can create client with validated NIF/CIF (Spanish format) or VIES-validated EU VAT number
   2. System automatically categorizes client by country: Spain, EU B2B, EU B2C, UK, US/third country
-  3. User can create projects per client with rate, dates, and recurring work patterns
-  4. Client list shows name, country flag, active projects, total invoiced, last invoice date
-  5. Client detail page shows contact info, projects, invoices, expenses, and profitability calculation
+  3. User can create projects per client with rate type (daily/hourly/fixed/retainer) and start/end dates
+  4. Client list shows name, country flag, active projects count, total invoiced, last invoice date
+  5. Client detail page shows contact info, projects, and profitability structure (populated when invoices/expenses exist in Phase 17/18)
 **Plans**: 5 plans
 Plans:
 - [ ] 15-01-PLAN.md - EU VAT format patterns, country flag emoji, CLIENT_CATEGORY constants
