@@ -11,24 +11,24 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 15 of 29 (Client Management) - IN PROGRESS
-Plan: 1 of 6 in current phase (15-01 complete)
+Plan: 2 of 6 in current phase (15-02 complete)
 Status: In progress
-Last activity: 2026-02-04 - Completed 15-01-PLAN.md (EU VAT Format Patterns and Country Utilities)
+Last activity: 2026-02-04 - Completed 15-02-PLAN.md (VIES Edge Function, VIESValidator, ClientManager)
 
-Progress: [############------] 75% (15/20 v2.0 plans complete)
+Progress: [############------] 80% (16/20 v2.0 plans complete)
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 41
+- Total plans completed: 42
 - Average duration: 3.3 min
-- Total execution time: 198 min
+- Total execution time: 200 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 15 (Phase 12 complete, Phase 13 complete, Phase 14 complete, Phase 15 started)
-- Phase 15 duration: ~2 min (1 plan)
+- Plans completed: 16 (Phase 12 complete, Phase 13 complete, Phase 14 complete, Phase 15 in progress)
+- Phase 15 duration: ~4 min (2 plans)
 
 *Updated after each plan completion*
 
@@ -96,6 +96,11 @@ Recent decisions affecting current work:
 - [15-01]: Greece uses EL country code per EU VIES specification (not GR)
 - [15-01]: UK and XI categorized as non-EU post-Brexit
 - [15-01]: EU countries return intermediate 'eu' value requiring B2B/B2C clarification
+- [15-02]: VIES validation via Edge Function proxy to bypass CORS
+- [15-02]: VIESValidator gracefully degrades to format-only when offline
+- [15-02]: ClientManager routes tax ID validation by country code (ES/EU/third)
+- [15-02]: EU VAT format validation immediate; VIES API validation deferred to UI button
+- [15-02]: Third country tax IDs stored as-is with no external validation
 
 ### Pending Todos
 
@@ -103,7 +108,9 @@ None - continue with Phase 15 plans.
 
 ### Blockers/Concerns
 
-None - Phase 15 Plan 01 completed successfully.
+None - Phase 15 Plan 02 completed successfully.
+
+User setup required: Deploy vies-validate Edge Function to Supabase for online EU VAT validation.
 
 ### Research Flags
 
@@ -119,14 +126,15 @@ Phases needing `/gsd:research-phase`:
 | Plan | Deliverable | Commit |
 |------|-------------|--------|
 | 15-01 | EU_VAT_PATTERNS, getFlagEmoji, CLIENT_CATEGORY, getClientCategoryByCountry | `004dbc6`, `bd9cd7c` |
+| 15-02 | VIESValidator, ClientManager, VIES Edge Function | `d1a4f49`, `fc0efaf`, `c97c24d` |
 
 **Phase 15 Success Criteria (Progress):**
 - [x] EU VAT format validation for all 27 EU countries plus XI
 - [x] Greece uses EL country code per VIES specification
 - [x] CLIENT_CATEGORY constants for IVA treatment routing
 - [x] Country flag emoji function working
-- [ ] VIESValidator with format and API validation (15-02)
-- [ ] ClientManager CRUD operations (15-02)
+- [x] VIESValidator with format and API validation (15-02)
+- [x] ClientManager CRUD operations (15-02)
 - [ ] ProjectManager CRUD operations (15-03)
 - [ ] Client form UI with country-aware validation (15-04)
 - [ ] Client list with search and filters (15-05)
@@ -135,9 +143,9 @@ Phases needing `/gsd:research-phase`:
 ## Session Continuity
 
 Last session: 2026-02-04
-Stopped at: Completed 15-01-PLAN.md (EU VAT Format Patterns and Country Utilities)
-Resume file: None - proceed to 15-02-PLAN.md
+Stopped at: Completed 15-02-PLAN.md (VIES Edge Function, VIESValidator, ClientManager)
+Resume file: None - proceed to 15-03-PLAN.md
 
 ---
 *Phase 15 started: 2026-02-04*
-*Next step: /gsd:execute-phase 15 (continue with 15-02)*
+*Next step: /gsd:execute-phase 15 (continue with 15-03)*
