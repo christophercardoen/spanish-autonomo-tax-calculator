@@ -6333,6 +6333,119 @@
         flex-direction: column;
       }
     }
+
+    /* ===========================================
+       PHASE 16-02: DAY EDITOR MODAL STYLES
+       =========================================== */
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .radio-option:hover {
+      background: var(--bg-surface);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .radio-option input[type="radio"] {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"]:checked + span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .day-editor-info-text {
+      color: var(--text-muted);
+      font-size: var(--size-small);
+    }
+
+    .btn-danger {
+      background: var(--negative);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-danger:hover {
+      opacity: 0.9;
+    }
+
+    /* Calendar cell client tag and expense badge */
+    .day-cell {
+      position: relative;
+    }
+
+    .day-client {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      position: absolute;
+      bottom: 2px;
+      left: 2px;
+      max-width: calc(100% - 4px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .day-expense-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.6rem;
+      padding: 0 3px;
+      border-radius: 50%;
+      min-width: 12px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* Bulk tag modal styles */
+    .bulk-tag-count {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .form-hint {
+      font-size: var(--size-small);
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
   </style>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
@@ -6837,6 +6950,123 @@
         <button type="button" class="btn btn-secondary" onclick="ProjectFormUI.close()">Cancel</button>
         <button type="button" class="btn btn-primary" id="project-submit-btn" onclick="ProjectFormUI.handleSubmit(event)">Save</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Phase 16-02: Day Editor Modal -->
+  <div id="dayEditorModal" class="client-modal hidden">
+    <div class="client-modal-content" style="max-width: 500px;">
+      <div class="client-modal-header">
+        <h3 id="dayEditorTitle">Edit Day</h3>
+        <button type="button" class="client-modal-close" onclick="closeDayEditor()">&times;</button>
+      </div>
+      <form id="dayEditorForm" class="client-modal-form" onsubmit="saveDayEditor(event)">
+        <input type="hidden" id="dayEditorDate" />
+
+        <!-- Location Selection -->
+        <div class="client-form-group">
+          <label>Location</label>
+          <div class="radio-group" id="dayEditorLocationGroup">
+            <label class="radio-option">
+              <input type="radio" name="dayLocation" value="belgium" />
+              <span>BE Belgium</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="dayLocation" value="spain" />
+              <span>ES Spain</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="dayLocation" value="travel" />
+              <span>Travel</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="dayLocation" value="other" />
+              <span>Other</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="dayLocation" value="unset" checked />
+              <span>Unset</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Client Selection -->
+        <div class="client-form-group">
+          <label for="dayEditorClient">Client</label>
+          <select id="dayEditorClient" onchange="updateDayEditorProjectDropdown()">
+            <option value="">-- No client --</option>
+          </select>
+        </div>
+
+        <!-- Project Selection -->
+        <div class="client-form-group">
+          <label for="dayEditorProject">Project</label>
+          <select id="dayEditorProject" disabled>
+            <option value="">-- Select client first --</option>
+          </select>
+        </div>
+
+        <!-- Notes -->
+        <div class="client-form-group">
+          <label for="dayEditorNotes">Notes</label>
+          <textarea id="dayEditorNotes" rows="2" placeholder="Optional notes for this day"></textarea>
+        </div>
+
+        <!-- Linked Expenses (read-only info) -->
+        <div class="client-form-group" id="dayEditorExpensesInfo" style="display: none;">
+          <label>Linked Expenses</label>
+          <div id="dayEditorExpensesCount" class="day-editor-info-text"></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="client-modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeDayEditor()">Cancel</button>
+          <button type="button" class="btn btn-danger" onclick="clearDayEditor()" style="margin-right: auto;">Clear Day</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Phase 16-02: Bulk Tag Modal -->
+  <div id="bulkTagModal" class="client-modal hidden">
+    <div class="client-modal-content" style="max-width: 400px;">
+      <div class="client-modal-header">
+        <h3>Tag Selected Days</h3>
+        <button type="button" class="client-modal-close" onclick="closeBulkTagModal()">&times;</button>
+      </div>
+      <form id="bulkTagForm" class="client-modal-form" onsubmit="executeBulkTag(event)">
+        <div class="client-form-group">
+          <label>Selected days: <span id="bulkTagCount" class="bulk-tag-count">0</span></label>
+        </div>
+
+        <div class="client-form-group">
+          <label for="bulkTagClient">Client</label>
+          <select id="bulkTagClient" onchange="updateBulkTagProjects()">
+            <option value="">-- Select client --</option>
+          </select>
+        </div>
+
+        <div class="client-form-group">
+          <label for="bulkTagProject">Project</label>
+          <select id="bulkTagProject" disabled>
+            <option value="">-- Select client first --</option>
+          </select>
+        </div>
+
+        <div class="client-form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="bulkTagOverwrite" />
+            <span>Overwrite existing client tags</span>
+          </label>
+          <small class="form-hint">If unchecked, days with existing client tags will be skipped</small>
+        </div>
+
+        <div class="client-modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeBulkTagModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Apply Tags</button>
+        </div>
+      </form>
     </div>
   </div>
 
