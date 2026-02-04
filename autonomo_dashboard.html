@@ -9740,6 +9740,7 @@
     // CALENDAR EXPORT FUNCTIONS (Task 1)
     // ============================================================
     // ICS and CSV export with Blob API download
+    // Enhanced in Phase 16-05 with client/project information
     // ============================================================
 
     /**
@@ -9752,9 +9753,101 @@
     }
 
     /**
-     * Generate ICS (iCalendar) content for all marked days
+     * Escape special characters for ICS format (RFC 5545)
+     * @param {string} str - String to escape
+     * @returns {string} - ICS-safe string
+     */
+    function escapeICS(str) {
+      if (!str) return '';
+      return str
+        .replace(/\\/g, '\\\\')
+        .replace(/,/g, '\\,')
+        .replace(/;/g, '\\;')
+        .replace(/\n/g, '\\n');
+    }
+
+    /**
+     * Generate enhanced ICS (iCalendar) content with client/project information
+     * Uses CalendarManager (IndexedDB) for v2 data
+     * @param {number} year - Year to export
+     * @returns {Promise<string>} - Valid ICS file content
+     */
+    async function generateEnhancedICS(year) {
+      // Get all days for the year from IndexedDB
+      const days = await CalendarManager.getDaysForYear(year);
+
+      // Get client lookup for names
+      const clients = await ClientManager.getClients({});
+      const clientMap = new Map(clients.map(c => [c.id, c.name]));
+
+      // Get project lookup for names
+      const projects = await db.projects
+        .where('entity_id').equals(EntityContext.entityId)
+        .toArray();
+      const projectMap = new Map(projects.map(p => [p.id, p.name]));
+
+      // Generate events
+      const events = days
+        .filter(d => d.location && d.location !== 'unset')
+        .map(d => {
+          const date = new Date(d.date);
+          const nextDay = new Date(date);
+          nextDay.setDate(nextDay.getDate() + 1);
+
+          // Build summary with location and client
+          const locationText = {
+            belgium: 'Belgium',
+            spain: 'Spain',
+            travel: 'Travel',
+            other: 'Other'
+          }[d.location] || d.location;
+
+          const locationEmoji = {
+            belgium: '🇧🇪',
+            spain: '🇪🇸',
+            travel: '✈️',
+            other: '📍'
+          }[d.location] || '';
+
+          const clientName = d.client_id ? clientMap.get(d.client_id) : null;
+          const projectName = d.project_id ? projectMap.get(d.project_id) : null;
+
+          let summary = `${locationText} ${locationEmoji}`;
+          if (clientName) summary += ` - ${clientName}`;
+          if (projectName) summary += ` (${projectName})`;
+
+          // Build description
+          let description = `Location: ${locationText}`;
+          if (clientName) description += `\\nClient: ${clientName}`;
+          if (projectName) description += `\\nProject: ${projectName}`;
+          if (d.notes) description += `\\nNotes: ${d.notes}`;
+
+          return `BEGIN:VEVENT
+DTSTART;VALUE=DATE:${d.date.replace(/-/g, '')}
+DTEND;VALUE=DATE:${toISODateKey(nextDay).replace(/-/g, '')}
+DTSTAMP:${formatICSTimestamp(new Date())}
+UID:${d.id || d.date}-${EntityContext.entityId}@autonomo-calculator
+SUMMARY:${escapeICS(summary)}
+DESCRIPTION:${escapeICS(description)}
+END:VEVENT`;
+        });
+
+      return `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Autonomo Tax Calculator//Work Calendar v2.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Work Calendar ${year}
+X-WR-CALDESC:Autonomo work presence calendar
+${events.join('\n')}
+END:VCALENDAR`;
+    }
+
+    /**
+     * Legacy: Generate ICS (iCalendar) content for all marked days
      * Follows RFC 5545 specification
      * @returns {string} - Valid ICS file content
+     * @deprecated Use generateEnhancedICS for v2 data
      */
     function generateICS() {
       const events = Object.entries(calendarState.days)
@@ -9794,17 +9887,30 @@ END:VCALENDAR`;
     }
 
     /**
-     * Download ICS file via Blob API
-     * Creates temporary anchor element for download
+     * Download ICS file via Blob API (enhanced version)
+     * Uses CalendarManager for v2 data with client/project info
      */
-    function downloadICS() {
-      const ics = generateICS();
+    async function downloadICS() {
+      const year = calendarState.currentYear;
+
+      // Check if we have IndexedDB data (v2) or legacy data
+      const v2Days = await CalendarManager.getDaysForYear(year);
+
+      let ics;
+      if (v2Days.length > 0) {
+        // Use enhanced ICS generation with client/project info
+        ics = await generateEnhancedICS(year);
+      } else {
+        // Fall back to legacy generation from calendarState.days
+        ics = generateICS();
+      }
+
       const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
       const url = URL.createObjectURL(blob);
 
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'belgium-calendar-2026.ics';
+      a.download = `work-calendar-${year}.ics`;
       document.body.appendChild(a);
       a.click();
 
@@ -9827,9 +9933,73 @@ END:VCALENDAR`;
     }
 
     /**
-     * Generate CSV content for all marked days
+     * Generate enhanced CSV content with client/project information
+     * Uses CalendarManager (IndexedDB) for v2 data
+     * @param {number} year - Year to export
+     * @returns {Promise<string>} - CSV file content
+     */
+    async function generateEnhancedCSV(year) {
+      // Get all days for the year from IndexedDB
+      const days = await CalendarManager.getDaysForYear(year);
+
+      // Get client and project lookups
+      const clients = await ClientManager.getClients({});
+      const clientMap = new Map(clients.map(c => [c.id, c.name]));
+
+      const projects = await db.projects
+        .where('entity_id').equals(EntityContext.entityId)
+        .toArray();
+      const projectMap = new Map(projects.map(p => [p.id, p.name]));
+
+      // CSV header
+      const headers = ['Date', 'Day', 'Location', 'Client', 'Project', 'Notes'];
+
+      // CSV rows
+      const rows = days
+        .sort((a, b) => a.date.localeCompare(b.date))
+        .filter(d => d.location && d.location !== 'unset')
+        .map(d => {
+          const date = new Date(d.date);
+          const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+          const location = d.location || '';
+          const client = d.client_id ? (clientMap.get(d.client_id) || '') : '';
+          const project = d.project_id ? (projectMap.get(d.project_id) || '') : '';
+          const notes = d.notes || '';
+
+          return [
+            d.date,
+            dayName,
+            location,
+            escapeCSVField(client),
+            escapeCSVField(project),
+            escapeCSVField(notes)
+          ];
+        });
+
+      // Get statistics for summary
+      const stats = await CalendarManager.getYearStatistics(year);
+
+      // Add summary rows at bottom
+      const summaryRows = [
+        [],  // Empty row
+        ['SUMMARY'],
+        ['Total Belgium Days', stats.belgium],
+        ['Total Travel Days', stats.travel],
+        ['Total Spain Days', stats.spain],
+        ['Total Other Days', stats.other],
+        ['Combined (Belgium + Travel)', stats.belgium + stats.travel],
+        ['183-day Threshold', (stats.belgium + stats.travel) >= 183 ? 'EXCEEDED' : 'OK']
+      ];
+
+      const allRows = [headers, ...rows, ...summaryRows];
+      return allRows.map(row => row.map(escapeCSVField).join(',')).join('\n');
+    }
+
+    /**
+     * Legacy: Generate CSV content for all marked days
      * Includes headers, data rows, and summary section
      * @returns {string} - CSV file content
+     * @deprecated Use generateEnhancedCSV for v2 data
      */
     function generateCSV() {
       const headers = ['Date', 'Day of Week', 'Status', 'Contracted', 'Month'];
@@ -9864,17 +10034,30 @@ END:VCALENDAR`;
     }
 
     /**
-     * Download CSV file via Blob API
-     * Creates temporary anchor element for download
+     * Download CSV file via Blob API (enhanced version)
+     * Uses CalendarManager for v2 data with client/project info
      */
-    function downloadCSV() {
-      const csv = generateCSV();
+    async function downloadCSV() {
+      const year = calendarState.currentYear;
+
+      // Check if we have IndexedDB data (v2) or legacy data
+      const v2Days = await CalendarManager.getDaysForYear(year);
+
+      let csv;
+      if (v2Days.length > 0) {
+        // Use enhanced CSV generation with client/project info
+        csv = await generateEnhancedCSV(year);
+      } else {
+        // Fall back to legacy generation from calendarState.days
+        csv = generateCSV();
+      }
+
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
       const url = URL.createObjectURL(blob);
 
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'belgium-calendar-2026.csv';
+      a.download = `work-calendar-${year}.csv`;
       document.body.appendChild(a);
       a.click();
 
