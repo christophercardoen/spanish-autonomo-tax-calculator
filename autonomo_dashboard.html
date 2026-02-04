@@ -3260,6 +3260,64 @@
       border-color: var(--accent);
     }
 
+    /* Year Navigation (Phase 16-04) */
+    .year-nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .year-jump-btn {
+      padding: 4px 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .year-jump-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .year-jump-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* Year Summary (Phase 16-04) */
+    .year-summary {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .year-summary strong {
+      color: var(--text);
+    }
+
+    .year-summary .threshold-indicator {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .year-summary .threshold-indicator.warning {
+      color: var(--warning);
+    }
+
+    .year-summary .threshold-indicator.danger {
+      color: var(--negative);
+    }
+
     /* Calendar grid with week selectors - 8 columns */
     .calendar-grid-with-weeks {
       display: grid;
@@ -7489,7 +7547,16 @@
         <!-- CALENDAR TAB -->
         <section class="tab-panel panel-calendar">
           <div class="calendar-section">
-      <h2>Belgium Calendar 2026</h2>
+      <h2>Belgium Calendar <span id="calendarYearTitle">2026</span></h2>
+
+      <!-- Year Summary (Phase 16-04) -->
+      <div id="yearSummary" class="year-summary">
+        <strong id="yearSummaryLabel">2026 Summary:</strong>
+        <span id="yearSummaryBelgium">0</span> Belgium
+        <span id="yearSummarySpain">0</span> Spain
+        <span id="yearSummaryTravel">0</span> Travel
+        <span id="yearSummaryThreshold" class="threshold-indicator">(0/183)</span>
+      </div>
 
       <div class="calendar-info" style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.03); border-radius: 4px; font-size: 0.9rem;">
         <strong style="color: var(--accent);">How days are counted:</strong>
@@ -8340,11 +8407,22 @@
       TRAVEL: 'travel'
     });
 
+    /**
+     * CALENDAR_RANGE - Define valid date ranges for each supported year
+     * 2026: Feb-Dec (first year of tracking, starting after project inception)
+     * 2027: Full year (complete fiscal year)
+     */
+    const CALENDAR_RANGE = Object.freeze({
+      2026: { startMonth: 1, endMonth: 11 },  // Feb-Dec (0-indexed)
+      2027: { startMonth: 0, endMonth: 11 }   // Jan-Dec (0-indexed)
+    });
+
     const DEFAULT_CALENDAR_STATE = Object.freeze({
-      version: 1,
+      version: 2,  // Incremented for multi-year support
       year: 2026,
-      startMonth: 1,  // February (0-indexed)
-      endMonth: 11,   // December (0-indexed)
+      currentYear: 2026,  // Track year independently for navigation
+      startMonth: 1,  // February (0-indexed) - legacy compatibility
+      endMonth: 11,   // December (0-indexed) - legacy compatibility
       days: {},       // { "2026-02-15": { status: "belgium", contracted: true } }
       contractedPatternApplied: false,
       lastModified: null,
@@ -8372,6 +8450,7 @@
     /**
      * Load calendar state from localStorage
      * Falls back to DEFAULT_CALENDAR_STATE on error or invalid data
+     * Handles version migration (v1 -> v2)
      * @returns {object} - Calendar state object (mutable clone)
      */
     function loadCalendarState() {
@@ -8379,8 +8458,26 @@
         const stored = localStorage.getItem(CALENDAR_STORAGE_KEY);
         if (stored) {
           const parsed = JSON.parse(stored);
-          // Version check for future migration support
+
+          // Handle v1 -> v2 migration (add currentYear)
           if (parsed && parsed.version === 1) {
+            parsed.version = 2;
+            parsed.currentYear = parsed.year || 2026;
+            // Update month bounds if needed
+            const yearRange = CALENDAR_RANGE[parsed.currentYear];
+            if (yearRange) {
+              // Ensure currentMonth is within valid range for current year
+              if (parsed.currentMonth < yearRange.startMonth) {
+                parsed.currentMonth = yearRange.startMonth;
+              } else if (parsed.currentMonth > yearRange.endMonth) {
+                parsed.currentMonth = yearRange.endMonth;
+              }
+            }
+            return parsed;
+          }
+
+          // v2 state - return as-is
+          if (parsed && parsed.version === 2) {
             return parsed;
           }
         }
@@ -8486,19 +8583,128 @@
     }
 
     /**
-     * Navigate to different month
-     * Updates currentMonth within bounds [startMonth, endMonth]
+     * Check if navigation is allowed to a specific month/year
+     * @param {number} year - Target year
+     * @param {number} month - Target month (0-indexed)
+     * @returns {boolean} True if navigation is allowed
+     */
+    function isNavigationAllowed(year, month) {
+      const yearRange = CALENDAR_RANGE[year];
+      if (!yearRange) return false;
+      return month >= yearRange.startMonth && month <= yearRange.endMonth;
+    }
+
+    /**
+     * Check if previous month navigation is possible
+     * @returns {boolean} True if can navigate to previous month
+     */
+    function canNavigatePrev() {
+      const currentYear = calendarState.currentYear || calendarState.year;
+      const currentMonth = calendarState.currentMonth;
+
+      // First, check within current year
+      const yearRange = CALENDAR_RANGE[currentYear];
+      if (yearRange && currentMonth > yearRange.startMonth) return true;
+
+      // Then check if can go to previous year
+      const prevYear = currentYear - 1;
+      const prevYearRange = CALENDAR_RANGE[prevYear];
+      return !!prevYearRange;
+    }
+
+    /**
+     * Check if next month navigation is possible
+     * @returns {boolean} True if can navigate to next month
+     */
+    function canNavigateNext() {
+      const currentYear = calendarState.currentYear || calendarState.year;
+      const currentMonth = calendarState.currentMonth;
+
+      // First, check within current year
+      const yearRange = CALENDAR_RANGE[currentYear];
+      if (yearRange && currentMonth < yearRange.endMonth) return true;
+
+      // Then check if can go to next year
+      const nextYear = currentYear + 1;
+      const nextYearRange = CALENDAR_RANGE[nextYear];
+      return !!nextYearRange;
+    }
+
+    /**
+     * Navigate to different month with year boundary handling
+     * Automatically crosses year boundaries when needed
      *
      * @param {number} delta - Direction (-1 for prev, +1 for next)
      */
     async function navigateMonth(delta) {
-      const newMonth = calendarState.currentMonth + delta;
-      if (newMonth >= calendarState.startMonth && newMonth <= calendarState.endMonth) {
-        calendarState.currentMonth = newMonth;
-        saveCalendarState();
-        await renderCalendarAsync();  // Use async version for IndexedDB
-        updateCountDisplays();  // Update counts for new month
+      let newMonth = calendarState.currentMonth + delta;
+      let newYear = calendarState.currentYear || calendarState.year;
+
+      // Handle year rollover
+      if (newMonth > 11) {
+        newMonth = 0;
+        newYear++;
+      } else if (newMonth < 0) {
+        newMonth = 11;
+        newYear--;
       }
+
+      // Check if new position is within allowed range
+      const yearRange = CALENDAR_RANGE[newYear];
+      if (!yearRange) return;  // Year not supported
+
+      // Clamp to allowed months for the target year
+      if (newMonth < yearRange.startMonth) {
+        // If going to prev year but landing before valid range, go to end of prev year
+        const prevYear = newYear - 1;
+        const prevRange = CALENDAR_RANGE[prevYear];
+        if (!prevRange) return;  // Can't navigate further back
+        newYear = prevYear;
+        newMonth = prevRange.endMonth;
+      } else if (newMonth > yearRange.endMonth) {
+        // If going to next year but landing after valid range, go to start of next year
+        const nextYear = newYear + 1;
+        const nextRange = CALENDAR_RANGE[nextYear];
+        if (!nextRange) return;  // Can't navigate further forward
+        newYear = nextYear;
+        newMonth = nextRange.startMonth;
+      }
+
+      // Apply changes
+      calendarState.currentYear = newYear;
+      calendarState.year = newYear;  // Keep legacy field in sync
+      calendarState.currentMonth = newMonth;
+
+      saveCalendarState();
+      await renderCalendarAsync();  // Use async version for IndexedDB
+      updateCountDisplaysAsync().catch(() => updateCountDisplays());  // Use async with fallback
+    }
+
+    /**
+     * Jump directly to a specific year
+     * Positions at the first valid month for that year
+     *
+     * @param {number} year - Target year (e.g., 2026, 2027)
+     */
+    async function jumpToYear(year) {
+      const yearRange = CALENDAR_RANGE[year];
+      if (!yearRange) {
+        console.warn(`jumpToYear: Year ${year} not supported`);
+        return;
+      }
+
+      calendarState.currentYear = year;
+      calendarState.year = year;  // Keep legacy field in sync
+
+      // Position at first valid month for this year
+      const currentMonth = calendarState.currentMonth;
+      if (currentMonth < yearRange.startMonth || currentMonth > yearRange.endMonth) {
+        calendarState.currentMonth = yearRange.startMonth;
+      }
+
+      saveCalendarState();
+      await renderCalendarAsync();
+      updateCountDisplaysAsync().catch(() => updateCountDisplays());
     }
 
     /**
@@ -8522,26 +8728,35 @@
       const container = document.getElementById('calendarContainer');
       if (!container) return;
 
-      const year = calendarState.year;
+      const year = calendarState.currentYear || calendarState.year;
       const month = calendarState.currentMonth;
 
-      // Get month name
-      const monthName = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' })
+      // Get month name with year display
+      const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' })
         .format(new Date(year, month, 1));
 
-      // Check navigation bounds
-      const canPrev = month > calendarState.startMonth;
-      const canNext = month < calendarState.endMonth;
+      // Check navigation bounds using helper functions
+      const canPrev = canNavigatePrev();
+      const canNext = canNavigateNext();
 
-      // Build header with Select All button
+      // Build year quick-jump buttons
+      const yearButtons = Object.keys(CALENDAR_RANGE).map(y => {
+        const isActive = parseInt(y) === year;
+        return `<button type="button" class="year-jump-btn ${isActive ? 'active' : ''}" onclick="jumpToYear(${y})">${y}</button>`;
+      }).join('');
+
+      // Build header with Select All button and year display
       const headerHtml = `
         <div class="calendar-header">
           <button class="nav-btn" onclick="navigateMonth(-1)" ${canPrev ? '' : 'disabled'}>
             &larr; Prev
           </button>
-          <div style="display: flex; align-items: center; justify-content: center;">
-            <h3 style="margin: 0;">${monthName}</h3>
-            <button type="button" class="month-select-all" onclick="selectMonth(${month})" title="Select all days in ${monthName}">Select All</button>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+            <div class="year-nav">${yearButtons}</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <h3 style="margin: 0;">${monthName} ${year}</h3>
+              <button type="button" class="month-select-all" onclick="selectMonth(${month})" title="Select all days in ${monthName}">Select All</button>
+            </div>
           </div>
           <button class="nav-btn" onclick="navigateMonth(1)" ${canNext ? '' : 'disabled'}>
             Next &rarr;
@@ -9335,11 +9550,33 @@
      * Loads data from IndexedDB and updates all count displays
      */
     async function updateCountDisplaysAsync() {
-      const year = calendarState?.year || 2026;
+      const year = calendarState?.currentYear || calendarState?.year || 2026;
       const currentMonth = calendarState?.currentMonth ?? 1;
 
       try {
         const counts = await calculateThresholdCounts(year);
+
+        // Update calendar title with current year
+        const titleEl = document.getElementById('calendarYearTitle');
+        if (titleEl) titleEl.textContent = year;
+
+        // Update year summary display
+        const summaryLabel = document.getElementById('yearSummaryLabel');
+        const summaryBelgium = document.getElementById('yearSummaryBelgium');
+        const summarySpain = document.getElementById('yearSummarySpain');
+        const summaryTravel = document.getElementById('yearSummaryTravel');
+        const summaryThreshold = document.getElementById('yearSummaryThreshold');
+
+        if (summaryLabel) summaryLabel.textContent = `${year} Summary:`;
+        if (summaryBelgium) summaryBelgium.innerHTML = `<span style="color: var(--belgium);">${counts.annual.belgium}</span> Belgium`;
+        if (summarySpain) summarySpain.innerHTML = `<span style="color: var(--positive);">${counts.annual.spain}</span> Spain`;
+        if (summaryTravel) summaryTravel.innerHTML = `<span style="color: var(--warning);">${counts.annual.travel}</span> Travel`;
+        if (summaryThreshold) {
+          const thresholdClass = counts.annual.threshold >= 183 ? 'danger' :
+                                 counts.annual.threshold >= 170 ? 'warning' : '';
+          summaryThreshold.className = `threshold-indicator ${thresholdClass}`;
+          summaryThreshold.textContent = `(${counts.annual.threshold}/183)`;
+        }
 
         // Update monthly count (current month display)
         const monthCountEl = document.getElementById('monthBelgiumCount');
@@ -9391,6 +9628,29 @@
      */
     function updateCountDisplays() {
       const counts = calculateCounts();
+      const year = calendarState?.currentYear || calendarState?.year || 2026;
+
+      // Update calendar title with current year
+      const titleEl = document.getElementById('calendarYearTitle');
+      if (titleEl) titleEl.textContent = year;
+
+      // Update year summary display (sync version - limited data)
+      const summaryLabel = document.getElementById('yearSummaryLabel');
+      const summaryBelgium = document.getElementById('yearSummaryBelgium');
+      const summarySpain = document.getElementById('yearSummarySpain');
+      const summaryTravel = document.getElementById('yearSummaryTravel');
+      const summaryThreshold = document.getElementById('yearSummaryThreshold');
+
+      if (summaryLabel) summaryLabel.textContent = `${year} Summary:`;
+      if (summaryBelgium) summaryBelgium.innerHTML = `<span style="color: var(--belgium);">${counts.annualBelgium}</span> Belgium`;
+      if (summarySpain) summarySpain.innerHTML = `<span style="color: var(--positive);">${counts.annualSpain}</span> Spain`;
+      if (summaryTravel) summaryTravel.innerHTML = `<span style="color: var(--warning);">${counts.annualTravel}</span> Travel`;
+      if (summaryThreshold) {
+        const thresholdClass = counts.annualThreshold >= 183 ? 'danger' :
+                               counts.annualThreshold >= 170 ? 'warning' : '';
+        summaryThreshold.className = `threshold-indicator ${thresholdClass}`;
+        summaryThreshold.textContent = `(${counts.annualThreshold}/183)`;
+      }
 
       const monthCountEl = document.getElementById('monthBelgiumCount');
       const annualCountEl = document.getElementById('annualBelgiumCount');
@@ -20055,7 +20315,7 @@ Generated by Autonomo Tax Calculator`;
       const container = document.getElementById('calendarContainer');
       if (!container) return;
 
-      const year = calendarState.year;
+      const year = calendarState.currentYear || calendarState.year;
       const month = calendarState.currentMonth;
 
       // Load days data from IndexedDB for this month
@@ -20066,23 +20326,32 @@ Generated by Autonomo Tax Calculator`;
       const clients = await ClientManager.getClients({ archived: false });
       const clientMap = new Map(clients.map(c => [c.id, c.name]));
 
-      // Get month name
-      const monthName = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' })
+      // Get month name (without year - year shown separately)
+      const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' })
         .format(new Date(year, month, 1));
 
-      // Check navigation bounds
-      const canPrev = month > calendarState.startMonth;
-      const canNext = month < calendarState.endMonth;
+      // Check navigation bounds using helper functions
+      const canPrev = canNavigatePrev();
+      const canNext = canNavigateNext();
 
-      // Build header with Select All button
+      // Build year quick-jump buttons
+      const yearButtons = Object.keys(CALENDAR_RANGE).map(y => {
+        const isActive = parseInt(y) === year;
+        return `<button type="button" class="year-jump-btn ${isActive ? 'active' : ''}" onclick="jumpToYear(${y})">${y}</button>`;
+      }).join('');
+
+      // Build header with Select All button and year display
       const headerHtml = `
         <div class="calendar-header">
           <button class="nav-btn" onclick="navigateMonth(-1)" ${canPrev ? '' : 'disabled'}>
             &larr; Prev
           </button>
-          <div style="display: flex; align-items: center; justify-content: center;">
-            <h3 style="margin: 0;">${monthName}</h3>
-            <button type="button" class="month-select-all" onclick="selectMonth(${month})" title="Select all days in ${monthName}">Select All</button>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+            <div class="year-nav">${yearButtons}</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <h3 style="margin: 0;">${monthName} ${year}</h3>
+              <button type="button" class="month-select-all" onclick="selectMonth(${month})" title="Select all days in ${monthName}">Select All</button>
+            </div>
           </div>
           <button class="nav-btn" onclick="navigateMonth(1)" ${canNext ? '' : 'disabled'}>
             Next &rarr;
