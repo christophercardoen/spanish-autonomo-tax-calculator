@@ -6491,6 +6491,42 @@
       border-color: var(--accent-primary);
       color: #fff;
     }
+
+    /* Phase 16-03: Pattern Preview Styles */
+    .pattern-preview {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .pattern-preview .preview-text {
+      color: var(--text-muted);
+      margin: 0;
+      font-size: var(--size-small);
+    }
+
+    .pattern-preview .preview-count {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .pattern-preview .preview-dates {
+      font-size: var(--size-small);
+      color: var(--text-secondary);
+      max-height: 100px;
+      overflow-y: auto;
+      line-height: 1.5;
+    }
+
+    .pattern-preview .preview-warning {
+      color: var(--warning-color, #f59e0b);
+      font-size: var(--size-small);
+      margin-top: 0.5rem;
+    }
   </style>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
@@ -7162,6 +7198,51 @@
     </div>
   </div>
 
+  <!-- Phase 16-03: Apply Work Pattern Modal -->
+  <div id="applyPatternModal" class="client-modal hidden">
+    <div class="client-modal-content" style="max-width: 450px;">
+      <div class="client-modal-header">
+        <h3>Apply Work Pattern</h3>
+        <button type="button" class="client-modal-close" onclick="closeApplyPatternModal()">&times;</button>
+      </div>
+      <form id="applyPatternForm" class="client-modal-form" onsubmit="executeApplyPattern(event)">
+        <div class="client-form-group">
+          <label for="applyPatternClient">Client</label>
+          <select id="applyPatternClient" required onchange="loadClientProjectsForPattern()">
+            <option value="">-- Select client --</option>
+          </select>
+        </div>
+
+        <div class="client-form-group">
+          <label for="applyPatternProject">Project (with pattern)</label>
+          <select id="applyPatternProject" required disabled onchange="previewApplyPattern()">
+            <option value="">-- Select client first --</option>
+          </select>
+        </div>
+
+        <div class="client-form-row">
+          <div class="client-form-group">
+            <label for="applyPatternStart">Start Date</label>
+            <input type="date" id="applyPatternStart" required onchange="previewApplyPattern()" />
+          </div>
+          <div class="client-form-group">
+            <label for="applyPatternEnd">End Date</label>
+            <input type="date" id="applyPatternEnd" required onchange="previewApplyPattern()" />
+          </div>
+        </div>
+
+        <div id="applyPatternPreview" class="pattern-preview">
+          <p class="preview-text">Select a project to see preview</p>
+        </div>
+
+        <div class="client-modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeApplyPatternModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="applyPatternSubmitBtn" disabled>Apply Pattern</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Phase 12: Loading Screen for Database Initialization -->
   <div id="loading-screen" class="loading-screen">
     <div class="loading-content">
@@ -7391,6 +7472,7 @@
         <!-- Populated by renderCalendar() -->
       </div>
       <div class="calendar-actions" style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: flex-end; align-items: center;">
+        <button type="button" class="secondary-btn" onclick="openApplyPatternModal()">Apply Work Pattern</button>
         <button class="reset-btn" onclick="resetCalendar()">Reset Calendar</button>
         <span id="unsavedIndicator" class="unsaved-indicator hidden">Unsaved changes</span>
         <button id="saveCalendarBtn" class="primary-btn" onclick="commitCalendarChanges()" disabled>Save Calendar</button>
@@ -8326,12 +8408,12 @@
      *
      * @param {number} delta - Direction (-1 for prev, +1 for next)
      */
-    function navigateMonth(delta) {
+    async function navigateMonth(delta) {
       const newMonth = calendarState.currentMonth + delta;
       if (newMonth >= calendarState.startMonth && newMonth <= calendarState.endMonth) {
         calendarState.currentMonth = newMonth;
         saveCalendarState();
-        renderCalendar();
+        await renderCalendarAsync();  // Use async version for IndexedDB
         updateCountDisplays();  // Update counts for new month
       }
     }
@@ -8339,8 +8421,21 @@
     /**
      * Render calendar for current month
      * Shows month header with navigation and day grid
+     * NOTE: This is the legacy sync version, renderCalendarAsync() is preferred
      */
     function renderCalendar() {
+      // Delegate to async version for IndexedDB support
+      renderCalendarAsync().catch(err => {
+        console.error('renderCalendarAsync failed:', err);
+        renderCalendarSync();  // Fallback to sync version
+      });
+    }
+
+    /**
+     * Synchronous fallback calendar render (uses localStorage only)
+     * Used when IndexedDB is not available
+     */
+    function renderCalendarSync() {
       const container = document.getElementById('calendarContainer');
       if (!container) return;
 
@@ -8419,16 +8514,17 @@
 
             const isSelected = selectedDates.has(dateKey);
             gridHtml += `
-              <div class="day-cell ${status} ${isSelected ? 'selected' : ''}" data-date="${dateKey}">
+              <div class="day-cell ${status} ${isSelected ? 'selected' : ''}" data-date="${dateKey}" onclick="handleDayClick('${dateKey}', event)">
                 <div class="day-cell-header">
                   <input type="checkbox" class="day-checkbox"
                     ${isSelected ? 'checked' : ''}
                     onchange="toggleDaySelection('${dateKey}', this.checked)"
+                    onclick="event.stopPropagation()"
                     aria-label="Select ${date.getDate()}">
                   <span class="day-number">${date.getDate()}</span>
                   ${isContracted ? '<span class="contracted-badge">C</span>' : ''}
                 </div>
-                <div class="day-status-display" onclick="toggleDaySelection('${dateKey}')">
+                <div class="day-status-display">
                   ${emoji ? `<span class="status-emoji">${emoji}</span>` : '<span class="status-empty">-</span>'}
                 </div>
               </div>
@@ -19068,6 +19164,281 @@ Generated by Autonomo Tax Calculator`;
         return projects.filter(p => p.work_pattern?.active === true);
       }
     };
+
+    // =====================================================
+    // PHASE 16-03: Apply Work Pattern Modal Functions
+    // =====================================================
+
+    // Store selected project pattern for preview
+    let selectedPatternProject = null;
+
+    /**
+     * Open the Apply Work Pattern modal
+     * Populates client dropdown with clients that have projects with patterns
+     */
+    async function openApplyPatternModal() {
+      const modal = document.getElementById('applyPatternModal');
+      if (!modal) return;
+
+      // Reset form
+      const form = document.getElementById('applyPatternForm');
+      if (form) form.reset();
+
+      selectedPatternProject = null;
+
+      // Reset preview
+      const preview = document.getElementById('applyPatternPreview');
+      if (preview) {
+        preview.innerHTML = '<p class="preview-text">Select a project to see preview</p>';
+      }
+
+      // Disable submit button
+      const submitBtn = document.getElementById('applyPatternSubmitBtn');
+      if (submitBtn) submitBtn.disabled = true;
+
+      // Reset project dropdown
+      const projectSelect = document.getElementById('applyPatternProject');
+      if (projectSelect) {
+        projectSelect.innerHTML = '<option value="">-- Select client first --</option>';
+        projectSelect.disabled = true;
+      }
+
+      // Populate client dropdown with clients that have projects with patterns
+      const clientSelect = document.getElementById('applyPatternClient');
+      if (clientSelect) {
+        clientSelect.innerHTML = '<option value="">-- Select client --</option>';
+
+        try {
+          const clients = await ClientManager.getClients({});
+          let hasClientsWithPatterns = false;
+
+          for (const client of clients) {
+            const projectsWithPatterns = await WorkPatternManager.getClientProjectsWithPatterns(client.id);
+            if (projectsWithPatterns.length > 0) {
+              hasClientsWithPatterns = true;
+              const option = document.createElement('option');
+              option.value = client.id;
+              option.textContent = client.name;
+              clientSelect.appendChild(option);
+            }
+          }
+
+          if (!hasClientsWithPatterns) {
+            clientSelect.innerHTML = '<option value="">No clients with patterns</option>';
+          }
+        } catch (error) {
+          console.error('Error loading clients for pattern modal:', error);
+        }
+      }
+
+      // Set default date range to current month
+      const now = new Date();
+      const year = calendarState?.year || now.getFullYear();
+      const month = calendarState?.currentMonth ?? now.getMonth();
+
+      const startDate = new Date(year, month, 1);
+      const endDate = new Date(year, month + 1, 0);
+
+      const startInput = document.getElementById('applyPatternStart');
+      const endInput = document.getElementById('applyPatternEnd');
+
+      if (startInput) startInput.value = startDate.toISOString().split('T')[0];
+      if (endInput) endInput.value = endDate.toISOString().split('T')[0];
+
+      // Show modal
+      modal.classList.remove('hidden');
+    }
+
+    /**
+     * Close the Apply Work Pattern modal
+     */
+    function closeApplyPatternModal() {
+      const modal = document.getElementById('applyPatternModal');
+      if (modal) modal.classList.add('hidden');
+      selectedPatternProject = null;
+    }
+
+    /**
+     * Load projects for selected client (only those with active patterns)
+     */
+    async function loadClientProjectsForPattern() {
+      const clientSelect = document.getElementById('applyPatternClient');
+      const projectSelect = document.getElementById('applyPatternProject');
+
+      if (!clientSelect || !projectSelect) return;
+
+      const clientId = parseInt(clientSelect.value, 10);
+
+      if (!clientId) {
+        projectSelect.innerHTML = '<option value="">-- Select client first --</option>';
+        projectSelect.disabled = true;
+        selectedPatternProject = null;
+        previewApplyPattern();
+        return;
+      }
+
+      try {
+        const projects = await WorkPatternManager.getClientProjectsWithPatterns(clientId);
+
+        projectSelect.innerHTML = '<option value="">-- Select project --</option>';
+
+        if (projects.length === 0) {
+          projectSelect.innerHTML = '<option value="">No projects with patterns</option>';
+          projectSelect.disabled = true;
+          selectedPatternProject = null;
+        } else {
+          projects.forEach(project => {
+            const option = document.createElement('option');
+            option.value = project.id;
+            option.textContent = project.name;
+            projectSelect.appendChild(option);
+          });
+          projectSelect.disabled = false;
+
+          // Auto-select if only one project
+          if (projects.length === 1) {
+            projectSelect.value = projects[0].id;
+            selectedPatternProject = projects[0];
+            previewApplyPattern();
+          }
+        }
+      } catch (error) {
+        console.error('Error loading projects for pattern:', error);
+        projectSelect.innerHTML = '<option value="">Error loading projects</option>';
+        projectSelect.disabled = true;
+      }
+    }
+
+    /**
+     * Preview which dates would be filled by the selected pattern
+     */
+    async function previewApplyPattern() {
+      const preview = document.getElementById('applyPatternPreview');
+      const submitBtn = document.getElementById('applyPatternSubmitBtn');
+
+      if (!preview) return;
+
+      const projectSelect = document.getElementById('applyPatternProject');
+      const startInput = document.getElementById('applyPatternStart');
+      const endInput = document.getElementById('applyPatternEnd');
+
+      const projectId = projectSelect?.value ? parseInt(projectSelect.value, 10) : null;
+      const startDate = startInput?.value;
+      const endDate = endInput?.value;
+
+      // Validate inputs
+      if (!projectId || !startDate || !endDate) {
+        preview.innerHTML = '<p class="preview-text">Select a project and date range to see preview</p>';
+        if (submitBtn) submitBtn.disabled = true;
+        selectedPatternProject = null;
+        return;
+      }
+
+      try {
+        // Get project and its pattern
+        const project = await ProjectManager.getProject(projectId);
+        if (!project || !project.work_pattern) {
+          preview.innerHTML = '<p class="preview-text">Project has no pattern</p>';
+          if (submitBtn) submitBtn.disabled = true;
+          selectedPatternProject = null;
+          return;
+        }
+
+        selectedPatternProject = project;
+        const pattern = project.work_pattern;
+
+        // Get preview dates
+        const dates = WorkPatternManager.previewPattern(pattern, startDate, endDate);
+
+        if (dates.length === 0) {
+          preview.innerHTML = '<p class="preview-text">No matching days in selected range</p>';
+          if (submitBtn) submitBtn.disabled = true;
+          return;
+        }
+
+        // Format preview
+        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const dateList = dates.slice(0, 15).map(d => {
+          const date = new Date(d + 'T12:00:00');
+          return `${dayNames[date.getDay()]} ${date.getDate()}/${date.getMonth() + 1}`;
+        }).join(', ');
+
+        const moreText = dates.length > 15 ? `... and ${dates.length - 15} more` : '';
+
+        preview.innerHTML = `
+          <div class="preview-count">${dates.length} days will be tagged</div>
+          <div class="preview-dates">${dateList}${moreText}</div>
+          <p class="preview-warning">Note: Days with existing location tags will be skipped</p>
+        `;
+
+        if (submitBtn) submitBtn.disabled = false;
+
+      } catch (error) {
+        console.error('Error previewing pattern:', error);
+        preview.innerHTML = '<p class="preview-text">Error generating preview</p>';
+        if (submitBtn) submitBtn.disabled = true;
+      }
+    }
+
+    /**
+     * Execute the pattern application
+     * @param {Event} event - Form submit event
+     */
+    async function executeApplyPattern(event) {
+      if (event) event.preventDefault();
+
+      const projectSelect = document.getElementById('applyPatternProject');
+      const startInput = document.getElementById('applyPatternStart');
+      const endInput = document.getElementById('applyPatternEnd');
+      const submitBtn = document.getElementById('applyPatternSubmitBtn');
+
+      const projectId = projectSelect?.value ? parseInt(projectSelect.value, 10) : null;
+      const startDate = startInput?.value;
+      const endDate = endInput?.value;
+
+      if (!projectId || !startDate || !endDate) {
+        alert('Please select a project and date range');
+        return;
+      }
+
+      try {
+        // Disable button during operation
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Applying...';
+        }
+
+        // Apply the pattern
+        const result = await WorkPatternManager.applyPattern(projectId, startDate, endDate);
+
+        // Show result
+        let message = `Applied pattern to ${result.applied} days.`;
+        if (result.skipped > 0) {
+          message += ` Skipped ${result.skipped} days with existing entries.`;
+        }
+        alert(message);
+
+        // Close modal
+        closeApplyPatternModal();
+
+        // Refresh calendar display
+        if (typeof renderCalendar === 'function') {
+          renderCalendar();
+        }
+        if (typeof updateCountDisplays === 'function') {
+          updateCountDisplays();
+        }
+
+      } catch (error) {
+        console.error('Error applying pattern:', error);
+        alert('Error applying pattern: ' + error.message);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Apply Pattern';
+        }
+      }
+    }
 
     // =====================================================
     // PHASE 16-02: Day Editor Functions
