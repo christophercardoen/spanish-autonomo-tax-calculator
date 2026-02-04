@@ -115,6 +115,10 @@ Recent decisions affecting current work:
 - [16-01]: Migration is per-entity via localStorage flag (calendar_migrated_v2_entity_{entityId})
 - [16-01]: getLinkedExpenseCount is placeholder returning 0 until Phase 17
 - [16-01]: Calendar migration runs in Step 5.5 of initializeDatabase()
+- [16-02]: Radio buttons for location selection (visual feedback, single selection)
+- [16-02]: Client abbreviation shows first 3 letters uppercase for compact display
+- [16-02]: Shift+click for multi-select toggle, regular click opens day editor
+- [16-02]: renderCalendarAsync with renderCalendarSync fallback for graceful degradation
 - [16-03]: ISO day format (1=Mon, 7=Sun) for pattern day selection
 - [16-03]: First week defined as days 1-7 of month for extra day patterns
 - [16-03]: Pattern application skips days with existing location (respects manual edits)
@@ -144,6 +148,7 @@ Phases needing `/gsd:research-phase`:
 | Plan | Deliverable | Commit |
 |------|-------------|--------|
 | 16-01 | CalendarManager, LOCATION_TYPE, migrateCalendarToIndexedDB | `6e91bf8` |
+| 16-02 | Day editor modal, bulk tag modal, async calendar rendering | `26a1420` |
 | 16-03 | WorkPatternManager, pattern form fields, Apply Pattern modal | `e32f234` |
 
 **Phase 16 Success Criteria (In Progress):**
@@ -151,7 +156,9 @@ Phases needing `/gsd:research-phase`:
 - [x] Migration preserves all v1 calendar entries in IndexedDB (16-01)
 - [x] Entity-scoping isolates calendar data per business entity (16-01)
 - [x] Placeholder for expense linking ready for Phase 17 (16-01)
-- [ ] Calendar UI uses CalendarManager for persistence (16-02)
+- [x] Calendar UI uses CalendarManager for persistence (16-02)
+- [x] Day editor modal for location/client/project tagging (16-02)
+- [x] Bulk tag feature for multi-day client tagging (16-02)
 - [x] Work pattern system for bulk calendar tagging (16-03)
 - [ ] Client/project picker for day assignment (16-04)
 - [ ] 183-day warning system (16-05)
