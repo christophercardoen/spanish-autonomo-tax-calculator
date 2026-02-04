@@ -403,6 +403,355 @@
     }
 
     /* ===========================================
+       PHASE 15: CLIENT DETAIL VIEW STYLES
+       =========================================== */
+
+    /* Client Detail View */
+    .detail-view {
+      padding: 1rem;
+    }
+
+    .detail-view.hidden {
+      display: none;
+    }
+
+    .back-btn {
+      background: transparent;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      padding: 0.5rem 0;
+      margin-bottom: 1rem;
+      font-size: var(--size-labels);
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    .client-detail-header {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 2rem;
+      align-items: start;
+      padding: 1.5rem;
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+    }
+
+    .client-detail-main {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .client-detail-flag {
+      font-size: 3rem;
+    }
+
+    .client-detail-info h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+    }
+
+    .client-detail-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tax-id-badge,
+    .category-badge,
+    .vies-badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+    }
+
+    .tax-id-badge {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-muted);
+    }
+
+    .category-badge {
+      background: var(--accent);
+      color: #1a1a1a;
+    }
+
+    .vies-badge.valid {
+      background: var(--positive);
+      color: #1a1a1a;
+    }
+
+    .vies-badge.invalid {
+      background: var(--warning);
+      color: #1a1a1a;
+    }
+
+    .client-detail-summary {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .summary-item {
+      text-align: right;
+    }
+
+    .summary-label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-value {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .client-detail-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .client-detail-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 1rem;
+    }
+
+    .detail-tab {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: var(--size-labels);
+    }
+
+    .detail-tab:hover {
+      color: var(--text);
+    }
+
+    .detail-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .detail-panel {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+
+    .detail-panel.hidden {
+      display: none;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .panel-header h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .btn-small {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .coming-soon {
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Contact list styles */
+    .contacts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius-sm);
+    }
+
+    .contact-item.primary {
+      border-left: 3px solid var(--accent);
+    }
+
+    .contact-role {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      min-width: 100px;
+    }
+
+    .contact-name {
+      font-weight: 500;
+    }
+
+    .contact-details {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .contact-details a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-details a:hover {
+      text-decoration: underline;
+    }
+
+    /* Project list styles */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius-sm);
+    }
+
+    .project-name {
+      font-weight: 500;
+    }
+
+    .project-rate {
+      font-family: var(--font-mono);
+      color: var(--accent);
+    }
+
+    .project-dates {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .status-badge.active {
+      background: var(--positive);
+      color: #1a1a1a;
+    }
+
+    .status-badge.upcoming {
+      background: var(--warning);
+      color: #1a1a1a;
+    }
+
+    .status-badge.completed {
+      background: var(--text-muted);
+      color: #1a1a1a;
+    }
+
+    .status-badge.cancelled {
+      background: var(--negative);
+      color: white;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+    }
+
+    .empty-state.hidden {
+      display: none;
+    }
+
+    /* Icon buttons */
+    .btn-icon {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-muted);
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .btn-icon:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+
+    .btn-icon.btn-danger:hover {
+      background: rgba(248,113,113,0.2);
+      color: var(--negative);
+    }
+
+    /* Responsive detail view */
+    @media (max-width: 768px) {
+      .client-detail-header {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .client-detail-summary {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .summary-item {
+        text-align: left;
+      }
+
+      .client-detail-actions {
+        justify-content: flex-end;
+      }
+
+      .client-detail-tabs {
+        flex-wrap: wrap;
+      }
+
+      .detail-tab {
+        padding: 0.5rem 1rem;
+      }
+
+      .contact-item,
+      .project-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+    }
+
+    /* ===========================================
        PHASE 8: INCOME TAB STYLES
        =========================================== */
 
@@ -6763,6 +7112,100 @@
 
           <div id="client-empty-state" class="clients-empty-state hidden">
             <p>No hay clientes. Crea tu primer cliente para comenzar.</p>
+          </div>
+
+          <!-- Client Detail View (replaces list when viewing detail) -->
+          <div id="client-detail-view" class="detail-view hidden">
+            <button class="back-btn" id="client-back-btn">&larr; Volver a clientes</button>
+
+            <div class="client-detail-header">
+              <div class="client-detail-main">
+                <span class="client-detail-flag" id="detail-flag"></span>
+                <div class="client-detail-info">
+                  <h2 id="detail-name"></h2>
+                  <div class="client-detail-meta">
+                    <span id="detail-tax-id" class="tax-id-badge"></span>
+                    <span id="detail-category" class="category-badge"></span>
+                    <span id="detail-vies-status" class="vies-badge hidden"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="client-detail-summary">
+                <div class="summary-item">
+                  <span class="summary-label">Total facturado</span>
+                  <span class="summary-value" id="detail-total-invoiced">0,00 EUR</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">Pendiente</span>
+                  <span class="summary-value" id="detail-outstanding">0,00 EUR</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">Beneficio</span>
+                  <span class="summary-value" id="detail-profit">0,00 EUR</span>
+                </div>
+              </div>
+              <div class="client-detail-actions">
+                <button class="btn btn-secondary" id="edit-client-btn" data-permission="edit">Editar</button>
+                <button class="btn btn-danger" id="archive-client-btn" data-permission="delete">Archivar</button>
+              </div>
+            </div>
+
+            <div class="client-detail-tabs">
+              <button class="detail-tab active" data-detail-tab="contacts">Contactos</button>
+              <button class="detail-tab" data-detail-tab="projects">Proyectos</button>
+              <button class="detail-tab" data-detail-tab="invoices">Facturas</button>
+              <button class="detail-tab" data-detail-tab="expenses">Gastos</button>
+              <button class="detail-tab" data-detail-tab="calendar">Calendario</button>
+            </div>
+
+            <div id="detail-contacts-panel" class="detail-panel">
+              <div class="panel-header">
+                <h3>Contactos</h3>
+                <button class="btn btn-small" id="add-contact-btn" data-permission="create">+ Contacto</button>
+              </div>
+              <div id="contacts-list" class="contacts-list"></div>
+              <div id="contacts-empty" class="empty-state hidden">
+                <p>No hay contactos. Anade un contacto para este cliente.</p>
+              </div>
+            </div>
+
+            <div id="detail-projects-panel" class="detail-panel hidden">
+              <div class="panel-header">
+                <h3>Proyectos</h3>
+                <button class="btn btn-small" id="add-project-btn" data-permission="create">+ Proyecto</button>
+              </div>
+              <div id="projects-list" class="projects-list"></div>
+              <div id="projects-empty" class="empty-state hidden">
+                <p>No hay proyectos. Crea un proyecto para este cliente.</p>
+              </div>
+            </div>
+
+            <div id="detail-invoices-panel" class="detail-panel hidden">
+              <div class="panel-header">
+                <h3>Facturas</h3>
+              </div>
+              <div id="invoices-list" class="invoices-list">
+                <p class="coming-soon">Las facturas estaran disponibles en la fase 18.</p>
+              </div>
+            </div>
+
+            <div id="detail-expenses-panel" class="detail-panel hidden">
+              <div class="panel-header">
+                <h3>Gastos vinculados</h3>
+              </div>
+              <div id="expenses-list" class="expenses-list">
+                <p class="coming-soon">Los gastos vinculados estaran disponibles en la fase 17.</p>
+              </div>
+            </div>
+
+            <div id="detail-calendar-panel" class="detail-panel hidden">
+              <div class="panel-header">
+                <h3>Dias trabajados</h3>
+              </div>
+              <div id="client-mini-calendar" class="mini-calendar">
+                <p class="coming-soon">El calendario de cliente estara disponible en la fase 16.</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -16454,25 +16897,6 @@ Generated by Autonomo Tax Calculator`;
     };
 
     // =====================================================
-    // Client Detail UI Module (Stub for Plan 15-05)
-    // =====================================================
-
-    /**
-     * ClientDetailUI - Shows client detail panel
-     * NOTE: This is a stub. Full implementation in Plan 15-05.
-     */
-    const ClientDetailUI = {
-      async open(clientId) {
-        const client = await ClientManager.getClient(clientId);
-        if (!client) {
-          alert('Cliente no encontrado');
-          return;
-        }
-        // For now, open edit modal. Detail panel will be added in Plan 15-05.
-        ClientFormUI.openEdit(clientId);
-      }
-    };
-
     // =====================================================
     // Client Form UI Module
     // =====================================================
@@ -16737,8 +17161,294 @@ Generated by Autonomo Tax Calculator`;
 
           this.close();
           await ClientListUI.refresh();
+          // Refresh detail view if open
+          if (ClientDetailUI.clientId === this.editingId) {
+            await ClientDetailUI.refresh();
+          }
         } catch (err) {
           alert(err.message);
+        }
+      }
+    };
+
+    // =====================================================
+    // Client Detail UI (Client Detail Page with Tabs)
+    // =====================================================
+
+    /**
+     * ClientDetailUI - Displays detailed client view with tabs for contacts,
+     * projects, invoices, expenses, and calendar
+     */
+    const ClientDetailUI = {
+      clientId: null,
+      client: null,
+      detailView: null,
+      clientsHeader: null,
+      clientsFilters: null,
+      clientList: null,
+      clientEmptyState: null,
+
+      init() {
+        this.detailView = document.getElementById('client-detail-view');
+        this.clientsHeader = document.querySelector('.panel-clients .clients-header');
+        this.clientsFilters = document.querySelector('.panel-clients .clients-filters');
+        this.clientList = document.getElementById('client-list');
+        this.clientEmptyState = document.getElementById('client-empty-state');
+
+        if (!this.detailView) return;
+
+        // Back button
+        document.getElementById('client-back-btn')?.addEventListener('click', () => this.close());
+
+        // Edit button
+        document.getElementById('edit-client-btn')?.addEventListener('click', () => {
+          if (this.clientId) ClientFormUI.openEdit(this.clientId);
+        });
+
+        // Archive button
+        document.getElementById('archive-client-btn')?.addEventListener('click', () => {
+          this.archiveClient();
+        });
+
+        // Tab switching
+        this.detailView.querySelectorAll('.detail-tab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            this.switchTab(tab.dataset.detailTab);
+          });
+        });
+
+        // Add contact button
+        document.getElementById('add-contact-btn')?.addEventListener('click', () => {
+          ContactFormUI.openCreate(this.clientId);
+        });
+
+        // Add project button
+        document.getElementById('add-project-btn')?.addEventListener('click', () => {
+          ProjectFormUI.openCreate(this.clientId);
+        });
+      },
+
+      async open(clientId) {
+        this.clientId = clientId;
+        this.client = await ClientManager.getClient(clientId);
+
+        if (!this.client) {
+          alert('Cliente no encontrado');
+          return;
+        }
+
+        // Hide list, show detail
+        this.clientsHeader?.classList.add('hidden');
+        this.clientsFilters?.classList.add('hidden');
+        this.clientList?.classList.add('hidden');
+        this.clientEmptyState?.classList.add('hidden');
+        this.detailView?.classList.remove('hidden');
+
+        // Render header
+        await this.renderHeader();
+
+        // Switch to contacts tab and load
+        this.switchTab('contacts');
+      },
+
+      close() {
+        this.clientId = null;
+        this.client = null;
+
+        // Show list, hide detail
+        this.detailView?.classList.add('hidden');
+        this.clientsHeader?.classList.remove('hidden');
+        this.clientsFilters?.classList.remove('hidden');
+        this.clientList?.classList.remove('hidden');
+
+        ClientListUI.refresh();
+      },
+
+      async renderHeader() {
+        const client = this.client;
+        if (!client) return;
+
+        document.getElementById('detail-flag').textContent = getFlagEmoji(client.country_code);
+        document.getElementById('detail-name').textContent = client.name;
+        document.getElementById('detail-tax-id').textContent = client.tax_id || 'Sin NIF';
+
+        // Category badge
+        const categoryEl = document.getElementById('detail-category');
+        const categoryLabels = {
+          spain: 'Espana',
+          eu_b2b: 'UE B2B',
+          eu_b2c: 'UE B2C',
+          uk: 'Reino Unido',
+          third_country: 'Tercer pais'
+        };
+        categoryEl.textContent = categoryLabels[client.category] || client.category;
+
+        // VIES status
+        const viesEl = document.getElementById('detail-vies-status');
+        if (client.tax_id_type === 'eu_vat') {
+          viesEl.classList.remove('hidden');
+          viesEl.textContent = client.tax_id_validated ? 'VIES OK' : 'VIES pendiente';
+          viesEl.className = `vies-badge ${client.tax_id_validated ? 'valid' : 'invalid'}`;
+        } else {
+          viesEl.classList.add('hidden');
+        }
+
+        // Calculate summary values (placeholders until invoices/expenses exist)
+        const totals = await this.calculateTotals(client.id);
+        document.getElementById('detail-total-invoiced').textContent = MoneyUtils.formatEuros(totals.invoiced);
+        document.getElementById('detail-outstanding').textContent = MoneyUtils.formatEuros(totals.outstanding);
+        document.getElementById('detail-profit').textContent = MoneyUtils.formatEuros(totals.profit);
+
+        // Apply permission UI
+        if (typeof PermissionUI !== 'undefined' && PermissionUI.applyPermissions) {
+          PermissionUI.applyPermissions();
+        }
+      },
+
+      async calculateTotals(clientId) {
+        // TODO: When invoices exist (Phase 18), sum from db.invoices where client_id = clientId
+        // TODO: When expenses exist (Phase 17), sum from db.expenses where client_id = clientId
+
+        // Placeholder - will be implemented when invoice/expense phases complete
+        const invoiced = 0;
+        const paid = 0;
+        const expenses = 0;
+
+        return {
+          invoiced,
+          outstanding: invoiced - paid,
+          profit: invoiced - expenses
+        };
+      },
+
+      switchTab(tabName) {
+        // Update tab buttons
+        this.detailView.querySelectorAll('.detail-tab').forEach(tab => {
+          tab.classList.toggle('active', tab.dataset.detailTab === tabName);
+        });
+
+        // Update panels
+        this.detailView.querySelectorAll('.detail-panel').forEach(panel => {
+          panel.classList.toggle('hidden', !panel.id.includes(tabName));
+        });
+
+        // Load content for selected tab
+        switch (tabName) {
+          case 'contacts':
+            this.renderContacts();
+            break;
+          case 'projects':
+            this.renderProjects();
+            break;
+          case 'invoices':
+            // Phase 18
+            break;
+          case 'expenses':
+            // Phase 17
+            break;
+          case 'calendar':
+            // Phase 16
+            break;
+        }
+      },
+
+      async renderContacts() {
+        if (!this.clientId) return;
+
+        const contacts = await ContactManager.getContacts(this.clientId);
+        const container = document.getElementById('contacts-list');
+        const emptyState = document.getElementById('contacts-empty');
+
+        if (contacts.length === 0) {
+          container.innerHTML = '';
+          emptyState?.classList.remove('hidden');
+          return;
+        }
+
+        emptyState?.classList.add('hidden');
+
+        container.innerHTML = contacts.map(contact => `
+          <div class="contact-item ${contact.is_primary ? 'primary' : ''}" data-contact-id="${contact.id}">
+            <span class="contact-role">${CONTACT_ROLE_LABELS[contact.role] || contact.role}</span>
+            <div>
+              <div class="contact-name">${escapeHtml(contact.name)}</div>
+              <div class="contact-details">
+                ${contact.email ? `<a href="mailto:${escapeHtml(contact.email)}">${escapeHtml(contact.email)}</a>` : ''}
+                ${contact.email && contact.phone ? ' &middot; ' : ''}
+                ${contact.phone ? escapeHtml(contact.phone) : ''}
+              </div>
+            </div>
+            <button class="btn btn-icon" onclick="ContactFormUI.openEdit(${contact.id})" data-permission="edit" title="Editar">&#9998;</button>
+            <button class="btn btn-icon btn-danger" onclick="ClientDetailUI.deleteContact(${contact.id})" data-permission="delete" title="Eliminar">&times;</button>
+          </div>
+        `).join('');
+
+        if (typeof PermissionUI !== 'undefined' && PermissionUI.applyPermissions) {
+          PermissionUI.applyPermissions();
+        }
+      },
+
+      async renderProjects() {
+        if (!this.clientId) return;
+
+        const projects = await ProjectManager.getProjectsByClient(this.clientId);
+        const container = document.getElementById('projects-list');
+        const emptyState = document.getElementById('projects-empty');
+
+        if (projects.length === 0) {
+          container.innerHTML = '';
+          emptyState?.classList.remove('hidden');
+          return;
+        }
+
+        emptyState?.classList.add('hidden');
+
+        container.innerHTML = projects.map(project => `
+          <div class="project-item" data-project-id="${project.id}">
+            <div class="project-name">${escapeHtml(project.name)}</div>
+            <span class="project-rate">${ProjectManager.formatRate(project)}</span>
+            <span class="project-dates">
+              ${project.start_date || '?'} - ${project.end_date || '?'}
+            </span>
+            <span class="status-badge ${project.status}">${PROJECT_STATUS_LABELS[project.status]}</span>
+            <button class="btn btn-icon" onclick="ProjectFormUI.openEdit(${project.id})" data-permission="edit" title="Editar">&#9998;</button>
+          </div>
+        `).join('');
+
+        if (typeof PermissionUI !== 'undefined' && PermissionUI.applyPermissions) {
+          PermissionUI.applyPermissions();
+        }
+      },
+
+      async deleteContact(contactId) {
+        if (!confirm('Eliminar este contacto?')) return;
+
+        try {
+          await ContactManager.deleteContact(contactId);
+          await this.renderContacts();
+        } catch (err) {
+          alert(err.message);
+        }
+      },
+
+      async archiveClient() {
+        if (!confirm('Archivar este cliente? El cliente quedara oculto pero sus datos se conservan.')) return;
+
+        try {
+          await ClientManager.archiveClient(this.clientId);
+          this.close();
+        } catch (err) {
+          alert(err.message);
+        }
+      },
+
+      async refresh() {
+        if (this.clientId) {
+          this.client = await ClientManager.getClient(this.clientId);
+          await this.renderHeader();
+          // Refresh current tab
+          const activeTab = this.detailView.querySelector('.detail-tab.active')?.dataset.detailTab;
+          if (activeTab) this.switchTab(activeTab);
         }
       }
     };
@@ -17774,6 +18484,7 @@ Generated by Autonomo Tax Calculator`;
       // Phase 15: Initialize Client UI
       ClientListUI.init();
       ClientFormUI.init();
+      ClientDetailUI.init();
 
       // Phase 14-05: Subscribe to entity changes for sharing section
       EntityContext.subscribe(async (entity) => {
