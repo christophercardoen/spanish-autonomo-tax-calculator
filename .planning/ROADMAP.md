@@ -118,7 +118,13 @@ Plans:
   3. User can create projects per client with rate, dates, and recurring work patterns
   4. Client list shows name, country flag, active projects, total invoiced, last invoice date
   5. Client detail page shows contact info, projects, invoices, expenses, and profitability calculation
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 15-01-PLAN.md - EU VAT format patterns, country flag emoji, CLIENT_CATEGORY constants
+- [ ] 15-02-PLAN.md - VIES Edge Function proxy, VIESValidator module, ClientManager CRUD
+- [ ] 15-03-PLAN.md - ContactManager and ProjectManager modules
+- [ ] 15-04-PLAN.md - Client list UI with search/filter, create/edit client modal
+- [ ] 15-05-PLAN.md - Client detail page with tabs, contact/project management, profitability
 
 ### Phase 16: Calendar Enhancement
 **Goal**: Calendar tracks work days by client while preserving 183-day residency management
@@ -298,7 +304,7 @@ Phases 12-29 execute sequentially with dependencies as noted.
 | 12. Data Architecture | v2.0 | 3/3 | ✓ Complete | 2026-02-03 |
 | 13. Multi-Entity Architecture | v2.0 | 5/5 | ✓ Complete | 2026-02-03 |
 | 14. Authentication & Permissions | v2.0 | 6/6 | ✓ Complete | 2026-02-04 |
-| 15. Client Management | v2.0 | 0/TBD | Not started | - |
+| 15. Client Management | v2.0 | 0/5 | Ready | - |
 | 16. Calendar Enhancement | v2.0 | 0/TBD | Not started | - |
 | 17. Expense Management | v2.0 | 0/TBD | Not started | - |
 | 18. Invoice Generation | v2.0 | 0/TBD | Not started | - |
