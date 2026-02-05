@@ -187,6 +187,11 @@ Recent decisions affecting current work:
 - [18-04]: Overdue badge replaces sent badge when invoice is past due
 - [18-04]: Summary bar always shows unfiltered totals (filters only affect list)
 - [18-04]: Separate invoice client cache from expense client cache (independent invalidation)
+- [18-05]: jsPDF built-in fonts only (Helvetica, Courier) - no custom font embedding for size/rendering
+- [18-05]: Logo stored per entity (not per invoice) - PDF reads current entity logo at generation time
+- [18-05]: VeriFactu QR via temporary hidden DOM canvas extraction, non-fatal on failure
+- [18-05]: Logo compression to max 200x200px JPEG 0.8 quality for IndexedDB efficiency
+- [18-05]: Notes section skipped if it would overlap QR code area (y > 248mm)
 - [18-06]: renderInvoicesTab reuses client-expense-item CSS pattern for consistent client detail styling
 - [18-06]: navigateToInvoiceDetail uses 100ms delay to allow tab activation before showing detail
 - [18-06]: Soft delete enforcement at UI level (handleArchiveInvoice) in addition to InvoiceManager level
@@ -248,6 +253,7 @@ Phases needing `/gsd:research-phase`:
 | 18-02 | Invoice tab navigation, CSS, list/form/detail HTML, stub JS functions | `10a3edd`, `64125eb` |
 | 18-03 | Invoice form handlers: open/close/client/IVA/IRPF/line items/totals/save/edit/populate | `51d0f9e`, `a16845a` |
 | 18-04 | Invoice list with filters/summary, detail view with status workflow/payments | `ea6e55e`, `d75dc64` |
+| 18-05 | InvoicePDFGenerator (jsPDF + AutoTable + VeriFactu QR), entity logo upload | `f32c86c`, `e686523` |
 | 18-06 | Client detail invoices tab, calculateTotals wiring, permissions, income tracking | `bff1787`, `235d8cc` |
 
 ## Session Continuity
