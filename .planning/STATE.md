@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 16 IN PROGRESS (Calendar Enhancement)
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 16 COMPLETE, Phase 17 next (Expense Management)
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
-Phase: 16 of 29 (Calendar Enhancement) - IN PROGRESS
-Plan: 6 of 7 in current phase (6 complete)
-Status: In progress
-Last activity: 2026-02-04 - Completed 16-06-PLAN.md (Google Calendar Sync)
+Phase: 16 of 29 (Calendar Enhancement) - COMPLETE
+Plan: 7 of 7 in current phase (all complete)
+Status: Phase 16 complete, ready for Phase 17
+Last activity: 2026-02-05 - Completed 16-07-PLAN.md (Verification + Bug Fixes)
 
-Progress: Phases 12-15 complete (19 plans), Phase 16: 6/7 plans complete
+Progress: Phases 12-16 complete (26 plans), ready for Phase 17
 
 ## Performance Metrics
 
@@ -27,8 +27,8 @@ Progress: Phases 12-15 complete (19 plans), Phase 16: 6/7 plans complete
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 25 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 6)
-- Phase 16 progress: 6/7 plans complete
+- Plans completed: 26 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7)
+- Phase 16: COMPLETE (7/7 plans)
 
 *Updated after each plan completion*
 
@@ -136,11 +136,11 @@ Recent decisions affecting current work:
 
 ### Pending Todos
 
-None - Plan 16-06 complete. Ready for Plan 16-07.
+None - Phase 16 complete. Ready for Phase 17.
 
 ### Blockers/Concerns
 
-None - Plan 16-06 completed successfully.
+None - Phase 16 completed and browser-tested successfully.
 
 User setup required:
 - Deploy vies-validate Edge Function to Supabase for online EU VAT validation
@@ -165,8 +165,9 @@ Phases needing `/gsd:research-phase`:
 | 16-04 | calculateThresholdCounts, WARNING_LEVELS, multi-year navigation | `7ec08db` |
 | 16-05 | generateEnhancedICS, generateEnhancedCSV, getLinkedExpenseCounts | `59ac3de`, `0294cda` |
 | 16-06 | GCalSync module, OAuth integration, sync UI | `a3704df`, `6bdcfed`, `e10853d` |
+| 16-07 | Verification + bug fixes (year summary, counts, emojis) | `49c8407`, `c157c70` |
 
-**Phase 16 Success Criteria (In Progress):**
+**Phase 16 Success Criteria (COMPLETE):**
 - [x] CalendarManager provides all CRUD operations for calendar days (16-01)
 - [x] Migration preserves all v1 calendar entries in IndexedDB (16-01)
 - [x] Entity-scoping isolates calendar data per business entity (16-01)
@@ -182,14 +183,14 @@ Phases needing `/gsd:research-phase`:
 - [x] CSV export with client/project columns (16-05)
 - [x] Expense linking infrastructure for Phase 17 (16-05)
 - [x] Google Calendar sync with OAuth (16-06)
-- [ ] Client/project calendar integration (16-07)
+- [x] Verification checkpoint + browser-tested bug fixes (16-07)
 
 ## Session Continuity
 
-Last session: 2026-02-04
-Stopped at: Completed 16-06-PLAN.md (Google Calendar Sync)
-Resume file: None - ready for 16-07-PLAN.md
+Last session: 2026-02-05
+Stopped at: Completed Phase 16 (Calendar Enhancement) - all 7 plans executed and verified
+Resume file: None - ready for Phase 17
 
 ---
-*Plan 16-06 completed: 2026-02-04*
-*Next step: /gsd:execute-phase 16-07 (Client/Project Calendar Integration)*
+*Phase 16 completed: 2026-02-05*
+*Next step: /gsd:plan-phase 17 (Expense Management)*

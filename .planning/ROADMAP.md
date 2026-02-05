@@ -38,7 +38,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for archived phase details.
 - [x] **Phase 13: Multi-Entity Architecture** - Entity type selection, RLS policies, entity switcher
 - [x] **Phase 14: Authentication & Permissions** - User accounts, roles, entity-level access control
 - [x] **Phase 15: Client Management** - CRM with NIF/VIES validation, country categorization
-- [ ] **Phase 16: Calendar Enhancement** - Client tagging, 183-day preservation, work patterns
+- [x] **Phase 16: Calendar Enhancement** - Client tagging, 183-day preservation, work patterns
 - [ ] **Phase 17: Expense Management** - Entity-type deduction rules, categories, linking
 - [ ] **Phase 18: Invoice Generation** - Factura completa, VeriFactu QR, entity-type templates
 - [ ] **Phase 19: Receipt Upload & OCR** - Mindee API, confidence scoring, duplicate detection
@@ -138,13 +138,13 @@ Plans:
   5. User can export to ICS/CSV and optionally sync with Google Calendar
 **Plans**: 7 plans
 Plans:
-- [ ] 16-01-PLAN.md - CalendarManager module and localStorage migration
-- [ ] 16-02-PLAN.md - Day editor modal with client/project/location tagging
-- [ ] 16-03-PLAN.md - Work pattern system for recurring schedules
-- [ ] 16-04-PLAN.md - 183-day threshold tracking and multi-year navigation
-- [ ] 16-05-PLAN.md - Enhanced ICS/CSV export and expense linking infrastructure
-- [ ] 16-06-PLAN.md - Google Calendar OAuth sync
-- [ ] 16-07-PLAN.md - Verification checkpoint
+- [x] 16-01-PLAN.md - CalendarManager module and localStorage migration
+- [x] 16-02-PLAN.md - Day editor modal with client/project/location tagging
+- [x] 16-03-PLAN.md - Work pattern system for recurring schedules
+- [x] 16-04-PLAN.md - 183-day threshold tracking and multi-year navigation
+- [x] 16-05-PLAN.md - Enhanced ICS/CSV export and expense linking infrastructure
+- [x] 16-06-PLAN.md - Google Calendar OAuth sync
+- [x] 16-07-PLAN.md - Verification checkpoint
 
 ### Phase 17: Expense Management
 **Goal**: Users can track expenses with entity-type-aware deduction rules
