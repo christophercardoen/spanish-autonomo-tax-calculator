@@ -11,25 +11,25 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 18 of 29 (Invoice Generation) - IN PROGRESS
-Plan: 6 of 8 in current phase (18-01, 18-02, 18-03, 18-04, 18-05, 18-06 complete)
-Status: In progress - Plan 18-06 complete, ready for 18-07+
-Last activity: 2026-02-05 - Completed 18-06-PLAN.md (Client Detail Integration & Permission Enforcement)
+Plan: 7 of 8 in current phase (18-01, 18-02, 18-03, 18-04, 18-05, 18-06, 18-07 complete)
+Status: In progress - Plan 18-07 complete, ready for 18-08
+Last activity: 2026-02-05 - Completed 18-07-PLAN.md (Invoice Delivery: Download, Print, Email)
 
-Progress: Phases 12-17 complete + 18-01/02/03/04/05/06 (39 plans)
-[########################################################################----] ~51%
+Progress: Phases 12-17 complete + 18-01/02/03/04/05/06/07 (40 plans)
+[########################################################################----] ~52%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 61
+- Total plans completed: 62
 - Average duration: 3.5 min
-- Total execution time: 351 min
+- Total execution time: 356 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 39 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 6)
-- Phase 18: In progress (6/8 plans complete)
+- Plans completed: 40 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 7)
+- Phase 18: In progress (7/8 plans complete)
 
 *Updated after each plan completion*
 
@@ -197,6 +197,11 @@ Recent decisions affecting current work:
 - [18-06]: Soft delete enforcement at UI level (handleArchiveInvoice) in addition to InvoiceManager level
 - [18-06]: getEntityIncomeSummary groups paid invoices by YYYY-MM key for monthly income aggregation
 - [18-06]: Client list enrichment queries invoices per client (N+1 acceptable for small client counts)
+- [18-07]: Email via Supabase Edge Function + Resend API (not direct SMTP) for single-file HTML security
+- [18-07]: PDF output modes: save (default), returnBase64 (email attachment), returnBlobUrl (print)
+- [18-07]: Contact priority for email: billing contact > primary contact > client email field
+- [18-07]: Email button always visible (dimmed without Supabase) rather than hidden
+- [18-07]: Print uses window.open + blob URL for cross-browser compatibility
 
 ### Pending Todos
 
@@ -204,11 +209,12 @@ None.
 
 ### Blockers/Concerns
 
-None - Plan 18-06 complete. Ready for Plan 18-07+.
+None - Plan 18-07 complete. Ready for Plan 18-08.
 
 User setup required:
 - Deploy vies-validate Edge Function to Supabase for online EU VAT validation
 - Configure GCAL_CONFIG.CLIENT_ID for Google Calendar sync (see 16-06-SUMMARY.md)
+- Deploy send-invoice Edge Function + set RESEND_API_KEY for email delivery (optional)
 
 ### Research Flags
 
@@ -255,13 +261,14 @@ Phases needing `/gsd:research-phase`:
 | 18-04 | Invoice list with filters/summary, detail view with status workflow/payments | `ea6e55e`, `d75dc64` |
 | 18-05 | InvoicePDFGenerator (jsPDF + AutoTable + VeriFactu QR), entity logo upload | `f32c86c`, `e686523` |
 | 18-06 | Client detail invoices tab, calculateTotals wiring, permissions, income tracking | `bff1787`, `235d8cc` |
+| 18-07 | Invoice delivery: download PDF, print, email via Edge Function + graceful degradation | `4c1d0ce`, `f7d3180` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 18-06-PLAN.md (Client Detail Integration & Permission Enforcement)
+Stopped at: Completed 18-07-PLAN.md (Invoice Delivery: Download, Print, Email)
 Resume file: None
 
 ---
 *Phase 18 in progress: 2026-02-05*
-*Next step: Execute 18-07-PLAN.md*
+*Next step: Execute 18-08-PLAN.md*
