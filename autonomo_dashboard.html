@@ -6709,6 +6709,238 @@
       font-size: var(--size-small);
       margin-top: 0.5rem;
     }
+
+    /* Phase 17: Expense Form Dialog */
+    .expense-form-dialog {
+      max-width: 520px;
+      width: 92%;
+      padding: 0;
+      border: none;
+      border-radius: 12px;
+      background: var(--bg-surface);
+      color: var(--text);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      margin: auto;
+      position: fixed;
+      inset: 0;
+      height: fit-content;
+      max-height: 90vh;
+    }
+
+    .expense-form-dialog::backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .expense-form-dialog .dialog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .expense-form-dialog .dialog-header h2 {
+      margin: 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .expense-form-dialog .expense-form-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      max-height: calc(90vh - 140px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .expense-form-dialog .form-row-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .expense-form-dialog .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .expense-form-dialog .form-group label {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .expense-form-dialog .form-group input,
+    .expense-form-dialog .form-group select,
+    .expense-form-dialog .form-group textarea {
+      padding: 0.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+
+    .expense-form-dialog .form-group textarea {
+      font-family: 'DM Sans', sans-serif;
+      resize: vertical;
+    }
+
+    .expense-form-dialog .form-group input:focus,
+    .expense-form-dialog .form-group select:focus,
+    .expense-form-dialog .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .expense-form-dialog .conditional-fields {
+      display: none;
+    }
+
+    .expense-form-dialog .conditional-fields.visible {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 6px;
+      border: 1px dashed rgba(255,255,255,0.1);
+    }
+
+    .expense-form-dialog .receipt-upload-area {
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 6px;
+      border: 1px dashed rgba(255,255,255,0.15);
+    }
+
+    .expense-form-dialog .receipt-upload-area input[type="file"] {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+    }
+
+    .expense-form-dialog .ocr-status {
+      display: none;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .expense-form-dialog .ocr-status.scanning {
+      display: block;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+    }
+
+    .expense-form-dialog .ocr-status.success {
+      display: block;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #86efac;
+    }
+
+    .expense-form-dialog .ocr-status.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+
+    .expense-form-dialog .ocr-confidence {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .expense-form-dialog .ocr-confidence.high {
+      background: rgba(34, 197, 94, 0.2);
+      color: #86efac;
+    }
+
+    .expense-form-dialog .ocr-confidence.medium {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fcd34d;
+    }
+
+    .expense-form-dialog .ocr-confidence.low {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+    }
+
+    .expense-form-dialog .ocr-raw-text {
+      margin-top: 0.5rem;
+    }
+
+    .expense-form-dialog .ocr-raw-text summary {
+      cursor: pointer;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    .expense-form-dialog .ocr-raw-text pre {
+      font-size: 0.75rem;
+      background: rgba(0,0,0,0.3);
+      padding: 0.5rem;
+      border-radius: 4px;
+      max-height: 100px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin-top: 0.25rem;
+    }
+
+    .expense-form-dialog .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .expense-form-dialog .checkbox-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+    }
+
+    .expense-form-dialog .checkbox-row label {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .expense-form-dialog .dialog-footer {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .expense-form-dialog .dialog-footer .spacer {
+      flex: 1;
+    }
+
+    .expense-tracker-section .empty-state {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      .expense-form-dialog {
+        width: 98%;
+        max-height: 95vh;
+      }
+      .expense-form-dialog .form-row-grid {
+        grid-template-columns: 1fr;
+      }
+      .expense-form-dialog .expense-form-body {
+        max-height: calc(95vh - 140px);
+      }
+    }
   </style>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
@@ -7574,6 +7806,172 @@
           <button class="primary-btn" onclick="submitNewExpense()">Add Expense</button>
         </div>
       </dialog>
+
+      <!-- Phase 17: Expense Tracker Section -->
+      <div class="expense-tracker-section" style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="margin: 0;">Expense Tracker</h3>
+          <button class="primary-btn" data-permission="edit" data-permission-type="expense" onclick="openExpenseFormDialog()">+ Add Expense</button>
+        </div>
+        <div id="expenseTrackerList">
+          <!-- Populated by renderExpenseList() -->
+          <div class="empty-state" style="text-align: center; padding: 2rem; opacity: 0.5;">
+            No expenses tracked yet. Click "Add Expense" to get started.
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 17: Expense Form Dialog -->
+      <dialog id="expenseFormDialog" class="expense-form-dialog" data-edit-id="">
+        <div class="dialog-header">
+          <h2 id="expenseFormTitle">Add Expense</h2>
+          <button type="button" class="dialog-close" onclick="closeExpenseFormDialog()">x</button>
+        </div>
+        <form id="expenseForm" class="expense-form-body" onsubmit="event.preventDefault(); submitExpenseForm();">
+
+          <!-- Row 1: Date + Amount -->
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="efDate">Date</label>
+              <input type="date" id="efDate" required>
+            </div>
+            <div class="form-group">
+              <label for="efAmount">Amount (EUR)</label>
+              <input type="number" id="efAmount" step="0.01" min="0" required placeholder="0.00">
+            </div>
+          </div>
+
+          <!-- Row 2: IVA + Vendor -->
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="efIva">IVA Amount (EUR)</label>
+              <input type="number" id="efIva" step="0.01" min="0" value="0" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label for="efVendor">Vendor</label>
+              <input type="text" id="efVendor" placeholder="e.g., Ryanair, Amazon, Gestor X">
+            </div>
+          </div>
+
+          <!-- Row 3: Category + Subcategory -->
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="efCategory">Category</label>
+              <select id="efCategory" required onchange="onExpenseCategoryChange(this)">
+                <option value="">-- Select --</option>
+              </select>
+            </div>
+            <div class="form-group" id="efSubcategoryGroup" style="display: none;">
+              <label for="efSubcategory">Subcategory</label>
+              <select id="efSubcategory">
+                <option value="">-- None --</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="efDescription">Description</label>
+            <textarea id="efDescription" rows="2" placeholder="Optional notes about this expense"></textarea>
+          </div>
+
+          <!-- Receipt Upload -->
+          <div class="receipt-upload-area">
+            <div class="form-group">
+              <label for="efReceipt">Receipt Upload</label>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <input type="file" id="efReceipt" accept="image/*,.pdf" onchange="handleReceiptUpload(this)">
+              </div>
+            </div>
+            <div id="efOcrStatus" class="ocr-status"></div>
+          </div>
+
+          <!-- Conditional fields: Travel -->
+          <div id="efTravelFields" class="conditional-fields">
+            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.25rem;">Travel Details</div>
+            <div class="form-group">
+              <label for="efDestination">Destination</label>
+              <input type="text" id="efDestination" placeholder="e.g., BE, ES, NL">
+            </div>
+            <div class="form-row-grid">
+              <div class="form-group">
+                <label for="efTripStartDate">Trip Start Date</label>
+                <input type="date" id="efTripStartDate">
+              </div>
+              <div class="form-group">
+                <label for="efTripEndDate">Trip End Date</label>
+                <input type="date" id="efTripEndDate">
+              </div>
+            </div>
+            <div class="checkbox-row">
+              <input type="checkbox" id="efHasOvernight">
+              <label for="efHasOvernight">Has Overnight Stay</label>
+            </div>
+          </div>
+
+          <!-- Conditional fields: Meals/Dietas -->
+          <div id="efMealsFields" class="conditional-fields">
+            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.25rem;">Meals / Dietas Details</div>
+            <div class="form-group">
+              <label for="efMealsDestination">Destination</label>
+              <input type="text" id="efMealsDestination" placeholder="e.g., BE, ES, NL">
+            </div>
+            <div class="checkbox-row">
+              <input type="checkbox" id="efMealsHasOvernight">
+              <label for="efMealsHasOvernight">Has Overnight Stay</label>
+            </div>
+            <div class="form-group">
+              <label for="efPaymentMethod">Payment Method</label>
+              <select id="efPaymentMethod">
+                <option value="card">Card</option>
+                <option value="transfer">Transfer</option>
+                <option value="bizum">Bizum</option>
+                <option value="cash">Cash</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Conditional fields: Home Office (autonomo only) -->
+          <div id="efHomeOfficeFields" class="conditional-fields">
+            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.25rem;">Home Office Deduction</div>
+            <div class="form-group">
+              <label for="efDeductiblePct">Deductible % (max 30% for autonomo)</label>
+              <input type="number" id="efDeductiblePct" min="0" max="30" value="30" step="1">
+            </div>
+          </div>
+
+          <!-- Client + Project (optional, for EXPENSE-09) -->
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="efClient">Client (optional)</label>
+              <select id="efClient" onchange="onExpenseClientChange(this)">
+                <option value="">-- None --</option>
+              </select>
+            </div>
+            <div class="form-group" id="efProjectGroup" style="display: none;">
+              <label for="efProject">Project</label>
+              <select id="efProject">
+                <option value="">-- None --</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Billable checkbox (shown when client selected) -->
+          <div id="efBillableGroup" style="display: none;">
+            <div class="checkbox-row">
+              <input type="checkbox" id="efBillable">
+              <label for="efBillable">Billable to client (EXPENSE-14)</label>
+            </div>
+          </div>
+
+        </form>
+        <div class="dialog-footer">
+          <div class="spacer"></div>
+          <button type="button" class="secondary-btn" onclick="closeExpenseFormDialog()">Cancel</button>
+          <button type="button" class="primary-btn" onclick="submitExpenseForm()">Save Expense</button>
+        </div>
+      </dialog>
+
           </div>
         </section>
 
