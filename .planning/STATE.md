@@ -11,25 +11,25 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 18 of 29 (Invoice Generation) - IN PROGRESS
-Plan: 7 of 8 in current phase (18-01, 18-02, 18-03, 18-04, 18-05, 18-06, 18-07 complete)
-Status: In progress - Plan 18-07 complete, ready for 18-08
-Last activity: 2026-02-05 - Completed 18-07-PLAN.md (Invoice Delivery: Download, Print, Email)
+Plan: 8 of 8 in current phase (18-01 through 18-07 complete, 18-08 Task 1 done - awaiting human verification)
+Status: In progress - Plan 18-08 Task 1 complete (browser testing + bug fixes), awaiting human checkpoint
+Last activity: 2026-02-05 - Completed 18-08 Task 1 (5 bug fixes, 23 requirements verified)
 
-Progress: Phases 12-17 complete + 18-01/02/03/04/05/06/07 (40 plans)
+Progress: Phases 12-17 complete + 18-01/02/03/04/05/06/07/08-T1 (40+ plans)
 [########################################################################----] ~52%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 62
+- Total plans completed: 62 (+ 18-08 Task 1 in progress)
 - Average duration: 3.5 min
-- Total execution time: 356 min
+- Total execution time: 365 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 40 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 7)
-- Phase 18: In progress (7/8 plans complete)
+- Plans completed: 40 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 7 + 18-08 T1)
+- Phase 18: In progress (18-08 Task 1 complete, awaiting human verification)
 
 *Updated after each plan completion*
 
@@ -202,6 +202,10 @@ Recent decisions affecting current work:
 - [18-07]: Contact priority for email: billing contact > primary contact > client email field
 - [18-07]: Email button always visible (dimmed without Supabase) rather than hidden
 - [18-07]: Print uses window.open + blob URL for cross-browser compatibility
+- [18-08]: entity.entity_type corrected to entity.type - consistent with all other entity references
+- [18-08]: Registro Mercantil added to invoice detail view for SL entities (matching PDF header)
+- [18-08]: showNotification used for invoice save feedback (consistent with other actions)
+- [18-08]: Null-safe sorts added to getInvoices and getPayments for defensive coding
 
 ### Pending Todos
 
@@ -209,7 +213,7 @@ None.
 
 ### Blockers/Concerns
 
-None - Plan 18-07 complete. Ready for Plan 18-08.
+None - Plan 18-08 Task 1 complete (browser testing + 5 bug fixes). Awaiting human verification checkpoint (Task 2).
 
 User setup required:
 - Deploy vies-validate Edge Function to Supabase for online EU VAT validation
@@ -262,13 +266,14 @@ Phases needing `/gsd:research-phase`:
 | 18-05 | InvoicePDFGenerator (jsPDF + AutoTable + VeriFactu QR), entity logo upload | `f32c86c`, `e686523` |
 | 18-06 | Client detail invoices tab, calculateTotals wiring, permissions, income tracking | `bff1787`, `235d8cc` |
 | 18-07 | Invoice delivery: download PDF, print, email via Edge Function + graceful degradation | `4c1d0ce`, `f7d3180` |
+| 18-08 | Browser testing: 5 bug fixes (IRPF toggle, SL Reg. Mercantil, notifications, null-safe sorts) | `4c1d0ce`, `dbf7200`, `c7d0a91`, `5610e54`, `637e616` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 18-07-PLAN.md (Invoice Delivery: Download, Print, Email)
+Stopped at: 18-08-PLAN.md Task 1 complete, awaiting human verification (Task 2)
 Resume file: None
 
 ---
 *Phase 18 in progress: 2026-02-05*
-*Next step: Execute 18-08-PLAN.md*
+*Next step: Human verification of Phase 18 invoice system*
