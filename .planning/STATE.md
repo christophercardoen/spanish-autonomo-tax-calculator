@@ -5,31 +5,31 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 17 in progress (Expense Management)
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 17 complete (Expense Management) pending human verification
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
-Phase: 17 of 29 (Expense Management) - In progress
-Plan: 6 of 7 in current phase (17-01 through 17-06 complete)
-Status: In progress
-Last activity: 2026-02-05 - Completed 17-06-PLAN.md (Dietas Validation & Billable/Receipt Protection)
+Phase: 17 of 29 (Expense Management) - Awaiting human verification
+Plan: 7 of 7 in current phase (17-01 through 17-07 complete, checkpoint pending)
+Status: Checkpoint - awaiting human verification
+Last activity: 2026-02-05 - Completed 17-07-PLAN.md Task 1 (Browser Testing & Fixes)
 
-Progress: Phases 12-16 complete (26 plans) + Phase 17: 6/7 plans complete
-[################################################################----------] ~42%
+Progress: Phases 12-16 complete (26 plans) + Phase 17: 7/7 plans complete
+[#################################################################---------] ~43%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 54
+- Total plans completed: 55
 - Average duration: 3.5 min
-- Total execution time: 304 min
+- Total execution time: 309 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 32 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 6)
-- Phase 17: In progress (6/7 plans)
+- Plans completed: 33 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7)
+- Phase 17: Complete (7/7 plans, awaiting human verification)
 
 *Updated after each plan completion*
 
@@ -164,6 +164,8 @@ Recent decisions affecting current work:
 - [17-06]: Receipt preview uses DOM overlay (not dialog) for backdrop click dismiss
 - [17-06]: renderArchivedExpenses uses forceShow parameter for re-render without toggle
 - [17-06]: All expense deletes remain soft delete via DataManager.softDelete (EXPENSE-15)
+- [17-07]: Proportional deduction uses single multiplication (amount * proportion), not double
+- [17-07]: Calendar expense counts always filter deleted_at === null to exclude archived expenses
 
 ### Pending Todos
 
@@ -171,7 +173,7 @@ None.
 
 ### Blockers/Concerns
 
-None - Phase 17 progressing smoothly.
+None - Phase 17 complete pending human verification.
 
 User setup required:
 - Deploy vies-validate Edge Function to Supabase for online EU VAT validation
@@ -181,6 +183,7 @@ User setup required:
 
 Phases needing `/gsd:research-phase`:
 - Phase 16: Calendar Enhancement - COMPLETE (research done)
+- Phase 17: Expense Management - COMPLETE
 - Phase 19: Receipt OCR (Mindee API) - HIGH
 - Phase 21: Tax Automation - SL (IS calculation, BINs) - HIGH
 - Phase 22: SL Accounting (Cuentas Anuales generation) - HIGH
@@ -208,13 +211,14 @@ Phases needing `/gsd:research-phase`:
 | 17-04 | Expense list with filters, summary bar, dual-layout table+cards | `4ade847`, `5a0e99e` |
 | 17-05 | Calendar-expense linking, deduction indicators/hints/summary, client expenses tab | `dab43a2`, `296d136` |
 | 17-06 | validateDietas, receipt preview, enhanced archive, archived expenses toggle | `296d136`, `aa1dd0f` |
+| 17-07 | Browser testing: 3 bug fixes + verification script | `81798e5` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 17-06-PLAN.md (Dietas Validation & Billable/Receipt Protection)
+Stopped at: Completed 17-07-PLAN.md Task 1 (Browser Testing & Fixes) - Checkpoint pending
 Resume file: None
 
 ---
-*Phase 17 in progress: 2026-02-05*
-*Next step: Continue Phase 17 plans (17-07 next)*
+*Phase 17 awaiting human verification: 2026-02-05*
+*Next step: Human verification of Phase 17 expense management system*
