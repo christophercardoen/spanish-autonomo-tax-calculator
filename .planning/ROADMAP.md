@@ -321,9 +321,9 @@ Phases 12-29 execute sequentially with dependencies as noted.
 | 13. Multi-Entity Architecture | v2.0 | 5/5 | ✓ Complete | 2026-02-03 |
 | 14. Authentication & Permissions | v2.0 | 6/6 | ✓ Complete | 2026-02-04 |
 | 15. Client Management | v2.0 | 5/5 | ✓ Complete | 2026-02-04 |
-| 16. Calendar Enhancement | v2.0 | 0/7 | Ready | - |
-| 17. Expense Management | v2.0 | 0/7 | Ready | - |
-| 18. Invoice Generation | v2.0 | 0/TBD | Not started | - |
+| 16. Calendar Enhancement | v2.0 | 7/7 | ✓ Complete | 2026-02-05 |
+| 17. Expense Management | v2.0 | 7/7 | ✓ Complete | 2026-02-05 |
+| 18. Invoice Generation | v2.0 | 0/TBD | Ready | - |
 | 19. Receipt Upload & OCR | v2.0 | 0/TBD | Not started | - |
 | 20. Tax Automation - Autonomo | v2.0 | 0/TBD | Not started | - |
 | 21. Tax Automation - SL | v2.0 | 0/TBD | Not started | - |
