@@ -39,7 +39,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for archived phase details.
 - [x] **Phase 14: Authentication & Permissions** - User accounts, roles, entity-level access control
 - [x] **Phase 15: Client Management** - CRM with NIF/VIES validation, country categorization
 - [x] **Phase 16: Calendar Enhancement** - Client tagging, 183-day preservation, work patterns
-- [ ] **Phase 17: Expense Management** - Entity-type deduction rules, categories, linking
+- [x] **Phase 17: Expense Management** - Entity-type deduction rules, categories, linking
 - [ ] **Phase 18: Invoice Generation** - Factura completa, VeriFactu QR, entity-type templates
 - [ ] **Phase 19: Receipt Upload & OCR** - Mindee API, confidence scoring, duplicate detection
 - [ ] **Phase 20: Tax Automation - Autonomo** - Modelo 130, IRPF, RETA regularization
@@ -158,13 +158,13 @@ Plans:
   5. Expense list shows date, vendor, amount, category, deductible amount, and client if linked
 **Plans**: 7 plans
 Plans:
-- [ ] 17-01-PLAN.md — EXPENSE_CATEGORY config and ExpenseManager CRUD
-- [ ] 17-02-PLAN.md — ReceiptManager with OCR and image compression
-- [ ] 17-03-PLAN.md — Expense form dialog with entity-type-aware categories
-- [ ] 17-04-PLAN.md — Expense list view with filters and summary
-- [ ] 17-05-PLAN.md — Calendar-expense linking and deduction integration
-- [ ] 17-06-PLAN.md — Dietas validation and billable/receipt protection
-- [ ] 17-07-PLAN.md — Verification checkpoint and browser testing
+- [x] 17-01-PLAN.md - EXPENSE_CATEGORY config and ExpenseManager CRUD
+- [x] 17-02-PLAN.md - ReceiptManager with OCR and image compression
+- [x] 17-03-PLAN.md - Expense form dialog with entity-type-aware categories
+- [x] 17-04-PLAN.md - Expense list view with filters and summary
+- [x] 17-05-PLAN.md - Calendar-expense linking and deduction integration
+- [x] 17-06-PLAN.md - Dietas validation and billable/receipt protection
+- [x] 17-07-PLAN.md - Verification checkpoint and browser testing
 
 ### Phase 18: Invoice Generation
 **Goal**: Users can generate compliant invoices with entity-type-specific templates and VeriFactu QR
@@ -176,7 +176,16 @@ Plans:
   3. System applies correct IVA treatment: Spain 21%, EU B2B inversion sujeto pasivo, third country no IVA
   4. User can generate PDF with VeriFactu QR code and download/print/email
   5. Invoice status workflow: Draft -> Sent -> Paid/Overdue with payment tracking
-**Plans**: TBD
+**Plans**: 8 plans
+Plans:
+- [ ] 18-01-PLAN.md - IVA_TREATMENT/IRPF constants, Dexie v4 schema, InvoiceManager CRUD extension
+- [ ] 18-02-PLAN.md - Invoice tab HTML/CSS scaffold (tab nav, list, form dialog, detail view)
+- [ ] 18-03-PLAN.md - Invoice form JS handlers (client IVA detection, line items, live totals, save)
+- [ ] 18-04-PLAN.md - Invoice list rendering, filters, summary, detail view, status/payment actions
+- [ ] 18-05-PLAN.md - PDF generation (jsPDF + AutoTable + VeriFactu QR) and entity logo upload
+- [ ] 18-06-PLAN.md - Client detail integration, calculateTotals wiring, permission enforcement
+- [ ] 18-07-PLAN.md - Email delivery (Supabase Edge Function), download/print handlers
+- [ ] 18-08-PLAN.md - Browser testing and human verification checkpoint
 
 ### Phase 19: Receipt Upload & OCR
 **Goal**: Users can upload receipts and have data extracted automatically via OCR
@@ -323,7 +332,7 @@ Phases 12-29 execute sequentially with dependencies as noted.
 | 15. Client Management | v2.0 | 5/5 | ✓ Complete | 2026-02-04 |
 | 16. Calendar Enhancement | v2.0 | 7/7 | ✓ Complete | 2026-02-05 |
 | 17. Expense Management | v2.0 | 7/7 | ✓ Complete | 2026-02-05 |
-| 18. Invoice Generation | v2.0 | 0/TBD | Ready | - |
+| 18. Invoice Generation | v2.0 | 0/8 | In Progress | - |
 | 19. Receipt Upload & OCR | v2.0 | 0/TBD | Not started | - |
 | 20. Tax Automation - Autonomo | v2.0 | 0/TBD | Not started | - |
 | 21. Tax Automation - SL | v2.0 | 0/TBD | Not started | - |
