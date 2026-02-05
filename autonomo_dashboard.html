@@ -229,6 +229,7 @@
     #tab-scenarios:checked ~ .tab-nav .tab-label[for="tab-scenarios"],
     #tab-calendar:checked ~ .tab-nav .tab-label[for="tab-calendar"],
     #tab-expenses:checked ~ .tab-nav .tab-label[for="tab-expenses"],
+    #tab-invoices:checked ~ .tab-nav .tab-label[for="tab-invoices"],
     #tab-details:checked ~ .tab-nav .tab-label[for="tab-details"],
     #tab-income:checked ~ .tab-nav .tab-label[for="tab-income"],
     #tab-compliance:checked ~ .tab-nav .tab-label[for="tab-compliance"],
@@ -247,6 +248,7 @@
     #tab-scenarios:checked ~ .tab-panels .panel-scenarios,
     #tab-calendar:checked ~ .tab-panels .panel-calendar,
     #tab-expenses:checked ~ .tab-panels .panel-expenses,
+    #tab-invoices:checked ~ .tab-panels .panel-invoices,
     #tab-details:checked ~ .tab-panels .panel-details,
     #tab-income:checked ~ .tab-panels .panel-income,
     #tab-compliance:checked ~ .tab-panels .panel-compliance,
@@ -3719,6 +3721,7 @@
       .calendar-section,
       .panel-calendar,
       .panel-expenses,
+      .panel-invoices,
       .panel-details,
       [role="tooltip"] {
         display: none !important;
@@ -7668,6 +7671,1002 @@
         max-height: calc(95vh - 140px);
       }
     }
+
+    /* ===========================================
+       PHASE 18: INVOICES TAB STYLES
+       =========================================== */
+
+    /* Invoice Panel Container */
+    .panel-invoices {
+      padding: var(--spacing-md);
+    }
+
+    /* Overdue Alert Banner */
+    .overdue-alert {
+      background: rgba(248, 113, 113, 0.12);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-sm) var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      color: var(--negative);
+      font-size: 0.9rem;
+    }
+
+    .overdue-alert-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--negative);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    /* Invoice Header */
+    .invoices-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .invoices-header h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    /* Invoice Filters */
+    .invoices-filters {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .invoices-filters select,
+    .invoices-filters input {
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: var(--size-small);
+      min-width: 140px;
+    }
+
+    .invoices-filters select:focus,
+    .invoices-filters input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Invoice Summary Bar */
+    .invoices-summary-bar {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.06);
+      flex-wrap: wrap;
+    }
+
+    .invoices-summary-bar .summary-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .invoices-summary-bar .summary-label {
+      font-size: var(--size-small);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .invoices-summary-bar .summary-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .invoices-summary-bar .summary-value.mono {
+      font-family: var(--font-mono);
+    }
+
+    .invoices-summary-bar .overdue-value {
+      color: var(--negative);
+    }
+
+    .invoices-summary-bar .paid-value {
+      color: var(--positive);
+    }
+
+    /* Invoice Table (Desktop) */
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .invoice-table thead th {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: var(--size-small);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .invoice-table thead th.text-right {
+      text-align: right;
+    }
+
+    .invoice-table tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .invoice-table tbody tr:nth-child(even) {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .invoice-table tbody tr:hover {
+      background: rgba(74, 222, 128, 0.06);
+    }
+
+    .invoice-table tbody td {
+      padding: 0.75rem 1rem;
+      vertical-align: middle;
+    }
+
+    .invoice-table tbody td.text-right {
+      text-align: right;
+    }
+
+    .invoice-table .mono {
+      font-family: var(--font-mono);
+    }
+
+    /* Invoice Status Badges */
+    .invoice-status-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-draft {
+      background: rgba(160, 160, 160, 0.2);
+      color: var(--text-muted);
+    }
+
+    .badge-sent {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+
+    .badge-paid {
+      background: rgba(74, 222, 128, 0.2);
+      color: var(--positive);
+    }
+
+    .badge-overdue {
+      background: rgba(248, 113, 113, 0.2);
+      color: var(--negative);
+    }
+
+    .badge-partial {
+      background: rgba(251, 146, 60, 0.2);
+      color: var(--warning);
+    }
+
+    /* Invoice Cards (Mobile) */
+    .invoice-cards {
+      display: none;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .invoice-card {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .invoice-card:hover {
+      background: rgba(74, 222, 128, 0.06);
+    }
+
+    .invoice-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .invoice-card-number {
+      font-weight: 600;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+
+    .invoice-card-client {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .invoice-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .invoice-card-total {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .invoice-card-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Invoice Actions */
+    .invoice-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .invoice-actions button {
+      padding: 0.2rem 0.5rem;
+      font-size: 0.8rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .invoice-actions button:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    /* Empty State */
+    .panel-invoices .empty-state {
+      text-align: center;
+      padding: var(--spacing-xl);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ===========================================
+       PHASE 18: INVOICE FORM DIALOG STYLES
+       =========================================== */
+
+    .invoice-dialog {
+      max-width: 800px;
+      width: 92%;
+      padding: 0;
+      border: none;
+      border-radius: 12px;
+      background: var(--bg-surface);
+      color: var(--text);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      margin: auto;
+      position: fixed;
+      inset: 0;
+      height: fit-content;
+      max-height: 90vh;
+    }
+
+    .invoice-dialog::backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .invoice-dialog .dialog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .invoice-dialog .dialog-header h2 {
+      margin: 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .invoice-dialog .dialog-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s;
+    }
+
+    .invoice-dialog .dialog-close:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .invoice-dialog-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      max-height: calc(90vh - 60px);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Meta Row (multi-column fields) */
+    .invoice-meta-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .invoice-meta-row .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .invoice-meta-row .form-group label {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .invoice-meta-row .form-group select,
+    .invoice-meta-row .form-group input {
+      padding: 0.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+
+    .invoice-meta-row .form-group select:focus,
+    .invoice-meta-row .form-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* IVA Treatment Info */
+    .iva-treatment-info {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: var(--radius-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: 0.85rem;
+      color: #60a5fa;
+    }
+
+    /* Calendar Populate Section */
+    .calendar-populate-section {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) 0;
+    }
+
+    .populate-info {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Line Items Section */
+    .invoice-line-items-section {
+      margin-top: 0.5rem;
+    }
+
+    .invoice-line-items-section h3 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .invoice-line-items-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .invoice-line-items-table thead th {
+      padding: 0.5rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .invoice-line-items-table thead th.text-right {
+      text-align: right;
+    }
+
+    .invoice-line-items-table tbody td {
+      padding: 0.4rem 0.5rem;
+      vertical-align: middle;
+    }
+
+    .invoice-line-items-table tbody td input,
+    .invoice-line-items-table tbody td select {
+      width: 100%;
+      padding: 0.4rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 3px;
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+
+    .invoice-line-items-table tbody td input[type="number"] {
+      font-family: var(--font-mono);
+      text-align: right;
+    }
+
+    .invoice-line-items-table tbody td input:focus,
+    .invoice-line-items-table tbody td select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .invoice-line-items-table .line-total {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      text-align: right;
+      padding-right: 0.5rem;
+    }
+
+    .invoice-line-items-table .remove-line-btn {
+      background: none;
+      border: none;
+      color: var(--negative);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      opacity: 0.6;
+      transition: opacity 0.15s;
+    }
+
+    .invoice-line-items-table .remove-line-btn:hover {
+      opacity: 1;
+      background: rgba(248, 113, 113, 0.1);
+    }
+
+    .line-items-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: var(--spacing-sm);
+    }
+
+    /* Discount Row */
+    .invoice-discount-row {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) 0;
+    }
+
+    .invoice-discount-row label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .invoice-discount-row select,
+    .invoice-discount-row input {
+      padding: 0.4rem 0.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+
+    .invoice-discount-row input[type="number"] {
+      width: 100px;
+      font-family: var(--font-mono);
+      text-align: right;
+    }
+
+    .invoice-discount-row select:focus,
+    .invoice-discount-row input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Totals Section */
+    .invoice-totals-section {
+      margin-left: auto;
+      width: 280px;
+      padding-top: var(--spacing-sm);
+    }
+
+    .totals-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      font-size: 0.9rem;
+    }
+
+    .totals-row .mono {
+      font-family: var(--font-mono);
+    }
+
+    .totals-row.totals-total {
+      border-top: 2px solid rgba(255,255,255,0.15);
+      margin-top: 0.25rem;
+      padding-top: 0.5rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .totals-row.totals-total .mono {
+      color: var(--accent);
+    }
+
+    /* Notes textarea */
+    .invoice-dialog-body .form-group label {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .invoice-dialog-body .form-group textarea {
+      padding: 0.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+
+    .invoice-dialog-body .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Dialog Actions */
+    .invoice-dialog .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--spacing-sm);
+      padding-top: var(--spacing-md);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .invoice-dialog .dialog-actions .btn {
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      transition: all 0.15s;
+    }
+
+    .invoice-dialog .dialog-actions .btn:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .invoice-dialog .dialog-actions .btn-primary {
+      background: var(--accent);
+      color: #1a1a1a;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .invoice-dialog .dialog-actions .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    /* ===========================================
+       PHASE 18: INVOICE DETAIL VIEW STYLES
+       =========================================== */
+
+    .invoice-detail-view {
+      padding: 0;
+    }
+
+    .invoice-detail-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+
+    .invoice-detail-header h2 {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+    }
+
+    .invoice-detail-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .invoice-detail-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .invoice-detail-meta .detail-entity-info,
+    .invoice-detail-meta .detail-client-info {
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .invoice-detail-meta .detail-entity-info strong,
+    .invoice-detail-meta .detail-client-info strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+    }
+
+    .invoice-detail-info-row {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .invoice-detail-info-row strong {
+      color: var(--text);
+    }
+
+    /* Detail Lines Table */
+    .invoice-detail-lines-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .invoice-detail-lines-table thead th {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .invoice-detail-lines-table thead th.text-right {
+      text-align: right;
+    }
+
+    .invoice-detail-lines-table tbody td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.9rem;
+    }
+
+    .invoice-detail-lines-table tbody td.text-right {
+      text-align: right;
+      font-family: var(--font-mono);
+    }
+
+    /* Detail Totals */
+    .invoice-detail-totals {
+      margin-left: auto;
+      width: 280px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .invoice-detail-totals .totals-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      font-size: 0.9rem;
+    }
+
+    .invoice-detail-totals .totals-row .mono {
+      font-family: var(--font-mono);
+    }
+
+    .invoice-detail-totals .totals-row.totals-total {
+      border-top: 2px solid rgba(255,255,255,0.15);
+      margin-top: 0.25rem;
+      padding-top: 0.5rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    /* Legal Text */
+    .invoice-legal-text {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: var(--radius-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: var(--spacing-md);
+      font-style: italic;
+    }
+
+    /* Rectificativa Reference */
+    .rectificativa-ref {
+      background: rgba(251, 146, 60, 0.08);
+      border: 1px solid rgba(251, 146, 60, 0.2);
+      border-radius: var(--radius-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: 0.85rem;
+      color: var(--warning);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .rect-original-ref {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Payment Section */
+    .payment-section {
+      margin-top: var(--spacing-md);
+      padding-top: var(--spacing-md);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .payment-section h3 {
+      margin: 0 0 var(--spacing-sm) 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .payment-section h4 {
+      margin: var(--spacing-sm) 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    #payment-history {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .payment-record {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      padding: var(--spacing-sm) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.85rem;
+    }
+
+    .payment-record .payment-amount {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--positive);
+    }
+
+    .payment-record .payment-date {
+      color: var(--text-muted);
+    }
+
+    .payment-record .payment-method {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .payment-form {
+      display: flex;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .payment-form input,
+    .payment-form select {
+      padding: 0.4rem 0.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+
+    .payment-form input[type="number"] {
+      width: 130px;
+      font-family: var(--font-mono);
+    }
+
+    .payment-form input[type="text"] {
+      width: 150px;
+    }
+
+    .payment-form input:focus,
+    .payment-form select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Invoice Notes (detail view) */
+    .invoice-notes {
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius-sm);
+      padding: var(--spacing-md);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: pre-wrap;
+      margin-top: var(--spacing-md);
+    }
+
+    /* Calendar Populate Preview */
+    .calendar-pop-preview {
+      margin-top: var(--spacing-sm);
+      padding: var(--spacing-sm);
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      min-height: 2rem;
+    }
+
+    /* ===========================================
+       PHASE 18: INVOICE MOBILE RESPONSIVE
+       =========================================== */
+
+    @media (max-width: 768px) {
+      .invoice-table {
+        display: none;
+      }
+
+      .invoice-cards {
+        display: flex;
+      }
+
+      .invoices-filters {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+
+      .invoices-filters select,
+      .invoices-filters input {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .invoices-summary-bar {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+
+      .invoices-summary-bar .summary-item {
+        flex-direction: row;
+        justify-content: space-between;
+        min-width: unset;
+      }
+
+      .invoice-meta-row {
+        grid-template-columns: 1fr;
+      }
+
+      .invoice-dialog {
+        width: 98%;
+        max-height: 95vh;
+      }
+
+      .invoice-dialog-body {
+        max-height: calc(95vh - 60px);
+      }
+
+      .invoice-totals-section {
+        width: 100%;
+      }
+
+      .invoice-detail-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .invoice-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .invoice-detail-actions {
+        margin-left: 0;
+      }
+
+      .invoice-detail-info-row {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+
+      .invoice-detail-totals {
+        width: 100%;
+      }
+
+      .payment-form {
+        flex-direction: column;
+      }
+
+      .payment-form input,
+      .payment-form select {
+        width: 100%;
+      }
+
+      .payment-form input[type="number"],
+      .payment-form input[type="text"] {
+        width: 100%;
+      }
+
+      .invoice-line-items-table {
+        font-size: 0.75rem;
+      }
+
+      .invoice-line-items-table thead th {
+        font-size: 0.65rem;
+        padding: 0.3rem;
+      }
+
+      .invoice-line-items-table tbody td {
+        padding: 0.3rem;
+      }
+
+      .invoice-line-items-table tbody td input,
+      .invoice-line-items-table tbody td select {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Desktop: hide card layout for invoices */
+    @media (min-width: 769px) {
+      .invoice-cards {
+        display: none;
+      }
+    }
   </style>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
@@ -8462,6 +9461,7 @@
       <input type="radio" name="tabs" id="tab-scenarios" class="tab-input" checked>
       <input type="radio" name="tabs" id="tab-calendar" class="tab-input">
       <input type="radio" name="tabs" id="tab-expenses" class="tab-input">
+      <input type="radio" name="tabs" id="tab-invoices" class="tab-input">
       <input type="radio" name="tabs" id="tab-details" class="tab-input">
       <input type="radio" name="tabs" id="tab-income" class="tab-input">
       <input type="radio" name="tabs" id="tab-clients" class="tab-input">
@@ -8472,6 +9472,7 @@
         <label for="tab-scenarios" class="tab-label">Scenarios</label>
         <label for="tab-calendar" class="tab-label">Calendar</label>
         <label for="tab-expenses" class="tab-label">Expenses</label>
+        <label for="tab-invoices" class="tab-label">Invoices</label>
         <label for="tab-details" class="tab-label">Details</label>
         <label for="tab-income" class="tab-label">Income</label>
         <label for="tab-clients" class="tab-label">Clients</label>
