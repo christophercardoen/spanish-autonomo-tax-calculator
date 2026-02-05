@@ -9763,6 +9763,149 @@
           </div>
         </section>
 
+        <!-- INVOICES TAB -->
+        <section class="tab-panel panel-invoices">
+          <!-- Overdue Alert Banner (hidden by default) -->
+          <div id="overdue-alert" class="overdue-alert" style="display: none;">
+            <span class="overdue-alert-icon">!</span>
+            <span id="overdue-alert-text"></span>
+          </div>
+
+          <!-- Invoice List View -->
+          <div id="invoice-list-view">
+            <div class="invoices-header">
+              <h2>Invoices</h2>
+              <button class="btn btn-primary" id="new-invoice-btn" data-permission="create" onclick="openInvoiceForm()">+ New Invoice</button>
+            </div>
+
+            <!-- Filters -->
+            <div class="invoices-filters">
+              <select id="invoiceFilterClient" onchange="renderInvoiceList()">
+                <option value="">All Clients</option>
+              </select>
+              <select id="invoiceFilterStatus" onchange="renderInvoiceList()">
+                <option value="">All Statuses</option>
+                <option value="draft">Draft</option>
+                <option value="sent">Sent</option>
+                <option value="paid">Paid</option>
+                <option value="overdue">Overdue</option>
+              </select>
+              <input type="month" id="invoiceFilterMonth" onchange="renderInvoiceList()">
+              <select id="invoiceFilterProject" onchange="renderInvoiceList()">
+                <option value="">All Projects</option>
+              </select>
+            </div>
+
+            <!-- Summary Bar -->
+            <div class="invoices-summary-bar">
+              <div class="summary-item">
+                <span class="summary-label">Total Invoiced</span>
+                <span id="invoiceSummaryTotal" class="summary-value mono">-</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Outstanding</span>
+                <span id="invoiceSummaryOutstanding" class="summary-value mono">-</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Overdue</span>
+                <span id="invoiceSummaryOverdue" class="summary-value mono overdue-value">-</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Paid</span>
+                <span id="invoiceSummaryPaid" class="summary-value mono paid-value">-</span>
+              </div>
+            </div>
+
+            <!-- Desktop Table -->
+            <table class="invoice-table" id="invoiceTable">
+              <thead>
+                <tr>
+                  <th>Number</th>
+                  <th>Client</th>
+                  <th>Date</th>
+                  <th>Due Date</th>
+                  <th class="text-right">Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="invoiceTableBody"></tbody>
+            </table>
+
+            <!-- Mobile Cards -->
+            <div class="invoice-cards" id="invoiceCards"></div>
+
+            <!-- Empty State -->
+            <div id="invoiceEmptyState" class="empty-state" style="display: none;">
+              <p id="invoiceEmptyText">No invoices yet. Create your first invoice.</p>
+            </div>
+          </div>
+
+          <!-- Invoice Detail View (hidden by default) -->
+          <div id="invoice-detail-view" class="invoice-detail-view" style="display: none;">
+            <div class="invoice-detail-header">
+              <button class="btn btn-small" onclick="showInvoiceList()">Back to List</button>
+              <h2 id="detail-invoice-number"></h2>
+              <span id="detail-invoice-status" class="invoice-status-badge"></span>
+              <div class="invoice-detail-actions" id="detail-invoice-actions"></div>
+            </div>
+            <div class="invoice-detail-body">
+              <div class="invoice-detail-meta">
+                <div class="detail-entity-info" id="detail-entity-info"></div>
+                <div class="detail-client-info" id="detail-client-info"></div>
+              </div>
+              <div class="invoice-detail-info-row">
+                <span>Date: <strong id="detail-invoice-date"></strong></span>
+                <span>Due: <strong id="detail-invoice-due"></strong></span>
+                <span id="detail-invoice-currency-info"></span>
+              </div>
+              <table class="invoice-detail-lines-table">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th class="text-right">Qty</th>
+                    <th class="text-right">Unit Price</th>
+                    <th class="text-right">IVA %</th>
+                    <th class="text-right">Total</th>
+                  </tr>
+                </thead>
+                <tbody id="detail-line-items"></tbody>
+              </table>
+              <div class="invoice-detail-totals" id="detail-totals"></div>
+
+              <!-- Legal Text (EU B2B, export, etc.) -->
+              <div id="detail-legal-text" class="invoice-legal-text" style="display: none;"></div>
+
+              <!-- Rectificativa Reference -->
+              <div id="detail-rectificativa-ref" class="rectificativa-ref" style="display: none;"></div>
+
+              <!-- Payment History -->
+              <div class="payment-section">
+                <h3>Payments</h3>
+                <div id="payment-history"></div>
+                <div id="payment-form-container" style="display: none;">
+                  <h4>Record Payment</h4>
+                  <div class="payment-form">
+                    <input type="number" id="paymentAmount" placeholder="Amount (EUR)" step="0.01" min="0">
+                    <input type="date" id="paymentDate">
+                    <select id="paymentMethod">
+                      <option value="transfer">Bank Transfer</option>
+                      <option value="card">Card</option>
+                      <option value="cash">Cash</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <input type="text" id="paymentReference" placeholder="Reference / Note">
+                    <button class="btn btn-primary" onclick="handleRecordPayment()">Record</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Notes -->
+              <div id="detail-notes" class="invoice-notes" style="display: none;"></div>
+            </div>
+          </div>
+        </section>
+
         <!-- SCENARIOS TAB -->
         <section class="tab-panel panel-scenarios">
           <div class="scenario-section">
@@ -10575,6 +10718,179 @@
         <h3 id="tooltipModalTitle" class="tooltip-modal-title"></h3>
         <p id="tooltipModalText" class="tooltip-modal-text"></p>
         <button type="button" class="tooltip-modal-close" autofocus onclick="closeTooltipModal()">Got it</button>
+      </div>
+    </dialog>
+
+    <!-- Invoice Form Dialog -->
+    <dialog id="invoiceDialog" class="invoice-dialog">
+      <div class="dialog-header">
+        <h2 id="invoiceDialogTitle">New Invoice</h2>
+        <button type="button" class="dialog-close" onclick="closeInvoiceForm()">x</button>
+      </div>
+      <div class="invoice-dialog-body">
+        <!-- Meta Fields Row -->
+        <div class="invoice-meta-row">
+          <div class="form-group">
+            <label for="invoiceClient">Client *</label>
+            <select id="invoiceClient" onchange="handleInvoiceClientChange()" required>
+              <option value="">Select client...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="invoiceDate">Issue Date *</label>
+            <input type="date" id="invoiceDate" required>
+          </div>
+          <div class="form-group">
+            <label for="invoiceDueDate">Due Date</label>
+            <input type="date" id="invoiceDueDate">
+          </div>
+        </div>
+
+        <div class="invoice-meta-row">
+          <div class="form-group">
+            <label for="invoiceCurrency">Currency</label>
+            <select id="invoiceCurrency" onchange="handleInvoiceCurrencyChange()">
+              <option value="EUR">EUR</option>
+              <option value="USD">USD</option>
+              <option value="GBP">GBP</option>
+            </select>
+          </div>
+          <div class="form-group" id="exchangeRateGroup" style="display: none;">
+            <label for="invoiceExchangeRate">Exchange Rate (to EUR)</label>
+            <input type="number" id="invoiceExchangeRate" step="0.0001" min="0" value="1">
+            <button class="btn btn-small" onclick="fetchExchangeRateForInvoice()">Fetch Rate</button>
+          </div>
+          <div class="form-group" id="irpfGroup" style="display: none;">
+            <label for="invoiceIrpf">IRPF Retention</label>
+            <select id="invoiceIrpf" onchange="recalculateInvoiceFormTotals()">
+              <option value="0">None</option>
+              <option value="15">15% (standard)</option>
+              <option value="7">7% (first 3 years)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- IVA Treatment Info -->
+        <div id="invoiceIvaTreatment" class="iva-treatment-info" style="display: none;"></div>
+
+        <!-- Auto-populate from Calendar -->
+        <div id="calendarPopulateSection" class="calendar-populate-section" style="display: none;">
+          <button class="btn btn-small" onclick="openCalendarPopulate()">Populate from Calendar Days</button>
+          <span id="calendarPopulateInfo" class="populate-info"></span>
+        </div>
+
+        <!-- Line Items -->
+        <div class="invoice-line-items-section">
+          <h3>Line Items</h3>
+          <table class="invoice-line-items-table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th class="text-right" style="width:70px">Qty</th>
+                <th class="text-right" style="width:100px">Unit Price</th>
+                <th class="text-right" style="width:80px">IVA %</th>
+                <th class="text-right" style="width:100px">Total</th>
+                <th style="width:40px"></th>
+              </tr>
+            </thead>
+            <tbody id="invoiceLineItemsBody"></tbody>
+          </table>
+          <div class="line-items-actions">
+            <button class="btn btn-small" onclick="addInvoiceLineItem()">+ Add Line</button>
+            <button class="btn btn-small" id="addFromExpenseBtn" onclick="openExpenseSelector()" style="display: none;">+ From Expense</button>
+            <button class="btn btn-small" id="addFromProjectBtn" onclick="addLineFromProject()" style="display: none;">+ From Project</button>
+          </div>
+        </div>
+
+        <!-- Discount -->
+        <div class="invoice-discount-row">
+          <label>Discount:</label>
+          <select id="invoiceDiscountType" onchange="recalculateInvoiceFormTotals()">
+            <option value="">None</option>
+            <option value="percentage">Percentage (%)</option>
+            <option value="fixed">Fixed Amount</option>
+          </select>
+          <input type="number" id="invoiceDiscountValue" value="0" min="0" step="0.01" oninput="recalculateInvoiceFormTotals()" style="display: none;">
+        </div>
+
+        <!-- Totals -->
+        <div class="invoice-totals-section">
+          <div class="totals-row"><span>Subtotal:</span><span id="invoiceFormSubtotal" class="mono">0.00</span></div>
+          <div class="totals-row" id="discountRow" style="display: none;"><span>Discount:</span><span id="invoiceFormDiscount" class="mono">-0.00</span></div>
+          <div class="totals-row"><span id="invoiceIvaLabel">IVA (21%):</span><span id="invoiceFormIva" class="mono">0.00</span></div>
+          <div class="totals-row" id="irpfRow" style="display: none;"><span id="invoiceIrpfLabel">IRPF (15%):</span><span id="invoiceFormIrpf" class="mono">-0.00</span></div>
+          <div class="totals-row totals-total"><span>TOTAL:</span><span id="invoiceFormTotal" class="mono">0.00</span></div>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group">
+          <label for="invoiceNotes">Notes / Payment Terms</label>
+          <textarea id="invoiceNotes" rows="3" placeholder="Bank details, payment terms..."></textarea>
+        </div>
+
+        <!-- Dialog Actions -->
+        <div class="dialog-actions">
+          <button class="btn" onclick="closeInvoiceForm()">Cancel</button>
+          <button class="btn btn-primary" id="saveInvoiceBtn" onclick="handleSaveInvoice()">Save Draft</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Calendar Populate Dialog -->
+    <dialog id="calendarPopulateDialog" class="invoice-dialog" style="max-width: 500px;">
+      <div class="dialog-header">
+        <h2>Populate from Calendar</h2>
+        <button type="button" class="dialog-close" onclick="document.getElementById('calendarPopulateDialog').close()">x</button>
+      </div>
+      <div style="padding: 1.5rem;">
+        <div class="form-group">
+          <label for="calPopProject">Project</label>
+          <select id="calPopProject"></select>
+        </div>
+        <div class="form-group">
+          <label for="calPopStartDate">Start Date</label>
+          <input type="date" id="calPopStartDate">
+        </div>
+        <div class="form-group">
+          <label for="calPopEndDate">End Date</label>
+          <input type="date" id="calPopEndDate">
+        </div>
+        <div id="calPopPreview" class="calendar-pop-preview"></div>
+        <div class="dialog-actions">
+          <button class="btn" onclick="document.getElementById('calendarPopulateDialog').close()">Cancel</button>
+          <button class="btn btn-primary" onclick="handleCalendarPopulate()">Add Line Item</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Rectificativa Dialog -->
+    <dialog id="rectificativaDialog" class="invoice-dialog" style="max-width: 500px;">
+      <div class="dialog-header">
+        <h2>Create Factura Rectificativa</h2>
+        <button type="button" class="dialog-close" onclick="document.getElementById('rectificativaDialog').close()">x</button>
+      </div>
+      <div style="padding: 1.5rem;">
+        <p id="rectOriginalRef" class="rect-original-ref"></p>
+        <div class="form-group">
+          <label for="rectReason">Correction Reason *</label>
+          <select id="rectReason" required>
+            <option value="">Select reason...</option>
+            <option value="error_datos_fiscales">Error in fiscal data</option>
+            <option value="modificacion_base">Modification of taxable base</option>
+            <option value="descuento_posterior">Subsequent discount</option>
+            <option value="devolucion_envases">Return of packaging</option>
+            <option value="impago_concurso">Non-payment (insolvency)</option>
+            <option value="otros">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rectDescription">Description</label>
+          <textarea id="rectDescription" rows="3" placeholder="Describe the correction..."></textarea>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn" onclick="document.getElementById('rectificativaDialog').close()">Cancel</button>
+          <button class="btn btn-primary" onclick="handleCreateRectificativa()">Create Rectificativa</button>
+        </div>
       </div>
     </dialog>
   </div>
@@ -26832,6 +27148,94 @@ Generated by Autonomo Tax Calculator`;
       // Initialize GCal UI state (shows "not configured" if CLIENT_ID missing)
       updateGCalUI();
     });
+
+    // ============================================================
+    // PHASE 18: INVOICE STUB FUNCTIONS
+    // ============================================================
+    // Placeholder functions to prevent console errors from onclick handlers.
+    // These will be replaced by full implementations in subsequent plans.
+
+    function openInvoiceForm(invoiceId) {
+      const dialog = document.getElementById('invoiceDialog');
+      if (dialog) {
+        document.getElementById('invoiceDialogTitle').textContent = invoiceId ? 'Edit Invoice' : 'New Invoice';
+        dialog.showModal();
+      }
+    }
+
+    function closeInvoiceForm() {
+      const dialog = document.getElementById('invoiceDialog');
+      if (dialog && dialog.open) dialog.close();
+    }
+
+    function renderInvoiceList() {
+      // Stub: will be implemented in 18-03 or later
+    }
+
+    function showInvoiceList() {
+      const listView = document.getElementById('invoice-list-view');
+      const detailView = document.getElementById('invoice-detail-view');
+      if (listView) listView.style.display = '';
+      if (detailView) detailView.style.display = 'none';
+    }
+
+    function handleInvoiceClientChange() {
+      // Stub: will populate IVA treatment, IRPF, calendar populate section
+    }
+
+    function handleInvoiceCurrencyChange() {
+      const currency = document.getElementById('invoiceCurrency').value;
+      const exchangeGroup = document.getElementById('exchangeRateGroup');
+      if (exchangeGroup) {
+        exchangeGroup.style.display = currency !== 'EUR' ? '' : 'none';
+      }
+    }
+
+    function fetchExchangeRateForInvoice() {
+      // Stub: will fetch exchange rate from API
+    }
+
+    function recalculateInvoiceFormTotals() {
+      // Stub: will recalculate subtotal, IVA, IRPF, discount, total
+    }
+
+    function addInvoiceLineItem() {
+      // Stub: will add a new row to the line items table
+    }
+
+    function openExpenseSelector() {
+      // Stub: will open expense selector for adding expense as line item
+    }
+
+    function addLineFromProject() {
+      // Stub: will add line item from project rate
+    }
+
+    function handleSaveInvoice() {
+      // Stub: will save invoice draft to IndexedDB
+      closeInvoiceForm();
+    }
+
+    function openCalendarPopulate() {
+      const dialog = document.getElementById('calendarPopulateDialog');
+      if (dialog) dialog.showModal();
+    }
+
+    function handleCalendarPopulate() {
+      // Stub: will populate line items from calendar days
+      const dialog = document.getElementById('calendarPopulateDialog');
+      if (dialog && dialog.open) dialog.close();
+    }
+
+    function handleRecordPayment() {
+      // Stub: will record payment against invoice
+    }
+
+    function handleCreateRectificativa() {
+      // Stub: will create factura rectificativa
+      const dialog = document.getElementById('rectificativaDialog');
+      if (dialog && dialog.open) dialog.close();
+    }
   </script>
 
   <!-- Phase 13: Entity Creation Modal -->
