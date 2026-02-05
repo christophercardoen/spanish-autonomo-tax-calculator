@@ -6929,6 +6929,320 @@
       color: var(--text);
     }
 
+    /* ===========================================
+       PHASE 17-04: EXPENSE LIST & FILTER STYLES
+       =========================================== */
+
+    /* Filter Bar */
+    .expense-filters {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .expense-filters .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .expense-filters .filter-group label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .expense-filters .filter-group input,
+    .expense-filters .filter-group select {
+      padding: 0.4rem 0.6rem;
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: var(--size-small);
+      min-width: 120px;
+    }
+
+    .expense-filters .filter-group input[type="date"] {
+      min-width: 140px;
+    }
+
+    .expense-filters .filter-group input:focus,
+    .expense-filters .filter-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Summary Bar */
+    .expense-summary-bar {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      padding: 0.75rem 1rem;
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      flex-wrap: wrap;
+    }
+
+    .expense-summary-bar .summary-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .expense-summary-bar .summary-stat .stat-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .expense-summary-bar .summary-stat .stat-value {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .expense-summary-bar .summary-stat .stat-value.deductible {
+      color: var(--accent);
+    }
+
+    /* Expense List Table */
+    .expense-list-container {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .expense-list-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .expense-list-table thead th {
+      position: sticky;
+      top: 0;
+      background: var(--bg-surface);
+      z-index: 10;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .expense-list-table thead th.col-amount,
+    .expense-list-table thead th.col-deductible {
+      text-align: right;
+    }
+
+    .expense-list-table thead th.col-actions {
+      text-align: center;
+      width: 80px;
+    }
+
+    .expense-list-table tbody td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+    }
+
+    .expense-list-table tbody td.col-amount,
+    .expense-list-table tbody td.col-deductible {
+      text-align: right;
+      font-family: var(--font-mono);
+      white-space: nowrap;
+    }
+
+    .expense-list-table tbody td.col-deductible {
+      color: var(--accent);
+    }
+
+    .expense-list-table tbody td.col-date {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      white-space: nowrap;
+      color: var(--text-muted);
+    }
+
+    .expense-list-table tbody td.col-vendor {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .expense-list-table tbody td.col-client {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Row hover */
+    .expense-row:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* Category badge */
+    .expense-category-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      background: rgba(74, 222, 128, 0.1);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* Billable badge */
+    .expense-billable-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      background: rgba(96, 165, 250, 0.15);
+      color: #60a5fa;
+      margin-left: 4px;
+    }
+
+    /* Actions column */
+    .expense-actions {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .expense-actions button {
+      padding: 3px 8px;
+      font-size: 11px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .expense-actions button:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .expense-actions button.archive-btn:hover {
+      color: #f87171;
+      border-color: rgba(248, 113, 113, 0.3);
+    }
+
+    /* Empty state for expense list */
+    .expense-list-empty {
+      text-align: center;
+      padding: var(--spacing-2xl) var(--spacing-md);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .expense-list-empty .empty-hint {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      opacity: 0.6;
+    }
+
+    /* Mobile responsive: card layout */
+    @media (max-width: 768px) {
+      .expense-filters {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+
+      .expense-filters .filter-group {
+        width: 100%;
+      }
+
+      .expense-filters .filter-group input,
+      .expense-filters .filter-group select {
+        width: 100%;
+      }
+
+      .expense-list-table {
+        display: none;
+      }
+
+      .expense-list-cards {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+
+      .expense-card {
+        background: var(--bg-surface);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: var(--radius-md);
+        padding: var(--spacing-md);
+      }
+
+      .expense-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .expense-card-header .card-vendor {
+        font-weight: 500;
+        max-width: 60%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .expense-card-header .card-amount {
+        font-family: var(--font-mono);
+        font-weight: 600;
+      }
+
+      .expense-card-meta {
+        display: flex;
+        gap: var(--spacing-sm);
+        flex-wrap: wrap;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+      }
+
+      .expense-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(255,255,255,0.04);
+      }
+
+      .expense-card-footer .card-deductible {
+        font-family: var(--font-mono);
+        color: var(--accent);
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Desktop: hide card layout */
+    @media (min-width: 769px) {
+      .expense-list-cards {
+        display: none;
+      }
+    }
+
     @media (max-width: 600px) {
       .expense-form-dialog {
         width: 98%;
@@ -7814,9 +8128,59 @@
           <button class="primary-btn" data-permission="edit" data-permission-type="expense" onclick="openExpenseFormDialog()">+ Add Expense</button>
         </div>
         <div id="expenseTrackerList">
-          <!-- Populated by renderExpenseList() -->
-          <div class="empty-state" style="text-align: center; padding: 2rem; opacity: 0.5;">
-            No expenses tracked yet. Click "Add Expense" to get started.
+          <!-- Phase 17-04: Filter Bar -->
+          <div class="expense-filters">
+            <div class="filter-group">
+              <label for="expFilterDateFrom">From</label>
+              <input type="date" id="expFilterDateFrom" onchange="renderExpenseList()">
+            </div>
+            <div class="filter-group">
+              <label for="expFilterDateTo">To</label>
+              <input type="date" id="expFilterDateTo" onchange="renderExpenseList()">
+            </div>
+            <div class="filter-group">
+              <label for="expFilterCategory">Category</label>
+              <select id="expFilterCategory" onchange="renderExpenseList()">
+                <option value="">All categories</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="expFilterClient">Client</label>
+              <select id="expFilterClient" onchange="renderExpenseList()">
+                <option value="">All clients</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="expFilterBillable">Billable</label>
+              <select id="expFilterBillable" onchange="renderExpenseList()">
+                <option value="">All</option>
+                <option value="true">Billable only</option>
+                <option value="false">Non-billable only</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Phase 17-04: Summary Bar -->
+          <div class="expense-summary-bar">
+            <div class="summary-stat">
+              <span class="stat-label">Total</span>
+              <span class="stat-value" id="expSummaryTotal">--</span>
+            </div>
+            <div class="summary-stat">
+              <span class="stat-label">Deductible</span>
+              <span class="stat-value deductible" id="expSummaryDeductible">--</span>
+            </div>
+            <div class="summary-stat">
+              <span class="stat-label">Count</span>
+              <span class="stat-value" id="expSummaryCount">0</span>
+            </div>
+          </div>
+
+          <!-- Phase 17-04: Expense List Container -->
+          <div id="expenseListContainer">
+            <div class="expense-list-empty">
+              No expenses tracked yet. Click "+ Add Expense" to get started.
+            </div>
           </div>
         </div>
       </div>
