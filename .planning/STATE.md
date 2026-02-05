@@ -11,25 +11,25 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 18 of 29 (Invoice Generation) - IN PROGRESS
-Plan: 2 of 8 in current phase (18-01 research, 18-02 UI scaffold complete)
-Status: In progress - 18-02 complete, ready for 18-03
-Last activity: 2026-02-05 - Completed 18-02-PLAN.md (Invoice UI Scaffold)
+Plan: 1 of 8 in current phase (18-01 complete)
+Status: In progress - Plan 18-01 complete, ready for 18-02+
+Last activity: 2026-02-05 - Completed 18-01-PLAN.md (Invoice Data Layer)
 
-Progress: Phases 12-17 complete (33 plans) + 18-01, 18-02 (35 total)
-[####################################################################------] ~47%
+Progress: Phases 12-17 complete + 18-01 (34 plans)
+[####################################################################------] ~46%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 57
+- Total plans completed: 56
 - Average duration: 3.5 min
-- Total execution time: 315 min
+- Total execution time: 319 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 35 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 2)
-- Phase 18: In progress (2/8 plans)
+- Plans completed: 34 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 1)
+- Phase 18: In progress (1/8 plans complete)
 
 *Updated after each plan completion*
 
@@ -166,10 +166,14 @@ Recent decisions affecting current work:
 - [17-06]: All expense deletes remain soft delete via DataManager.softDelete (EXPENSE-15)
 - [17-07]: Proportional deduction uses single multiplication (amount * proportion), not double
 - [17-07]: Calendar expense counts always filter deleted_at === null to exclude archived expenses
-- [18-02]: Stub JS functions added for onclick handlers (will be replaced in 18-03+)
-- [18-02]: Invoice dialog max-width 800px (wider than expense 520px) for line items table
-- [18-02]: Badge-partial added for partial payment status (orange/warning)
-- [18-02]: Invoices panel added to print media exclusion list
+- [18-01]: IVA_TREATMENT uses computed property keys [CLIENT_CATEGORY.X] for direct category lookup
+- [18-01]: IRPF retention only applies when entity is autonomo AND client category is spain
+- [18-01]: Sent invoices are immutable - no edits to lines or amounts after markAsSent
+- [18-01]: markAsSent validates at least one line item exists before allowing transition
+- [18-01]: recordPayment allows additional payments on already-paid invoices
+- [18-01]: calculateInvoiceTotals applies discount before IVA/IRPF (per Spanish fiscal law)
+- [18-01]: VeriFactu QR uses DD-MM-YYYY date format per AEAT specification
+- [18-01]: fetchExchangeRate returns null on error for graceful fallback to manual entry
 
 ### Pending Todos
 
@@ -177,7 +181,7 @@ None.
 
 ### Blockers/Concerns
 
-None - Phase 18 in progress (2/8 plans complete).
+None - Plan 18-01 complete. Ready for Plan 18-02+.
 
 User setup required:
 - Deploy vies-validate Edge Function to Supabase for online EU VAT validation
@@ -222,15 +226,14 @@ Phases needing `/gsd:research-phase`:
 
 | Plan | Deliverable | Commit |
 |------|-------------|--------|
-| 18-01 | Research: Spanish invoicing rules, SII, TicketBAI, factura rectificativa | (research) |
-| 18-02 | Invoice tab HTML/CSS scaffold, form dialog, detail view, stub JS | `10a3edd`, `64125eb` |
+| 18-01 | IVA_TREATMENT, IRPF_RETENTION, INVOICE_CURRENCY, Dexie v4, InvoiceManager 18 methods | `dafc3d9`, `34f8e6d` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 18-02-PLAN.md (Invoice UI Scaffold)
+Stopped at: Completed 18-01-PLAN.md (Invoice Data Layer)
 Resume file: None
 
 ---
 *Phase 18 in progress: 2026-02-05*
-*Next step: Execute 18-03-PLAN.md (InvoiceManager data layer)*
+*Next step: Execute 18-02-PLAN.md (Invoice Form & List UI)*
