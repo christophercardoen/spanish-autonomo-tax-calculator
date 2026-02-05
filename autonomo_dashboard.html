@@ -6603,6 +6603,259 @@
       font-weight: 600;
     }
 
+    /* Day editor expenses list (Phase 17-05) */
+    .day-editor-expenses-list {
+      max-height: 150px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .day-expense-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 4px 8px;
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+    }
+
+    .day-expense-item .de-cat {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      min-width: 80px;
+    }
+
+    .day-expense-item .de-vendor {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .day-expense-item .de-amount {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .day-expense-item .de-deductible {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .day-expense-item .de-trip-badge {
+      display: inline-block;
+      padding: 0 4px;
+      border-radius: 4px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      background: rgba(96, 165, 250, 0.15);
+      color: #60a5fa;
+    }
+
+    .day-editor-expenses-empty {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 4px 0;
+    }
+
+    /* Deduction indicators (Phase 17-05) */
+    .deduction-full {
+      color: var(--accent);
+    }
+
+    .deduction-partial {
+      color: #fbbf24;
+    }
+
+    .deduction-pct-badge {
+      display: inline-block;
+      padding: 0 4px;
+      border-radius: 4px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      background: rgba(251, 191, 36, 0.15);
+      color: #fbbf24;
+      margin-left: 3px;
+    }
+
+    .deduction-zero-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 8px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      background: rgba(248, 113, 113, 0.15);
+      color: #f87171;
+      margin-left: 3px;
+    }
+
+    /* Category deduction hint in form (Phase 17-05) */
+    .category-deduction-hint {
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      margin-top: 4px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.03);
+      color: var(--text-muted);
+      border-left: 2px solid var(--accent);
+    }
+
+    /* Deduction summary (Phase 17-05) */
+    .deduction-summary {
+      margin-top: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .deduction-summary-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1rem;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .deduction-summary-header h4 {
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .deduction-summary-header .toggle-icon {
+      font-size: 0.7rem;
+      opacity: 0.5;
+      transition: transform 0.2s;
+    }
+
+    .deduction-summary.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .deduction-summary-body {
+      display: none;
+      padding: 0;
+    }
+
+    .deduction-summary.expanded .deduction-summary-body {
+      display: block;
+    }
+
+    .deduction-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+
+    .deduction-summary-table th {
+      padding: 0.4rem 0.75rem;
+      text-align: left;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .deduction-summary-table th:nth-child(2),
+    .deduction-summary-table th:nth-child(3),
+    .deduction-summary-table th:nth-child(4) {
+      text-align: right;
+    }
+
+    .deduction-summary-table td {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .deduction-summary-table td:nth-child(2),
+    .deduction-summary-table td:nth-child(3),
+    .deduction-summary-table td:nth-child(4) {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    .deduction-summary-table td:nth-child(3) {
+      color: var(--accent);
+    }
+
+    .deduction-summary-table tr.summary-total-row td {
+      font-weight: 700;
+      border-top: 2px solid rgba(255,255,255,0.1);
+    }
+
+    /* Client detail expenses list (Phase 17-05) */
+    .client-expenses-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .client-expense-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+    }
+
+    .client-expense-item .ce-meta {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .client-expense-item .ce-date {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .client-expense-item .ce-vendor {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .client-expense-item .ce-amount {
+      font-family: var(--font-mono);
+      white-space: nowrap;
+      margin-left: 0.5rem;
+    }
+
+    .client-expenses-summary {
+      display: flex;
+      gap: 1.5rem;
+      padding: 0.5rem 0;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.82rem;
+    }
+
+    .client-expenses-summary .ces-label {
+      color: var(--text-muted);
+    }
+
+    .client-expenses-summary .ces-value {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--accent);
+    }
+
     /* Bulk tag modal styles */
     .bulk-tag-count {
       font-family: var(--font-mono);
@@ -7873,10 +8126,11 @@
           <textarea id="dayEditorNotes" rows="2" placeholder="Optional notes for this day"></textarea>
         </div>
 
-        <!-- Linked Expenses (read-only info) -->
+        <!-- Linked Expenses (read-only info + mini list) -->
         <div class="client-form-group" id="dayEditorExpensesInfo" style="display: none;">
-          <label>Linked Expenses</label>
-          <div id="dayEditorExpensesCount" class="day-editor-info-text"></div>
+          <label>Linked Expenses (<span id="dayEditorExpensesCount">0</span>)</label>
+          <div id="dayEditorExpensesList" class="day-editor-expenses-list"></div>
+          <button type="button" class="btn btn-secondary btn-sm" id="dayEditorAddExpenseBtn" style="margin-top: 0.5rem; font-size: 0.75rem;" onclick="addExpenseForDay()">+ Add Expense for This Day</button>
         </div>
 
         <!-- Actions -->
@@ -8765,10 +9019,10 @@
 
             <div id="detail-expenses-panel" class="detail-panel hidden">
               <div class="panel-header">
-                <h3>Linked expenses</h3>
+                <h3>Linked Expenses</h3>
               </div>
               <div id="expenses-list" class="expenses-list">
-                <p class="coming-soon">Linked expenses will be available in phase 17.</p>
+                <p class="coming-soon">No expenses linked to this client yet.</p>
               </div>
             </div>
 
@@ -19964,6 +20218,36 @@ Generated by Autonomo Tax Calculator`;
       },
 
       /**
+       * Get expenses whose trip date range overlaps with the given date range
+       * Used by the day editor to show travel expenses spanning multiple days.
+       * Returns expenses where trip_start_date <= endDate AND trip_end_date >= startDate.
+       * @param {string} startDate - Start date in YYYY-MM-DD format
+       * @param {string} endDate - End date in YYYY-MM-DD format
+       * @returns {Promise<Array>} - Array of travel expenses with overlapping trip dates
+       */
+      async getExpensesForDateRange(startDate, endDate) {
+        const entityId = EntityContext.entityId;
+        if (!entityId) return [];
+
+        try {
+          const expenses = await db.expenses
+            .where('entity_id').equals(entityId)
+            .filter(e =>
+              e.deleted_at === null &&
+              e.trip_start_date && e.trip_end_date &&
+              e.trip_start_date <= endDate &&
+              e.trip_end_date >= startDate
+            )
+            .toArray();
+
+          return expenses;
+        } catch (e) {
+          console.debug('ExpenseManager.getExpensesForDateRange: error', e);
+          return [];
+        }
+      },
+
+      /**
        * Get expense summary totals for reporting
        * @param {Object} options - Same filter options as getExpenses
        * @param {boolean} options.group_by_category - Include per-category breakdown
@@ -21612,17 +21896,24 @@ Generated by Autonomo Tax Calculator`;
 
       async calculateTotals(clientId) {
         // TODO: When invoices exist (Phase 18), sum from db.invoices where client_id = clientId
-        // TODO: When expenses exist (Phase 17), sum from db.expenses where client_id = clientId
-
-        // Placeholder - will be implemented when invoice/expense phases complete
         const invoiced = 0;
         const paid = 0;
-        const expenses = 0;
+
+        // Sum billable expenses for this client (Phase 17)
+        let expensesTotal = 0;
+        try {
+          const clientExpenses = await ExpenseManager.getExpenses({ client_id: clientId });
+          for (const exp of clientExpenses) {
+            expensesTotal += exp.amount_cents || 0;
+          }
+        } catch (e) {
+          console.debug('calculateTotals: expense query error', e);
+        }
 
         return {
           invoiced,
           outstanding: invoiced - paid,
-          profit: invoiced - expenses
+          profit: invoiced - expensesTotal
         };
       },
 
@@ -21649,7 +21940,7 @@ Generated by Autonomo Tax Calculator`;
             // Phase 18
             break;
           case 'expenses':
-            // Phase 17
+            this.renderExpensesTab();
             break;
           case 'calendar':
             // Phase 16
@@ -21722,6 +22013,74 @@ Generated by Autonomo Tax Calculator`;
 
         if (typeof PermissionUI !== 'undefined' && PermissionUI.applyPermissions) {
           PermissionUI.applyPermissions();
+        }
+      },
+
+      /**
+       * Render the expenses tab in client detail view
+       * Shows billable expenses linked to this client (EXPENSE-09 integration)
+       */
+      async renderExpensesTab() {
+        if (!this.clientId) return;
+
+        const container = document.getElementById('expenses-list');
+        if (!container) return;
+
+        try {
+          const expenses = await ExpenseManager.getExpenses({ client_id: this.clientId });
+
+          if (!expenses || expenses.length === 0) {
+            container.innerHTML = '<p class="coming-soon">No expenses linked to this client yet.</p>';
+            return;
+          }
+
+          // Calculate summary
+          let totalCents = 0;
+          let billableCents = 0;
+          for (const exp of expenses) {
+            totalCents += exp.amount_cents || 0;
+            if (exp.is_billable) {
+              billableCents += exp.amount_cents || 0;
+            }
+          }
+
+          // Build summary + list
+          let html = `<div class="client-expenses-summary">
+            <div><span class="ces-label">Total: </span><span class="ces-value">${MoneyUtils.formatEuros(totalCents)}</span></div>
+            <div><span class="ces-label">Billable: </span><span class="ces-value">${MoneyUtils.formatEuros(billableCents)}</span></div>
+            <div><span class="ces-label">Count: </span><span class="ces-value">${expenses.length}</span></div>
+          </div>`;
+
+          html += '<div class="client-expenses-list">';
+          // Show most recent 20 expenses
+          const recentExpenses = expenses.slice(0, 20);
+          for (const exp of recentExpenses) {
+            const catConfig = EXPENSE_CATEGORY[exp.category];
+            const catLabel = catConfig?.label || exp.category;
+            const vendor = _escapeHtml(exp.vendor || catLabel);
+            const amount = MoneyUtils.formatEuros(exp.amount_cents || 0);
+            const dateStr = formatDateEU(exp.date);
+            const billBadge = exp.is_billable ? '<span class="expense-billable-badge">Billable</span>' : '';
+
+            html += `<div class="client-expense-item">
+              <div class="ce-meta">
+                <span class="ce-date">${dateStr}</span>
+                <span class="ce-vendor" title="${vendor}">${vendor}</span>
+                ${billBadge}
+              </div>
+              <span class="ce-amount">${amount}</span>
+            </div>`;
+          }
+
+          if (expenses.length > 20) {
+            html += `<div style="text-align: center; font-size: 0.78rem; color: var(--text-muted); padding: 0.5rem;">... and ${expenses.length - 20} more</div>`;
+          }
+
+          html += '</div>';
+          container.innerHTML = html;
+        } catch (err) {
+          console.error('Error rendering client expenses tab:', err);
+          container.innerHTML = '<p class="coming-soon">Error loading expenses.</p>';
         }
       },
 
@@ -23094,15 +23453,56 @@ Generated by Autonomo Tax Calculator`;
       // Set notes
       document.getElementById('dayEditorNotes').value = dayData?.notes || '';
 
-      // Show expense count if > 0
-      const expenseCount = await CalendarManager.getLinkedExpenseCount(dateKey);
+      // Show expenses linked to this day (Phase 17-05)
       const expenseInfo = document.getElementById('dayEditorExpensesInfo');
       const expenseCountEl = document.getElementById('dayEditorExpensesCount');
-      if (expenseCount > 0) {
+      const expenseListEl = document.getElementById('dayEditorExpensesList');
+
+      try {
+        // Get expenses for this exact date
+        const dayExpenses = await ExpenseManager.getExpensesByDate(dateKey);
+
+        // Get travel expenses whose trip range spans this date (but receipt date differs)
+        const tripExpenses = await ExpenseManager.getExpensesForDateRange(dateKey, dateKey);
+        // Avoid duplicates: filter out trip expenses already in dayExpenses
+        const dayExpenseIds = new Set(dayExpenses.map(e => e.id));
+        const extraTripExpenses = tripExpenses.filter(e => !dayExpenseIds.has(e.id));
+
+        const allExpenses = [...dayExpenses, ...extraTripExpenses];
+        const totalCount = allExpenses.length;
+
+        // Always show the expenses section (with "Add Expense" button even if empty)
         expenseInfo.style.display = 'block';
-        expenseCountEl.textContent = `${expenseCount} expense(s) linked to this day`;
-      } else {
-        expenseInfo.style.display = 'none';
+        expenseCountEl.textContent = totalCount;
+
+        if (totalCount > 0) {
+          let html = '';
+          for (const exp of allExpenses) {
+            const catConfig = EXPENSE_CATEGORY[exp.category];
+            const catLabel = catConfig?.label || exp.category;
+            const vendor = _escapeHtml(exp.vendor || 'No vendor');
+            const amount = MoneyUtils.formatEuros(exp.amount_cents || 0);
+            const deductible = MoneyUtils.formatEuros(exp.deductible_amount_cents || 0);
+            const isTrip = extraTripExpenses.includes(exp);
+            const tripBadge = isTrip ? '<span class="de-trip-badge">trip</span>' : '';
+
+            html += `<div class="day-expense-item">
+              <span class="de-cat">${_escapeHtml(catLabel)}</span>
+              <span class="de-vendor" title="${vendor}">${vendor}</span>
+              ${tripBadge}
+              <span class="de-amount">${amount}</span>
+              <span class="de-deductible">${deductible}</span>
+            </div>`;
+          }
+          expenseListEl.innerHTML = html;
+        } else {
+          expenseListEl.innerHTML = '<div class="day-editor-expenses-empty">No expenses for this day.</div>';
+        }
+      } catch (err) {
+        console.debug('Day editor expense load error:', err);
+        expenseInfo.style.display = 'block';
+        expenseCountEl.textContent = '0';
+        expenseListEl.innerHTML = '<div class="day-editor-expenses-empty">No expenses for this day.</div>';
       }
 
       // Show modal
@@ -23119,6 +23519,23 @@ Generated by Autonomo Tax Calculator`;
       }
       // Reset form
       document.getElementById('dayEditorForm').reset();
+    }
+
+    /**
+     * Open expense form with the current day editor date pre-filled
+     * Closes the day editor and opens the expense form dialog.
+     */
+    function addExpenseForDay() {
+      const dateKey = document.getElementById('dayEditorDate')?.value;
+      closeDayEditor();
+      openExpenseFormDialog(null);
+      // Pre-fill the date after the form opens (setTimeout to let form populate)
+      if (dateKey) {
+        setTimeout(() => {
+          const dateInput = document.getElementById('efDate');
+          if (dateInput) dateInput.value = dateKey;
+        }, 50);
+      }
     }
 
     /**
