@@ -11,25 +11,25 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 18 of 29 (Invoice Generation) - IN PROGRESS
-Plan: 4 of 8 in current phase (18-01, 18-02, 18-03, 18-04 complete)
-Status: In progress - Plan 18-04 complete, ready for 18-05+
-Last activity: 2026-02-05 - Completed 18-04-PLAN.md (Invoice List & Detail View)
+Plan: 6 of 8 in current phase (18-01, 18-02, 18-03, 18-04, 18-05, 18-06 complete)
+Status: In progress - Plan 18-06 complete, ready for 18-07+
+Last activity: 2026-02-05 - Completed 18-06-PLAN.md (Client Detail Integration & Permission Enforcement)
 
-Progress: Phases 12-17 complete + 18-01/02/03/04 (37 plans)
-[######################################################################----] ~49%
+Progress: Phases 12-17 complete + 18-01/02/03/04/05/06 (39 plans)
+[########################################################################----] ~51%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 59
+- Total plans completed: 61
 - Average duration: 3.5 min
-- Total execution time: 339 min
+- Total execution time: 351 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 37 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 4)
-- Phase 18: In progress (4/8 plans complete)
+- Plans completed: 39 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 6)
+- Phase 18: In progress (6/8 plans complete)
 
 *Updated after each plan completion*
 
@@ -187,6 +187,11 @@ Recent decisions affecting current work:
 - [18-04]: Overdue badge replaces sent badge when invoice is past due
 - [18-04]: Summary bar always shows unfiltered totals (filters only affect list)
 - [18-04]: Separate invoice client cache from expense client cache (independent invalidation)
+- [18-06]: renderInvoicesTab reuses client-expense-item CSS pattern for consistent client detail styling
+- [18-06]: navigateToInvoiceDetail uses 100ms delay to allow tab activation before showing detail
+- [18-06]: Soft delete enforcement at UI level (handleArchiveInvoice) in addition to InvoiceManager level
+- [18-06]: getEntityIncomeSummary groups paid invoices by YYYY-MM key for monthly income aggregation
+- [18-06]: Client list enrichment queries invoices per client (N+1 acceptable for small client counts)
 
 ### Pending Todos
 
@@ -194,7 +199,7 @@ None.
 
 ### Blockers/Concerns
 
-None - Plan 18-04 complete. Ready for Plan 18-05+.
+None - Plan 18-06 complete. Ready for Plan 18-07+.
 
 User setup required:
 - Deploy vies-validate Edge Function to Supabase for online EU VAT validation
@@ -243,13 +248,14 @@ Phases needing `/gsd:research-phase`:
 | 18-02 | Invoice tab navigation, CSS, list/form/detail HTML, stub JS functions | `10a3edd`, `64125eb` |
 | 18-03 | Invoice form handlers: open/close/client/IVA/IRPF/line items/totals/save/edit/populate | `51d0f9e`, `a16845a` |
 | 18-04 | Invoice list with filters/summary, detail view with status workflow/payments | `ea6e55e`, `d75dc64` |
+| 18-06 | Client detail invoices tab, calculateTotals wiring, permissions, income tracking | `bff1787`, `235d8cc` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 18-04-PLAN.md (Invoice List & Detail View)
+Stopped at: Completed 18-06-PLAN.md (Client Detail Integration & Permission Enforcement)
 Resume file: None
 
 ---
 *Phase 18 in progress: 2026-02-05*
-*Next step: Execute 18-05-PLAN.md*
+*Next step: Execute 18-07-PLAN.md*
