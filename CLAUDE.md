@@ -223,6 +223,43 @@ Ralph Loop will:
 9. **Sequential phases** - Build foundation first (calculations) before UI/features
 10. **Ralph Loop approved** - Use for both improvement and context preservation
 
+## Mandatory Browser Testing Rule
+
+**CRITICAL: All code changes MUST be browser-tested before presenting to the user.**
+
+This is non-negotiable. The user must never be the first person to discover broken code.
+
+### When to Test
+
+1. **After each wave completes** during `/gsd:execute-phase` — the orchestrator must open the page in Chrome, check for console errors, and verify key features render
+2. **Before any human checkpoint** — load the page, run through the verification checklist, fix all errors found
+3. **After any bug fix** — confirm the fix actually works in the browser
+
+### How to Test
+
+The orchestrator (not the executor subagents) performs browser testing using Claude in Chrome tools:
+
+1. Navigate to `http://localhost:3013/autonomo_dashboard.html`
+2. Check browser console for JavaScript errors (`read_console_messages` with pattern for errors)
+3. Verify the relevant tab/feature renders (take screenshot, check key elements)
+4. If errors found: fix them directly, commit the fix, and re-test
+5. Only present checkpoint to user after zero console errors and visual confirmation
+
+### What to Check
+
+- **Console errors**: Any uncaught exceptions, reference errors, syntax errors
+- **Page renders**: The page loads without blank screens or missing sections
+- **Feature-specific**: New UI elements exist and are visible (modals, buttons, forms)
+- **No regressions**: Previously working tabs/features still render
+
+### Fix-Before-Present Rule
+
+If browser testing reveals errors:
+1. Fix the code directly (don't spawn a subagent)
+2. Commit with format: `fix({phase}): {description of what was broken}`
+3. Re-test to confirm the fix works
+4. Only then continue to the next wave or present the checkpoint
+
 ### For User
 
 - Project initialized and ready to build
