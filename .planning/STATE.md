@@ -11,25 +11,25 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 18 of 29 (Invoice Generation) - IN PROGRESS
-Plan: 3 of 8 in current phase (18-01, 18-02, 18-03 complete)
-Status: In progress - Plan 18-03 complete, ready for 18-04+
-Last activity: 2026-02-05 - Completed 18-03-PLAN.md (Invoice Form Interactivity)
+Plan: 4 of 8 in current phase (18-01, 18-02, 18-03, 18-04 complete)
+Status: In progress - Plan 18-04 complete, ready for 18-05+
+Last activity: 2026-02-05 - Completed 18-04-PLAN.md (Invoice List & Detail View)
 
-Progress: Phases 12-17 complete + 18-01/02/03 (36 plans)
-[#####################################################################-----] ~48%
+Progress: Phases 12-17 complete + 18-01/02/03/04 (37 plans)
+[######################################################################----] ~49%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 58
+- Total plans completed: 59
 - Average duration: 3.5 min
-- Total execution time: 330 min
+- Total execution time: 339 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 36 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 3)
-- Phase 18: In progress (3/8 plans complete)
+- Plans completed: 37 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 4)
+- Phase 18: In progress (4/8 plans complete)
 
 *Updated after each plan completion*
 
@@ -181,6 +181,12 @@ Recent decisions affecting current work:
 - [18-03]: Discount value stored as percentage (raw number) or fixed (euro cents) depending on type
 - [18-03]: Calendar populate description format: '{project} - {start} to {end} ({N} days)'
 - [18-03]: handleDiscountTypeChange wired to discount select onchange (separate from recalculateInvoiceFormTotals)
+- [18-04]: Rectificativa dialog submit calls handleSubmitRectificativa (separate from handleCreateRectificativa which opens dialog)
+- [18-04]: PDF buttons show info notification pointing to Plan 18-05 (graceful stub)
+- [18-04]: Payment form only shown for sent invoices (not draft or paid)
+- [18-04]: Overdue badge replaces sent badge when invoice is past due
+- [18-04]: Summary bar always shows unfiltered totals (filters only affect list)
+- [18-04]: Separate invoice client cache from expense client cache (independent invalidation)
 
 ### Pending Todos
 
@@ -188,7 +194,7 @@ None.
 
 ### Blockers/Concerns
 
-None - Plan 18-03 complete. Ready for Plan 18-04+.
+None - Plan 18-04 complete. Ready for Plan 18-05+.
 
 User setup required:
 - Deploy vies-validate Edge Function to Supabase for online EU VAT validation
@@ -236,13 +242,14 @@ Phases needing `/gsd:research-phase`:
 | 18-01 | IVA_TREATMENT, IRPF_RETENTION, INVOICE_CURRENCY, Dexie v4, InvoiceManager 18 methods | `dafc3d9`, `34f8e6d` |
 | 18-02 | Invoice tab navigation, CSS, list/form/detail HTML, stub JS functions | `10a3edd`, `64125eb` |
 | 18-03 | Invoice form handlers: open/close/client/IVA/IRPF/line items/totals/save/edit/populate | `51d0f9e`, `a16845a` |
+| 18-04 | Invoice list with filters/summary, detail view with status workflow/payments | `ea6e55e`, `d75dc64` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 18-03-PLAN.md (Invoice Form Interactivity)
+Stopped at: Completed 18-04-PLAN.md (Invoice List & Detail View)
 Resume file: None
 
 ---
 *Phase 18 in progress: 2026-02-05*
-*Next step: Execute 18-04-PLAN.md (Invoice List Rendering)*
+*Next step: Execute 18-05-PLAN.md*
