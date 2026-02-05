@@ -10,12 +10,13 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
-Phase: 16 of 29 (Calendar Enhancement) - COMPLETE
-Plan: 7 of 7 in current phase (all complete)
-Status: Phase 16 complete, ready for Phase 17
-Last activity: 2026-02-05 - Completed 16-07-PLAN.md (Verification + Bug Fixes)
+Phase: 17 of 29 (Expense Management) - In progress
+Plan: 2 of 7 in current phase
+Status: In progress
+Last activity: 2026-02-05 - Completed 17-02-PLAN.md (Receipt Manager)
 
-Progress: Phases 12-16 complete (26 plans), ready for Phase 17
+Progress: Phases 12-16 complete (26 plans) + Phase 17: 1/7 plans complete
+[##########################################################----------------] ~36%
 
 ## Performance Metrics
 
@@ -27,8 +28,8 @@ Progress: Phases 12-16 complete (26 plans), ready for Phase 17
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 26 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7)
-- Phase 16: COMPLETE (7/7 plans)
+- Plans completed: 27 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 1)
+- Phase 17: In progress (1/7 plans)
 
 *Updated after each plan completion*
 
@@ -133,10 +134,14 @@ Recent decisions affecting current work:
 - [16-06]: App calendar entries win in sync conflicts, external events read-only (CALENDAR-16)
 - [16-06]: OAuth 2.0 implicit flow via Google Identity Services for single-file HTML
 - [16-06]: Sync to user's primary calendar by default
+- [17-02]: Tesseract.js lazy-loaded via dynamic script injection (no static script tag)
+- [17-02]: Image compression to max 1024px JPEG 0.7 before IndexedDB storage
+- [17-02]: European date/number formats prioritized in receipt text parsing
+- [17-02]: compressImage graceful degradation returns original file on error
 
 ### Pending Todos
 
-None - Phase 16 complete. Ready for Phase 17.
+None.
 
 ### Blockers/Concerns
 
@@ -185,12 +190,18 @@ Phases needing `/gsd:research-phase`:
 - [x] Google Calendar sync with OAuth (16-06)
 - [x] Verification checkpoint + browser-tested bug fixes (16-07)
 
+## Phase 17 Deliverables Summary
+
+| Plan | Deliverable | Commit |
+|------|-------------|--------|
+| 17-02 | ReceiptManager singleton, compressImage, lazy Tesseract.js OCR | `ea30959` |
+
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed Phase 16 (Calendar Enhancement) - all 7 plans executed and verified
-Resume file: None - ready for Phase 17
+Stopped at: Completed 17-02-PLAN.md (Receipt Manager)
+Resume file: None
 
 ---
-*Phase 16 completed: 2026-02-05*
-*Next step: /gsd:plan-phase 17 (Expense Management)*
+*Phase 17 in progress: 2026-02-05*
+*Next step: Continue Phase 17 plans*
