@@ -5,31 +5,31 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 16 COMPLETE, Phase 17 next (Expense Management)
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 17 in progress (Expense Management)
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 17 of 29 (Expense Management) - In progress
-Plan: 2 of 7 in current phase (17-01 and 17-02 complete)
+Plan: 3 of 7 in current phase (17-01, 17-02, 17-03 complete)
 Status: In progress
-Last activity: 2026-02-05 - Completed 17-01-PLAN.md (Expense Data Layer)
+Last activity: 2026-02-05 - Completed 17-03-PLAN.md (Expense Form Dialog)
 
-Progress: Phases 12-16 complete (26 plans) + Phase 17: 2/7 plans complete
-[############################################################--------------] ~38%
+Progress: Phases 12-16 complete (26 plans) + Phase 17: 3/7 plans complete
+[#############################################################-------------] ~39%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 50
+- Total plans completed: 51
 - Average duration: 3.4 min
-- Total execution time: 273 min
+- Total execution time: 278 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 28 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 2)
-- Phase 17: In progress (2/7 plans)
+- Plans completed: 29 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 3)
+- Phase 17: In progress (3/7 plans)
 
 *Updated after each plan completion*
 
@@ -143,6 +143,12 @@ Recent decisions affecting current work:
 - [17-02]: Image compression to max 1024px JPEG 0.7 before IndexedDB storage
 - [17-02]: European date/number formats prioritized in receipt text parsing
 - [17-02]: compressImage graceful degradation returns original file on error
+- [17-03]: Separate conditional field groups for Travel vs Meals for cleaner UX
+- [17-03]: Home office deductible % field only shown for autonomo entities (max 30%)
+- [17-03]: OCR auto-fill only overwrites empty fields (preserves manual edits)
+- [17-03]: Receipt file stored after expense creation to get expense ID for linking
+- [17-03]: XSS prevention via _escapeHtml helper for all user-generated content display
+- [17-03]: Form dialog dual mode via data-edit-id attribute (empty = create, populated = edit)
 
 ### Pending Todos
 
@@ -150,7 +156,7 @@ None.
 
 ### Blockers/Concerns
 
-None - Phase 16 completed and browser-tested successfully.
+None - Phase 17 progressing smoothly.
 
 User setup required:
 - Deploy vies-validate Edge Function to Supabase for online EU VAT validation
@@ -177,37 +183,20 @@ Phases needing `/gsd:research-phase`:
 | 16-06 | GCalSync module, OAuth integration, sync UI | `a3704df`, `6bdcfed`, `e10853d` |
 | 16-07 | Verification + bug fixes (year summary, counts, emojis) | `49c8407`, `c157c70` |
 
-**Phase 16 Success Criteria (COMPLETE):**
-- [x] CalendarManager provides all CRUD operations for calendar days (16-01)
-- [x] Migration preserves all v1 calendar entries in IndexedDB (16-01)
-- [x] Entity-scoping isolates calendar data per business entity (16-01)
-- [x] Placeholder for expense linking ready for Phase 17 (16-01)
-- [x] Calendar UI uses CalendarManager for persistence (16-02)
-- [x] Day editor modal for location/client/project tagging (16-02)
-- [x] Bulk tag feature for multi-day client tagging (16-02)
-- [x] Work pattern system for bulk calendar tagging (16-03)
-- [x] 183-day threshold warnings at 170/180/183 days (16-04)
-- [x] Multi-year calendar navigation (2026-2027) (16-04)
-- [x] Year summary with per-year counts (16-04)
-- [x] Enhanced ICS export with client/project in events (16-05)
-- [x] CSV export with client/project columns (16-05)
-- [x] Expense linking infrastructure for Phase 17 (16-05)
-- [x] Google Calendar sync with OAuth (16-06)
-- [x] Verification checkpoint + browser-tested bug fixes (16-07)
-
 ## Phase 17 Deliverables Summary
 
 | Plan | Deliverable | Commit |
 |------|-------------|--------|
 | 17-01 | EXPENSE_CATEGORY config, ExpenseManager singleton with CRUD + deduction calc | `a01ffde`, `304264c` |
 | 17-02 | ReceiptManager singleton, compressImage, lazy Tesseract.js OCR | `ea30959` |
+| 17-03 | Expense form dialog HTML + JS handlers (create/edit, OCR, conditional fields) | `be26446`, `e743df1` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 17-01-PLAN.md (Expense Data Layer)
+Stopped at: Completed 17-03-PLAN.md (Expense Form Dialog)
 Resume file: None
 
 ---
 *Phase 17 in progress: 2026-02-05*
-*Next step: Continue Phase 17 plans (17-03 next)*
+*Next step: Continue Phase 17 plans (17-04 next)*
