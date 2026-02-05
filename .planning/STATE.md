@@ -11,25 +11,25 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 17 of 29 (Expense Management) - In progress
-Plan: 3 of 7 in current phase (17-01, 17-02, 17-03 complete)
+Plan: 4 of 7 in current phase (17-01, 17-02, 17-03, 17-04 complete)
 Status: In progress
-Last activity: 2026-02-05 - Completed 17-03-PLAN.md (Expense Form Dialog)
+Last activity: 2026-02-05 - Completed 17-04-PLAN.md (Expense List View)
 
-Progress: Phases 12-16 complete (26 plans) + Phase 17: 3/7 plans complete
-[#############################################################-------------] ~39%
+Progress: Phases 12-16 complete (26 plans) + Phase 17: 4/7 plans complete
+[##############################################################------------] ~40%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 51
-- Average duration: 3.4 min
-- Total execution time: 278 min
+- Total plans completed: 52
+- Average duration: 3.5 min
+- Total execution time: 286 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 29 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 3)
-- Phase 17: In progress (3/7 plans)
+- Plans completed: 30 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 4)
+- Phase 17: In progress (4/7 plans)
 
 *Updated after each plan completion*
 
@@ -149,6 +149,11 @@ Recent decisions affecting current work:
 - [17-03]: Receipt file stored after expense creation to get expense ID for linking
 - [17-03]: XSS prevention via _escapeHtml helper for all user-generated content display
 - [17-03]: Form dialog dual mode via data-edit-id attribute (empty = create, populated = edit)
+- [17-04]: Client names batch-loaded via _loadClientNameCache with entity-scoped cache invalidation
+- [17-04]: Dual rendering: table for desktop (>768px), cards for mobile (<768px) using CSS display toggle
+- [17-04]: Empty state differentiates 'no expenses yet' vs 'no matches for current filters'
+- [17-04]: Category filter is entity-type-aware (hides SL-only categories for autonomo)
+- [17-04]: Tab activation (tab-expenses change event) triggers filter population and list render
 
 ### Pending Todos
 
@@ -190,13 +195,14 @@ Phases needing `/gsd:research-phase`:
 | 17-01 | EXPENSE_CATEGORY config, ExpenseManager singleton with CRUD + deduction calc | `a01ffde`, `304264c` |
 | 17-02 | ReceiptManager singleton, compressImage, lazy Tesseract.js OCR | `ea30959` |
 | 17-03 | Expense form dialog HTML + JS handlers (create/edit, OCR, conditional fields) | `be26446`, `e743df1` |
+| 17-04 | Expense list with filters, summary bar, dual-layout table+cards | `4ade847`, `5a0e99e` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 17-03-PLAN.md (Expense Form Dialog)
+Stopped at: Completed 17-04-PLAN.md (Expense List View)
 Resume file: None
 
 ---
 *Phase 17 in progress: 2026-02-05*
-*Next step: Continue Phase 17 plans (17-04 next)*
+*Next step: Continue Phase 17 plans (17-05 next)*
