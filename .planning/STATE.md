@@ -11,12 +11,12 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 17 of 29 (Expense Management) - In progress
-Plan: 2 of 7 in current phase
+Plan: 2 of 7 in current phase (17-01 and 17-02 complete)
 Status: In progress
-Last activity: 2026-02-05 - Completed 17-02-PLAN.md (Receipt Manager)
+Last activity: 2026-02-05 - Completed 17-01-PLAN.md (Expense Data Layer)
 
-Progress: Phases 12-16 complete (26 plans) + Phase 17: 1/7 plans complete
-[##########################################################----------------] ~36%
+Progress: Phases 12-16 complete (26 plans) + Phase 17: 2/7 plans complete
+[############################################################--------------] ~38%
 
 ## Performance Metrics
 
@@ -28,8 +28,8 @@ Progress: Phases 12-16 complete (26 plans) + Phase 17: 1/7 plans complete
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 27 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 1)
-- Phase 17: In progress (1/7 plans)
+- Plans completed: 28 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 2)
+- Phase 17: In progress (2/7 plans)
 
 *Updated after each plan completion*
 
@@ -134,6 +134,11 @@ Recent decisions affecting current work:
 - [16-06]: App calendar entries win in sync conflicts, external events read-only (CALENDAR-16)
 - [16-06]: OAuth 2.0 implicit flow via Google Identity Services for single-file HTML
 - [16-06]: Sync to user's primary calendar by default
+- [17-01]: EXPENSE_CATEGORY uses Object.freeze() with ENTITY_TYPE constants as rule keys
+- [17-01]: No gastos_dificil category - automatic IRPF deduction, not user expense
+- [17-01]: ExpenseManager follows ProjectManager pattern (entity scoping, soft delete, audit, sync)
+- [17-01]: calculateDeductible auto-recalculates on update when amount/category/metadata change
+- [17-01]: DEPRECIATION category sl_only: true (autonomo uses per-asset simplified table)
 - [17-02]: Tesseract.js lazy-loaded via dynamic script injection (no static script tag)
 - [17-02]: Image compression to max 1024px JPEG 0.7 before IndexedDB storage
 - [17-02]: European date/number formats prioritized in receipt text parsing
@@ -194,14 +199,15 @@ Phases needing `/gsd:research-phase`:
 
 | Plan | Deliverable | Commit |
 |------|-------------|--------|
+| 17-01 | EXPENSE_CATEGORY config, ExpenseManager singleton with CRUD + deduction calc | `a01ffde`, `304264c` |
 | 17-02 | ReceiptManager singleton, compressImage, lazy Tesseract.js OCR | `ea30959` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 17-02-PLAN.md (Receipt Manager)
+Stopped at: Completed 17-01-PLAN.md (Expense Data Layer)
 Resume file: None
 
 ---
 *Phase 17 in progress: 2026-02-05*
-*Next step: Continue Phase 17 plans*
+*Next step: Continue Phase 17 plans (17-03 next)*
