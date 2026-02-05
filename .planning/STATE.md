@@ -5,31 +5,31 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Complete business management for Spanish SMEs (autonomo + SL) with multi-entity support, client CRM, invoice generation, receipt OCR, and tax automation
-**Current focus:** v2.0 Multi-Entity Business Management - Phase 17 complete (Expense Management), ready for Phase 18
+**Current focus:** v2.0 Multi-Entity Business Management - Phase 18 in progress (Invoice Generation)
 
 ## Current Position
 
 Milestone: v2.0 Multi-Entity Business Management
-Phase: 17 of 29 (Expense Management) - COMPLETE
-Plan: 7 of 7 in current phase (17-01 through 17-07 all complete)
-Status: Phase complete - ready for Phase 18 (Invoice Management)
-Last activity: 2026-02-05 - Phase 17 human verification approved
+Phase: 18 of 29 (Invoice Generation) - IN PROGRESS
+Plan: 2 of 8 in current phase (18-01 research, 18-02 UI scaffold complete)
+Status: In progress - 18-02 complete, ready for 18-03
+Last activity: 2026-02-05 - Completed 18-02-PLAN.md (Invoice UI Scaffold)
 
-Progress: Phases 12-17 complete (33 plans)
-[###################################################################-------] ~45%
+Progress: Phases 12-17 complete (33 plans) + 18-01, 18-02 (35 total)
+[####################################################################------] ~47%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 55
+- Total plans completed: 57
 - Average duration: 3.5 min
-- Total execution time: 309 min
+- Total execution time: 315 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 33 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7)
-- Phase 17: Complete (7/7 plans, human verification approved)
+- Plans completed: 35 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 7, Phase 18: 2)
+- Phase 18: In progress (2/8 plans)
 
 *Updated after each plan completion*
 
@@ -166,6 +166,10 @@ Recent decisions affecting current work:
 - [17-06]: All expense deletes remain soft delete via DataManager.softDelete (EXPENSE-15)
 - [17-07]: Proportional deduction uses single multiplication (amount * proportion), not double
 - [17-07]: Calendar expense counts always filter deleted_at === null to exclude archived expenses
+- [18-02]: Stub JS functions added for onclick handlers (will be replaced in 18-03+)
+- [18-02]: Invoice dialog max-width 800px (wider than expense 520px) for line items table
+- [18-02]: Badge-partial added for partial payment status (orange/warning)
+- [18-02]: Invoices panel added to print media exclusion list
 
 ### Pending Todos
 
@@ -173,7 +177,7 @@ None.
 
 ### Blockers/Concerns
 
-None - Phase 17 complete. Ready for Phase 18 (Invoice Management).
+None - Phase 18 in progress (2/8 plans complete).
 
 User setup required:
 - Deploy vies-validate Edge Function to Supabase for online EU VAT validation
@@ -184,6 +188,7 @@ User setup required:
 Phases needing `/gsd:research-phase`:
 - Phase 16: Calendar Enhancement - COMPLETE (research done)
 - Phase 17: Expense Management - COMPLETE
+- Phase 18: Invoice Generation - COMPLETE (research done)
 - Phase 19: Receipt OCR (Mindee API) - HIGH
 - Phase 21: Tax Automation - SL (IS calculation, BINs) - HIGH
 - Phase 22: SL Accounting (Cuentas Anuales generation) - HIGH
@@ -213,12 +218,19 @@ Phases needing `/gsd:research-phase`:
 | 17-06 | validateDietas, receipt preview, enhanced archive, archived expenses toggle | `296d136`, `aa1dd0f` |
 | 17-07 | Browser testing: 3 bug fixes + verification script | `81798e5` |
 
+## Phase 18 Deliverables Summary
+
+| Plan | Deliverable | Commit |
+|------|-------------|--------|
+| 18-01 | Research: Spanish invoicing rules, SII, TicketBAI, factura rectificativa | (research) |
+| 18-02 | Invoice tab HTML/CSS scaffold, form dialog, detail view, stub JS | `10a3edd`, `64125eb` |
+
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Phase 17 complete (human verification approved)
+Stopped at: Completed 18-02-PLAN.md (Invoice UI Scaffold)
 Resume file: None
 
 ---
-*Phase 17 complete: 2026-02-05*
-*Next step: /gsd:discuss-phase 18 or /gsd:plan-phase 18 (Invoice Management)*
+*Phase 18 in progress: 2026-02-05*
+*Next step: Execute 18-03-PLAN.md (InvoiceManager data layer)*
