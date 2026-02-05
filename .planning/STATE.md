@@ -11,25 +11,25 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 17 of 29 (Expense Management) - In progress
-Plan: 5 of 7 in current phase (17-01, 17-02, 17-03, 17-04, 17-05 complete)
+Plan: 6 of 7 in current phase (17-01 through 17-06 complete)
 Status: In progress
-Last activity: 2026-02-05 - Completed 17-05-PLAN.md (Calendar-Expense Linking & Deduction Integration)
+Last activity: 2026-02-05 - Completed 17-06-PLAN.md (Dietas Validation & Billable/Receipt Protection)
 
-Progress: Phases 12-16 complete (26 plans) + Phase 17: 5/7 plans complete
-[###############################################################-----------] ~41%
+Progress: Phases 12-16 complete (26 plans) + Phase 17: 6/7 plans complete
+[################################################################----------] ~42%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 53
+- Total plans completed: 54
 - Average duration: 3.5 min
-- Total execution time: 294 min
+- Total execution time: 304 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 31 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 5)
-- Phase 17: In progress (5/7 plans)
+- Plans completed: 32 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 6)
+- Phase 17: In progress (6/7 plans)
 
 *Updated after each plan completion*
 
@@ -159,6 +159,11 @@ Recent decisions affecting current work:
 - [17-05]: Deduction hints are entity-type-aware (Autonomo vs SL rules per category)
 - [17-05]: Deduction summary collapsible by default to keep expense list clean
 - [17-05]: Client calculateTotals now queries real expense data (invoices still placeholder for Phase 18)
+- [17-06]: validateDietas is standalone function (separate from ExpenseManager CRUD)
+- [17-06]: Dietas warnings are advisory (do not block save), cash shows error-level warning
+- [17-06]: Receipt preview uses DOM overlay (not dialog) for backdrop click dismiss
+- [17-06]: renderArchivedExpenses uses forceShow parameter for re-render without toggle
+- [17-06]: All expense deletes remain soft delete via DataManager.softDelete (EXPENSE-15)
 
 ### Pending Todos
 
@@ -202,13 +207,14 @@ Phases needing `/gsd:research-phase`:
 | 17-03 | Expense form dialog HTML + JS handlers (create/edit, OCR, conditional fields) | `be26446`, `e743df1` |
 | 17-04 | Expense list with filters, summary bar, dual-layout table+cards | `4ade847`, `5a0e99e` |
 | 17-05 | Calendar-expense linking, deduction indicators/hints/summary, client expenses tab | `dab43a2`, `296d136` |
+| 17-06 | validateDietas, receipt preview, enhanced archive, archived expenses toggle | `296d136`, `aa1dd0f` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 17-05-PLAN.md (Calendar-Expense Linking & Deduction Integration)
+Stopped at: Completed 17-06-PLAN.md (Dietas Validation & Billable/Receipt Protection)
 Resume file: None
 
 ---
 *Phase 17 in progress: 2026-02-05*
-*Next step: Continue Phase 17 plans (17-06 next)*
+*Next step: Continue Phase 17 plans (17-07 next)*
