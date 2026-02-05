@@ -156,7 +156,15 @@ Plans:
   3. User can link expense to client/project (billable) or calendar days (trip)
   4. System validates dietas limits (91.35 EUR/day Belgium with overnight)
   5. Expense list shows date, vendor, amount, category, deductible amount, and client if linked
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [ ] 17-01-PLAN.md — EXPENSE_CATEGORY config and ExpenseManager CRUD
+- [ ] 17-02-PLAN.md — ReceiptManager with OCR and image compression
+- [ ] 17-03-PLAN.md — Expense form dialog with entity-type-aware categories
+- [ ] 17-04-PLAN.md — Expense list view with filters and summary
+- [ ] 17-05-PLAN.md — Calendar-expense linking and deduction integration
+- [ ] 17-06-PLAN.md — Dietas validation and billable/receipt protection
+- [ ] 17-07-PLAN.md — Verification checkpoint and browser testing
 
 ### Phase 18: Invoice Generation
 **Goal**: Users can generate compliant invoices with entity-type-specific templates and VeriFactu QR
@@ -314,7 +322,7 @@ Phases 12-29 execute sequentially with dependencies as noted.
 | 14. Authentication & Permissions | v2.0 | 6/6 | ✓ Complete | 2026-02-04 |
 | 15. Client Management | v2.0 | 5/5 | ✓ Complete | 2026-02-04 |
 | 16. Calendar Enhancement | v2.0 | 0/7 | Ready | - |
-| 17. Expense Management | v2.0 | 0/TBD | Not started | - |
+| 17. Expense Management | v2.0 | 0/7 | Ready | - |
 | 18. Invoice Generation | v2.0 | 0/TBD | Not started | - |
 | 19. Receipt Upload & OCR | v2.0 | 0/TBD | Not started | - |
 | 20. Tax Automation - Autonomo | v2.0 | 0/TBD | Not started | - |
