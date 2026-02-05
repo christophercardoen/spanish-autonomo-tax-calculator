@@ -7369,6 +7369,166 @@
       margin-left: 4px;
     }
 
+    /* Phase 17-06: Dietas warnings in expense form */
+    .dietas-warnings {
+      margin-top: 0.5rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .dietas-warnings:empty { display: none; }
+    .dietas-warning-item {
+      padding: 0.4rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      line-height: 1.3;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .dietas-warning-item.level-error {
+      background: rgba(248, 113, 113, 0.12);
+      border-left: 3px solid #f87171;
+      color: #fca5a5;
+    }
+    .dietas-warning-item.level-warning {
+      background: rgba(251, 191, 36, 0.10);
+      border-left: 3px solid #fbbf24;
+      color: #fde68a;
+    }
+    .dietas-warning-item.level-info {
+      background: rgba(96, 165, 250, 0.08);
+      border-left: 3px solid #60a5fa;
+      color: #93c5fd;
+    }
+    .dietas-warning-item .warning-icon {
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      margin-top: 1px;
+    }
+    .expense-form-dialog select.cash-warning-highlight {
+      border-color: rgba(248, 113, 113, 0.5);
+      background: rgba(248, 113, 113, 0.06);
+    }
+    .expense-cash-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      background: rgba(248, 113, 113, 0.15);
+      color: #f87171;
+      margin-left: 4px;
+    }
+    .expense-dietas-warn-icon {
+      display: inline-block;
+      margin-left: 4px;
+      color: #fbbf24;
+      cursor: help;
+      font-size: 12px;
+    }
+    .expense-receipt-icon {
+      display: inline-block;
+      margin-left: 4px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 12px;
+      transition: color 0.15s;
+    }
+    .expense-receipt-icon:hover { color: var(--accent); }
+    .receipt-preview-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .receipt-preview-modal {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      max-width: 500px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .receipt-preview-modal .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .receipt-preview-modal .preview-header h3 {
+      margin: 0; font-size: 0.9rem; color: var(--text);
+    }
+    .receipt-preview-modal .preview-header button {
+      background: transparent; border: none; color: var(--text-muted);
+      cursor: pointer; font-size: 1.1rem; padding: 2px 6px;
+    }
+    .receipt-preview-modal .preview-header button:hover { color: var(--text); }
+    .receipt-preview-modal .preview-image-container {
+      overflow: auto; max-height: 60vh; text-align: center;
+    }
+    .receipt-preview-modal .preview-image-container img {
+      max-width: 100%; border-radius: var(--radius-sm);
+    }
+    .receipt-preview-modal .preview-footer {
+      display: flex; justify-content: flex-end; gap: 0.5rem;
+    }
+    .receipt-preview-modal .preview-footer button {
+      padding: 0.35rem 0.75rem; border-radius: var(--radius-sm);
+      font-size: 0.8rem; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent; color: var(--text-muted);
+      transition: background 0.15s, color 0.15s;
+    }
+    .receipt-preview-modal .preview-footer button:hover {
+      background: rgba(255,255,255,0.05); color: var(--text);
+    }
+    .expense-summary-bar .summary-stat .billable-detail {
+      font-size: 10px; color: var(--text-muted); opacity: 0.7; margin-top: 1px;
+    }
+    .expense-archived-toggle {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-top: var(--spacing-md); padding: 0.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.8rem; color: var(--text-muted); cursor: pointer;
+    }
+    .expense-archived-toggle:hover { color: var(--text); }
+    .expense-archived-list {
+      margin-top: 0.5rem;
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+    }
+    .expense-archived-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.82rem;
+    }
+    .expense-archived-item:last-child { border-bottom: none; }
+    .expense-archived-item .archived-info {
+      display: flex; gap: 0.75rem; color: var(--text-muted);
+    }
+    .expense-archived-item .restore-btn {
+      padding: 2px 8px; font-size: 11px;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      border-radius: var(--radius-sm);
+      background: transparent; color: var(--accent);
+      cursor: pointer; transition: background 0.15s;
+    }
+    .expense-archived-item .restore-btn:hover {
+      background: rgba(74, 222, 128, 0.1);
+    }
+    .expense-archived-item .restore-btn:disabled {
+      opacity: 0.4; cursor: not-allowed;
+    }
+
     /* Actions column */
     .expense-actions {
       display: flex;
@@ -8455,7 +8615,7 @@
             </div>
             <div class="form-group">
               <label for="efAmount">Amount (EUR)</label>
-              <input type="number" id="efAmount" step="0.01" min="0" required placeholder="0.00">
+              <input type="number" id="efAmount" step="0.01" min="0" required placeholder="0.00" oninput="_triggerDietasValidation()">
             </div>
           </div>
 
@@ -8478,6 +8638,7 @@
               <select id="efCategory" required onchange="onExpenseCategoryChange(this)">
                 <option value="">-- Select --</option>
               </select>
+              <div id="efCategoryDeductionHint" class="category-deduction-hint" style="display: none;"></div>
             </div>
             <div class="form-group" id="efSubcategoryGroup" style="display: none;">
               <label for="efSubcategory">Subcategory</label>
@@ -8532,21 +8693,23 @@
             <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.25rem;">Meals / Dietas Details</div>
             <div class="form-group">
               <label for="efMealsDestination">Destination</label>
-              <input type="text" id="efMealsDestination" placeholder="e.g., BE, ES, NL">
+              <input type="text" id="efMealsDestination" placeholder="e.g., BE, ES, NL" oninput="_triggerDietasValidation()">
             </div>
             <div class="checkbox-row">
-              <input type="checkbox" id="efMealsHasOvernight">
+              <input type="checkbox" id="efMealsHasOvernight" onchange="_triggerDietasValidation()">
               <label for="efMealsHasOvernight">Has Overnight Stay</label>
             </div>
             <div class="form-group">
               <label for="efPaymentMethod">Payment Method</label>
-              <select id="efPaymentMethod">
+              <select id="efPaymentMethod" onchange="_triggerDietasValidation()">
                 <option value="card">Card</option>
                 <option value="transfer">Transfer</option>
                 <option value="bizum">Bizum</option>
                 <option value="cash">Cash</option>
               </select>
             </div>
+            <!-- Phase 17-06: Dietas real-time warnings container -->
+            <div id="efDietasWarnings" class="dietas-warnings"></div>
           </div>
 
           <!-- Conditional fields: Home Office (autonomo only) -->
@@ -20287,6 +20450,165 @@ Generated by Autonomo Tax Calculator`;
     };
 
     // =====================================================
+    // Dietas Validation (Phase 17-06, EXPENSE-08)
+    // =====================================================
+
+    /**
+     * validateDietas - Validate autonomo dietas expense for fiscal compliance
+     * Checks AEAT rules: electronic payment, destination, daily limits.
+     *
+     * Source: AEAT Reglamento IRPF Art. 9 (RD 439/2007)
+     * Limits per day:
+     *   Spain no overnight: 26.67 EUR (2667 cents)
+     *   Spain with overnight: 53.34 EUR (5334 cents)
+     *   Abroad no overnight: 48.08 EUR (4808 cents)
+     *   Abroad with overnight: 91.35 EUR (9135 cents)
+     *
+     * @param {Object} expenseData - Expense form data
+     * @param {number} expenseData.amount_cents - Amount in cents
+     * @param {string} expenseData.payment_method - Payment method
+     * @param {string} expenseData.destination - Destination code
+     * @param {boolean} expenseData.has_overnight - Overnight stay
+     * @param {string} entityType - ENTITY_TYPE value
+     * @returns {Object} { valid, warnings, deductible_limit_cents }
+     */
+    function validateDietas(expenseData, entityType) {
+      if (entityType !== ENTITY_TYPE.AUTONOMO) {
+        return { valid: true, warnings: [], deductible_limit_cents: null };
+      }
+
+      const warnings = [];
+
+      // a. Cash payment: NOT deductible since 2018
+      if (expenseData.payment_method === 'cash') {
+        warnings.push({
+          level: 'error',
+          message: 'Dietas paid in cash are NOT deductible since 2018 (Ley 6/2017). Use card, transfer, or Bizum.'
+        });
+      }
+
+      // b. No destination provided
+      if (!expenseData.destination || expenseData.destination.trim() === '') {
+        warnings.push({
+          level: 'warning',
+          message: 'Destination required for dietas deduction. AEAT requires municipality/country of work.'
+        });
+      }
+
+      // c. Same municipality (home location)
+      const dest = (expenseData.destination || '').trim().toUpperCase();
+      if (dest === 'HOME' || dest === 'LOCAL') {
+        warnings.push({
+          level: 'warning',
+          message: 'Dietas in your municipality of residence are NOT deductible (Art. 9 RD 439/2007).'
+        });
+      }
+
+      // d. Daily limit calculation
+      const isAbroad = dest && dest !== 'ES' && dest !== '' && dest !== 'HOME' && dest !== 'LOCAL';
+      const hasOvernight = expenseData.has_overnight === true;
+
+      let limitCents;
+      if (isAbroad) {
+        limitCents = hasOvernight ? 9135 : 4808;
+      } else {
+        limitCents = hasOvernight ? 5334 : 2667;
+      }
+
+      const amountCents = expenseData.amount_cents || 0;
+      if (amountCents > limitCents) {
+        const limitEuros = (limitCents / 100).toFixed(2);
+        const overnightLabel = hasOvernight ? 'with overnight' : 'without overnight';
+        const locationLabel = isAbroad ? 'abroad' : 'Spain';
+        warnings.push({
+          level: 'warning',
+          message: `Amount exceeds daily dietas limit: ${limitEuros} EUR/day (${locationLabel}, ${overnightLabel}). Only ${limitEuros} EUR is deductible per day.`
+        });
+      }
+
+      // e. Electronic payment reminder (only if not set)
+      if (!expenseData.payment_method) {
+        warnings.push({
+          level: 'info',
+          message: 'Remember: electronic payment required for dietas deduction (card, transfer, Bizum).'
+        });
+      }
+
+      return {
+        valid: warnings.filter(w => w.level === 'error').length === 0,
+        warnings,
+        deductible_limit_cents: limitCents
+      };
+    }
+
+    /**
+     * _renderDietasWarnings - Render warnings into the form container
+     * @param {Array<{level,message}>} warnings
+     */
+    function _renderDietasWarnings(warnings) {
+      const container = document.getElementById('efDietasWarnings');
+      if (!container) return;
+
+      if (!warnings || warnings.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      const icons = { error: '!', warning: '!', info: 'i' };
+      container.innerHTML = warnings.map(w => {
+        const icon = icons[w.level] || 'i';
+        return `<div class="dietas-warning-item level-${w.level}">
+          <span class="warning-icon">${icon}</span>
+          <span>${_escapeHtml(w.message)}</span>
+        </div>`;
+      }).join('');
+    }
+
+    /**
+     * _triggerDietasValidation - Gather form values and run validation
+     * Called on input changes within the meals/dietas fields
+     */
+    function _triggerDietasValidation() {
+      const entity = EntityContext.current;
+      const entityType = entity?.type || ENTITY_TYPE.AUTONOMO;
+      const categoryVal = document.getElementById('efCategory')?.value;
+
+      // Only validate for MEALS_DIETAS category
+      if (categoryVal !== 'MEALS_DIETAS') {
+        const container = document.getElementById('efDietasWarnings');
+        if (container) container.innerHTML = '';
+        return;
+      }
+
+      const amountStr = document.getElementById('efAmount')?.value || '0';
+      const amountEur = parseFloat(amountStr);
+      const amountCents = isNaN(amountEur) ? 0 : Math.round(amountEur * 100);
+
+      const destination = document.getElementById('efMealsDestination')?.value?.trim() || '';
+      const hasOvernight = !!document.getElementById('efMealsHasOvernight')?.checked;
+      const paymentMethod = document.getElementById('efPaymentMethod')?.value || null;
+
+      const result = validateDietas({
+        amount_cents: amountCents,
+        payment_method: paymentMethod,
+        destination: destination,
+        has_overnight: hasOvernight
+      }, entityType);
+
+      _renderDietasWarnings(result.warnings);
+
+      // Highlight cash payment select with red tint
+      const paySelect = document.getElementById('efPaymentMethod');
+      if (paySelect) {
+        if (paymentMethod === 'cash' && entityType === ENTITY_TYPE.AUTONOMO) {
+          paySelect.classList.add('cash-warning-highlight');
+        } else {
+          paySelect.classList.remove('cash-warning-highlight');
+        }
+      }
+    }
+
+    // =====================================================
     // Receipt Manager (Phase 17)
     // =====================================================
 
@@ -20787,6 +21109,19 @@ Generated by Autonomo Tax Calculator`;
         }
       }
 
+      // Show category-specific deduction hint (Phase 17-05)
+      const hintEl = document.getElementById('efCategoryDeductionHint');
+      if (hintEl) {
+        const hint = _getCategoryDeductionHint(categoryKey);
+        if (hint) {
+          hintEl.textContent = hint;
+          hintEl.style.display = '';
+        } else {
+          hintEl.style.display = 'none';
+          hintEl.textContent = '';
+        }
+      }
+
       // Handle subcategory select
       const subcategoryGroup = document.getElementById('efSubcategoryGroup');
       const subcategorySelect = document.getElementById('efSubcategory');
@@ -20805,6 +21140,58 @@ Generated by Autonomo Tax Calculator`;
           subcategoryGroup.style.display = 'none';
           subcategorySelect.innerHTML = '<option value="">-- None --</option>';
         }
+      }
+
+      // Phase 17-06: Trigger dietas validation when category changes
+      _triggerDietasValidation();
+    }
+
+    /**
+     * _getCategoryDeductionHint - Get entity-type-aware deduction hint text for a category
+     * Shows the deduction rules for the selected category based on the current entity type.
+     * @param {string} categoryKey - EXPENSE_CATEGORY key
+     * @returns {string|null} - Hint text or null if no hint
+     */
+    function _getCategoryDeductionHint(categoryKey) {
+      if (\!categoryKey) return null;
+
+      const entity = EntityContext.current;
+      const entityType = entity?.type || ENTITY_TYPE.AUTONOMO;
+      const isAutonomo = entityType === ENTITY_TYPE.AUTONOMO;
+
+      switch (categoryKey) {
+        case 'HOME_OFFICE':
+          return isAutonomo
+            ? 'Deduction: max 30% of home expenses (Autonomo). Requires Modelo 036.'
+            : 'Deduction: 100% if justified as business space (SL).';
+        case 'GSM':
+          return isAutonomo
+            ? 'Deduction: 50% IRPF + 50% IVA (Autonomo).'
+            : 'Deduction: 100% if company line (SL).';
+        case 'VEHICLE':
+          return isAutonomo
+            ? 'Deduction: 0% IRPF, 50% IVA only (Autonomo). Must prove exclusive business use for IRPF.'
+            : 'Deduction: 100% if company asset (SL). Mixed use = retribucion en especie.';
+        case 'MEALS_DIETAS':
+          return isAutonomo
+            ? 'Limit: 91.35 EUR/day abroad w/ overnight, 48.08 EUR without. Requires electronic payment.'
+            : 'Deduction: 100% if justified (SL). Representation limit 1% of revenue.';
+        case 'TRAVEL':
+          return 'Deduction: 100% if justified as business travel. Hotel IVA via Modelo 360 (Belgium).';
+        case 'IT_SOFTWARE':
+          return 'Deduction: 100%. Hardware > 300 EUR may require depreciation (26%/year).';
+        case 'OFFICE_SUPPLIES':
+          return 'Deduction: 100% deductible.';
+        case 'PROFESSIONAL_SERVICES':
+          return 'Deduction: 100% deductible (gestor, lawyer, notary).';
+        case 'TRAINING':
+          return 'Deduction: 100% if related to business activity.';
+        case 'DEPRECIATION':
+          return isAutonomo
+            ? 'Use simplified amortization table (Grupo 1-10). Applied per-asset.'
+            : 'Use IS amortization tables (LIS Art. 12). Accelerated for PYME.';
+        default:
+          return null;
       }
     }
 
@@ -21015,6 +21402,41 @@ Generated by Autonomo Tax Calculator`;
           expenseData.is_billable = !!document.getElementById('efBillable')?.checked;
         }
 
+        // Phase 17-06: Billable validation - client required when billable checked
+        if (expenseData.is_billable && !expenseData.client_id) {
+          alert('A client must be selected when marking an expense as billable.');
+          _expenseFormSubmitting = false;
+          return;
+        }
+
+        // Phase 17-06: Pre-submit dietas validation (EXPENSE-08)
+        if (categoryVal === 'MEALS_DIETAS') {
+          const entity = EntityContext.current;
+          const entityType = entity?.type || ENTITY_TYPE.AUTONOMO;
+          const dietasResult = validateDietas({
+            amount_cents: amountCents,
+            payment_method: expenseData.payment_method,
+            destination: expenseData.destination,
+            has_overnight: expenseData.has_overnight
+          }, entityType);
+
+          if (dietasResult.warnings.length > 0) {
+            const warningMessages = dietasResult.warnings.map(w => {
+              const prefix = w.level === 'error' ? '[!] ' : w.level === 'warning' ? '[!] ' : '[i] ';
+              return prefix + w.message;
+            }).join('\n');
+
+            const proceed = confirm('Dietas warnings:\n\n' + warningMessages + '\n\nSave anyway?');
+            if (!proceed) {
+              _expenseFormSubmitting = false;
+              return;
+            }
+          }
+
+          // Store warnings as metadata for list display
+          expenseData._dietas_warnings = dietasResult.warnings;
+        }
+
         let expenseId;
 
         if (editId) {
@@ -21192,7 +21614,26 @@ Generated by Autonomo Tax Calculator`;
         // Update summary bar
         if (summaryTotal) summaryTotal.textContent = MoneyUtils.formatEuros(totalCents);
         if (summaryDeductible) summaryDeductible.textContent = MoneyUtils.formatEuros(deductibleCents);
-        if (summaryCount) summaryCount.textContent = expenses.length.toString();
+        if (summaryCount) {
+          summaryCount.textContent = expenses.length.toString();
+          // Phase 17-06: Show billable detail when billable filter active
+          const billableFilter = document.getElementById('expFilterBillable')?.value;
+          if (billableFilter === 'true') {
+            const clientIds = new Set(expenses.filter(e => e.client_id).map(e => e.client_id));
+            const billableDetailEl = summaryCount.parentElement?.querySelector('.billable-detail');
+            if (billableDetailEl) {
+              billableDetailEl.textContent = `${expenses.length} expenses for ${clientIds.size} client${clientIds.size !== 1 ? 's' : ''}`;
+            } else {
+              const detail = document.createElement('div');
+              detail.className = 'billable-detail';
+              detail.textContent = `${expenses.length} expenses for ${clientIds.size} client${clientIds.size !== 1 ? 's' : ''}`;
+              summaryCount.parentElement?.appendChild(detail);
+            }
+          } else {
+            const existingDetail = summaryCount.parentElement?.querySelector('.billable-detail');
+            if (existingDetail) existingDetail.remove();
+          }
+        }
 
         // Empty state
         if (!expenses || expenses.length === 0) {
@@ -21220,8 +21661,10 @@ Generated by Autonomo Tax Calculator`;
           const catConfig = EXPENSE_CATEGORY[exp.category];
           const catLabel = catConfig?.label || exp.category;
           const dateDisplay = formatDateEU(exp.date);
-          const amountDisplay = MoneyUtils.formatEuros(exp.amount_cents || 0);
-          const deductDisplay = MoneyUtils.formatEuros(exp.deductible_amount_cents || 0);
+          const amountCents = exp.amount_cents || 0;
+          const deductCents = exp.deductible_amount_cents || 0;
+          const amountDisplay = MoneyUtils.formatEuros(amountCents);
+          const deductDisplay = MoneyUtils.formatEuros(deductCents);
           const vendorDisplay = _escapeHtml(exp.vendor || '');
           const vendorTruncated = vendorDisplay.length > 30
             ? vendorDisplay.substring(0, 30) + '...'
@@ -21231,14 +21674,56 @@ Generated by Autonomo Tax Calculator`;
             ? '<span class="expense-billable-badge">Billable</span>'
             : '';
 
+          // Phase 17-06: Dietas badges for expense list
+          let dietasBadge = '';
+          if (exp.category === 'MEALS_DIETAS') {
+            const entity = EntityContext.current;
+            const entityType = entity?.type || ENTITY_TYPE.AUTONOMO;
+            if (entityType === ENTITY_TYPE.AUTONOMO) {
+              if (exp.payment_method === 'cash') {
+                dietasBadge = '<span class="expense-cash-badge">Cash - Not deductible</span>';
+              } else {
+                // Quick check for limit exceeded
+                const dietasCheck = validateDietas({
+                  amount_cents: exp.amount_cents || 0,
+                  payment_method: exp.payment_method,
+                  destination: exp.destination,
+                  has_overnight: exp.has_overnight
+                }, entityType);
+                const hasWarns = dietasCheck.warnings.filter(w => w.level !== 'info').length > 0;
+                if (hasWarns) {
+                  const warnTitles = dietasCheck.warnings.filter(w => w.level !== 'info').map(w => w.message).join(' | ');
+                  dietasBadge = `<span class="expense-dietas-warn-icon" title="${_escapeHtml(warnTitles)}">!</span>`;
+                }
+              }
+            }
+          }
+
+          // Phase 17-06: Receipt icon
+          const receiptIcon = exp.receipt_id
+            ? `<span class="expense-receipt-icon" title="Has receipt attached" onclick="event.stopPropagation(); openReceiptPreview(${exp.id})">&#128206;</span>`
+            : '';
+
+          // Deduction indicator: full (100%), partial, or zero
+          let deductIndicator = '';
+          let deductClass = 'deduction-full';
+          if (amountCents > 0 && deductCents === 0) {
+            deductIndicator = '<span class="deduction-zero-badge">Not deductible</span>';
+            deductClass = '';
+          } else if (amountCents > 0 && deductCents < amountCents) {
+            const pct = Math.round((deductCents / amountCents) * 100);
+            deductIndicator = `<span class="deduction-pct-badge">${pct}%</span>`;
+            deductClass = 'deduction-partial';
+          }
+
           // Table row (desktop)
           tableRows += `
             <tr class="expense-row">
               <td class="col-date">${dateDisplay}</td>
-              <td class="col-vendor" title="${vendorDisplay}">${vendorTruncated}</td>
-              <td><span class="expense-category-badge">${_escapeHtml(catLabel)}</span>${billableBadge}</td>
+              <td class="col-vendor" title="${vendorDisplay}">${vendorTruncated}${receiptIcon}</td>
+              <td><span class="expense-category-badge">${_escapeHtml(catLabel)}</span>${billableBadge}${dietasBadge}</td>
               <td class="col-amount">${amountDisplay}</td>
-              <td class="col-deductible">${deductDisplay}</td>
+              <td class="col-deductible ${deductClass}">${deductDisplay}${deductIndicator}</td>
               <td class="col-client">${clientName || '&mdash;'}</td>
               <td class="col-actions">
                 <div class="expense-actions">
@@ -21258,11 +21743,11 @@ Generated by Autonomo Tax Calculator`;
               <div class="expense-card-meta">
                 <span>${dateDisplay}</span>
                 <span class="expense-category-badge">${_escapeHtml(catLabel)}</span>
-                ${billableBadge}
+                ${billableBadge}${dietasBadge}${receiptIcon}
                 ${clientName ? '<span>' + clientName + '</span>' : ''}
               </div>
               <div class="expense-card-footer">
-                <span class="card-deductible">Deductible: ${deductDisplay}</span>
+                <span class="card-deductible ${deductClass}">Deductible: ${deductDisplay}${deductIndicator}</span>
                 <div class="expense-actions">
                   <button type="button" onclick="openExpenseFormDialog(${exp.id})" title="Edit">Edit</button>
                   <button type="button" class="archive-btn" onclick="archiveExpenseConfirm(${exp.id})" title="Archive">Del</button>
@@ -21270,6 +21755,9 @@ Generated by Autonomo Tax Calculator`;
               </div>
             </div>`;
         }
+
+        // Build deduction summary by category
+        const deductionSummaryHtml = await _buildDeductionSummary(expenses);
 
         // Render both layouts (CSS handles visibility)
         container.innerHTML = `
@@ -21289,7 +21777,8 @@ Generated by Autonomo Tax Calculator`;
               <tbody>${tableRows}</tbody>
             </table>
           </div>
-          <div class="expense-list-cards">${cards}</div>`;
+          <div class="expense-list-cards">${cards}</div>
+          ${deductionSummaryHtml}`;
 
       } catch (err) {
         console.error('Error rendering expense list:', err);
@@ -21300,6 +21789,89 @@ Generated by Autonomo Tax Calculator`;
         if (summaryDeductible) summaryDeductible.textContent = '--';
         if (summaryCount) summaryCount.textContent = '0';
       }
+    }
+
+    /**
+     * _buildDeductionSummary - Build collapsible deduction summary by category
+     * Groups total expenses and deductible amounts by category.
+     * @param {Array} expenses - Array of expense objects
+     * @returns {string} - HTML string for deduction summary section
+     */
+    function _buildDeductionSummary(expenses) {
+      if (!expenses || expenses.length === 0) return '';
+
+      // Group by category
+      const groups = {};
+      let grandTotal = 0;
+      let grandDeductible = 0;
+
+      for (const exp of expenses) {
+        const cat = exp.category || 'OTHER';
+        if (!groups[cat]) {
+          const catConfig = EXPENSE_CATEGORY[cat];
+          groups[cat] = {
+            label: catConfig?.label || cat,
+            total_cents: 0,
+            deductible_cents: 0,
+            count: 0
+          };
+        }
+        groups[cat].total_cents += exp.amount_cents || 0;
+        groups[cat].deductible_cents += exp.deductible_amount_cents || 0;
+        groups[cat].count += 1;
+        grandTotal += exp.amount_cents || 0;
+        grandDeductible += exp.deductible_amount_cents || 0;
+      }
+
+      // Build table rows
+      let rows = '';
+      for (const [cat, data] of Object.entries(groups).sort((a, b) => b[1].total_cents - a[1].total_cents)) {
+        const rate = data.total_cents > 0 ? Math.round((data.deductible_cents / data.total_cents) * 100) : 0;
+        const rateLabel = rate === 100 ? '100%' : (rate === 0 ? '0%' : rate + '%');
+        rows += `<tr>
+          <td>${_escapeHtml(data.label)}</td>
+          <td>${MoneyUtils.formatEuros(data.total_cents)}</td>
+          <td>${MoneyUtils.formatEuros(data.deductible_cents)}</td>
+          <td>${rateLabel}</td>
+        </tr>`;
+      }
+
+      const grandRate = grandTotal > 0 ? Math.round((grandDeductible / grandTotal) * 100) : 0;
+      rows += `<tr class="summary-total-row">
+        <td>Total</td>
+        <td>${MoneyUtils.formatEuros(grandTotal)}</td>
+        <td>${MoneyUtils.formatEuros(grandDeductible)}</td>
+        <td>${grandRate}%</td>
+      </tr>`;
+
+      return `
+        <div class="deduction-summary" id="deductionSummary">
+          <div class="deduction-summary-header" onclick="toggleDeductionSummary()">
+            <h4>Deduction Summary by Category</h4>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="deduction-summary-body">
+            <table class="deduction-summary-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Total</th>
+                  <th>Deductible</th>
+                  <th>Rate</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
+        </div>`;
+    }
+
+    /**
+     * toggleDeductionSummary - Toggle the expanded/collapsed state of the deduction summary
+     */
+    function toggleDeductionSummary() {
+      const el = document.getElementById('deductionSummary');
+      if (el) el.classList.toggle('expanded');
     }
 
     /**
