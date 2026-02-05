@@ -11,25 +11,25 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 Milestone: v2.0 Multi-Entity Business Management
 Phase: 17 of 29 (Expense Management) - In progress
-Plan: 4 of 7 in current phase (17-01, 17-02, 17-03, 17-04 complete)
+Plan: 5 of 7 in current phase (17-01, 17-02, 17-03, 17-04, 17-05 complete)
 Status: In progress
-Last activity: 2026-02-05 - Completed 17-04-PLAN.md (Expense List View)
+Last activity: 2026-02-05 - Completed 17-05-PLAN.md (Calendar-Expense Linking & Deduction Integration)
 
-Progress: Phases 12-16 complete (26 plans) + Phase 17: 4/7 plans complete
-[##############################################################------------] ~40%
+Progress: Phases 12-16 complete (26 plans) + Phase 17: 5/7 plans complete
+[###############################################################-----------] ~41%
 
 ## Performance Metrics
 
 **Velocity (from v1.1):**
-- Total plans completed: 52
+- Total plans completed: 53
 - Average duration: 3.5 min
-- Total execution time: 286 min
+- Total execution time: 294 min
 
 **v2.0 Metrics:**
 - Phases: 18 (Phases 12-29)
 - Total requirements: 223
-- Plans completed: 30 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 4)
-- Phase 17: In progress (4/7 plans)
+- Plans completed: 31 (Phase 12: 3, Phase 13: 5, Phase 14: 6, Phase 15: 5, Phase 16: 7, Phase 17: 5)
+- Phase 17: In progress (5/7 plans)
 
 *Updated after each plan completion*
 
@@ -154,6 +154,11 @@ Recent decisions affecting current work:
 - [17-04]: Empty state differentiates 'no expenses yet' vs 'no matches for current filters'
 - [17-04]: Category filter is entity-type-aware (hides SL-only categories for autonomo)
 - [17-04]: Tab activation (tab-expenses change event) triggers filter population and list render
+- [17-05]: Day editor always shows expenses section (Add button visible even with 0 expenses)
+- [17-05]: Trip expenses displayed via getExpensesForDateRange overlap query with 'trip' badge
+- [17-05]: Deduction hints are entity-type-aware (Autonomo vs SL rules per category)
+- [17-05]: Deduction summary collapsible by default to keep expense list clean
+- [17-05]: Client calculateTotals now queries real expense data (invoices still placeholder for Phase 18)
 
 ### Pending Todos
 
@@ -196,13 +201,14 @@ Phases needing `/gsd:research-phase`:
 | 17-02 | ReceiptManager singleton, compressImage, lazy Tesseract.js OCR | `ea30959` |
 | 17-03 | Expense form dialog HTML + JS handlers (create/edit, OCR, conditional fields) | `be26446`, `e743df1` |
 | 17-04 | Expense list with filters, summary bar, dual-layout table+cards | `4ade847`, `5a0e99e` |
+| 17-05 | Calendar-expense linking, deduction indicators/hints/summary, client expenses tab | `dab43a2`, `296d136` |
 
 ## Session Continuity
 
 Last session: 2026-02-05
-Stopped at: Completed 17-04-PLAN.md (Expense List View)
+Stopped at: Completed 17-05-PLAN.md (Calendar-Expense Linking & Deduction Integration)
 Resume file: None
 
 ---
 *Phase 17 in progress: 2026-02-05*
-*Next step: Continue Phase 17 plans (17-05 next)*
+*Next step: Continue Phase 17 plans (17-06 next)*
