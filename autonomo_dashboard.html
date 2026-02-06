@@ -35,16 +35,16 @@
       /* Text hierarchy */
       --text: #111827;
       --text-muted: #6b7280;
-      --text-faint: #9ca3af;
+      --text-faint: #566070;  /* Was #78818d (3.7:1 FAIL AA) → now 4.8:1 on #f8f9fa — WCAG AA pass */
 
       /* Accent — emerald, used sparingly */
-      --accent: #059669;
-      --accent-hover: #047857;
+      --accent: #047857;      /* Was #059669 (3.8:1 FAIL) → now 5.5:1 on white */
+      --accent-hover: #065f46;
 
       /* Semantic colors */
-      --positive: #059669;
+      --positive: #047857;    /* Matches accent */
       --negative: #dc2626;
-      --warning: #d97706;
+      --warning: #b45309;     /* Was #d97706 (3.2:1 FAIL) → now 5.0:1 on white */
       --belgium: #2563eb;
 
       /* Borders & surfaces */
@@ -53,35 +53,51 @@
       --hover-bg: rgba(0,0,0,0.04);
       --surface-hover: rgba(0,0,0,0.02);
       --surface-subtle: rgba(0,0,0,0.015);
-      --accent-surface: rgba(5,150,105,0.06);
-      --accent-surface-hover: rgba(5,150,105,0.1);
+      --accent-surface: rgba(4,120,87,0.06);
+      --accent-surface-hover: rgba(4,120,87,0.1);
       --negative-surface: rgba(220,38,38,0.06);
-      --warning-surface: rgba(217,119,6,0.06);
+      --warning-surface: rgba(180,83,9,0.06);
       --belgium-surface: rgba(37,99,235,0.06);
       --overlay: rgba(0,0,0,0.4);
       --overlay-bg: rgba(0,0,0,0.03);
+
+      /* Previously undefined tokens — now defined */
+      --text-secondary: #6b7280;
+      --text-tertiary: #9ca3af;
+      --text-dim: #9ca3af;
+      --bg-primary: #f8f9fa;
+      --bg-secondary: #f3f4f6;
+      --bg-tertiary: #e5e7eb;
+      --bg-card: #ffffff;
+      --accent-color: #2563eb;
+      --accent-color-hover: #1d4ed8;
+      --warning-color: #d97706;
 
       /* Shadows — minimal, modern */
       --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
       --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
       --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+      --shadow-xl: 0 20px 40px rgba(0,0,0,0.12);
 
-      /* Typography */
+      /* Typography — Major Third scale (1.25 ratio) from 16px base */
       --font-ui: 'DM Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
-      --size-page-title: 24px;
-      --size-section-title: 18px;
-      --size-body: 15px;
-      --size-small: 13px;
-      --size-caption: 12px;
-      --size-numbers: 16px;
-      --size-header: 20px;
-      --size-labels: 14px;
+      --size-display: 32px;       /* 2rem — large display */
+      --size-page-title: 24px;    /* 1.5rem — page headings */
+      --size-header: 20px;        /* 1.25rem — section headings */
+      --size-section-title: 18px; /* 1.125rem — subsection headings */
+      --size-numbers: 16px;       /* 1rem — monospace data */
+      --size-body: 15px;          /* 0.9375rem — body text */
+      --size-labels: 14px;        /* 0.875rem — form labels, nav */
+      --size-small: 13px;         /* 0.8125rem — secondary info */
+      --size-caption: 12px;       /* 0.75rem — captions, badges */
+      --size-tiny: 11px;          /* 0.6875rem — micro labels */
 
       /* Spacing scale (4px base) */
       --spacing-xs: 4px;
       --spacing-sm: 8px;
+      --spacing-ms: 12px;
       --spacing-md: 16px;
       --spacing-lg: 24px;
       --spacing-xl: 32px;
@@ -136,7 +152,7 @@
 
       --text: #f0f1f3;
       --text-muted: #9ca3af;
-      --text-faint: #6b7280;
+      --text-faint: #8a94a2;  /* Was #7c8694 (4.7:1) → 5.2:1 on #1a1b23 — WCAG AA pass */
 
       --accent: #34d399;
       --accent-hover: #6ee7b7;
@@ -159,10 +175,23 @@
       --overlay: rgba(0,0,0,0.6);
       --overlay-bg: rgba(0,0,0,0.2);
 
+      /* Previously undefined tokens — dark equivalents */
+      --text-secondary: #9ca3af;
+      --text-tertiary: #6b7280;
+      --text-dim: #6b7280;
+      --bg-primary: #0f1117;
+      --bg-secondary: #1a1b23;
+      --bg-tertiary: #24252e;
+      --bg-card: #1a1b23;
+      --accent-color: #60a5fa;
+      --accent-color-hover: #3b82f6;
+      --warning-color: #fbbf24;
+
       --shadow-xs: 0 1px 2px rgba(0,0,0,0.2);
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
       --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
       --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+      --shadow-xl: 0 20px 40px rgba(0,0,0,0.5);
     }
     *, *::before, *::after {
       box-sizing: border-box;
@@ -183,6 +212,49 @@
       margin: 0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Tabular numbers for financial data alignment */
+    .metric .value,
+    .expense-value,
+    .block-row .value,
+    .detail-row .value,
+    .scenario-metric .value,
+    .invoice-amount,
+    .summary-amount,
+    .income-amount,
+    [class*="amount"],
+    [class*="total"],
+    .font-mono,
+    table td:last-child,
+    .comparison-table td {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Selection styling — matches accent color */
+    ::selection {
+      background: rgba(4,120,87,0.2);
+      color: var(--text);
+    }
+    [data-theme="dark"] ::selection {
+      background: rgba(52,211,153,0.25);
+      color: var(--text);
+    }
+
+    /* Custom scrollbar — subtle, both modes */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-faint);
     }
 
     .container {
@@ -464,7 +536,7 @@
 
     .clients-header h2 {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: var(--size-header);
       font-weight: 600;
     }
 
@@ -538,7 +610,7 @@
     }
 
     .client-flag {
-      font-size: 1.5rem;
+      font-size: var(--size-page-title);
     }
 
     .client-name {
@@ -647,7 +719,7 @@
 
     .client-detail-info h2 {
       margin: 0 0 0.5rem 0;
-      font-size: 1.5rem;
+      font-size: var(--size-page-title);
     }
 
     .client-detail-meta {
@@ -661,7 +733,7 @@
     .vies-badge {
       padding: 0.25rem 0.5rem;
       border-radius: var(--radius-sm);
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       font-family: var(--font-mono);
     }
 
@@ -696,14 +768,14 @@
 
     .summary-label {
       display: block;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       color: var(--text-muted);
       margin-bottom: 0.25rem;
     }
 
     .summary-value {
       font-family: var(--font-mono);
-      font-size: 1.25rem;
+      font-size: var(--size-header);
       font-weight: 600;
       color: var(--text);
     }
@@ -760,12 +832,12 @@
 
     .panel-header h3 {
       margin: 0;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
     }
 
     .btn-small {
       padding: 0.25rem 0.75rem;
-      font-size: 0.875rem;
+      font-size: var(--size-labels);
     }
 
     .coming-soon {
@@ -797,7 +869,7 @@
     }
 
     .contact-role {
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       color: var(--text-muted);
       text-transform: uppercase;
       min-width: 100px;
@@ -808,7 +880,7 @@
     }
 
     .contact-details {
-      font-size: 0.875rem;
+      font-size: var(--size-labels);
       color: var(--text-muted);
     }
 
@@ -848,14 +920,14 @@
     }
 
     .project-dates {
-      font-size: 0.875rem;
+      font-size: var(--size-labels);
       color: var(--text-muted);
     }
 
     .status-badge {
       padding: 0.25rem 0.5rem;
       border-radius: var(--radius-sm);
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       text-transform: uppercase;
     }
 
@@ -902,13 +974,13 @@
       margin-bottom: 0.5rem;
     }
     .empty-state-illustrated p {
-      color: var(--text-muted); font-size: 0.9rem; max-width: 340px;
+      color: var(--text-muted); font-size: var(--size-labels); max-width: 340px;
       line-height: 1.6; margin-bottom: 1.5rem;
     }
     .empty-state-illustrated .empty-cta {
       background: var(--accent); color: #000; border: none;
-      padding: 0.65rem 1.5rem; border-radius: 8px; font-weight: 600;
-      font-size: 0.9rem; cursor: pointer; transition: filter 0.2s;
+      padding: 0.65rem 1.5rem; border-radius: var(--radius-md); font-weight: 600;
+      font-size: var(--size-labels); cursor: pointer; transition: filter 0.2s;
       font-family: inherit;
     }
     .empty-state-illustrated .empty-cta:hover { filter: brightness(1.1); }
@@ -921,7 +993,7 @@
       padding: 0.25rem 0.5rem;
       border-radius: var(--radius-sm);
       cursor: pointer;
-      font-size: 0.875rem;
+      font-size: var(--size-labels);
     }
 
     .btn-icon:hover {
@@ -989,7 +1061,7 @@
 
     .income-header h2 {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: var(--size-header);
       font-weight: 600;
     }
 
@@ -1163,7 +1235,7 @@
 
     .panel-compliance h2 {
       margin: 0 0 8px 0;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       font-weight: 600;
     }
 
@@ -1190,7 +1262,7 @@
       border: none;
       color: var(--text);
       cursor: pointer;
-      font-size: 0.875rem;
+      font-size: var(--size-labels);
       font-weight: 500;
       text-align: left;
       transition: background 0.15s ease;
@@ -1205,7 +1277,7 @@
     }
 
     .compliance-section .section-icon {
-      font-size: 0.7rem;
+      font-size: var(--size-tiny);
       transition: transform 0.15s ease;
       color: var(--text-muted);
       flex-shrink: 0;
@@ -1220,7 +1292,7 @@
     .compliance-section .section-content {
       padding: 10px 12px 12px;
       background: var(--overlay-bg);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       line-height: 1.5;
     }
 
@@ -1235,14 +1307,14 @@
       padding: 8px 12px;
       margin: 0 0 8px 0;
       font-style: italic;
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       line-height: 1.5;
       color: var(--text-muted);
     }
 
     /* Plain summary - tighter */
     .plain-summary {
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       line-height: 1.5;
       color: var(--text);
       margin: 0 0 8px 0;
@@ -1284,7 +1356,7 @@
     }
 
     .action-phase h3 {
-      font-size: 0.7rem;
+      font-size: var(--size-tiny);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -1305,7 +1377,7 @@
       width: 100%;
       border-collapse: collapse;
       margin: 6px 0;
-      font-size: 0.8rem;
+      font-size: var(--size-small);
     }
 
     .fiscal-table th,
@@ -1318,7 +1390,7 @@
     .fiscal-table th {
       color: var(--text-muted);
       font-weight: 500;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       text-transform: uppercase;
       letter-spacing: 0.3px;
     }
@@ -1335,7 +1407,7 @@
     /* Source citation - minimal */
     .panel-compliance .source-citation {
       display: block;
-      font-size: 0.7rem;
+      font-size: var(--size-tiny);
       color: var(--text-muted);
       margin-top: 6px;
       font-style: normal;
@@ -1395,7 +1467,7 @@
 
     .sources-section h3 {
       margin: 0 0 var(--spacing-md) 0;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       color: var(--text);
     }
 
@@ -1435,7 +1507,7 @@
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       gap: 4px;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       line-height: 1.3;
     }
 
@@ -1460,7 +1532,7 @@
     .invalid-list h5 {
       color: var(--negative);
       margin: 0 0 6px 0;
-      font-size: 0.8rem;
+      font-size: var(--size-small);
     }
 
     .invalid-list li {
@@ -1485,7 +1557,7 @@
       margin-bottom: 2px;
       counter-increment: step;
       position: relative;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       line-height: 1.3;
     }
 
@@ -1507,14 +1579,14 @@
       align-items: center;
       justify-content: center;
       font-weight: 600;
-      font-size: 0.65rem;
+      font-size: var(--size-tiny);
     }
 
     .tie-breaker-steps .step-name {
       font-weight: 600;
       color: var(--text);
       display: inline;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
     }
 
     .tie-breaker-steps .step-name::after {
@@ -1523,7 +1595,7 @@
     }
 
     .tie-breaker-steps .step-plain {
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       color: var(--text-muted);
       display: inline;
     }
@@ -1535,7 +1607,7 @@
       padding: 8px 10px;
       margin-top: 8px;
       border-radius: 0 4px 4px 0;
-      font-size: 0.8rem;
+      font-size: var(--size-small);
     }
 
     .payment-warning strong {
@@ -1544,7 +1616,7 @@
 
     .payment-warning p {
       margin: 4px 0 0 0;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       color: var(--text-muted);
     }
 
@@ -1555,7 +1627,7 @@
       padding: 8px 10px;
       margin-top: 8px;
       border-radius: 0 4px 4px 0;
-      font-size: 0.8rem;
+      font-size: var(--size-small);
     }
 
     .entry-exit-warning strong {
@@ -1564,7 +1636,7 @@
 
     .entry-exit-warning p {
       margin: 4px 0 0 0;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       color: var(--text-muted);
     }
 
@@ -1577,7 +1649,7 @@
       margin-bottom: 1rem;
       background: rgba(251, 146, 60, 0.15);
       border: 1px solid var(--warning);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       color: var(--text);
     }
 
@@ -1599,7 +1671,7 @@
     }
 
     .compliance-warning-banner .warning-text {
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       flex: 1;
     }
 
@@ -1615,7 +1687,7 @@
       background: transparent;
       border: none;
       color: var(--text);
-      font-size: 1.25rem;
+      font-size: var(--size-header);
       cursor: pointer;
       padding: 0.25rem 0.5rem;
       margin-left: 1rem;
@@ -1636,7 +1708,7 @@
     }
 
     .global-disclaimer p {
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       color: var(--text-muted);
       line-height: 1.5;
       max-width: 800px;
@@ -1650,18 +1722,18 @@
       padding: 1rem;
       margin-top: 1rem;
       border-radius: 0 4px 4px 0;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .entry-exit-warning strong {
       color: var(--warning);
     }
 
-    input[type="number"] { padding: 0.5rem; font-size: 1rem; width: 150px; }
+    input[type="number"] { padding: 0.5rem; font-size: var(--size-numbers); width: 150px; }
     input[type="checkbox"] { width: auto; }
     button { padding: 0.5rem 1rem; cursor: pointer; }
     .result { margin-top: 1rem; font-family: monospace; }
-    .breakdown { margin-left: 1rem; font-size: 0.9rem; opacity: 0.8; }
+    .breakdown { margin-left: 1rem; font-size: var(--size-labels); opacity: 0.8; }
     .input-section {
       display: flex;
       flex-direction: column;
@@ -1859,7 +1931,7 @@
       color: var(--accent); font-size: 1.3rem; margin-bottom: 0.25rem;
     }
     .modelo130-section .section-subtitle {
-      color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;
+      color: var(--text-muted); font-size: var(--size-labels); margin-bottom: 1.5rem;
     }
     .modelo130-quarters {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1875,10 +1947,10 @@
       margin-bottom: 1rem;
     }
     .quarter-card .q-label {
-      font-weight: 600; font-size: 1rem;
+      font-weight: 600; font-size: var(--size-numbers);
     }
     .quarter-card .q-deadline {
-      font-size: 0.75rem; color: var(--text-muted);
+      font-size: var(--size-caption); color: var(--text-muted);
       background: var(--hover-bg); padding: 0.2rem 0.5rem; border-radius: 4px;
     }
     .quarter-card .q-deadline.urgent {
@@ -1886,7 +1958,7 @@
     }
     .quarter-card .q-rows { display: flex; flex-direction: column; gap: 0.4rem; }
     .quarter-card .q-row {
-      display: flex; justify-content: space-between; font-size: 0.85rem;
+      display: flex; justify-content: space-between; font-size: var(--size-labels);
     }
     .quarter-card .q-row .q-key { color: var(--text-muted); }
     .quarter-card .q-row .q-val {
@@ -1896,13 +1968,13 @@
       border-top: 1px solid var(--border);
       padding-top: 0.5rem; margin-top: 0.25rem; font-weight: 600;
     }
-    .quarter-card .q-row.q-total .q-val { color: var(--accent); font-size: 0.95rem; }
+    .quarter-card .q-row.q-total .q-val { color: var(--accent); font-size: var(--size-body); }
     .quarter-card .q-row.q-total.q-negative .q-val { color: var(--negative); }
     .modelo130-annual {
       background: var(--bg-surface); border: 1px solid var(--border);
       border-radius: 10px; padding: 1.25rem;
     }
-    .modelo130-annual h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+    .modelo130-annual h3 { font-size: var(--size-numbers); margin-bottom: 0.75rem; }
     .annual-summary {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1rem;
@@ -1913,7 +1985,7 @@
       font-weight: 700; color: var(--accent);
     }
     .annual-stat .stat-label {
-      font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;
+      font-size: var(--size-small); color: var(--text-muted); margin-top: 0.25rem;
     }
 
     /* Mobile responsive for calculator */
@@ -1963,7 +2035,7 @@
 
     .summary-value {
       font-family: var(--font-mono);
-      font-size: 1.5rem;
+      font-size: var(--size-page-title);
       font-weight: 600;
       color: var(--text);
     }
@@ -1977,7 +2049,7 @@
     }
 
     .summary-unit {
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       font-weight: 400;
       color: var(--text-muted);
       margin-left: 2px;
@@ -2139,7 +2211,7 @@
       margin-top: 3rem;
       padding-top: 1rem;
       border-top: 1px solid var(--border);
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       opacity: 0.7;
     }
 
@@ -2177,16 +2249,16 @@
     .expense-section {
       margin-bottom: 2rem;
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       background: var(--surface-hover);
     }
 
     .expense-section.spain-deductible {
-      border-left: 3px solid #4ade80;  /* Green - deductible */
+      border-left: 3px solid var(--positive);  /* Green - deductible */
     }
 
     .expense-section.work-travel {
-      border-left: 3px solid #60a5fa;  /* Blue - work travel */
+      border-left: 3px solid var(--accent-color);  /* Blue - work travel */
     }
 
     .expense-section.private {
@@ -2235,7 +2307,7 @@
 
     .expense-formula {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       opacity: 0.7;
       flex: 1;
       text-align: center;
@@ -2294,7 +2366,7 @@
       width: 90%;
       padding: 0;
       border: none;
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       background: var(--bg-surface);
       color: var(--text);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
@@ -2335,7 +2407,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .form-row input,
@@ -2379,7 +2451,7 @@
       padding: 0.5rem 1rem;
       border-radius: var(--radius-sm);
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .reset-btn:hover {
@@ -2486,8 +2558,8 @@
     .card-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
     }
 
     .card-header input[type="checkbox"] {
@@ -2498,14 +2570,14 @@
 
     .card-header h3 {
       margin: 0;
-      font-size: 1.1rem;
+      font-size: var(--size-section-title);
       flex: 1;
     }
 
     .optimal-badge {
       background: var(--accent);
       color: var(--bg);
-      font-size: 0.7rem;
+      font-size: var(--size-tiny);
       padding: 0.2rem 0.5rem;
       border-radius: 4px;
       font-weight: 600;
@@ -2515,36 +2587,43 @@
     .card-metrics {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: var(--spacing-xs);
     }
 
     .metric {
       display: flex;
       justify-content: space-between;
-      font-size: 0.85rem;
-      padding: 0.2rem 0;
+      font-size: var(--size-labels);
+      padding: 2px 0;
     }
 
     .metric .label {
       color: var(--text-muted);
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-right: var(--spacing-sm);
     }
 
     .metric .value {
       font-family: var(--font-mono);
       font-size: var(--size-labels);
+      flex-shrink: 0;
+      text-align: right;
     }
 
     /* Divider for metric groups */
     .metric.divider {
       padding: 0;
-      margin: 0.4rem 0;
+      margin: var(--spacing-xs) 0;
       border-top: 1px solid var(--border);
     }
 
     /* Highlight row (leefgeld) */
     .metric.highlight {
-      padding: 0.4rem 0;
-      margin-top: 0.4rem;
+      padding: var(--spacing-xs) 0;
+      margin-top: var(--spacing-xs);
       border-top: 1px solid var(--border);
     }
 
@@ -2594,6 +2673,19 @@
       border-radius: 4px;
     }
 
+    /* Desktop: scenario cards fill available space instead of clipping */
+    @media (min-width: 1024px) {
+      .scenario-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        overflow-x: visible;
+      }
+      .scenario-card {
+        flex: none;
+        width: 100%;
+      }
+    }
+
     /* Modal dialogs — clean surfaces */
     dialog {
       background: var(--bg-surface);
@@ -2621,7 +2713,7 @@
     .detail-dialog {
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       padding: 0;
       max-width: 500px;
       width: 90%;
@@ -2652,7 +2744,7 @@
 
     .detail-title {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: var(--size-header);
       font-weight: 600;
     }
 
@@ -2660,7 +2752,7 @@
       background: transparent;
       border: none;
       color: var(--text);
-      font-size: 1.5rem;
+      font-size: var(--size-page-title);
       cursor: pointer;
       opacity: 0.7;
       padding: 0;
@@ -2678,7 +2770,7 @@
 
     .detail-section {
       background: var(--surface-hover);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 1rem;
     }
 
@@ -2694,7 +2786,7 @@
       display: flex;
       justify-content: space-between;
       padding: 0.4rem 0;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .detail-row .label {
@@ -2746,7 +2838,7 @@
       background: transparent;
       border: none;
       color: var(--text);
-      font-size: 1.5rem;
+      font-size: var(--size-page-title);
       cursor: pointer;
       padding: 0.25rem 0.5rem;
       opacity: 0.7;
@@ -2773,7 +2865,7 @@
 
     .input-pane h3, .results-pane h3 {
       margin: 0 0 0.5rem 0;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       opacity: 0.8;
       border-bottom: 1px solid var(--border);
       padding-bottom: 0.5rem;
@@ -2782,7 +2874,7 @@
     .results-pane {
       background: var(--surface-hover);
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
     }
 
     .form-group {
@@ -2792,7 +2884,7 @@
     }
 
     .form-group label {
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       opacity: 0.8;
     }
 
@@ -2834,7 +2926,7 @@
 
     .fiscal-overrides summary {
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       opacity: 0.8;
     }
 
@@ -2847,7 +2939,7 @@
       display: flex;
       justify-content: space-between;
       padding: 0.4rem 0;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       border-bottom: 1px solid var(--hover-bg);
     }
 
@@ -2872,7 +2964,7 @@
     .live-result-row.highlight .value {
       color: var(--accent);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
     }
 
     .dialog-footer {
@@ -2943,7 +3035,7 @@
       overflow-y: visible;   /* Let content expand vertically */
       max-width: 100%;
       background: var(--surface-subtle);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       border: 1px solid var(--border);
     }
 
@@ -2971,7 +3063,7 @@
       width: max-content;    /* Allow table to exceed container */
       min-width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     /* Sticky header row - z-index: 100 */
@@ -3053,13 +3145,13 @@
       border-top: 1px solid var(--border);
     }
     .year-comparison-section h3 {
-      font-size: 1.2rem;
+      font-size: var(--size-header);
       font-weight: 600;
       margin-bottom: 0.25rem;
     }
     .year-comparison-section .section-subtitle {
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       margin-bottom: 1.25rem;
     }
     .year-comparison-controls {
@@ -3071,15 +3163,15 @@
     }
     .year-comparison-controls label {
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
     .year-comparison-controls select {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text);
       padding: 0.4rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: var(--size-labels);
     }
     .year-cards {
       display: grid;
@@ -3102,11 +3194,11 @@
       margin-bottom: 1rem;
     }
     .year-card-header h4 {
-      font-size: 1.1rem;
+      font-size: var(--size-section-title);
       font-weight: 700;
     }
     .year-card-header .year-badge {
-      font-size: 0.7rem;
+      font-size: var(--size-tiny);
       padding: 0.2rem 0.6rem;
       border-radius: 10px;
       font-weight: 600;
@@ -3117,7 +3209,7 @@
       display: flex;
       justify-content: space-between;
       padding: 0.3rem 0;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
     .year-card .yr-row .yr-label { color: var(--text-muted); }
     .year-card .yr-row .yr-val { font-family: var(--font-mono); }
@@ -3129,11 +3221,11 @@
     .year-card .yr-row.yr-highlight .yr-val {
       color: var(--accent);
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: var(--size-body);
     }
     .year-delta {
       display: inline-block;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       margin-left: 0.5rem;
       font-weight: 600;
     }
@@ -3158,9 +3250,9 @@
       border: 2px dashed var(--border);
       color: var(--text);
       padding: 0.75rem 1.5rem;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       cursor: pointer;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       margin-left: 1rem;
       flex-shrink: 0;
       transition: border-color 0.2s, color 0.2s;
@@ -3212,7 +3304,7 @@
     }
 
     .template-option .template-desc {
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       opacity: 0.7;
     }
 
@@ -3233,7 +3325,7 @@
       margin: 0;
       flex: 1;
       text-align: center;
-      font-size: 1.2rem;
+      font-size: var(--size-header);
     }
 
     .nav-btn {
@@ -3243,7 +3335,7 @@
       padding: 0.5rem 1rem;
       border-radius: 4px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       transition: border-color 0.2s, color 0.2s;
     }
 
@@ -3262,14 +3354,14 @@
       grid-template-columns: repeat(7, 1fr);
       gap: 2px;
       background: var(--hover-bg);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 0.5rem;
     }
 
     .day-header {
       text-align: center;
       padding: 0.5rem;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       font-weight: 600;
       opacity: 0.6;
     }
@@ -3432,7 +3524,7 @@
     }
 
     .day-number {
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       font-weight: 600;
       flex: 1;
     }
@@ -3463,7 +3555,7 @@
     }
 
     .status-empty {
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       color: var(--text-muted);
       opacity: 0.3;
     }
@@ -3509,7 +3601,7 @@
     }
 
     .status-emoji-large {
-      font-size: 1.5rem;
+      font-size: var(--size-page-title);
     }
 
     /* Day Picker Dialog - narrower width */
@@ -3550,10 +3642,10 @@
     /* Calendar Help Tip */
     .calendar-help-tip {
       padding: 10px 14px;
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-ms);
       background: var(--hover-bg);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       font-size: var(--size-small);
       color: var(--text-muted);
       line-height: 1.5;
@@ -3578,12 +3670,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: var(--spacing-ms);
       padding: 12px 16px;
       background: var(--accent);
       color: var(--bg);
       font-weight: 600;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       margin-bottom: 16px;
     }
 
@@ -3597,7 +3689,7 @@
       border: none;
       border-radius: 4px;
       color: var(--bg);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       cursor: pointer;
       transition: background 0.2s;
     }
@@ -3618,7 +3710,7 @@
       border-radius: 4px;
       background: var(--bg-surface);
       color: var(--text-muted);
-      font-size: 0.7rem;
+      font-size: var(--size-tiny);
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
@@ -3637,7 +3729,7 @@
       border-radius: 4px;
       background: transparent;
       color: var(--text-muted);
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       cursor: pointer;
       transition: all 0.2s;
       margin-left: 12px;
@@ -3661,7 +3753,7 @@
       border-radius: 4px;
       background: transparent;
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
@@ -3685,9 +3777,9 @@
       gap: 1rem;
       padding: 0.75rem 1rem;
       background: var(--surface-hover);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       margin-bottom: 1rem;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .year-summary strong {
@@ -3696,7 +3788,7 @@
 
     .year-summary .threshold-indicator {
       font-family: var(--font-mono);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .year-summary .threshold-indicator.warning {
@@ -3713,14 +3805,14 @@
       grid-template-columns: 32px repeat(7, 1fr);
       gap: 2px;
       background: var(--hover-bg);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 0.5rem;
     }
 
     .calendar-grid-with-weeks .day-header {
       text-align: center;
       padding: 0.5rem;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       font-weight: 600;
       opacity: 0.6;
     }
@@ -3734,7 +3826,7 @@
     /* Unsaved changes indicator */
     .unsaved-indicator {
       color: var(--warning);
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       align-self: center;
     }
     .unsaved-indicator.hidden { display: none; }
@@ -3760,19 +3852,19 @@
     .count-value {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: var(--size-section-title);
     }
 
     /* Warning Badge */
     .warning-badge {
       padding: 0.2rem 0.5rem;
       border-radius: 4px;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       font-weight: 600;
     }
 
     .warning-badge.yellow { background: var(--warning); color: #fff; }
-    .warning-badge.orange { background: #fb923c; color: #fff; }
+    .warning-badge.orange { background: var(--warning); color: #fff; }
     .warning-badge.red { background: var(--negative); color: #fff; }
 
     /* Warning Banner */
@@ -3784,7 +3876,7 @@
     }
 
     .warning-banner.yellow { background: var(--warning-surface); border: 1px solid var(--warning); color: var(--warning); }
-    .warning-banner.orange { background: rgba(251, 146, 60, 0.1); border: 1px solid #fb923c; color: #fb923c; }
+    .warning-banner.orange { background: rgba(251, 146, 60, 0.1); border: 1px solid var(--warning); color: var(--warning); }
     .warning-banner.red { background: var(--negative-surface); border: 1px solid var(--negative); color: var(--negative); }
 
     .warning-banner.hidden, .warning-badge.hidden { display: none; }
@@ -3793,11 +3885,11 @@
     .threshold-banner {
       padding: 0.75rem 1rem;
       margin-bottom: 1rem;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .threshold-banner.safe {
@@ -3813,17 +3905,17 @@
     .threshold-banner.warning {
       background: rgba(251, 146, 60, 0.15);
       border: 1px solid rgba(251, 146, 60, 0.3);
-      color: #f97316;
+      color: var(--warning);
     }
 
     .threshold-banner.danger {
       background: rgba(239, 68, 68, 0.15);
       border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #ef4444;
+      color: var(--negative);
     }
 
     .threshold-banner .warning-icon {
-      font-size: 1.1rem;
+      font-size: var(--size-section-title);
       flex-shrink: 0;
     }
 
@@ -3835,18 +3927,18 @@
     .threshold-banner .warning-count {
       margin-left: auto;
       font-family: var(--font-mono);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       white-space: nowrap;
     }
 
     .threshold-banner .warning-count strong {
-      font-size: 1rem;
+      font-size: var(--size-numbers);
     }
 
     .threshold-banner .warning-dismiss {
       background: none;
       border: none;
-      font-size: 1.2rem;
+      font-size: var(--size-header);
       cursor: pointer;
       opacity: 0.7;
       padding: 0.25rem;
@@ -3894,12 +3986,12 @@
 
     .gcal-not-configured {
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .gcal-status {
       color: var(--positive);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       margin-right: 0.5rem;
     }
 
@@ -3912,7 +4004,7 @@
 
     #gcalConnected .btn-sm {
       padding: 0.25rem 0.5rem;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
     }
 
     /* Notification Toast */
@@ -3922,7 +4014,7 @@
       right: 2rem;
       padding: 0.75rem 1.5rem;
       border-radius: 4px;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       z-index: 1000;
       animation: slideIn 0.3s ease;
     }
@@ -4000,7 +4092,7 @@
       width: 90%;
       padding: 0;
       border: none;
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       background: var(--bg-surface);
       color: var(--text);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
@@ -4023,14 +4115,14 @@
 
     .tooltip-modal-title {
       margin: 0 0 12px 0;
-      font-size: 1.1rem;
+      font-size: var(--size-section-title);
       font-weight: 600;
       color: var(--accent);
     }
 
     .tooltip-modal-text {
       margin: 0 0 20px 0;
-      font-size: 0.95rem;
+      font-size: var(--size-body);
       line-height: 1.6;
       color: var(--text);
     }
@@ -4040,10 +4132,10 @@
       width: 100%;
       padding: 12px 20px;
       border: none;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       background: var(--accent);
       color: var(--bg);
-      font-size: 0.95rem;
+      font-size: var(--size-body);
       font-weight: 600;
       cursor: pointer;
       transition: opacity 0.2s;
@@ -4078,6 +4170,16 @@
     .export-actions button {
       font-size: var(--size-small);
       padding: 0.4rem 0.75rem;
+    }
+
+    /* Accessibility: reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
 
     @media print {
@@ -4332,7 +4434,7 @@
     .comparison-block {
       background: var(--surface-hover);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 1rem;
       margin-bottom: 1rem;
     }
@@ -4344,7 +4446,7 @@
 
     .block-title {
       margin: 0 0 1rem 0;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -4414,7 +4516,7 @@
       /* Tab nav adjustments */
       .tab-label {
         padding: 0.6rem 1rem;
-        font-size: 0.8rem;
+        font-size: var(--size-small);
       }
 
       /* Calendar adjustments for tablet */
@@ -4455,7 +4557,7 @@
     @media (max-width: 600px) {
 
       .dashboard-title {
-        font-size: 1.25rem;
+        font-size: var(--size-header);
       }
 
       /* Mobile header: compact single row */
@@ -4536,7 +4638,7 @@
       }
 
       .block-row .value {
-        font-size: 0.9rem;
+        font-size: var(--size-labels);
       }
 
       /* Export actions stack */
@@ -4560,7 +4662,7 @@
         order: 1;
         width: 100%;
         text-align: center;
-        font-size: 1rem;
+        font-size: var(--size-numbers);
         margin-bottom: 0.5rem;
       }
 
@@ -4578,21 +4680,21 @@
 
       .day-header {
         padding: 0.25rem;
-        font-size: 0.7rem;
+        font-size: var(--size-tiny);
       }
 
       .day-cell {
         min-height: 48px; /* Touch-friendly minimum */
         padding: 0.2rem;
-        font-size: 0.75rem;
+        font-size: var(--size-caption);
       }
 
       .day-number {
-        font-size: 0.75rem;
+        font-size: var(--size-caption);
       }
 
       .status-emoji {
-        font-size: 1.1rem;
+        font-size: var(--size-section-title);
       }
 
       .contracted-badge {
@@ -4611,7 +4713,7 @@
       .selection-indicator {
         flex-wrap: wrap;
         padding: 10px 12px;
-        font-size: 0.85rem;
+        font-size: var(--size-labels);
       }
 
       .selection-indicator .clear-btn {
@@ -4627,7 +4729,7 @@
 
       .count-display {
         flex-wrap: wrap;
-        font-size: 0.9rem;
+        font-size: var(--size-labels);
       }
 
       /* Calendar actions */
@@ -4686,7 +4788,7 @@
       }
 
       .dialog-header h2 {
-        font-size: 1.1rem;
+        font-size: var(--size-section-title);
       }
 
       .dialog-body {
@@ -4761,7 +4863,7 @@
       }
 
       .status-emoji-large {
-        font-size: 1.25rem;
+        font-size: var(--size-header);
       }
 
       /* Expense sections mobile */
@@ -4789,7 +4891,7 @@
 
       .expense-formula {
         text-align: left;
-        font-size: 0.8rem;
+        font-size: var(--size-small);
       }
 
       .expense-value {
@@ -4859,7 +4961,7 @@
         left: 0.5rem;
         width: 1.25rem;
         height: 1.25rem;
-        font-size: 0.75rem;
+        font-size: var(--size-caption);
       }
 
       /* Global disclaimer mobile */
@@ -4869,7 +4971,7 @@
       }
 
       .global-disclaimer p {
-        font-size: 0.75rem;
+        font-size: var(--size-caption);
       }
 
       /* Template dialog mobile */
@@ -4904,20 +5006,20 @@
       }
 
       .day-number {
-        font-size: 0.7rem;
+        font-size: var(--size-tiny);
       }
 
       .status-emoji {
-        font-size: 1rem;
+        font-size: var(--size-numbers);
         margin-top: 0.15rem;
       }
 
       .metric {
-        font-size: 0.8rem;
+        font-size: var(--size-small);
       }
 
       .metric .value {
-        font-size: 0.8rem;
+        font-size: var(--size-small);
       }
     }
 
@@ -5268,7 +5370,7 @@
     }
 
     .entity-modal__btn--primary:hover {
-      background: #3bc972;
+      background: var(--accent-hover);
     }
 
     .entity-modal__btn--primary:disabled {
@@ -5386,7 +5488,7 @@
       padding: 4px 0;
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       z-index: 1000;
       list-style: none;
@@ -5476,11 +5578,11 @@
     .dual-activity-warning {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: var(--spacing-ms);
       padding: 16px 20px;
       background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.05));
       border: 1px solid rgba(234, 179, 8, 0.3);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       margin: 16px 24px;
     }
 
@@ -5495,7 +5597,7 @@
 
     .dual-activity-warning__title {
       font-weight: 600;
-      color: #eab308;
+      color: var(--warning);
       margin-bottom: 4px;
     }
 
@@ -5556,7 +5658,7 @@
     .auth-container {
       background: var(--bg-surface, #242424);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       padding: 48px;
       max-width: 400px;
       width: 90%;
@@ -5585,7 +5687,7 @@
     .auth-input {
       background: var(--bg, #1a1a1a);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 14px 16px;
       font-size: 16px;
       color: var(--text, #eaeaea);
@@ -5617,7 +5719,7 @@
     }
 
     .auth-button:hover {
-      background: #22c55e;
+      background: var(--accent-hover);
     }
 
     .auth-button:active {
@@ -5625,7 +5727,7 @@
     }
 
     .auth-button:disabled {
-      background: #4b5563;
+      background: var(--text-faint);
       cursor: not-allowed;
     }
 
@@ -5635,11 +5737,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: var(--spacing-ms);
     }
 
     .auth-button.google:hover {
-      background: #f3f4f6;
+      background: var(--bg-secondary);
     }
 
     .auth-button.google svg {
@@ -5666,20 +5768,20 @@
 
     .auth-message {
       padding: 12px 16px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-size: 14px;
       margin-top: 16px;
     }
 
     .auth-message.success {
       background: rgba(34, 197, 94, 0.1);
-      color: #22c55e;
+      color: var(--positive);
       border: 1px solid rgba(34, 197, 94, 0.2);
     }
 
     .auth-message.error {
       background: rgba(239, 68, 68, 0.1);
-      color: #ef4444;
+      color: var(--negative);
       border: 1px solid rgba(239, 68, 68, 0.2);
     }
 
@@ -5717,9 +5819,9 @@
     .auth-offline-notice {
       background: rgba(234, 179, 8, 0.1);
       border: 1px solid rgba(234, 179, 8, 0.2);
-      color: #eab308;
+      color: var(--warning);
       padding: 12px 16px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-size: 13px;
       margin-bottom: 24px;
     }
@@ -5770,7 +5872,7 @@
       right: 0;
       background: var(--bg-surface, #242424);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       min-width: 200px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       z-index: 1000;
@@ -5877,7 +5979,7 @@
     .profile-field input {
       background: var(--bg, #1a1a1a);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 12px 14px;
       font-size: 15px;
       color: var(--text, #eaeaea);
@@ -5891,7 +5993,7 @@
 
     .profile-actions {
       display: flex;
-      gap: 12px;
+      gap: var(--spacing-ms);
       margin-top: 8px;
     }
 
@@ -5899,7 +6001,7 @@
       background: var(--accent, #4ade80);
       color: #1a1a1a;
       border: none;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 12px 24px;
       font-size: 14px;
       font-weight: 500;
@@ -5908,11 +6010,11 @@
     }
 
     .profile-save-btn:hover {
-      background: #22c55e;
+      background: var(--accent-hover);
     }
 
     .profile-save-btn:disabled {
-      background: #4b5563;
+      background: var(--text-faint);
       cursor: not-allowed;
     }
 
@@ -5946,7 +6048,7 @@
     .mfa-content {
       background: var(--bg-secondary, #242424);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       padding: 32px;
       max-width: 400px;
       width: 90%;
@@ -5968,7 +6070,7 @@
     .mfa-qr-code {
       background: #fff;
       padding: 16px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       margin-bottom: 16px;
       display: inline-block;
     }
@@ -5982,7 +6084,7 @@
     .mfa-secret {
       background: var(--bg-primary, #1a1a1a);
       padding: 12px;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: var(--text-secondary, #888);
@@ -6011,7 +6113,7 @@
       font-family: 'JetBrains Mono', monospace;
       background: var(--bg-primary, #1a1a1a);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       color: var(--text);
     }
 
@@ -6023,12 +6125,12 @@
     .mfa-actions {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: var(--spacing-ms);
     }
 
     .mfa-btn {
       padding: 12px 24px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
@@ -6042,11 +6144,11 @@
     }
 
     .mfa-btn-primary:hover {
-      background: #2563eb;
+      background: var(--accent-color-hover);
     }
 
     .mfa-btn-primary:disabled {
-      background: #4b5563;
+      background: var(--text-faint);
       cursor: not-allowed;
     }
 
@@ -6081,7 +6183,7 @@
     .sessions-content {
       background: var(--bg-secondary, #242424);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       padding: 24px;
       max-width: 500px;
       width: 90%;
@@ -6114,13 +6216,13 @@
     .sessions-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: var(--spacing-ms);
     }
 
     .session-item {
       background: var(--bg-primary, #1a1a1a);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 16px;
       display: flex;
       justify-content: space-between;
@@ -6159,17 +6261,17 @@
 
     .session-revoke {
       background: transparent;
-      border: 1px solid #ef4444;
-      color: #ef4444;
+      border: 1px solid var(--negative);
+      color: var(--negative);
       padding: 8px 12px;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       font-size: 12px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .session-revoke:hover {
-      background: #ef4444;
+      background: var(--negative);
       color: #fff;
     }
 
@@ -6179,13 +6281,13 @@
       border-top: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: var(--spacing-ms);
     }
 
     .sessions-action-btn {
       width: 100%;
       padding: 12px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-size: 14px;
       cursor: pointer;
       transition: background-color 0.2s;
@@ -6194,7 +6296,7 @@
     .sessions-action-btn.danger {
       background: rgba(239, 68, 68, 0.1);
       border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #ef4444;
+      color: var(--negative);
     }
 
     .sessions-action-btn.danger:hover {
@@ -6229,7 +6331,7 @@
     .invite-content {
       background: var(--bg-secondary, #242424);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       padding: 24px;
       max-width: 480px;
       width: 90%;
@@ -6279,7 +6381,7 @@
     .invite-field select {
       background: var(--bg-primary, #1a1a1a);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 12px 14px;
       font-size: 15px;
       color: var(--text);
@@ -6306,7 +6408,7 @@
       background: var(--accent-color, #3b82f6);
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 12px 24px;
       font-size: 14px;
       font-weight: 500;
@@ -6316,11 +6418,11 @@
     }
 
     .invite-submit:hover {
-      background: #2563eb;
+      background: var(--accent-color-hover);
     }
 
     .invite-submit:disabled {
-      background: #4b5563;
+      background: var(--text-faint);
       cursor: not-allowed;
     }
 
@@ -6330,18 +6432,18 @@
       padding: 16px;
       background: rgba(34, 197, 94, 0.1);
       border: 1px solid rgba(34, 197, 94, 0.2);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
     }
 
     .invite-result-title {
       font-size: 14px;
       font-weight: 500;
-      color: #22c55e;
-      margin-bottom: 12px;
+      color: var(--positive);
+      margin-bottom: var(--spacing-ms);
     }
 
     .invite-result-field {
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-ms);
     }
 
     .invite-result-label {
@@ -6360,7 +6462,7 @@
       flex: 1;
       background: var(--bg-primary, #1a1a1a);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       padding: 10px 12px;
       font-size: 13px;
       color: var(--text);
@@ -6370,7 +6472,7 @@
     .invite-copy-btn {
       background: var(--bg-tertiary, #2a2a2a);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       padding: 10px 14px;
       color: var(--text);
       cursor: pointer;
@@ -6406,14 +6508,14 @@
       background: var(--accent-color, #3b82f6);
       color: #fff;
       border: none;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       padding: 8px 16px;
       font-size: 13px;
       cursor: pointer;
     }
 
     .sharing-invite-btn:hover {
-      background: #2563eb;
+      background: var(--accent-color-hover);
     }
 
     .sharing-list {
@@ -6425,7 +6527,7 @@
     .sharing-item {
       background: var(--bg-primary, #1a1a1a);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 12px 16px;
       display: flex;
       justify-content: space-between;
@@ -6462,13 +6564,13 @@
     .sharing-role {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: var(--spacing-ms);
     }
 
     .sharing-role-badge {
       font-size: 12px;
       padding: 4px 10px;
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       font-weight: 500;
     }
 
@@ -6495,7 +6597,7 @@
     .sharing-revoke {
       background: none;
       border: none;
-      color: #ef4444;
+      color: var(--negative);
       cursor: pointer;
       font-size: 12px;
       padding: 4px 8px;
@@ -6516,7 +6618,7 @@
     .invite-accept-banner {
       background: rgba(59, 130, 246, 0.1);
       border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 16px;
       margin-bottom: 20px;
       display: flex;
@@ -6547,7 +6649,7 @@
 
     .invite-accept-btn {
       padding: 8px 16px;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       font-size: 13px;
       cursor: pointer;
       transition: background-color 0.2s;
@@ -6560,7 +6662,7 @@
     }
 
     .invite-accept-btn.accept:hover {
-      background: #2563eb;
+      background: var(--accent-color-hover);
     }
 
     .invite-accept-btn.decline {
@@ -6615,7 +6717,7 @@
       font-size: 13px;
       text-align: center;
       display: none;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       margin-bottom: 16px;
     }
 
@@ -6627,7 +6729,7 @@
     .entity-switcher__option-role {
       font-size: 10px;
       padding: 1px 6px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       margin-left: auto;
       margin-right: 8px;
     }
@@ -6689,7 +6791,7 @@
 
     .client-modal-header h3 {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: var(--size-header);
       font-weight: 600;
       color: var(--text);
     }
@@ -6699,7 +6801,7 @@
       border: none;
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 1.5rem;
+      font-size: var(--size-page-title);
       padding: 4px;
       line-height: 1;
     }
@@ -6973,7 +7075,7 @@
     }
 
     .day-client {
-      font-size: 0.65rem;
+      font-size: var(--size-tiny);
       color: var(--text-muted);
       position: absolute;
       bottom: 2px;
@@ -6990,7 +7092,7 @@
       right: 2px;
       background: var(--accent);
       color: var(--bg);
-      font-size: 0.6rem;
+      font-size: var(--size-tiny);
       padding: 0 3px;
       border-radius: 50%;
       min-width: 12px;
@@ -7014,11 +7116,11 @@
       padding: 4px 8px;
       background: var(--surface-hover);
       border-radius: var(--radius-sm);
-      font-size: 0.78rem;
+      font-size: var(--size-small);
     }
 
     .day-expense-item .de-cat {
-      font-size: 0.7rem;
+      font-size: var(--size-tiny);
       opacity: 0.7;
       min-width: 80px;
     }
@@ -7032,13 +7134,13 @@
 
     .day-expense-item .de-amount {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       white-space: nowrap;
     }
 
     .day-expense-item .de-deductible {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: var(--size-tiny);
       color: var(--accent);
       white-space: nowrap;
     }
@@ -7047,14 +7149,14 @@
       display: inline-block;
       padding: 0 4px;
       border-radius: 4px;
-      font-size: 0.6rem;
+      font-size: var(--size-tiny);
       font-weight: 600;
       background: rgba(96, 165, 250, 0.15);
-      color: #60a5fa;
+      color: var(--accent-color);
     }
 
     .day-editor-expenses-empty {
-      font-size: 0.78rem;
+      font-size: var(--size-small);
       color: var(--text-muted);
       padding: 4px 0;
     }
@@ -7072,7 +7174,7 @@
       display: inline-block;
       padding: 0 4px;
       border-radius: 4px;
-      font-size: 0.6rem;
+      font-size: var(--size-tiny);
       font-weight: 600;
       background: rgba(251, 191, 36, 0.15);
       color: var(--warning);
@@ -7082,8 +7184,8 @@
     .deduction-zero-badge {
       display: inline-block;
       padding: 1px 6px;
-      border-radius: 8px;
-      font-size: 0.6rem;
+      border-radius: var(--radius-md);
+      font-size: var(--size-tiny);
       font-weight: 600;
       background: rgba(248, 113, 113, 0.15);
       color: var(--negative);
@@ -7092,7 +7194,7 @@
 
     /* Category deduction hint in form (Phase 17-05) */
     .category-deduction-hint {
-      font-size: 0.72rem;
+      font-size: var(--size-caption);
       padding: 4px 8px;
       margin-top: 4px;
       border-radius: var(--radius-sm);
@@ -7121,12 +7223,12 @@
 
     .deduction-summary-header h4 {
       margin: 0;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       font-weight: 600;
     }
 
     .deduction-summary-header .toggle-icon {
-      font-size: 0.7rem;
+      font-size: var(--size-tiny);
       opacity: 0.5;
       transition: transform 0.2s;
     }
@@ -7147,7 +7249,7 @@
     .deduction-summary-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.78rem;
+      font-size: var(--size-small);
     }
 
     .deduction-summary-table th {
@@ -7156,7 +7258,7 @@
       font-weight: 500;
       color: var(--text-muted);
       border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.72rem;
+      font-size: var(--size-caption);
       text-transform: uppercase;
       letter-spacing: 0.3px;
     }
@@ -7177,7 +7279,7 @@
     .deduction-summary-table td:nth-child(4) {
       text-align: right;
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
     }
 
     .deduction-summary-table td:nth-child(3) {
@@ -7204,7 +7306,7 @@
       padding: 6px 10px;
       background: var(--surface-hover);
       border-radius: var(--radius-sm);
-      font-size: 0.8rem;
+      font-size: var(--size-small);
     }
 
     .client-invoice-item:hover {
@@ -7221,7 +7323,7 @@
 
     .client-expense-item .ce-date {
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: var(--size-caption);
       color: var(--text-muted);
     }
 
@@ -7243,7 +7345,7 @@
       padding: 0.5rem 0;
       margin-bottom: 0.5rem;
       border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.82rem;
+      font-size: var(--size-small);
     }
 
     .client-expenses-summary .ces-label {
@@ -7285,7 +7387,7 @@
     /* Phase 16-03: Work Pattern Form Styles */
     .form-fieldset {
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 1rem;
       margin-top: 1rem;
     }
@@ -7331,7 +7433,7 @@
     .pattern-preview {
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 1rem;
       margin: 1rem 0;
     }
@@ -7343,7 +7445,7 @@
     }
 
     .pattern-preview .preview-count {
-      font-size: 1.25rem;
+      font-size: var(--size-header);
       font-weight: 600;
       color: var(--accent);
       margin-bottom: 0.5rem;
@@ -7369,7 +7471,7 @@
       width: 92%;
       padding: 0;
       border: none;
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       background: var(--bg-surface);
       color: var(--text);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
@@ -7396,7 +7498,7 @@
     .expense-form-dialog .dialog-header h2 {
       margin: 0;
       color: var(--accent);
-      font-size: 1.1rem;
+      font-size: var(--size-section-title);
     }
 
     .expense-form-dialog .expense-form-body {
@@ -7421,7 +7523,7 @@
     }
 
     .expense-form-dialog .form-group label {
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       opacity: 0.8;
     }
 
@@ -7434,7 +7536,7 @@
       border-radius: 4px;
       color: var(--text);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .expense-form-dialog .form-group textarea {
@@ -7459,20 +7561,20 @@
       gap: 0.75rem;
       padding: 0.75rem;
       background: var(--surface-subtle);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       border: 1px dashed var(--border);
     }
 
     .expense-form-dialog .receipt-upload-area {
       padding: 0.75rem;
       background: var(--surface-subtle);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       border: 1px dashed var(--border);
     }
 
     .expense-form-dialog .receipt-upload-area input[type="file"] {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .expense-form-dialog .ocr-status {
@@ -7480,21 +7582,21 @@
       margin-top: 0.5rem;
       padding: 0.5rem;
       border-radius: 4px;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .expense-form-dialog .ocr-status.scanning {
       display: block;
       background: rgba(59, 130, 246, 0.1);
       border: 1px solid rgba(59, 130, 246, 0.3);
-      color: #93c5fd;
+      color: var(--accent-color);
     }
 
     .expense-form-dialog .ocr-status.success {
       display: block;
       background: rgba(34, 197, 94, 0.1);
       border: 1px solid rgba(34, 197, 94, 0.3);
-      color: #86efac;
+      color: var(--positive);
     }
 
     .expense-form-dialog .ocr-status.error {
@@ -7508,13 +7610,13 @@
       display: inline-block;
       padding: 0.15rem 0.5rem;
       border-radius: 10px;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       font-weight: 600;
     }
 
     .expense-form-dialog .ocr-confidence.high {
       background: rgba(34, 197, 94, 0.2);
-      color: #86efac;
+      color: var(--positive);
     }
 
     .expense-form-dialog .ocr-confidence.medium {
@@ -7533,12 +7635,12 @@
 
     .expense-form-dialog .ocr-raw-text summary {
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       opacity: 0.6;
     }
 
     .expense-form-dialog .ocr-raw-text pre {
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       background: rgba(0,0,0,0.3);
       padding: 0.5rem;
       border-radius: 4px;
@@ -7562,7 +7664,7 @@
     }
 
     .expense-form-dialog .checkbox-row label {
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       opacity: 0.8;
     }
 
@@ -7578,7 +7680,7 @@
     }
 
     .expense-tracker-section .empty-state {
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       color: var(--text);
     }
 
@@ -7656,7 +7758,7 @@
 
     .expense-summary-bar .summary-stat .stat-value {
       font-family: var(--font-mono);
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       font-weight: 600;
       color: var(--text);
     }
@@ -7675,7 +7777,7 @@
     .expense-list-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .expense-list-table thead th {
@@ -7723,7 +7825,7 @@
 
     .expense-list-table tbody td.col-date {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       white-space: nowrap;
       color: var(--text-muted);
     }
@@ -7737,7 +7839,7 @@
 
     .expense-list-table tbody td.col-client {
       color: var(--text-muted);
-      font-size: 0.8rem;
+      font-size: var(--size-small);
     }
 
     /* Row hover */
@@ -7761,11 +7863,11 @@
     .expense-billable-badge {
       display: inline-block;
       padding: 1px 6px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-size: 10px;
       font-weight: 600;
       background: rgba(96, 165, 250, 0.15);
-      color: #60a5fa;
+      color: var(--accent-color);
       margin-left: 4px;
     }
 
@@ -7781,7 +7883,7 @@
     .dietas-warning-item {
       padding: 0.4rem 0.6rem;
       border-radius: var(--radius-sm);
-      font-size: 0.78rem;
+      font-size: var(--size-small);
       line-height: 1.3;
       display: flex;
       align-items: flex-start;
@@ -7794,17 +7896,17 @@
     }
     .dietas-warning-item.level-warning {
       background: rgba(251, 191, 36, 0.10);
-      border-left: 3px solid #fbbf24;
+      border-left: 3px solid var(--warning);
       color: var(--warning);
     }
     .dietas-warning-item.level-info {
       background: rgba(96, 165, 250, 0.08);
-      border-left: 3px solid #60a5fa;
-      color: #93c5fd;
+      border-left: 3px solid var(--accent-color);
+      color: var(--accent-color);
     }
     .dietas-warning-item .warning-icon {
       flex-shrink: 0;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       margin-top: 1px;
     }
     .expense-form-dialog select.cash-warning-highlight {
@@ -7814,7 +7916,7 @@
     .expense-cash-badge {
       display: inline-block;
       padding: 1px 6px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-size: 10px;
       font-weight: 600;
       background: rgba(248, 113, 113, 0.15);
@@ -7864,11 +7966,11 @@
       align-items: center;
     }
     .receipt-preview-modal .preview-header h3 {
-      margin: 0; font-size: 0.9rem; color: var(--text);
+      margin: 0; font-size: var(--size-labels); color: var(--text);
     }
     .receipt-preview-modal .preview-header button {
       background: transparent; border: none; color: var(--text-muted);
-      cursor: pointer; font-size: 1.1rem; padding: 2px 6px;
+      cursor: pointer; font-size: var(--size-section-title); padding: 2px 6px;
     }
     .receipt-preview-modal .preview-header button:hover { color: var(--text); }
     .receipt-preview-modal .preview-image-container {
@@ -7882,7 +7984,7 @@
     }
     .receipt-preview-modal .preview-footer button {
       padding: 0.35rem 0.75rem; border-radius: var(--radius-sm);
-      font-size: 0.8rem; cursor: pointer;
+      font-size: var(--size-small); cursor: pointer;
       border: 1px solid var(--border);
       background: transparent; color: var(--text-muted);
       transition: background 0.15s, color 0.15s;
@@ -7897,7 +7999,7 @@
       display: flex; align-items: center; gap: 0.5rem;
       margin-top: var(--spacing-md); padding: 0.5rem 0;
       border-top: 1px solid var(--border-subtle);
-      font-size: 0.8rem; color: var(--text-muted); cursor: pointer;
+      font-size: var(--size-small); color: var(--text-muted); cursor: pointer;
     }
     .expense-archived-toggle:hover { color: var(--text); }
     .expense-archived-list {
@@ -7909,7 +8011,7 @@
     .expense-archived-item {
       display: flex; justify-content: space-between; align-items: center;
       padding: 0.4rem 0; border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.82rem;
+      font-size: var(--size-small);
     }
     .expense-archived-item:last-child { border-bottom: none; }
     .expense-archived-item .archived-info {
@@ -7963,11 +8065,11 @@
       text-align: center;
       padding: var(--spacing-2xl) var(--spacing-md);
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .expense-list-empty .empty-hint {
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       margin-top: 0.5rem;
       opacity: 0.6;
     }
@@ -8029,7 +8131,7 @@
         display: flex;
         gap: var(--spacing-sm);
         flex-wrap: wrap;
-        font-size: 0.8rem;
+        font-size: var(--size-small);
         color: var(--text-muted);
         margin-bottom: 0.5rem;
       }
@@ -8045,7 +8147,7 @@
       .expense-card-footer .card-deductible {
         font-family: var(--font-mono);
         color: var(--accent);
-        font-size: 0.85rem;
+        font-size: var(--size-labels);
       }
     }
 
@@ -8089,7 +8191,7 @@
       align-items: center;
       gap: var(--spacing-sm);
       color: var(--negative);
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .overdue-alert-icon {
@@ -8102,7 +8204,7 @@
       background: var(--negative);
       color: #fff;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       flex-shrink: 0;
     }
 
@@ -8116,7 +8218,7 @@
 
     .invoices-header h2 {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: var(--size-header);
       font-weight: 600;
     }
 
@@ -8174,7 +8276,7 @@
     }
 
     .invoices-summary-bar .summary-value {
-      font-size: 1.1rem;
+      font-size: var(--size-section-title);
       font-weight: 600;
     }
 
@@ -8194,7 +8296,7 @@
     .invoice-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .invoice-table thead th {
@@ -8243,8 +8345,8 @@
     .invoice-status-badge {
       display: inline-block;
       padding: 0.2rem 0.6rem;
-      border-radius: 12px;
-      font-size: 0.75rem;
+      border-radius: var(--radius-lg);
+      font-size: var(--size-caption);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.3px;
@@ -8257,7 +8359,7 @@
 
     .badge-sent {
       background: rgba(59, 130, 246, 0.2);
-      color: #60a5fa;
+      color: var(--accent-color);
     }
 
     .badge-paid {
@@ -8305,12 +8407,12 @@
     .invoice-card-number {
       font-weight: 600;
       font-family: var(--font-mono);
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .invoice-card-client {
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       margin-bottom: 0.5rem;
     }
 
@@ -8325,11 +8427,11 @@
     .invoice-card-total {
       font-family: var(--font-mono);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
     }
 
     .invoice-card-date {
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       color: var(--text-muted);
     }
 
@@ -8342,7 +8444,7 @@
 
     .invoice-actions button {
       padding: 0.2rem 0.5rem;
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       background: var(--hover-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
@@ -8361,7 +8463,7 @@
       text-align: center;
       padding: var(--spacing-xl);
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: var(--size-body);
     }
 
     /* ===========================================
@@ -8373,7 +8475,7 @@
       width: 92%;
       padding: 0;
       border: none;
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       background: var(--bg-surface);
       color: var(--text);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
@@ -8400,14 +8502,14 @@
     .invoice-dialog .dialog-header h2 {
       margin: 0;
       color: var(--accent);
-      font-size: 1.1rem;
+      font-size: var(--size-section-title);
     }
 
     .invoice-dialog .dialog-close {
       background: none;
       border: none;
       color: var(--text-muted);
-      font-size: 1.2rem;
+      font-size: var(--size-header);
       cursor: pointer;
       padding: 0.25rem 0.5rem;
       border-radius: var(--radius-sm);
@@ -8442,7 +8544,7 @@
     }
 
     .invoice-meta-row .form-group label {
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       opacity: 0.8;
     }
 
@@ -8454,7 +8556,7 @@
       border-radius: 4px;
       color: var(--text);
       font-family: var(--font-mono);
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .invoice-meta-row .form-group select:focus,
@@ -8469,8 +8571,8 @@
       border: 1px solid rgba(59, 130, 246, 0.25);
       border-radius: var(--radius-sm);
       padding: var(--spacing-sm) var(--spacing-md);
-      font-size: 0.85rem;
-      color: #60a5fa;
+      font-size: var(--size-labels);
+      color: var(--accent-color);
     }
 
     /* Calendar Populate Section */
@@ -8482,7 +8584,7 @@
     }
 
     .populate-info {
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       color: var(--text-muted);
     }
 
@@ -8493,21 +8595,21 @@
 
     .invoice-line-items-section h3 {
       margin: 0 0 0.75rem 0;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       font-weight: 600;
     }
 
     .invoice-line-items-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .invoice-line-items-table thead th {
       padding: 0.5rem;
       text-align: left;
       font-weight: 600;
-      font-size: 0.75rem;
+      font-size: var(--size-caption);
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.3px;
@@ -8531,7 +8633,7 @@
       border: 1px solid var(--border);
       border-radius: 3px;
       color: var(--text);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .invoice-line-items-table tbody td input[type="number"] {
@@ -8557,7 +8659,7 @@
       border: none;
       color: var(--negative);
       cursor: pointer;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       padding: 0.2rem 0.4rem;
       border-radius: 3px;
       opacity: 0.6;
@@ -8584,7 +8686,7 @@
     }
 
     .invoice-discount-row label {
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       color: var(--text-muted);
     }
 
@@ -8595,7 +8697,7 @@
       border: 1px solid var(--border);
       border-radius: 4px;
       color: var(--text);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .invoice-discount-row input[type="number"] {
@@ -8621,7 +8723,7 @@
       display: flex;
       justify-content: space-between;
       padding: 0.35rem 0;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .totals-row .mono {
@@ -8642,7 +8744,7 @@
 
     /* Notes textarea */
     .invoice-dialog-body .form-group label {
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       opacity: 0.8;
     }
 
@@ -8653,7 +8755,7 @@
       border-radius: 4px;
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       resize: vertical;
     }
 
@@ -8674,7 +8776,7 @@
     .invoice-dialog .dialog-actions .btn {
       padding: 0.5rem 1.25rem;
       border-radius: var(--radius-sm);
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       cursor: pointer;
       border: 1px solid var(--border);
       background: var(--hover-bg);
@@ -8716,7 +8818,7 @@
     .invoice-detail-header h2 {
       margin: 0;
       font-family: var(--font-mono);
-      font-size: 1.2rem;
+      font-size: var(--size-header);
     }
 
     .invoice-detail-actions {
@@ -8738,7 +8840,7 @@
 
     .invoice-detail-meta .detail-entity-info,
     .invoice-detail-meta .detail-client-info {
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       line-height: 1.6;
     }
 
@@ -8746,14 +8848,14 @@
     .invoice-detail-meta .detail-client-info strong {
       display: block;
       margin-bottom: 0.25rem;
-      font-size: 0.95rem;
+      font-size: var(--size-body);
     }
 
     .invoice-detail-info-row {
       display: flex;
       gap: var(--spacing-lg);
       margin-bottom: var(--spacing-md);
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       color: var(--text-muted);
     }
 
@@ -8772,7 +8874,7 @@
       padding: 0.6rem 0.75rem;
       text-align: left;
       font-weight: 600;
-      font-size: 0.78rem;
+      font-size: var(--size-small);
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.3px;
@@ -8786,7 +8888,7 @@
     .invoice-detail-lines-table tbody td {
       padding: 0.6rem 0.75rem;
       border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .invoice-detail-lines-table tbody td.text-right {
@@ -8805,7 +8907,7 @@
       display: flex;
       justify-content: space-between;
       padding: 0.35rem 0;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
     }
 
     .invoice-detail-totals .totals-row .mono {
@@ -8826,7 +8928,7 @@
       border: 1px solid rgba(59, 130, 246, 0.2);
       border-radius: var(--radius-sm);
       padding: var(--spacing-sm) var(--spacing-md);
-      font-size: 0.8rem;
+      font-size: var(--size-small);
       color: var(--text-muted);
       margin-bottom: var(--spacing-md);
       font-style: italic;
@@ -8838,13 +8940,13 @@
       border: 1px solid rgba(251, 146, 60, 0.2);
       border-radius: var(--radius-sm);
       padding: var(--spacing-sm) var(--spacing-md);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       color: var(--warning);
       margin-bottom: var(--spacing-md);
     }
 
     .rect-original-ref {
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       color: var(--text-muted);
       margin-bottom: var(--spacing-md);
     }
@@ -8858,13 +8960,13 @@
 
     .payment-section h3 {
       margin: 0 0 var(--spacing-sm) 0;
-      font-size: 1rem;
+      font-size: var(--size-numbers);
       font-weight: 600;
     }
 
     .payment-section h4 {
       margin: var(--spacing-sm) 0;
-      font-size: 0.9rem;
+      font-size: var(--size-labels);
       font-weight: 500;
     }
 
@@ -8878,7 +8980,7 @@
       gap: var(--spacing-md);
       padding: var(--spacing-sm) 0;
       border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .payment-record .payment-amount {
@@ -8893,7 +8995,7 @@
 
     .payment-record .payment-method {
       color: var(--text-muted);
-      font-size: 0.8rem;
+      font-size: var(--size-small);
     }
 
     .payment-form {
@@ -8910,7 +9012,7 @@
       border: 1px solid var(--border);
       border-radius: 4px;
       color: var(--text);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
     }
 
     .payment-form input[type="number"] {
@@ -8933,7 +9035,7 @@
       background: var(--surface-hover);
       border-radius: var(--radius-sm);
       padding: var(--spacing-md);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       color: var(--text-muted);
       white-space: pre-wrap;
       margin-top: var(--spacing-md);
@@ -8945,7 +9047,7 @@
       padding: var(--spacing-sm);
       background: var(--surface-hover);
       border-radius: var(--radius-sm);
-      font-size: 0.85rem;
+      font-size: var(--size-labels);
       color: var(--text-muted);
       min-height: 2rem;
     }
@@ -9039,11 +9141,11 @@
       }
 
       .invoice-line-items-table {
-        font-size: 0.75rem;
+        font-size: var(--size-caption);
       }
 
       .invoice-line-items-table thead th {
-        font-size: 0.65rem;
+        font-size: var(--size-tiny);
         padding: 0.3rem;
       }
 
@@ -9054,7 +9156,7 @@
       .invoice-line-items-table tbody td input,
       .invoice-line-items-table tbody td select {
         padding: 0.3rem;
-        font-size: 0.8rem;
+        font-size: var(--size-small);
       }
     }
 
@@ -9081,8 +9183,8 @@
       min-width: 280px;
       max-width: 420px;
       padding: 0.85rem 1.25rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
+      border-radius: var(--radius-md);
+      font-size: var(--size-labels);
       line-height: 1.4;
       color: #fff;
       background: var(--bg-surface);
@@ -9097,9 +9199,9 @@
       animation: toast-out 0.3s ease forwards;
     }
     .toast-success { border-color: var(--accent, #4ade80); }
-    .toast-error { border-color: #ef4444; }
-    .toast-warning { border-color: #f59e0b; }
-    .toast-info { border-color: #3b82f6; }
+    .toast-error { border-color: var(--negative); }
+    .toast-warning { border-color: var(--warning); }
+    .toast-info { border-color: var(--accent-color); }
     @keyframes toast-in {
       to { opacity: 1; transform: translateX(0); }
     }
@@ -9129,19 +9231,19 @@
     }
     .onboarding-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
     .onboarding-dot.done { background: var(--accent); }
-    .onboarding-icon { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; }
+    .onboarding-icon { font-size: var(--size-display); text-align: center; margin-bottom: 1rem; }
     .onboarding-title {
       font-size: 1.35rem; font-weight: 600; text-align: center;
       color: var(--text); margin-bottom: 0.75rem;
     }
     .onboarding-desc {
-      font-size: 0.9rem; color: var(--text-muted);
+      font-size: var(--size-labels); color: var(--text-muted);
       text-align: center; line-height: 1.6; margin-bottom: 2rem;
     }
     .onboarding-desc strong { color: var(--text); }
     .onboarding-actions { display: flex; gap: 0.75rem; justify-content: center; }
     .onboarding-btn {
-      padding: 0.65rem 1.5rem; border-radius: var(--radius-md); font-size: 0.9rem;
+      padding: 0.65rem 1.5rem; border-radius: var(--radius-md); font-size: var(--size-labels);
       font-weight: 500; cursor: pointer; border: none; transition: all 0.2s;
     }
     .onboarding-btn-primary {
@@ -9155,7 +9257,7 @@
     .onboarding-btn-skip:hover { color: var(--text); border-color: var(--text-faint); }
     .onboarding-check {
       display: flex; align-items: center; justify-content: center;
-      gap: 0.5rem; margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-muted);
+      gap: 0.5rem; margin-top: 1.5rem; font-size: var(--size-small); color: var(--text-muted);
     }
     .onboarding-check input { accent-color: var(--accent); }
   </style>
@@ -9181,13 +9283,13 @@
   </script>
 
   <!-- Phase 12: Dexie.js v4.x for IndexedDB -->
-  <script src="https://unpkg.com/dexie@4/dist/dexie.min.js"></script>
+  <script src="https://unpkg.com/dexie@4/dist/dexie.min.js" integrity="sha384-JGONCOBgEuvhugC6W3kOfmxfspQT1+CuSTIn/vYg6dCJTTTeQW+HifZCoB/Vkg13" crossorigin="anonymous"></script>
 
   <!-- Phase 12: currency.js for money handling -->
-  <script src="https://unpkg.com/currency.js@2.0.4/dist/currency.min.js"></script>
+  <script src="https://unpkg.com/currency.js@2.0.4/dist/currency.min.js" integrity="sha384-rvtOlmtdaQlETnn9WzuLmsk2dRrRmmavPGSnHVDWwXkUkN9ZB+APb+LX/7AVJCIV" crossorigin="anonymous"></script>
 
   <!-- Phase 14: Supabase client for authentication -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" integrity="sha384-aRAaCbKYByQpx0fjPuC0PQ9P9moWMEsHXP9tyzP7tbyD5fPK6oTp+THsxdWiq02L" crossorigin="anonymous"></script>
 
   <!-- Phase 16-06: Google Identity Services for OAuth -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -9247,10 +9349,10 @@
 
       <!-- Demo mode button (outside form) -->
       <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);">
-        <p style="color: var(--text-muted, #888); font-size: 12px; text-align: center; margin-bottom: 12px;">
+        <p style="color: var(--text-muted, #888); font-size: 12px; text-align: center; margin-bottom: var(--spacing-ms);">
           For testing without authentication:
         </p>
-        <button type="button" id="demo-mode-btn" style="width: 100%; padding: 12px 16px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; border-radius: 8px; color: white; font-size: 14px; font-weight: 500; cursor: pointer;">
+        <button type="button" id="demo-mode-btn" style="width: 100%; padding: 12px 16px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; border-radius: var(--radius-md); color: white; font-size: 14px; font-weight: 500; cursor: pointer;">
           🧪 Enter Demo Mode
         </button>
       </div>
@@ -9809,7 +9911,7 @@
         <div class="client-form-group" id="dayEditorExpensesInfo" style="display: none;">
           <label>Linked Expenses (<span id="dayEditorExpensesCount">0</span>)</label>
           <div id="dayEditorExpensesList" class="day-editor-expenses-list"></div>
-          <button type="button" class="btn btn-secondary btn-sm" id="dayEditorAddExpenseBtn" style="margin-top: 0.5rem; font-size: 0.75rem;" onclick="addExpenseForDay()">+ Add Expense for This Day</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="dayEditorAddExpenseBtn" style="margin-top: 0.5rem; font-size: var(--size-caption);" onclick="addExpenseForDay()">+ Add Expense for This Day</button>
         </div>
 
         <!-- Actions -->
@@ -10217,7 +10319,7 @@
 
           <!-- Conditional fields: Travel -->
           <div id="efTravelFields" class="conditional-fields">
-            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.25rem;">Travel Details</div>
+            <div style="font-size: var(--size-small); opacity: 0.6; margin-bottom: 0.25rem;">Travel Details</div>
             <div class="form-group">
               <label for="efDestination">Destination</label>
               <input type="text" id="efDestination" placeholder="e.g., BE, ES, NL">
@@ -10240,7 +10342,7 @@
 
           <!-- Conditional fields: Meals/Dietas -->
           <div id="efMealsFields" class="conditional-fields">
-            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.25rem;">Meals / Dietas Details</div>
+            <div style="font-size: var(--size-small); opacity: 0.6; margin-bottom: 0.25rem;">Meals / Dietas Details</div>
             <div class="form-group">
               <label for="efMealsDestination">Destination</label>
               <input type="text" id="efMealsDestination" placeholder="e.g., BE, ES, NL" oninput="_triggerDietasValidation()">
@@ -10264,7 +10366,7 @@
 
           <!-- Conditional fields: Home Office (autonomo only) -->
           <div id="efHomeOfficeFields" class="conditional-fields">
-            <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.25rem;">Home Office Deduction</div>
+            <div style="font-size: var(--size-small); opacity: 0.6; margin-bottom: 0.25rem;">Home Office Deduction</div>
             <div class="form-group">
               <label for="efDeductiblePct">Deductible % (max 30% for autonomo)</label>
               <input type="number" id="efDeductiblePct" min="0" max="30" value="30" step="1">
@@ -10509,7 +10611,7 @@
         <span id="yearSummaryThreshold" class="threshold-indicator">(0/183)</span>
       </div>
 
-      <div class="calendar-info" style="margin-bottom: 1rem; padding: 0.75rem; background: var(--surface-hover); border-radius: 4px; font-size: 0.9rem;">
+      <div class="calendar-info" style="margin-bottom: 1rem; padding: 0.75rem; background: var(--surface-hover); border-radius: 4px; font-size: var(--size-labels);">
         <strong style="color: var(--accent);">How days are counted:</strong>
         <ul style="margin: 0.5rem 0 0 1.5rem; opacity: 0.8; line-height: 1.6;">
           <li><strong>Belgium days</strong> + <strong>Travel days</strong> count toward 183-day threshold</li>
@@ -10627,7 +10729,7 @@
 
       <details class="holidays-reference" style="margin-top: 1rem;">
         <summary style="cursor: pointer; opacity: 0.8;">Belgian Public Holidays 2026 (Reference)</summary>
-        <div style="padding: 1rem 0; font-size: 0.9rem; opacity: 0.8;">
+        <div style="padding: 1rem 0; font-size: var(--size-labels); opacity: 0.8;">
           <p style="margin-bottom: 0.5rem;">These are NOT auto-marked. Mark manually if you are in Belgium:</p>
           <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
             <li>Apr 6 - Easter Monday</li>
@@ -10974,7 +11076,7 @@
             <!-- 2FA Settings - Phase 14-04 -->
             <div class="profile-field" id="profile-2fa-section">
               <label>Two-Factor Authentication</label>
-              <div id="profile-2fa-status" style="display: flex; align-items: center; gap: 12px; margin-top: 8px;">
+              <div id="profile-2fa-status" style="display: flex; align-items: center; gap: var(--spacing-ms); margin-top: 8px;">
                 <span id="profile-2fa-text">Loading...</span>
                 <button type="button" id="profile-2fa-btn" class="auth-link" onclick="ProfileUI.toggle2FA()">
                   Enable
@@ -11116,7 +11218,7 @@
             <input type="text" id="newScenarioName" required placeholder="e.g., Aggressive Growth">
           </div>
 
-          <h3 style="margin-top: 1rem; font-size: 0.95rem;">Copy values from:</h3>
+          <h3 style="margin-top: 1rem; font-size: var(--size-body);">Copy values from:</h3>
           <div class="template-options" id="templateOptions">
             <!-- Populated by showTemplateDialog() -->
           </div>
@@ -11142,7 +11244,7 @@
           <li>Monday and Tuesday every week</li>
           <li>Wednesday-Friday of first week each month</li>
         </ul>
-        <p style="font-size: 0.9rem; opacity: 0.7;">
+        <p style="font-size: var(--size-labels); opacity: 0.7;">
           Belgian holidays are NOT auto-filled. You can override any day later.
         </p>
       </div>
@@ -11499,8 +11601,8 @@
           <label for="emailBody">Message</label>
           <textarea id="emailBody" rows="6" style="font-family: inherit; resize: vertical;"></textarea>
         </div>
-        <p class="text-dim" style="font-size: 0.8rem; margin-top: 0.5rem;">PDF will be attached automatically.</p>
-        <div id="emailStatusMsg" style="display: none; padding: 0.75rem; border-radius: 4px; margin-top: 0.75rem; font-size: 0.85rem;"></div>
+        <p class="text-dim" style="font-size: var(--size-small); margin-top: 0.5rem;">PDF will be attached automatically.</p>
+        <div id="emailStatusMsg" style="display: none; padding: 0.75rem; border-radius: 4px; margin-top: 0.75rem; font-size: var(--size-labels);"></div>
         <div class="dialog-actions">
           <button class="btn" onclick="document.getElementById('emailInvoiceDialog').close()">Cancel</button>
           <button class="btn btn-primary" id="sendEmailBtn" onclick="handleSendInvoiceEmail()">Send Email</button>
@@ -12171,6 +12273,7 @@
       // Delegate to async version for IndexedDB support
       renderCalendarAsync().catch(err => {
         console.error('renderCalendarAsync failed:', err);
+        showToast('Calendar failed to load. Please refresh the page.', 'error');
         renderCalendarSync();  // Fallback to sync version
       });
     }
@@ -14154,6 +14257,7 @@ Generated by Autonomo Tax Calculator`;
         }
       } catch (e) {
         console.error('Error loading income data:', e);
+        showToast('Failed to load income data.', 'error');
       }
       return [];
     }
@@ -15054,8 +15158,12 @@ Generated by Autonomo Tax Calculator`;
         alert('Please enter a name for the expense.');
         return;
       }
-      if (amount < 0) {
-        alert('Amount cannot be negative.');
+      if (amount <= 0) {
+        alert('Please enter a valid amount greater than zero.');
+        return;
+      }
+      if (amount > 1000000) {
+        alert('Amount exceeds maximum (1,000,000 EUR). Please check the value.');
         return;
       }
 
@@ -19256,10 +19364,19 @@ Generated by Autonomo Tax Calculator`;
         try {
           this.enrollmentData = await MFAManager.enroll();
 
-          // Show QR code
+          // Show QR code (validate URI to prevent javascript: injection)
           const qrContainer = document.getElementById('mfa-qr-container');
           if (qrContainer && this.enrollmentData.qrCode) {
-            qrContainer.innerHTML = `<img src="${this.enrollmentData.qrCode}" alt="QR Code">`;
+            const qrSrc = this.enrollmentData.qrCode;
+            if (qrSrc.startsWith('data:image/') || qrSrc.startsWith('https://')) {
+              const img = document.createElement('img');
+              img.src = qrSrc;
+              img.alt = 'QR Code';
+              qrContainer.textContent = '';
+              qrContainer.appendChild(img);
+            } else {
+              qrContainer.textContent = 'Invalid QR code format.';
+            }
           }
 
           // Show secret for manual entry
@@ -24508,7 +24625,7 @@ Generated by Autonomo Tax Calculator`;
         ocrStatus.className = 'ocr-status success';
         ocrStatus.innerHTML = `
           OCR Complete <span class="ocr-confidence ${confClass}">${confLabel} (${Math.round(confidence)}%)</span>
-          <div style="margin-top: 0.25rem; font-size: 0.8rem; opacity: 0.7;">
+          <div style="margin-top: 0.25rem; font-size: var(--size-small); opacity: 0.7;">
             ${result.vendor ? 'Vendor: ' + _escapeHtml(result.vendor) : ''}
             ${result.date ? ' | Date: ' + result.date : ''}
             ${result.amount_euros ? ' | Amount: ' + result.amount_euros.toFixed(2) + ' EUR' : ''}
@@ -24527,16 +24644,12 @@ Generated by Autonomo Tax Calculator`;
     }
 
     /**
-     * _escapeHtml - Escape HTML entities for safe display
+     * _escapeHtml - Alias for escapeHtml (consolidated from 3 duplicate definitions)
      * @param {string} text
      * @returns {string}
      * @private
      */
-    function _escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
+    const _escapeHtml = escapeHtml;
 
     /**
      * submitExpenseForm - Validate, convert, and save the expense form data
@@ -24567,6 +24680,11 @@ Generated by Autonomo Tax Calculator`;
         }
         if (!amountEur || amountEur <= 0) {
           alert('Please enter a valid amount greater than zero.');
+          _expenseFormSubmitting = false;
+          return;
+        }
+        if (amountEur > 1000000) {
+          alert('Amount exceeds maximum (1,000,000 EUR). Please check the value.');
           _expenseFormSubmitting = false;
           return;
         }
@@ -25215,14 +25333,16 @@ Generated by Autonomo Tax Calculator`;
         } else {
           let items = '';
           for (const exp of deleted) {
-            const dateStr = formatDateEU(exp.date);
+            const dateStr = _escapeHtml(formatDateEU(exp.date));
             const vendor = _escapeHtml(exp.vendor || 'Unknown');
-            const amount = MoneyUtils.formatEuros(exp.amount_cents || 0);
-            const daysAgo = exp._daysSinceDeleted;
+            const amount = _escapeHtml(MoneyUtils.formatEuros(exp.amount_cents || 0));
+            const daysAgo = parseInt(exp._daysSinceDeleted, 10) || 0;
             const canRestore = exp._canRestore;
             const restoreLabel = canRestore
               ? `Restore (${30 - daysAgo}d left)`
               : 'Expired';
+            const expId = parseInt(exp.id, 10);
+            if (!Number.isFinite(expId)) continue;
 
             items += `
               <div class="expense-archived-item">
@@ -25232,7 +25352,7 @@ Generated by Autonomo Tax Calculator`;
                   <span>${amount}</span>
                   <span style="opacity:0.5;">Deleted ${daysAgo}d ago</span>
                 </div>
-                <button class="restore-btn" ${canRestore ? '' : 'disabled'} onclick="restoreArchivedExpense(${exp.id})">${restoreLabel}</button>
+                <button class="restore-btn" ${canRestore ? '' : 'disabled'} onclick="restoreArchivedExpense(${expId})">${_escapeHtml(restoreLabel)}</button>
               </div>`;
           }
           container.innerHTML = `<div class="expense-archived-list">${items}</div>`;
@@ -26059,7 +26179,7 @@ Generated by Autonomo Tax Calculator`;
           }
 
           if (expenses.length > 20) {
-            html += `<div style="text-align: center; font-size: 0.78rem; color: var(--text-muted); padding: 0.5rem;">... and ${expenses.length - 20} more</div>`;
+            html += `<div style="text-align: center; font-size: var(--size-small); color: var(--text-muted); padding: 0.5rem;">... and ${expenses.length - 20} more</div>`;
           }
 
           html += '</div>';
@@ -26128,7 +26248,7 @@ Generated by Autonomo Tax Calculator`;
               <div class="ce-meta">
                 <span class="ce-date mono">${invNumber}</span>
                 <span class="ce-vendor">${dateStr}</span>
-                <span class="invoice-status-badge ${badgeClass}" style="font-size: 0.7rem;">${badgeText}</span>
+                <span class="invoice-status-badge ${badgeClass}" style="font-size: var(--size-tiny);">${badgeText}</span>
               </div>
               <span class="ce-amount mono">${total}</span>
             </div>`;
@@ -28563,13 +28683,6 @@ Generated by Autonomo Tax Calculator`;
       let entities = [];
       let isOpen = false;
 
-      // Escape HTML to prevent XSS
-      function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-
       // Entity roles cache for display
       let entityRoles = {};
 
@@ -29000,7 +29113,9 @@ Generated by Autonomo Tax Calculator`;
 
       // Register Service Worker (PWA E-5)
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+          console.error('[PWA] Service Worker registration failed:', err);
+        });
       }
 
       // Activate tab from URL hash immediately
@@ -29023,6 +29138,7 @@ Generated by Autonomo Tax Calculator`;
       const dbSuccess = await initializeDatabase();
       if (!dbSuccess) {
         console.warn('Database initialization failed, continuing with limited functionality');
+        showToast('Database failed to initialize. Some features may not work. Try refreshing.', 'error', 8000);
       }
 
       // Phase 13: Initialize entity modal
@@ -29056,14 +29172,18 @@ Generated by Autonomo Tax Calculator`;
 
       // Phase 14-05: Subscribe to entity changes for sharing section
       EntityContext.subscribe(async (entity) => {
-        const sharingSection = document.getElementById('sharing-section');
-        if (sharingSection) {
-          if (entity && AuthManager.isAuthenticated()) {
-            sharingSection.style.display = '';
-            await SharingUI.load();
-          } else {
-            sharingSection.style.display = 'none';
+        try {
+          const sharingSection = document.getElementById('sharing-section');
+          if (sharingSection) {
+            if (entity && AuthManager.isAuthenticated()) {
+              sharingSection.style.display = '';
+              await SharingUI.load();
+            } else {
+              sharingSection.style.display = 'none';
+            }
           }
+        } catch (err) {
+          console.error('[INIT] Failed to update sharing section:', err);
         }
       });
 
@@ -30694,7 +30814,7 @@ Generated by Autonomo Tax Calculator`;
               if (rm.tomo) rmText += ' Tomo ' + _escapeHtml(rm.tomo);
               if (rm.folio) rmText += ', Folio ' + _escapeHtml(rm.folio);
               if (rm.hoja) rmText += ', Hoja ' + _escapeHtml(rm.hoja);
-              entityHtml += '<br><span style="font-size: 0.8rem; color: var(--text-muted);">' + rmText + '</span>';
+              entityHtml += '<br><span style="font-size: var(--size-small); color: var(--text-muted);">' + rmText + '</span>';
             }
           }
           entityInfoEl.innerHTML = entityHtml;
@@ -30988,7 +31108,7 @@ Generated by Autonomo Tax Calculator`;
         const invoice = await db.invoices.get(invoiceId);
 
         if (payments.length === 0) {
-          historyEl.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No payments recorded yet.</p>';
+          historyEl.innerHTML = '<p style="color: var(--text-muted); font-size: var(--size-labels);">No payments recorded yet.</p>';
         } else {
           const methodLabels = { transfer: 'Bank Transfer', card: 'Card', cash: 'Cash', other: 'Other' };
           let html = '';
@@ -30998,7 +31118,7 @@ Generated by Autonomo Tax Calculator`;
                 <span class="payment-amount">${MoneyUtils.formatEuros(payment.amount_cents)}</span>
                 <span class="payment-date">${formatDateEU(payment.date)}</span>
                 <span class="payment-method">${_escapeHtml(methodLabels[payment.method] || payment.method)}</span>
-                ${payment.reference ? `<span style="color: var(--text-muted); font-size: 0.8rem;">${_escapeHtml(payment.reference)}</span>` : ''}
+                ${payment.reference ? `<span style="color: var(--text-muted); font-size: var(--size-small);">${_escapeHtml(payment.reference)}</span>` : ''}
               </div>`;
           }
 
@@ -31006,7 +31126,7 @@ Generated by Autonomo Tax Calculator`;
           if (invoice) {
             const remaining = (invoice.total_cents || 0) - (invoice.paid_cents || 0);
             if (remaining > 0) {
-              html += `<div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); font-size: 0.85rem;">
+              html += `<div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); font-size: var(--size-labels);">
                 <span style="color: var(--text-muted);">Remaining:</span>
                 <span class="mono" style="color: var(--warning); font-weight: 600;">${MoneyUtils.formatEuros(remaining)}</span>
               </div>`;
@@ -32443,13 +32563,13 @@ Generated by Autonomo Tax Calculator`;
               <label class="entity-form__label" for="entityLogoUpload">Company Logo (optional)</label>
               <div class="entity-form__hint" style="margin-bottom: 0.5rem;">Logo appears on PDF invoices. Max 200x200px, auto-compressed.</div>
               <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                <div id="entity-logo-preview" style="width: 80px; height: 80px; border: 2px dashed var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; background: var(--bg-elevated);">
-                  <span id="entity-logo-placeholder" style="color: var(--text-muted); font-size: 0.75rem; text-align: center;">No logo</span>
+                <div id="entity-logo-preview" style="width: 80px; height: 80px; border: 2px dashed var(--border); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; background: var(--bg-elevated);">
+                  <span id="entity-logo-placeholder" style="color: var(--text-muted); font-size: var(--size-caption); text-align: center;">No logo</span>
                   <img id="entity-logo-img" style="max-width: 100%; max-height: 100%; display: none;" alt="Entity logo preview">
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                  <input type="file" id="entityLogoUpload" accept="image/*" style="font-size: 0.85rem;" onchange="EntityModal.handleLogoUpload(this)">
-                  <button type="button" id="entity-logo-remove-btn" class="entity-modal__btn entity-modal__btn--secondary" style="display: none; padding: 0.25rem 0.75rem; font-size: 0.8rem;" onclick="EntityModal.removeLogo()">Remove Logo</button>
+                  <input type="file" id="entityLogoUpload" accept="image/*" style="font-size: var(--size-labels);" onchange="EntityModal.handleLogoUpload(this)">
+                  <button type="button" id="entity-logo-remove-btn" class="entity-modal__btn entity-modal__btn--secondary" style="display: none; padding: 0.25rem 0.75rem; font-size: var(--size-small);" onclick="EntityModal.removeLogo()">Remove Logo</button>
                 </div>
               </div>
             </div>
