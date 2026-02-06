@@ -55,29 +55,29 @@
 
 ### Invoice Generation (INVOICE)
 
-- [ ] **INVOICE-01**: User can create invoice for a client
-- [ ] **INVOICE-02**: Invoice includes sequential number (no gaps allowed per VeriFactu)
-- [ ] **INVOICE-03**: For Autónomo entity: Invoice shows NIF, nombre completo, domicilio fiscal
-- [ ] **INVOICE-04**: For SL entity: Invoice shows CIF, razón social, domicilio social, Registro Mercantil (Tomo/Folio/Hoja)
-- [ ] **INVOICE-05**: Invoice includes 13 factura completa fields: date, number, client NIF/name/address, description, base, IVA %, IVA amount, total
-- [ ] **INVOICE-06**: User adds line items: description, quantity, unit price, IVA %, total
-- [ ] **INVOICE-07**: For EU B2B clients, invoice shows "Inversión del sujeto pasivo" (no IVA charged)
-- [ ] **INVOICE-08**: For Autónomo invoices to Spanish clients, system calculates IRPF retention (7% or 15% based on activity)
-- [ ] **INVOICE-09**: System generates VeriFactu QR code with: NIF/CIF, invoice number, date, total, hash
-- [ ] **INVOICE-10**: User can auto-populate invoice from calendar days tagged with client (days × rate)
-- [ ] **INVOICE-11**: User can add expenses to invoice as line items (pass-through billable expenses)
-- [ ] **INVOICE-12**: Invoice status: Draft → Sent → Paid → Overdue
-- [ ] **INVOICE-13**: User can mark invoice as sent (date sent recorded)
-- [ ] **INVOICE-14**: User can mark invoice as paid (payment date, method, bank reference)
-- [ ] **INVOICE-15**: System shows overdue invoices (sent >30 days ago, not paid)
-- [ ] **INVOICE-16**: User can generate PDF from invoice (professional template)
-- [ ] **INVOICE-17**: PDF includes VeriFactu QR code rendered as image
-- [ ] **INVOICE-18**: User can download, print, or email PDF
-- [ ] **INVOICE-19**: For corrections, user creates factura rectificativa (links to original invoice)
-- [ ] **INVOICE-20**: System prevents deleting invoices (soft delete only, 4-year retention)
-- [ ] **INVOICE-21**: Invoice list view shows: number, client, date, total, status, overdue indicator
-- [ ] **INVOICE-22**: User can filter invoices by: client, date range, status, project
-- [ ] **INVOICE-23**: System tracks total income per entity from paid invoices
+- [x] **INVOICE-01**: User can create invoice for a client
+- [x] **INVOICE-02**: Invoice includes sequential number (no gaps allowed per VeriFactu)
+- [x] **INVOICE-03**: For Autónomo entity: Invoice shows NIF, nombre completo, domicilio fiscal
+- [x] **INVOICE-04**: For SL entity: Invoice shows CIF, razón social, domicilio social, Registro Mercantil (Tomo/Folio/Hoja)
+- [x] **INVOICE-05**: Invoice includes 13 factura completa fields: date, number, client NIF/name/address, description, base, IVA %, IVA amount, total
+- [x] **INVOICE-06**: User adds line items: description, quantity, unit price, IVA %, total
+- [x] **INVOICE-07**: For EU B2B clients, invoice shows "Inversión del sujeto pasivo" (no IVA charged)
+- [x] **INVOICE-08**: For Autónomo invoices to Spanish clients, system calculates IRPF retention (7% or 15% based on activity)
+- [x] **INVOICE-09**: System generates VeriFactu QR code with: NIF/CIF, invoice number, date, total, hash
+- [x] **INVOICE-10**: User can auto-populate invoice from calendar days tagged with client (days × rate)
+- [x] **INVOICE-11**: User can add expenses to invoice as line items (pass-through billable expenses)
+- [x] **INVOICE-12**: Invoice status: Draft → Sent → Paid → Overdue
+- [x] **INVOICE-13**: User can mark invoice as sent (date sent recorded)
+- [x] **INVOICE-14**: User can mark invoice as paid (payment date, method, bank reference)
+- [x] **INVOICE-15**: System shows overdue invoices (sent >30 days ago, not paid)
+- [x] **INVOICE-16**: User can generate PDF from invoice (professional template)
+- [x] **INVOICE-17**: PDF includes VeriFactu QR code rendered as image
+- [x] **INVOICE-18**: User can download, print, or email PDF
+- [x] **INVOICE-19**: For corrections, user creates factura rectificativa (links to original invoice)
+- [x] **INVOICE-20**: System prevents deleting invoices (soft delete only, 4-year retention)
+- [x] **INVOICE-21**: Invoice list view shows: number, client, date, total, status, overdue indicator
+- [x] **INVOICE-22**: User can filter invoices by: client, date range, status, project
+- [x] **INVOICE-23**: System tracks total income per entity from paid invoices
 
 ### Receipt Upload & OCR (RECEIPT)
 
@@ -386,29 +386,29 @@
 | EXPENSE-13 | Phase 17 | Complete |
 | EXPENSE-14 | Phase 17 | Complete |
 | EXPENSE-15 | Phase 17 | Complete |
-| INVOICE-01 | Phase 18 | Pending |
-| INVOICE-02 | Phase 18 | Pending |
-| INVOICE-03 | Phase 18 | Pending |
-| INVOICE-04 | Phase 18 | Pending |
-| INVOICE-05 | Phase 18 | Pending |
-| INVOICE-06 | Phase 18 | Pending |
-| INVOICE-07 | Phase 18 | Pending |
-| INVOICE-08 | Phase 18 | Pending |
-| INVOICE-09 | Phase 18 | Pending |
-| INVOICE-10 | Phase 18 | Pending |
-| INVOICE-11 | Phase 18 | Pending |
-| INVOICE-12 | Phase 18 | Pending |
-| INVOICE-13 | Phase 18 | Pending |
-| INVOICE-14 | Phase 18 | Pending |
-| INVOICE-15 | Phase 18 | Pending |
-| INVOICE-16 | Phase 18 | Pending |
-| INVOICE-17 | Phase 18 | Pending |
-| INVOICE-18 | Phase 18 | Pending |
-| INVOICE-19 | Phase 18 | Pending |
-| INVOICE-20 | Phase 18 | Pending |
-| INVOICE-21 | Phase 18 | Pending |
-| INVOICE-22 | Phase 18 | Pending |
-| INVOICE-23 | Phase 18 | Pending |
+| INVOICE-01 | Phase 18 | Complete |
+| INVOICE-02 | Phase 18 | Complete |
+| INVOICE-03 | Phase 18 | Complete |
+| INVOICE-04 | Phase 18 | Complete |
+| INVOICE-05 | Phase 18 | Complete |
+| INVOICE-06 | Phase 18 | Complete |
+| INVOICE-07 | Phase 18 | Complete |
+| INVOICE-08 | Phase 18 | Complete |
+| INVOICE-09 | Phase 18 | Complete |
+| INVOICE-10 | Phase 18 | Complete |
+| INVOICE-11 | Phase 18 | Complete |
+| INVOICE-12 | Phase 18 | Complete |
+| INVOICE-13 | Phase 18 | Complete |
+| INVOICE-14 | Phase 18 | Complete |
+| INVOICE-15 | Phase 18 | Complete |
+| INVOICE-16 | Phase 18 | Complete |
+| INVOICE-17 | Phase 18 | Complete |
+| INVOICE-18 | Phase 18 | Complete |
+| INVOICE-19 | Phase 18 | Complete |
+| INVOICE-20 | Phase 18 | Complete |
+| INVOICE-21 | Phase 18 | Complete |
+| INVOICE-22 | Phase 18 | Complete |
+| INVOICE-23 | Phase 18 | Complete |
 | RECEIPT-01 | Phase 19 | Pending |
 | RECEIPT-02 | Phase 19 | Pending |
 | RECEIPT-03 | Phase 19 | Pending |
