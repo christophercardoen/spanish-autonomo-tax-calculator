@@ -4026,6 +4026,9 @@
         scrollbar-width: none;
         -ms-overflow-style: none;
         position: relative;
+        /* Fade hint on right edge to indicate scrollability */
+        mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
       }
       .tab-nav::-webkit-scrollbar {
         display: none;
@@ -4033,6 +4036,7 @@
       .tab-label {
         flex-shrink: 0;
         white-space: nowrap;
+        padding: 0.75rem 1rem;
       }
 
       .scenario-cards {
@@ -4111,17 +4115,17 @@
         font-size: 1.25rem;
       }
 
-      /* Stack tabs in 2x3 grid on mobile */
+      /* Stack tabs in 4x2 grid on mobile */
       .tab-nav {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 0;
         border-bottom: none;
       }
 
       .tab-label {
-        padding: 0.75rem 0.5rem;
-        font-size: 0.7rem;
+        padding: 0.6rem 0.25rem;
+        font-size: 0.65rem;
         text-align: center;
         border-bottom: 1px solid rgba(255,255,255,0.1);
         border-right: 1px solid rgba(255,255,255,0.1);
@@ -4129,14 +4133,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        letter-spacing: 0.3px;
       }
 
-      .tab-label:nth-child(3n) {
+      .tab-label:nth-child(4n) {
         border-right: none;
       }
 
-      .tab-label:nth-child(4),
-      .tab-label:nth-child(5) {
+      /* Bottom row has no bottom border */
+      .tab-label:nth-child(n+5) {
         border-bottom: none;
       }
 
