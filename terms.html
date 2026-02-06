@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service &mdash; Autonomo Tax Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f17; --card-bg: #1a1a2e; --border: #2a2a3e;
+      --accent: #4ade80; --text: #e2e8f0; --text-muted: #94a3b8; --text-dim: #64748b;
+    }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem; background: rgba(15,15,23,0.85);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { font-weight: 700; font-size: 1.1rem; }
+    .nav-brand a { color: var(--text); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { color: var(--text-muted); font-size: 0.9rem; }
+    .nav-cta {
+      background: var(--accent); color: #000 !important; padding: 0.5rem 1.25rem;
+      border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+    }
+
+    .content {
+      max-width: 740px; margin: 0 auto; padding: 7rem 2rem 4rem;
+    }
+    .content h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .content .updated {
+      color: var(--text-dim); font-size: 0.85rem; margin-bottom: 2.5rem;
+    }
+    .content h2 {
+      font-size: 1.25rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+    .content p, .content li {
+      color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;
+    }
+    .content ul, .content ol {
+      padding-left: 1.5rem; margin-bottom: 1rem;
+    }
+    .content li { margin-bottom: 0.5rem; }
+    .content strong { color: var(--text); }
+
+    .footer {
+      border-top: 1px solid var(--border); padding: 3rem 2rem;
+      text-align: center; color: var(--text-dim); font-size: 0.85rem;
+    }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1rem; }
+    .footer-links a { color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-brand"><a href="index.html">Autonomo Tax Calculator</a></div>
+    <div class="nav-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="autonomo_dashboard.html" class="nav-cta">Launch App</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <h1>Terms of Service</h1>
+    <p class="updated">Last updated: February 6, 2026</p>
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using the Autonomo Tax Calculator (the "Service"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service.</p>
+
+    <h2>2. Description of Service</h2>
+    <p>The Autonomo Tax Calculator is a web-based tool that provides tax estimation calculations, expense tracking, invoice management, and compliance guidance for self-employed individuals (aut&oacute;nomos) registered in Spain who work in Belgium. The Service includes:</p>
+    <ul>
+      <li>IRPF and RETA tax calculations based on published 2025/2026 rates</li>
+      <li>Scenario comparison tools for revenue planning</li>
+      <li>183-day residency rule calendar tracking</li>
+      <li>Expense categorization and deduction estimation</li>
+      <li>Invoice creation and client management</li>
+      <li>Spain-Belgium tax treaty compliance information</li>
+    </ul>
+
+    <h2>3. Not Professional Tax Advice</h2>
+    <p><strong>The Service is an informational and estimation tool only.</strong> It does not constitute professional tax, legal, or financial advice. All calculations are estimates based on publicly available tax rates and rules. You should consult a qualified tax advisor (asesor fiscal) or gestor&iacute;a before making any tax-related decisions.</p>
+    <p>We make reasonable efforts to keep tax rates and rules current, but tax law changes frequently. We do not guarantee the accuracy, completeness, or timeliness of any calculations or information provided.</p>
+
+    <h2>4. User Accounts</h2>
+    <p>You may use the Service without creating an account (offline/demo mode). If you choose to create an account:</p>
+    <ul>
+      <li>You are responsible for maintaining the confidentiality of your credentials</li>
+      <li>You must provide accurate information</li>
+      <li>You are responsible for all activity under your account</li>
+      <li>You must notify us immediately of any unauthorized use</li>
+    </ul>
+
+    <h2>5. Data Storage</h2>
+    <p>In offline/demo mode, all data is stored locally on your device using IndexedDB and localStorage. We do not have access to locally stored data. If you create an account, certain data may be synced to our cloud infrastructure (Supabase) to enable cross-device access.</p>
+
+    <h2>6. Acceptable Use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Use the Service for any illegal purpose</li>
+      <li>Attempt to gain unauthorized access to the Service or its systems</li>
+      <li>Interfere with or disrupt the Service</li>
+      <li>Reverse engineer, decompile, or disassemble any part of the Service</li>
+      <li>Use the Service to submit fraudulent tax declarations</li>
+    </ul>
+
+    <h2>7. Intellectual Property</h2>
+    <p>The Service, including its design, code, and content, is protected by copyright and other intellectual property laws. You may not copy, modify, distribute, or create derivative works without prior written consent.</p>
+
+    <h2>8. Limitation of Liability</h2>
+    <p><strong>To the maximum extent permitted by law, the Service is provided "as is" without warranties of any kind.</strong> We shall not be liable for any direct, indirect, incidental, special, or consequential damages arising from:</p>
+    <ul>
+      <li>Errors or inaccuracies in tax calculations</li>
+      <li>Loss of data stored locally or in the cloud</li>
+      <li>Decisions made based on information from the Service</li>
+      <li>Tax penalties or interest resulting from reliance on the Service</li>
+      <li>Interruption or unavailability of the Service</li>
+    </ul>
+
+    <h2>9. Indemnification</h2>
+    <p>You agree to indemnify and hold harmless the Service operators from any claims, damages, or expenses arising from your use of the Service or violation of these Terms.</p>
+
+    <h2>10. Changes to Terms</h2>
+    <p>We may update these Terms at any time. Changes will be posted on this page with an updated revision date. Continued use of the Service after changes constitutes acceptance of the new Terms.</p>
+
+    <h2>11. Termination</h2>
+    <p>We reserve the right to suspend or terminate your access to the Service at any time, with or without cause. Upon termination, your right to use the Service ceases immediately. Locally stored data remains on your device.</p>
+
+    <h2>12. Governing Law</h2>
+    <p>These Terms are governed by and construed in accordance with the laws of Spain. Any disputes shall be subject to the exclusive jurisdiction of the courts of Spain.</p>
+
+    <h2>13. Contact</h2>
+    <p>For questions about these Terms, please contact us through the application.</p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="index.html">Home</a>
+    </div>
+    <p>&copy; 2026 Autonomo Tax Calculator.</p>
+  </footer>
+</body>
+</html>

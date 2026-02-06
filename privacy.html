@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy &mdash; Autonomo Tax Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f17; --card-bg: #1a1a2e; --border: #2a2a3e;
+      --accent: #4ade80; --text: #e2e8f0; --text-muted: #94a3b8; --text-dim: #64748b;
+    }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem; background: rgba(15,15,23,0.85);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { font-weight: 700; font-size: 1.1rem; }
+    .nav-brand a { color: var(--text); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { color: var(--text-muted); font-size: 0.9rem; }
+    .nav-cta {
+      background: var(--accent); color: #000 !important; padding: 0.5rem 1.25rem;
+      border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+    }
+
+    .content {
+      max-width: 740px; margin: 0 auto; padding: 7rem 2rem 4rem;
+    }
+    .content h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .content .updated {
+      color: var(--text-dim); font-size: 0.85rem; margin-bottom: 2.5rem;
+    }
+    .content h2 {
+      font-size: 1.25rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+    .content h3 {
+      font-size: 1.05rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;
+    }
+    .content p, .content li {
+      color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;
+    }
+    .content ul, .content ol {
+      padding-left: 1.5rem; margin-bottom: 1rem;
+    }
+    .content li { margin-bottom: 0.5rem; }
+    .content strong { color: var(--text); }
+    .content table {
+      width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem;
+    }
+    .content th, .content td {
+      text-align: left; padding: 0.75rem 1rem; border: 1px solid var(--border);
+      font-size: 0.9rem; color: var(--text-muted);
+    }
+    .content th {
+      background: var(--card-bg); color: var(--text); font-weight: 600;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border); padding: 3rem 2rem;
+      text-align: center; color: var(--text-dim); font-size: 0.85rem;
+    }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1rem; }
+    .footer-links a { color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-brand"><a href="index.html">Autonomo Tax Calculator</a></div>
+    <div class="nav-links">
+      <a href="terms.html">Terms</a>
+      <a href="autonomo_dashboard.html" class="nav-cta">Launch App</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: February 6, 2026</p>
+
+    <p>The Autonomo Tax Calculator ("we", "our", "the Service") is committed to protecting your privacy. This policy explains what data we collect, how we use it, and your rights under the General Data Protection Regulation (GDPR) and Spanish data protection law (LOPDGDD).</p>
+
+    <h2>1. Data Controller</h2>
+    <p>The data controller for the Service is the operator of the Autonomo Tax Calculator. For privacy inquiries, please contact us through the application.</p>
+
+    <h2>2. Data We Collect</h2>
+
+    <h3>2.1 Offline/Demo Mode (No Account)</h3>
+    <p><strong>We collect no personal data when you use the Service without an account.</strong> All information you enter is stored exclusively on your device using browser technologies (IndexedDB and localStorage). We have no access to this data.</p>
+
+    <h3>2.2 With an Account</h3>
+    <p>When you create an account, we collect and process:</p>
+    <table>
+      <tr><th>Data</th><th>Purpose</th><th>Legal Basis</th></tr>
+      <tr><td>Email address</td><td>Authentication, account recovery</td><td>Contract performance</td></tr>
+      <tr><td>Display name (optional)</td><td>Personalization</td><td>Consent</td></tr>
+      <tr><td>Authentication tokens</td><td>Session management</td><td>Contract performance</td></tr>
+      <tr><td>Business data you enter (expenses, invoices, clients)</td><td>Cloud sync, cross-device access</td><td>Contract performance</td></tr>
+    </table>
+
+    <h3>2.3 Automatically Collected Data</h3>
+    <p>We do not use cookies for tracking. We do not use third-party analytics services that track individual users. If analytics are implemented, they will be privacy-friendly and aggregate-only (no personal identification).</p>
+
+    <h2>3. How We Use Your Data</h2>
+    <p>We use your data exclusively to:</p>
+    <ul>
+      <li>Provide and maintain the Service</li>
+      <li>Authenticate your identity and manage your account</li>
+      <li>Sync your data across devices (if you have an account)</li>
+      <li>Send essential service communications (password resets, security alerts)</li>
+    </ul>
+    <p><strong>We do not:</strong></p>
+    <ul>
+      <li>Sell your personal data to third parties</li>
+      <li>Use your financial data for advertising or profiling</li>
+      <li>Share your data with tax authorities or government agencies</li>
+      <li>Use your data for automated decision-making</li>
+    </ul>
+
+    <h2>4. Data Storage and Security</h2>
+    <p><strong>Local storage:</strong> Data in offline/demo mode is stored on your device only. Clearing your browser data will permanently delete this information.</p>
+    <p><strong>Cloud storage:</strong> Account data is stored on Supabase infrastructure in the EU (eu-west-1, Ireland). Data is encrypted in transit (TLS 1.2+) and at rest. Row Level Security (RLS) policies ensure users can only access their own data.</p>
+
+    <h2>5. Data Retention</h2>
+    <ul>
+      <li><strong>Local data:</strong> Retained until you clear it or clear your browser data</li>
+      <li><strong>Account data:</strong> Retained while your account is active</li>
+      <li><strong>After account deletion:</strong> Personal data is deleted within 30 days. Anonymized aggregate data may be retained for service improvement</li>
+    </ul>
+
+    <h2>6. Your Rights (GDPR)</h2>
+    <p>Under the GDPR and LOPDGDD, you have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> &mdash; Request a copy of your personal data</li>
+      <li><strong>Rectification</strong> &mdash; Correct inaccurate personal data</li>
+      <li><strong>Erasure</strong> &mdash; Request deletion of your personal data ("right to be forgotten")</li>
+      <li><strong>Portability</strong> &mdash; Receive your data in a structured, machine-readable format</li>
+      <li><strong>Restriction</strong> &mdash; Restrict processing of your personal data</li>
+      <li><strong>Objection</strong> &mdash; Object to processing based on legitimate interests</li>
+      <li><strong>Withdraw consent</strong> &mdash; Where processing is based on consent</li>
+    </ul>
+    <p>To exercise these rights, contact us through the application. We will respond within 30 days.</p>
+    <p>You also have the right to lodge a complaint with the Spanish Data Protection Agency (Agencia Espa&ntilde;ola de Protecci&oacute;n de Datos, AEPD) at <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>.</p>
+
+    <h2>7. Third-Party Services</h2>
+    <p>The Service uses the following third-party services:</p>
+    <table>
+      <tr><th>Service</th><th>Purpose</th><th>Data Shared</th></tr>
+      <tr><td>Supabase (EU)</td><td>Authentication, database</td><td>Email, account data</td></tr>
+      <tr><td>Google Fonts</td><td>Typography</td><td>IP address (font loading)</td></tr>
+    </table>
+    <p>Each third-party service has its own privacy policy. We only use services that offer EU data processing or adequate data protection.</p>
+
+    <h2>8. Cookies</h2>
+    <p>The Service uses only <strong>essential cookies</strong> required for authentication (session tokens). We do not use:</p>
+    <ul>
+      <li>Tracking cookies</li>
+      <li>Advertising cookies</li>
+      <li>Third-party analytics cookies</li>
+    </ul>
+    <p>Essential cookies cannot be disabled as they are necessary for the Service to function.</p>
+
+    <h2>9. International Data Transfers</h2>
+    <p>Your data is processed and stored within the European Union (Ireland). No data is transferred outside the EU/EEA.</p>
+
+    <h2>10. Children's Privacy</h2>
+    <p>The Service is not directed at children under 16. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us.</p>
+
+    <h2>11. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated revision date. We will notify account holders of significant changes via email.</p>
+
+    <h2>12. Contact</h2>
+    <p>For privacy inquiries or to exercise your data rights, please contact us through the application.</p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="index.html">Home</a>
+    </div>
+    <p>&copy; 2026 Autonomo Tax Calculator.</p>
+  </footer>
+</body>
+</html>
