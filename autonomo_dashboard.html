@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net https://accounts.google.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://*.supabase.in https://accounts.google.com https://apis.google.com https://*.googleapis.com; frame-src https://accounts.google.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net https://accounts.google.com https://apis.google.com https://js.sentry-cdn.com https://browser.sentry-cdn.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co https://*.supabase.in https://accounts.google.com https://apis.google.com https://*.googleapis.com https://*.ingest.sentry.io https://plausible.io; frame-src https://accounts.google.com;">
   <title>Autonomo Tax Calculator - 2025/2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8798,6 +8798,15 @@
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <!-- Phase 16-06: Google API Client for Calendar API -->
   <script src="https://apis.google.com/js/api.js" async defer></script>
+  <!-- Phase C-5: Sentry Error Tracking (uncomment and set DSN to activate)
+  <script src="https://browser.sentry-cdn.com/8.0.0/bundle.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.init({ dsn: 'YOUR_SENTRY_DSN_HERE', tracesSampleRate: 0.1 });
+  </script>
+  -->
+  <!-- Phase C-5: Plausible Analytics — privacy-friendly, no cookies (uncomment to activate)
+  <script defer data-domain="your-domain.com" src="https://plausible.io/js/script.js"></script>
+  -->
 </head>
 <body>
   <!-- Phase 14-03: Auth Screen -->
@@ -11068,6 +11077,81 @@
     // DEBUG FLAG — Set to true to enable verbose console.log output
     // ============================================================
     const DEBUG = false;
+
+    // ============================================================
+    // ERROR TRACKING & ANALYTICS (C-5)
+    // ============================================================
+    // Built-in error tracker — captures unhandled errors and rejections
+    // Works immediately without external services. Errors are stored
+    // in-memory and can be sent to Sentry when configured.
+    const ErrorTracker = {
+      errors: [],
+      maxErrors: 50,
+      sentryDSN: '', // Set your Sentry DSN here to enable remote error tracking
+
+      init() {
+        window.onerror = (msg, source, line, col, error) => {
+          this.capture({ type: 'error', message: msg, source, line, col, stack: error?.stack });
+          return false; // Don't suppress the error
+        };
+        window.addEventListener('unhandledrejection', (event) => {
+          this.capture({
+            type: 'unhandledrejection',
+            message: event.reason?.message || String(event.reason),
+            stack: event.reason?.stack
+          });
+        });
+        if (DEBUG) console.log('[ErrorTracker] Initialized');
+      },
+
+      capture(errorData) {
+        const entry = {
+          ...errorData,
+          timestamp: new Date().toISOString(),
+          url: window.location.href,
+          userAgent: navigator.userAgent
+        };
+        this.errors.push(entry);
+        if (this.errors.length > this.maxErrors) this.errors.shift();
+
+        // If Sentry SDK is loaded, forward to Sentry
+        if (window.Sentry && errorData.type === 'error') {
+          window.Sentry.captureException(new Error(errorData.message));
+        }
+      },
+
+      getErrors() { return [...this.errors]; },
+      getErrorCount() { return this.errors.length; },
+      clear() { this.errors = []; }
+    };
+    ErrorTracker.init();
+
+    // Simple feature usage analytics — privacy-friendly, no PII
+    // Tracks aggregate feature usage (tab switches, key actions) in-memory.
+    // If Plausible is configured, events are forwarded there.
+    const Analytics = {
+      events: [],
+      maxEvents: 200,
+
+      track(eventName, props) {
+        const entry = { event: eventName, props: props || {}, timestamp: Date.now() };
+        this.events.push(entry);
+        if (this.events.length > this.maxEvents) this.events.shift();
+
+        // Forward to Plausible if loaded
+        if (window.plausible) {
+          window.plausible(eventName, { props });
+        }
+        if (DEBUG) console.log('[Analytics]', eventName, props);
+      },
+
+      getEvents() { return [...this.events]; },
+      getSummary() {
+        const counts = {};
+        this.events.forEach(e => { counts[e.event] = (counts[e.event] || 0) + 1; });
+        return counts;
+      }
+    };
 
     // ============================================================
     // URL HASH ROUTING — must be early to run before any errors
@@ -17636,6 +17720,7 @@ Generated by Autonomo Tax Calculator`;
 
           // Show onboarding for first-time users
           OnboardingFlow.show();
+          Analytics.track('session_start', { mode: 'authenticated' });
         } else {
           // Not authenticated - show login
           if (authScreen) authScreen.classList.remove('hidden');
@@ -17932,6 +18017,7 @@ Generated by Autonomo Tax Calculator`;
 
           // Show onboarding for first-time users
           OnboardingFlow.show();
+          Analytics.track('session_start', { mode: 'demo' });
 
         } catch (err) {
           console.error('[DEMO] Fatal error:', err);
@@ -28086,7 +28172,10 @@ Generated by Autonomo Tax Calculator`;
       // Listen for tab changes via radio change events
       document.querySelectorAll('input[name="tabs"]').forEach(radio => {
         radio.addEventListener('change', () => {
-          if (radio.checked) updateHashFromTab();
+          if (radio.checked) {
+            updateHashFromTab();
+            Analytics.track('tab_switch', { tab: radio.id.replace('tab-', '') });
+          }
         });
       });
       window.addEventListener('hashchange', activateTabFromHash);
