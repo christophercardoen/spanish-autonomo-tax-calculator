@@ -9019,7 +9019,7 @@
     <div class="sessions-content">
       <div class="sessions-header">
         <h3>Active Sessions</h3>
-        <button class="sessions-close" onclick="SessionsUI.close()">&times;</button>
+        <button class="sessions-close" onclick="SessionsUI.close()" aria-label="Close">&times;</button>
       </div>
 
       <div id="sessions-list" class="sessions-list">
@@ -9039,7 +9039,7 @@
     <div class="invite-content">
       <div class="invite-header">
         <h3>Invite User to Entity</h3>
-        <button class="invite-close" onclick="InviteUI.closeModal()">&times;</button>
+        <button class="invite-close" onclick="InviteUI.closeModal()" aria-label="Close">&times;</button>
       </div>
 
       <form class="invite-form" id="invite-form" onsubmit="InviteUI.create(event)">
@@ -9120,7 +9120,7 @@
     <div class="client-modal-content">
       <div class="client-modal-header">
         <h3 id="client-modal-title">New Client</h3>
-        <button class="client-modal-close" onclick="ClientFormUI.close()">&times;</button>
+        <button class="client-modal-close" onclick="ClientFormUI.close()" aria-label="Close">&times;</button>
       </div>
 
       <form id="client-form" class="client-modal-form">
@@ -9216,7 +9216,7 @@
     <div class="client-modal-content">
       <div class="client-modal-header">
         <h3 id="contact-modal-title">New Contact</h3>
-        <button class="client-modal-close" onclick="ContactFormUI.close()">&times;</button>
+        <button class="client-modal-close" onclick="ContactFormUI.close()" aria-label="Close">&times;</button>
       </div>
 
       <form id="contact-form" class="client-modal-form">
@@ -9271,7 +9271,7 @@
     <div class="client-modal-content">
       <div class="client-modal-header">
         <h3 id="project-modal-title">New Project</h3>
-        <button class="client-modal-close" onclick="ProjectFormUI.close()">&times;</button>
+        <button class="client-modal-close" onclick="ProjectFormUI.close()" aria-label="Close">&times;</button>
       </div>
 
       <form id="project-form" class="client-modal-form">
@@ -9388,7 +9388,7 @@
     <div class="client-modal-content" style="max-width: 500px;">
       <div class="client-modal-header">
         <h3 id="dayEditorTitle">Edit Day</h3>
-        <button type="button" class="client-modal-close" onclick="closeDayEditor()">&times;</button>
+        <button type="button" class="client-modal-close" onclick="closeDayEditor()" aria-label="Close">&times;</button>
       </div>
       <form id="dayEditorForm" class="client-modal-form" onsubmit="saveDayEditor(event)">
         <input type="hidden" id="dayEditorDate" />
@@ -9464,7 +9464,7 @@
     <div class="client-modal-content" style="max-width: 400px;">
       <div class="client-modal-header">
         <h3>Tag Selected Days</h3>
-        <button type="button" class="client-modal-close" onclick="closeBulkTagModal()">&times;</button>
+        <button type="button" class="client-modal-close" onclick="closeBulkTagModal()" aria-label="Close">&times;</button>
       </div>
       <form id="bulkTagForm" class="client-modal-form" onsubmit="executeBulkTag(event)">
         <div class="client-form-group">
@@ -9506,7 +9506,7 @@
     <div class="client-modal-content" style="max-width: 450px;">
       <div class="client-modal-header">
         <h3>Apply Work Pattern</h3>
-        <button type="button" class="client-modal-close" onclick="closeApplyPatternModal()">&times;</button>
+        <button type="button" class="client-modal-close" onclick="closeApplyPatternModal()" aria-label="Close">&times;</button>
       </div>
       <form id="applyPatternForm" class="client-modal-form" onsubmit="executeApplyPattern(event)">
         <div class="client-form-group">
@@ -9576,7 +9576,7 @@
   <div id="notification" class="notification hidden"></div>
 
   <div class="container">
-    <div class="dashboard">
+    <main class="dashboard" role="main">
       <!-- Dashboard Header -->
       <header class="dashboard-header">
         <div>
@@ -9643,7 +9643,7 @@
       <input type="radio" name="tabs" id="tab-compliance" class="tab-input">
 
       <!-- Tab navigation -->
-      <nav class="tab-nav">
+      <nav class="tab-nav" aria-label="Main navigation">
         <label for="tab-scenarios" class="tab-label">Scenarios</label>
         <label for="tab-calendar" class="tab-label">Calendar</label>
         <label for="tab-expenses" class="tab-label">Expenses</label>
@@ -9672,7 +9672,7 @@
       <dialog id="addExpenseDialog" class="expense-dialog">
         <div class="dialog-header">
           <h2>Add New Expense</h2>
-          <button type="button" class="dialog-close" onclick="hideAddForm()">x</button>
+          <button type="button" class="dialog-close" onclick="hideAddForm()" aria-label="Close">x</button>
         </div>
         <div style="padding: 1.5rem;">
           <div class="form-row">
@@ -9785,7 +9785,7 @@
       <dialog id="expenseFormDialog" class="expense-form-dialog" data-edit-id="">
         <div class="dialog-header">
           <h2 id="expenseFormTitle">Add Expense</h2>
-          <button type="button" class="dialog-close" onclick="closeExpenseFormDialog()">x</button>
+          <button type="button" class="dialog-close" onclick="closeExpenseFormDialog()" aria-label="Close">x</button>
         </div>
         <form id="expenseForm" class="expense-form-body" onsubmit="event.preventDefault(); submitExpenseForm();">
 
@@ -10692,7 +10692,7 @@
       <div class="detail-content">
         <header class="detail-header">
           <h2 class="detail-title">Scenario Details</h2>
-          <button class="close-btn" onclick="closeDetailModal()">&times;</button>
+          <button class="close-btn" onclick="closeDetailModal()" aria-label="Close">&times;</button>
         </header>
         <div class="detail-body" id="detail-body">
           <!-- Populated by openDetailModal() -->
@@ -10736,7 +10736,7 @@
     <dialog id="contractedWizardDialog">
       <div class="dialog-header">
         <h2>Apply Contracted Pattern?</h2>
-        <button type="button" class="dialog-close" onclick="declineContractedPattern()">x</button>
+        <button type="button" class="dialog-close" onclick="declineContractedPattern()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
         <p>Pre-fill calendar with your contracted work pattern?</p>
@@ -10759,7 +10759,7 @@
     <dialog id="dayPickerDialog">
       <div class="dialog-header">
         <h2 id="pickerDateDisplay">February 15, 2026</h2>
-        <button type="button" class="dialog-close" onclick="closeDayPicker()">x</button>
+        <button type="button" class="dialog-close" onclick="closeDayPicker()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
         <p id="pickerContracted" style="opacity: 0.7; margin-bottom: 1rem;"></p>
@@ -10803,7 +10803,7 @@
     <dialog id="bulkPickerDialog">
       <div class="dialog-header">
         <h2>Set Status for <span id="bulkCount">5</span> Days</h2>
-        <button type="button" class="dialog-close" onclick="closeBulkPicker()">x</button>
+        <button type="button" class="dialog-close" onclick="closeBulkPicker()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
         <p style="opacity: 0.7; margin-bottom: 1rem;">Apply status to all selected days:</p>
@@ -10842,7 +10842,7 @@
       <form id="incomeForm" onsubmit="saveIncomeEntry(event)">
         <div class="dialog-header">
           <h3 id="incomeDialogTitle">Add Income Entry</h3>
-          <button type="button" class="dialog-close" onclick="closeIncomeDialog()">x</button>
+          <button type="button" class="dialog-close" onclick="closeIncomeDialog()" aria-label="Close">x</button>
         </div>
 
         <div style="padding: var(--spacing-md);">
@@ -10909,7 +10909,7 @@
     <dialog id="invoiceDialog" class="invoice-dialog">
       <div class="dialog-header">
         <h2 id="invoiceDialogTitle">New Invoice</h2>
-        <button type="button" class="dialog-close" onclick="closeInvoiceForm()">x</button>
+        <button type="button" class="dialog-close" onclick="closeInvoiceForm()" aria-label="Close">x</button>
       </div>
       <div class="invoice-dialog-body">
         <!-- Meta Fields Row -->
@@ -11024,7 +11024,7 @@
     <dialog id="calendarPopulateDialog" class="invoice-dialog" style="max-width: 500px;">
       <div class="dialog-header">
         <h2>Populate from Calendar</h2>
-        <button type="button" class="dialog-close" onclick="document.getElementById('calendarPopulateDialog').close()">x</button>
+        <button type="button" class="dialog-close" onclick="document.getElementById('calendarPopulateDialog').close()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
         <div class="form-group">
@@ -11051,7 +11051,7 @@
     <dialog id="rectificativaDialog" class="invoice-dialog" style="max-width: 500px;">
       <div class="dialog-header">
         <h2>Create Factura Rectificativa</h2>
-        <button type="button" class="dialog-close" onclick="document.getElementById('rectificativaDialog').close()">x</button>
+        <button type="button" class="dialog-close" onclick="document.getElementById('rectificativaDialog').close()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
         <p id="rectOriginalRef" class="rect-original-ref"></p>
@@ -11082,7 +11082,7 @@
     <dialog id="emailInvoiceDialog" class="invoice-dialog" style="max-width: 500px;">
       <div class="dialog-header">
         <h2>Email Invoice</h2>
-        <button type="button" class="dialog-close" onclick="document.getElementById('emailInvoiceDialog').close()">x</button>
+        <button type="button" class="dialog-close" onclick="document.getElementById('emailInvoiceDialog').close()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
         <div class="form-group">
@@ -11109,7 +11109,7 @@
         </div>
       </div>
     </dialog>
-  </div>
+  </main>
   <script>
     // ============================================================
     // DEBUG FLAG — Set to true to enable verbose console.log output
@@ -27416,14 +27416,20 @@ Generated by Autonomo Tax Calculator`;
 
       open() {
         this.reset();
-        document.getElementById('entity-modal-overlay').classList.add('active');
-        // Prevent body scroll when modal is open
+        const overlay = document.getElementById('entity-modal-overlay');
+        overlay.classList.add('active');
+        // Prevent body scroll and set inert on background for accessibility
         document.body.style.overflow = 'hidden';
+        document.querySelector('.dashboard')?.setAttribute('inert', '');
+        // Focus first interactive element
+        const firstInput = overlay.querySelector('input, button:not(.entity-modal__close)');
+        if (firstInput) setTimeout(() => firstInput.focus(), 100);
       },
 
       close() {
         document.getElementById('entity-modal-overlay').classList.remove('active');
         document.body.style.overflow = '';
+        document.querySelector('.dashboard')?.removeAttribute('inert');
         this.reset();
       },
 
@@ -29148,7 +29154,7 @@ Generated by Autonomo Tax Calculator`;
         <td><input type="number" class="line-unit-price text-right" value="${unitPrice}" step="0.01" min="0" oninput="recalculateInvoiceFormTotals()"></td>
         <td><input type="number" class="line-iva-rate text-right" value="${ivaRateDisplay}" readonly tabindex="-1"></td>
         <td><span class="line-total text-right mono">0.00</span></td>
-        <td><button type="button" class="btn-remove-line" onclick="removeInvoiceLineItem(this.closest('tr'))" title="Remove line">&times;</button></td>
+        <td><button type="button" class="btn-remove-line" onclick="removeInvoiceLineItem(this.closest('tr'))" title="Remove line" aria-label="Remove line item">&times;</button></td>
       `;
 
       lineItemsBody.appendChild(tr);
