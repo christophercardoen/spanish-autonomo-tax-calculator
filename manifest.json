@@ -1,0 +1,22 @@
+{
+  "name": "Autonomo Tax Calculator",
+  "short_name": "Autonomo Tax",
+  "description": "Tax calculator for Spanish autónomos working in Belgium. IRPF, RETA, 183-day rule, expenses, invoices.",
+  "start_url": "/autonomo_dashboard.html",
+  "display": "standalone",
+  "background_color": "#0f0f17",
+  "theme_color": "#1a1a2e",
+  "orientation": "any",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "business"],
+  "lang": "en",
+  "dir": "ltr"
+}
