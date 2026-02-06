@@ -3739,7 +3739,7 @@
         max-width: 100%;
       }
 
-      /* Hide interactive elements */
+      /* Hide non-printable elements */
       .tab-nav,
       .tab-input,
       .edit-btn,
@@ -3751,22 +3751,25 @@
       .reset-btn,
       button:not(.print-include),
       dialog,
-      .calendar-section,
-      .panel-calendar,
-      .panel-expenses,
-      .panel-invoices,
-      .panel-details,
-      [role="tooltip"] {
+      [role="tooltip"],
+      #auth-screen,
+      #loading-screen,
+      #onboarding-overlay,
+      #toast-container,
+      .entity-modal-overlay,
+      .auth-status-indicator,
+      .entity-switcher-trigger,
+      .compliance-warning-banner,
+      .dual-activity-warning,
+      .empty-cta,
+      .invoice-filters,
+      .client-filters {
         display: none !important;
       }
 
-      /* Show only scenarios panel */
+      /* Show currently active tab panel (CSS :checked still works in print) */
       .tab-panel {
-        display: block !important;
-      }
-
-      .panel-scenarios {
-        display: block !important;
+        /* Default hidden — CSS radio :checked rules control visibility */
       }
 
       /* Dashboard header adjustments */
@@ -3853,16 +3856,70 @@
         font-weight: 700;
       }
 
-      /* Color classes in print */
-      .value-positive,
-      .value-negative,
-      .value-warning {
-        color: black !important;
-      }
+      /* Semantic colors in print — use grayscale with weight */
+      .value-positive { color: #1a7a1a !important; }
+      .value-negative { color: #b91c1c !important; }
+      .value-warning { color: #92400e !important; }
 
       /* Hide mobile comparison on print */
       .comparison-mobile {
         display: none !important;
+      }
+
+      /* Numbers stay monospaced in print */
+      .metric .value,
+      .stat-number,
+      td[style*="JetBrains"],
+      .amount {
+        font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+      }
+
+      /* Generic table print styling (expenses, invoices, clients) */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid #ddd !important;
+        padding: 0.4rem 0.6rem !important;
+        color: black !important;
+        background: white !important;
+        font-size: 9pt;
+      }
+      thead th {
+        background: #f0f0f0 !important;
+        font-weight: 700;
+      }
+      tr { page-break-inside: avoid; }
+
+      /* Expense category headers in print */
+      .expense-category h3 {
+        color: black !important;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 0.25rem;
+      }
+
+      /* Invoice cards in print — linearize */
+      .invoice-cards .invoice-card {
+        background: white !important;
+        border: 1px solid #ccc !important;
+        color: black !important;
+        page-break-inside: avoid;
+      }
+
+      /* Client list in print */
+      .client-row {
+        border: 1px solid #ccc !important;
+        background: white !important;
+        color: black !important;
+        page-break-inside: avoid;
+      }
+
+      /* Calendar grid in print */
+      .calendar-grid .day-cell {
+        border: 1px solid #ddd !important;
+        color: black !important;
+        font-size: 8pt;
       }
 
       /* Page settings */
