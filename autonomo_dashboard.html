@@ -2853,6 +2853,101 @@
       background: rgba(255,255,255,0.05);
     }
 
+    /* Year-over-Year Comparison (E-3) */
+    .year-comparison-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .year-comparison-section h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .year-comparison-section .section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    .year-comparison-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .year-comparison-controls label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .year-comparison-controls select {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .year-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .year-card {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .year-card.current-year {
+      border-color: var(--accent);
+    }
+    .year-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .year-card-header h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .year-card-header .year-badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .year-badge.current { background: rgba(74,222,128,0.15); color: var(--accent); }
+    .year-badge.projected { background: rgba(251,146,60,0.15); color: var(--warning); }
+    .year-card .yr-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.85rem;
+    }
+    .year-card .yr-row .yr-label { color: var(--text-muted); }
+    .year-card .yr-row .yr-val { font-family: var(--font-mono); }
+    .year-card .yr-row.yr-divider {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 0.35rem;
+      padding-top: 0.55rem;
+    }
+    .year-card .yr-row.yr-highlight .yr-val {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .year-delta {
+      display: inline-block;
+      font-size: 0.75rem;
+      margin-left: 0.5rem;
+      font-weight: 600;
+    }
+    .year-delta.positive { color: var(--positive); }
+    .year-delta.negative { color: var(--negative); }
+    .year-delta.neutral { color: var(--text-dim); }
+
     /* Empty state */
     .comparison-empty {
       text-align: center;
@@ -10236,6 +10331,19 @@
             <div class="comparison-mobile">
               <!-- Populated by renderMobileComparison() -->
             </div>
+
+            <!-- Year-over-Year Comparison (E-3) -->
+            <div class="year-comparison-section">
+              <h3>Year-over-Year Comparison</h3>
+              <p class="section-subtitle">See how tax changes across fiscal years affect your net income for the same scenario.</p>
+              <div class="year-comparison-controls">
+                <label for="yearCompScenario">Scenario:</label>
+                <select id="yearCompScenario" onchange="renderYearComparison()"></select>
+              </div>
+              <div id="yearCompCards" class="year-cards">
+                <!-- Populated by renderYearComparison() -->
+              </div>
+            </div>
           </div>
         </section>
 
@@ -11554,6 +11662,33 @@
       // Private costs (fixed, not deductible)
       // Breakdown: Rent 70% (808.50) + GSM 50% (27.50) + Electricity 91% (91) + Auto (600) + Insurance (200)
       PRIVATE_COSTS_MONTHLY: 1727
+    });
+
+    // ============================================================
+    // MULTI-YEAR FISCAL DATA (E-3)
+    // ============================================================
+    // IRPF brackets unchanged 2024-2026. RETA may change per tramo.
+    // 2027 projected: same brackets, RETA estimated increase per SS trend.
+    // Source: AEAT, BOE, Seguridad Social
+    // ============================================================
+    const FISCAL_YEARS = Object.freeze({
+      2025: FISCAL_2025,
+      2026: Object.freeze({
+        ...FISCAL_2025,
+        // IRPF brackets identical to 2025
+        // RETA unchanged for fixed-cuota registrations
+        label: '2026',
+        confirmed: true
+      }),
+      2027: Object.freeze({
+        ...FISCAL_2025,
+        // Projected: RETA estimated +3% per SS convergence trend
+        // IRPF brackets: no announced changes
+        RETA_MONTHLY: 441.25,
+        RETA_ANNUAL: 5295.00,
+        label: '2027 (projected)',
+        confirmed: false
+      })
     });
 
     // ============================================================
@@ -15551,6 +15686,10 @@ Generated by Autonomo Tax Calculator`;
       `;
 
       container.innerHTML = cardsHtml + newButtonHtml;
+
+      // Populate year comparison dropdown (E-3) — independent of comparison selection
+      populateYearCompScenarioSelect();
+      renderYearComparison();
     }
 
     /**
@@ -15716,6 +15855,10 @@ Generated by Autonomo Tax Calculator`;
       if (mobileContainer) {
         mobileContainer.innerHTML = renderMobileComparison(scenarios);
       }
+
+      // Update year-over-year comparison (E-3)
+      populateYearCompScenarioSelect();
+      renderYearComparison();
     }
 
     /**
@@ -15800,6 +15943,121 @@ Generated by Autonomo Tax Calculator`;
         console.error('Clipboard write failed:', err);
         showNotification('Copy failed - try again', 'error');
       }
+    }
+
+    // ============================================================
+    // YEAR-OVER-YEAR COMPARISON (E-3)
+    // ============================================================
+
+    function populateYearCompScenarioSelect() {
+      const sel = document.getElementById('yearCompScenario');
+      if (!sel) return;
+      const prev = sel.value;
+      sel.innerHTML = '';
+      const co = scenarioState.customOrder;
+      const ids = (co && co.length > 0) ? co : Object.keys(scenarioState.scenarios);
+      ids.forEach(id => {
+        const s = scenarioState.scenarios[id];
+        if (!s) return;
+        const opt = document.createElement('option');
+        opt.value = id;
+        opt.textContent = s.name;
+        sel.appendChild(opt);
+      });
+      if (prev && scenarioState.scenarios[prev]) sel.value = prev;
+    }
+
+    function renderYearComparison() {
+      const container = document.getElementById('yearCompCards');
+      const sel = document.getElementById('yearCompScenario');
+      if (!container || !sel) return;
+
+      const scenarioId = sel.value;
+      const scenario = scenarioState.scenarios[scenarioId];
+      if (!scenario) {
+        container.innerHTML = '<p style="color:var(--text-muted);">Select a scenario above.</p>';
+        return;
+      }
+
+      const years = Object.keys(FISCAL_YEARS).map(Number).sort();
+      const currentYear = new Date().getFullYear();
+      const workTravel = typeof getWorkTravelCost === 'function' ? getWorkTravelCost(scenario) : (scenario.workTravelCost || 0);
+      const monthlyDeductible = scenario.monthlyExpenses + workTravel;
+
+      // Calculate for each year
+      const results = years.map(year => {
+        const fiscal = FISCAL_YEARS[year];
+        const r = calculateFullIRPFWithConfig(
+          scenario.monthlyRevenue,
+          monthlyDeductible,
+          scenario.hasDescendant !== false,
+          fiscal
+        );
+        r.privateCostsMonthly = fiscal.PRIVATE_COSTS_MONTHLY || FISCAL_2025.PRIVATE_COSTS_MONTHLY;
+        r.leefgeld = r.netMonthly - r.privateCostsMonthly;
+        return { year, fiscal, results: r };
+      });
+
+      // Use first year as baseline for deltas
+      const baseline = results[0].results;
+
+      function delta(val, baseVal, inverse) {
+        const diff = val - baseVal;
+        if (Math.abs(diff) < 0.01) return '';
+        const sign = diff > 0 ? '+' : '';
+        const cls = inverse
+          ? (diff > 0 ? 'negative' : 'positive')
+          : (diff > 0 ? 'positive' : 'negative');
+        return `<span class="year-delta ${cls}">${sign}${formatEUR(diff)}</span>`;
+      }
+
+      container.innerHTML = results.map(({ year, fiscal, results: r }) => {
+        const isCurrent = year === currentYear || year === currentYear + 1;
+        const isProjected = fiscal.confirmed === false;
+        const badgeClass = isProjected ? 'projected' : 'current';
+        const badgeText = isProjected ? 'Projected' : (year <= currentYear ? 'Current' : 'Confirmed');
+
+        return `
+          <div class="year-card${isCurrent ? ' current-year' : ''}">
+            <div class="year-card-header">
+              <h4>${fiscal.label || year}</h4>
+              <span class="year-badge ${badgeClass}">${badgeText}</span>
+            </div>
+            <div class="yr-row">
+              <span class="yr-label">RETA (monthly)</span>
+              <span class="yr-val">${formatEUR(r.retaMonthly)}${delta(r.retaMonthly, baseline.retaMonthly, true)}</span>
+            </div>
+            <div class="yr-row">
+              <span class="yr-label">RETA (annual)</span>
+              <span class="yr-val">${formatEUR(r.retaAnnual)}${delta(r.retaAnnual, baseline.retaAnnual, true)}</span>
+            </div>
+            <div class="yr-row">
+              <span class="yr-label">Total Deductible</span>
+              <span class="yr-val">${formatEUR(r.totalDeductible)}</span>
+            </div>
+            <div class="yr-row yr-divider">
+              <span class="yr-label">Base Liquidable</span>
+              <span class="yr-val">${formatEUR(r.baseLiquidable)}</span>
+            </div>
+            <div class="yr-row">
+              <span class="yr-label">IRPF (Cuota Integra)</span>
+              <span class="yr-val">${formatEUR(r.cuotaIntegra)}${delta(r.cuotaIntegra, baseline.cuotaIntegra, true)}</span>
+            </div>
+            <div class="yr-row">
+              <span class="yr-label">Effective Rate</span>
+              <span class="yr-val">${(r.effectiveRate * 100).toFixed(1)}%</span>
+            </div>
+            <div class="yr-row yr-divider">
+              <span class="yr-label">Net Monthly</span>
+              <span class="yr-val">${formatEUR(r.netMonthly)}${delta(r.netMonthly, baseline.netMonthly, false)}</span>
+            </div>
+            <div class="yr-row yr-highlight">
+              <span class="yr-label">Disposable Income</span>
+              <span class="yr-val">${formatEUR(r.leefgeld)}${delta(r.leefgeld, baseline.leefgeld, false)}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     // ============================================================
