@@ -4420,6 +4420,67 @@
     }
     .help-menu-item:hover { background: var(--surface-hover); }
 
+    /* Phase H: SL (Sociedad Limitada) Support */
+    .sl-section { display: none; margin-top: var(--spacing-lg); }
+    .sl-section.visible { display: block; }
+    .sl-section h2 { margin-bottom: var(--spacing-sm); }
+
+    .is-breakdown {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+    }
+    @media (max-width: 600px) { .is-breakdown { grid-template-columns: 1fr; } }
+
+    .is-card {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: var(--spacing-md);
+    }
+    .is-card h3 { font-size: var(--size-body); margin-bottom: var(--spacing-xs); }
+    .is-card .is-rate { font-family: 'JetBrains Mono', monospace; font-size: var(--size-header); font-weight: 700; }
+    .is-card .is-amount { font-family: 'JetBrains Mono', monospace; font-size: var(--size-section-title); }
+    .is-card .is-note { font-size: var(--size-small); color: var(--text-muted); margin-top: var(--spacing-xs); }
+
+    .optimizer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--spacing-md); margin: var(--spacing-md) 0;
+    }
+    .optimizer-card {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: var(--spacing-md);
+      text-align: center;
+    }
+    .optimizer-card.optimal { border-color: var(--positive); background: color-mix(in srgb, var(--positive) 5%, var(--bg-surface)); }
+    .optimizer-card h4 { font-size: var(--size-labels); color: var(--text-muted); margin-bottom: var(--spacing-xs); }
+    .optimizer-card .opt-amount {
+      font-family: 'JetBrains Mono', monospace; font-size: var(--size-header);
+      font-weight: 700;
+    }
+    .optimizer-card .opt-detail { font-size: var(--size-small); color: var(--text-muted); margin-top: var(--spacing-xs); }
+    .optimizer-card .opt-badge {
+      display: inline-block; padding: 2px 8px; border-radius: var(--radius-full);
+      font-size: var(--size-tiny); font-weight: 600; background: var(--positive); color: white;
+      margin-top: var(--spacing-xs);
+    }
+
+    .cuentas-table {
+      width: 100%; border-collapse: collapse; margin: var(--spacing-md) 0;
+      font-size: var(--size-labels);
+    }
+    .cuentas-table th, .cuentas-table td {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-bottom: 1px solid var(--border); text-align: left;
+    }
+    .cuentas-table th { font-weight: 600; color: var(--text-muted); font-size: var(--size-small); text-transform: uppercase; }
+    .cuentas-table .amount { text-align: right; font-family: 'JetBrains Mono', monospace; }
+    .cuentas-table .total-row { font-weight: 700; border-top: 2px solid var(--text); }
+    .cuentas-table .subtotal-row { font-weight: 600; background: color-mix(in srgb, var(--accent) 5%, transparent); }
+
+    .sl-entity-notice {
+      padding: var(--spacing-md); background: color-mix(in srgb, var(--accent) 8%, var(--bg-surface));
+      border: 1px solid var(--accent); border-radius: var(--radius-lg);
+      font-size: var(--size-labels); margin-bottom: var(--spacing-md);
+    }
+
     /* Phase F: Skip Navigation Link */
     .skip-nav {
       position: absolute;
@@ -11337,6 +11398,80 @@
             </div>
           </div>
 
+          <!-- Phase H: SL (Sociedad Limitada) Tax Sections -->
+          <div id="slSections" class="sl-section">
+
+            <div class="sl-entity-notice">
+              <strong>SL Mode Active</strong> — These calculations apply to your Sociedad Limitada entity.
+              Impuesto de Sociedades (IS) replaces IRPF for corporate income. RETA is obligatory for SL administrators.
+            </div>
+
+            <!-- H-1: Impuesto de Sociedades Calculator -->
+            <div id="isCalculatorSection">
+              <h2>Impuesto de Sociedades (IS)</h2>
+              <p class="section-subtitle">Corporate income tax for your SL. General rate 25%, reduced 15% for new entities (first 2 profitable years).</p>
+
+              <div style="display:flex;gap:1rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;">
+                <label for="isRateSelector" style="font-size:var(--size-small);color:var(--text-muted);">IS Rate:</label>
+                <select id="isRateSelector" onchange="recalculateSL()">
+                  <option value="0.25" selected>25% General</option>
+                  <option value="0.15">15% New entity (primeros 2 ejercicios)</option>
+                </select>
+                <label for="slAdminSalary" style="font-size:var(--size-small);color:var(--text-muted);">Admin salary (EUR/year):</label>
+                <input type="number" id="slAdminSalary" value="24000" min="0" step="1000" oninput="recalculateSL()" style="width:120px;padding:0.35rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-surface);color:var(--text);">
+              </div>
+
+              <div id="isBreakdown" class="is-breakdown">
+                <!-- Populated by calculateIS() -->
+              </div>
+            </div>
+
+            <!-- H-2: Modelo 200 (Annual IS) -->
+            <div id="modelo200Section" style="margin-top: var(--spacing-lg);">
+              <h2>Modelo 200 — Annual IS Declaration</h2>
+              <p class="section-subtitle">Annual corporate tax return. Filing deadline: 25 days after 6 months from fiscal year end (typically July 25).</p>
+              <div id="modelo200Content">
+                <!-- Populated by calculateModelo200() -->
+              </div>
+            </div>
+
+            <!-- H-3: Modelo 202 (Advance IS Payments) -->
+            <div id="modelo202Section" style="margin-top: var(--spacing-lg);">
+              <h2>Modelo 202 — Advance IS Payments</h2>
+              <p class="section-subtitle">Quarterly advance payments on corporate tax. Due April 20, October 20, December 20.</p>
+              <div id="modelo202Content">
+                <!-- Populated by calculateModelo202() -->
+              </div>
+            </div>
+
+            <!-- H-4: Salary vs Dividend Optimizer -->
+            <div id="salaryDividendSection" style="margin-top: var(--spacing-lg);">
+              <h2>Salary vs Dividend Optimizer</h2>
+              <p class="section-subtitle">Find the optimal split between admin salary and dividends to minimize total tax burden.</p>
+              <div id="salaryDividendContent" class="optimizer-grid">
+                <!-- Populated by calculateSalaryVsDividend() -->
+              </div>
+            </div>
+
+            <!-- H-5: RETA for SL Administrators -->
+            <div id="retaSLSection" style="margin-top: var(--spacing-lg);">
+              <h2>RETA — SL Administrator</h2>
+              <p class="section-subtitle">As SL administrator with 25%+ ownership, RETA is obligatory under the Autonomo regime (RETA, not Regimen General).</p>
+              <div id="retaSLContent">
+                <!-- Populated by calculateRetaSL() -->
+              </div>
+            </div>
+
+            <!-- H-6: Cuentas Anuales (P&L + Balance) -->
+            <div id="cuentasAnualesSection" style="margin-top: var(--spacing-lg);">
+              <h2>Cuentas Anuales — Simplified</h2>
+              <p class="section-subtitle">Simplified P&L and Balance Sheet for SL filing with the Registro Mercantil.</p>
+              <div id="cuentasAnualesContent">
+                <!-- Populated by renderCuentasAnuales() -->
+              </div>
+            </div>
+          </div>
+
           <!-- Tax Calendar (C-5) -->
           <div class="tax-calendar-section" id="taxCalendarSection">
             <h2>Tax Calendar — Upcoming Deadlines</h2>
@@ -16212,6 +16347,9 @@ Generated by Autonomo Tax Calculator`;
       // Phase G: Update timeline and savings
       renderTaxTimeline();
       renderSavingsBanner();
+
+      // Phase H: Recalculate SL sections if entity is SL
+      recalculateSL();
     }
 
     // ============================================================
@@ -30497,6 +30635,390 @@ Generated by Autonomo Tax Calculator`;
     }
 
     // ============================================================
+    // PHASE H: SL (SOCIEDAD LIMITADA) SUPPORT
+    // ============================================================
+
+    /**
+     * IS (Impuesto de Sociedades) fiscal constants
+     * Source: AEAT — Ley 27/2014 del Impuesto sobre Sociedades
+     * https://www.boe.es/buscar/act.php?id=BOE-A-2014-12328
+     */
+    const IS_FISCAL = Object.freeze({
+      GENERAL_RATE: 0.25,         // Art. 29.1 LIS — General rate
+      REDUCED_RATE: 0.15,         // Art. 29.1 LIS — First 2 profitable years for new entities
+      DIVIDEND_TAX_RATE: 0.19,    // IRPF savings base: 19% up to 6,000 EUR
+      DIVIDEND_TAX_BRACKETS: Object.freeze([
+        { upTo: 6000, rate: 0.19 },
+        { upTo: 50000, rate: 0.21 },
+        { upTo: 200000, rate: 0.23 },
+        { upTo: 300000, rate: 0.27 },
+        { upTo: Infinity, rate: 0.28 }
+      ]),
+      // Modelo 202 advance payment rate (Art. 40.2 LIS)
+      MODELO202_RATE: 0.18,       // 18% of cuota integra from last Modelo 200
+      // RETA for SL admins with 25%+ ownership (same regime as autonomos)
+      RETA_SL_ADMIN_MONTHLY: 428.40,
+      // Minimum admin salary for SL (recommended to avoid imputed income)
+      MIN_ADMIN_SALARY: 12000
+    });
+
+    /**
+     * H-1: Calculate Impuesto de Sociedades
+     * @param {number} annualRevenue - Total company revenue
+     * @param {number} annualExpenses - Total deductible expenses (including admin salary)
+     * @param {number} isRate - IS rate (0.25 or 0.15)
+     * @returns {Object} IS calculation breakdown
+     */
+    function calculateIS(annualRevenue, annualExpenses, isRate) {
+      const baseImponible = Math.max(0, annualRevenue - annualExpenses);
+      const cuotaIntegra = Math.round(baseImponible * isRate * 100) / 100;
+
+      return {
+        annualRevenue,
+        annualExpenses,
+        baseImponible,
+        isRate,
+        cuotaIntegra,
+        beneficioNeto: baseImponible - cuotaIntegra
+      };
+    }
+
+    /**
+     * H-1: Calculate dividend tax (IRPF on savings base)
+     */
+    function calculateDividendTax(dividendAmount) {
+      let remaining = dividendAmount;
+      let totalTax = 0;
+
+      for (const bracket of IS_FISCAL.DIVIDEND_TAX_BRACKETS) {
+        if (remaining <= 0) break;
+        const prevLimit = bracket === IS_FISCAL.DIVIDEND_TAX_BRACKETS[0] ? 0 :
+          IS_FISCAL.DIVIDEND_TAX_BRACKETS[IS_FISCAL.DIVIDEND_TAX_BRACKETS.indexOf(bracket) - 1].upTo;
+        const taxableInBracket = Math.min(remaining, bracket.upTo - prevLimit);
+        totalTax += taxableInBracket * bracket.rate;
+        remaining -= taxableInBracket;
+      }
+
+      return Math.round(totalTax * 100) / 100;
+    }
+
+    /**
+     * H-2: Calculate Modelo 200 (Annual IS Declaration)
+     */
+    function calculateModelo200(isResult) {
+      return {
+        resultado_contable: isResult.baseImponible,
+        ajustes_positivos: 0,
+        ajustes_negativos: 0,
+        base_imponible: isResult.baseImponible,
+        tipo_gravamen: isResult.isRate,
+        cuota_integra: isResult.cuotaIntegra,
+        deducciones: 0,
+        cuota_liquida: isResult.cuotaIntegra,
+        pagos_a_cuenta: 0, // Would be sum of Modelo 202 payments
+        cuota_diferencial: isResult.cuotaIntegra,
+        deadline: 'July 25 (25 days after 6 months from fiscal year end)'
+      };
+    }
+
+    /**
+     * H-3: Calculate Modelo 202 (Quarterly Advance IS Payments)
+     * Rate: 18% of last year's cuota integra, split into 3 payments
+     * Deadlines: April 20, October 20, December 20
+     */
+    function calculateModelo202(lastYearCuotaIntegra) {
+      const annualAdvance = lastYearCuotaIntegra * IS_FISCAL.MODELO202_RATE;
+      const quarterlyPayment = Math.round(annualAdvance / 3 * 100) / 100;
+
+      return {
+        rate: IS_FISCAL.MODELO202_RATE,
+        lastYearCuota: lastYearCuotaIntegra,
+        annualTotal: Math.round(annualAdvance * 100) / 100,
+        payments: [
+          { period: '1P', deadline: 'April 20', amount: quarterlyPayment },
+          { period: '2P', deadline: 'October 20', amount: quarterlyPayment },
+          { period: '3P', deadline: 'December 20', amount: quarterlyPayment }
+        ]
+      };
+    }
+
+    /**
+     * H-4: Salary vs Dividend Optimizer
+     * Calculates total tax burden for different salary/dividend splits
+     * to find the optimal extraction strategy.
+     */
+    function calculateSalaryVsDividend(companyProfit, retaAnnual) {
+      const scenarios = [];
+      const salaryOptions = [0, 12000, 18000, 24000, 30000, 36000, 42000, 48000];
+
+      for (const salary of salaryOptions) {
+        if (salary > companyProfit) continue;
+
+        // Company side: salary is deductible expense
+        const companyTaxableIncome = Math.max(0, companyProfit - salary - retaAnnual);
+        const isRate = parseFloat(document.getElementById('isRateSelector')?.value) || IS_FISCAL.GENERAL_RATE;
+        const isTax = Math.round(companyTaxableIncome * isRate * 100) / 100;
+        const afterIsTax = companyTaxableIncome - isTax;
+
+        // Dividends: remaining profit after IS
+        const dividends = afterIsTax;
+        const dividendTax = calculateDividendTax(dividends);
+
+        // Personal side: salary taxed via IRPF
+        // Simplified IRPF on salary (using autonomo brackets since admin is in RETA)
+        let salaryIRPF = 0;
+        const salaryTaxable = Math.max(0, salary - FISCAL_2025.MINIMO_PERSONAL);
+        let remaining = salaryTaxable;
+        for (const bracket of FISCAL_2025.IRPF_BRACKETS) {
+          if (remaining <= 0) break;
+          const prevLimit = bracket.prevLimit;
+          const width = bracket.upTo - prevLimit;
+          const taxable = Math.min(remaining, width);
+          salaryIRPF += taxable * bracket.rate;
+          remaining -= taxable;
+        }
+        salaryIRPF = Math.round(salaryIRPF * 100) / 100;
+
+        // RETA cost (always the same)
+        const retaCost = retaAnnual;
+
+        // Total tax burden
+        const totalTax = isTax + dividendTax + salaryIRPF + retaCost;
+        const totalNet = companyProfit - totalTax;
+
+        scenarios.push({
+          salary,
+          dividends: Math.round(dividends * 100) / 100,
+          isTax,
+          dividendTax,
+          salaryIRPF,
+          retaCost,
+          totalTax: Math.round(totalTax * 100) / 100,
+          totalNet: Math.round(totalNet * 100) / 100,
+          effectiveRate: companyProfit > 0 ? Math.round((totalTax / companyProfit) * 10000) / 100 : 0
+        });
+      }
+
+      // Find optimal (lowest total tax)
+      if (scenarios.length > 0) {
+        const minTax = Math.min(...scenarios.map(s => s.totalTax));
+        scenarios.forEach(s => { s.isOptimal = s.totalTax === minTax; });
+      }
+
+      return scenarios;
+    }
+
+    /**
+     * H-5: RETA for SL Administrators
+     */
+    function calculateRetaSL() {
+      const retaMonthly = IS_FISCAL.RETA_SL_ADMIN_MONTHLY;
+      const retaAnnual = retaMonthly * 12;
+      return {
+        monthly: retaMonthly,
+        annual: retaAnnual,
+        isDeductibleForIS: true,
+        note: 'SL administrators with 25%+ ownership must register in RETA (not Regimen General). The cuota is a deductible expense for IS purposes.'
+      };
+    }
+
+    /**
+     * H-6: Simplified Cuentas Anuales (P&L + Balance)
+     */
+    function renderCuentasAnuales(annualRevenue, annualExpenses, adminSalary, retaAnnual, isTax) {
+      const grossProfit = annualRevenue;
+      const operatingExpenses = annualExpenses - adminSalary - retaAnnual;
+      const personnelCosts = adminSalary + retaAnnual;
+      const ebitda = grossProfit - operatingExpenses - personnelCosts;
+      const ebt = ebitda; // No interest/depreciation in simplified model
+      const netIncome = ebt - isTax;
+
+      const pnl = `
+        <h3>Cuenta de Perdidas y Ganancias (Simplified)</h3>
+        <table class="cuentas-table">
+          <thead><tr><th>Concept</th><th class="amount">Amount (EUR)</th></tr></thead>
+          <tbody>
+            <tr><td>1. Revenue (Cifra de negocios)</td><td class="amount">${formatEUR(annualRevenue)}</td></tr>
+            <tr><td>2. Operating Expenses</td><td class="amount">(${formatEUR(operatingExpenses)})</td></tr>
+            <tr><td>3. Personnel Costs (Admin salary + SS)</td><td class="amount">(${formatEUR(personnelCosts)})</td></tr>
+            <tr class="subtotal-row"><td>EBITDA</td><td class="amount">${formatEUR(ebitda)}</td></tr>
+            <tr><td>4. Depreciation & Amortization</td><td class="amount">0.00 EUR</td></tr>
+            <tr class="subtotal-row"><td>Result before Tax (BAI)</td><td class="amount">${formatEUR(ebt)}</td></tr>
+            <tr><td>5. Impuesto de Sociedades</td><td class="amount">(${formatEUR(isTax)})</td></tr>
+            <tr class="total-row"><td>Net Income (Resultado del ejercicio)</td><td class="amount">${formatEUR(netIncome)}</td></tr>
+          </tbody>
+        </table>
+      `;
+
+      // Simplified Balance Sheet
+      const cash = netIncome; // Simplified: all retained as cash
+      const equity = 3000; // Minimum SL capital
+      const retainedEarnings = netIncome;
+
+      const balance = `
+        <h3 style="margin-top: var(--spacing-lg);">Balance de Situacion (Simplified)</h3>
+        <table class="cuentas-table">
+          <thead><tr><th>Concept</th><th class="amount">Amount (EUR)</th></tr></thead>
+          <tbody>
+            <tr><td colspan="2" style="font-weight:600;color:var(--accent);">ASSETS</td></tr>
+            <tr><td>Cash & Banks (Tesoreria)</td><td class="amount">${formatEUR(cash + equity)}</td></tr>
+            <tr><td>Accounts Receivable (Deudores)</td><td class="amount">0.00 EUR</td></tr>
+            <tr class="total-row"><td>Total Assets</td><td class="amount">${formatEUR(cash + equity)}</td></tr>
+            <tr><td colspan="2" style="font-weight:600;color:var(--accent);">EQUITY & LIABILITIES</td></tr>
+            <tr><td>Share Capital (Capital social)</td><td class="amount">${formatEUR(equity)}</td></tr>
+            <tr><td>Retained Earnings (Reservas + Resultado)</td><td class="amount">${formatEUR(retainedEarnings)}</td></tr>
+            <tr><td>Tax Payable (Hacienda acreedora)</td><td class="amount">${formatEUR(isTax)}</td></tr>
+            <tr class="total-row"><td>Total Equity & Liabilities</td><td class="amount">${formatEUR(cash + equity + isTax)}</td></tr>
+          </tbody>
+        </table>
+      `;
+
+      return pnl + balance;
+    }
+
+    /**
+     * Master recalculation for SL entities
+     * Called when SL-specific inputs change or entity switches to SL type
+     */
+    function recalculateSL() {
+      const slSections = document.getElementById('slSections');
+      if (!slSections) return;
+
+      // Check if current entity is SL
+      const entity = EntityContext.current;
+      const isSL = entity?.type === ENTITY_TYPE.SOCIEDAD_LIMITADA;
+
+      slSections.classList.toggle('visible', isSL);
+      if (!isSL) return;
+
+      // Get inputs
+      const monthlyRevenue = parseFloat(document.getElementById('monthlyRevenue')?.value) || 6000;
+      const annualRevenue = monthlyRevenue * 12;
+      const spainDeductible = parseFloat(document.getElementById('calcSpainDeductible')?.value) || 383;
+      const workTravel = parseFloat(document.getElementById('calcWorkTravel')?.value) || 1000;
+      const totalExpensesMonthly = spainDeductible + workTravel;
+      const adminSalary = parseFloat(document.getElementById('slAdminSalary')?.value) || 24000;
+      const isRate = parseFloat(document.getElementById('isRateSelector')?.value) || IS_FISCAL.GENERAL_RATE;
+
+      // H-5: RETA for SL admin
+      const retaInfo = calculateRetaSL();
+      const retaSLEl = document.getElementById('retaSLContent');
+      if (retaSLEl) {
+        retaSLEl.innerHTML = `
+          <div class="is-breakdown">
+            <div class="is-card">
+              <h3>Monthly RETA</h3>
+              <div class="is-amount">${formatEUR(retaInfo.monthly)}</div>
+              <div class="is-note">Same base as autonomo regime</div>
+            </div>
+            <div class="is-card">
+              <h3>Annual RETA</h3>
+              <div class="is-amount">${formatEUR(retaInfo.annual)}</div>
+              <div class="is-note">${retaInfo.note}</div>
+            </div>
+          </div>`;
+      }
+
+      // Total annual expenses for IS (operating + salary + RETA)
+      const annualExpenses = (totalExpensesMonthly * 12) + adminSalary + retaInfo.annual;
+
+      // H-1: Impuesto de Sociedades
+      const isResult = calculateIS(annualRevenue, annualExpenses, isRate);
+      const isEl = document.getElementById('isBreakdown');
+      if (isEl) {
+        isEl.innerHTML = `
+          <div class="is-card">
+            <h3>Base Imponible</h3>
+            <div class="is-amount">${formatEUR(isResult.baseImponible)}</div>
+            <div class="is-note">Revenue (${formatEUR(annualRevenue)}) - Expenses (${formatEUR(annualExpenses)})</div>
+          </div>
+          <div class="is-card">
+            <h3>Cuota Integra (IS Tax)</h3>
+            <div class="is-rate" style="color: var(--negative);">${formatEUR(isResult.cuotaIntegra)}</div>
+            <div class="is-note">Rate: ${(isResult.isRate * 100).toFixed(0)}% on base imponible</div>
+          </div>
+          <div class="is-card">
+            <h3>Beneficio Neto</h3>
+            <div class="is-amount" style="color: var(--positive);">${formatEUR(isResult.beneficioNeto)}</div>
+            <div class="is-note">Available for dividends or retention</div>
+          </div>
+          <div class="is-card">
+            <h3>Effective IS Rate</h3>
+            <div class="is-rate">${annualRevenue > 0 ? (isResult.cuotaIntegra / annualRevenue * 100).toFixed(1) : '0.0'}%</div>
+            <div class="is-note">Tax as percentage of total revenue</div>
+          </div>`;
+      }
+
+      // H-2: Modelo 200
+      const m200 = calculateModelo200(isResult);
+      const m200El = document.getElementById('modelo200Content');
+      if (m200El) {
+        m200El.innerHTML = `
+          <div class="is-breakdown">
+            <div class="is-card">
+              <h3>Resultado Contable</h3>
+              <div class="is-amount">${formatEUR(m200.resultado_contable)}</div>
+            </div>
+            <div class="is-card">
+              <h3>Base Imponible</h3>
+              <div class="is-amount">${formatEUR(m200.base_imponible)}</div>
+            </div>
+            <div class="is-card">
+              <h3>Cuota Diferencial</h3>
+              <div class="is-amount" style="color: var(--negative);">${formatEUR(m200.cuota_diferencial)}</div>
+              <div class="is-note">Due: ${m200.deadline}</div>
+            </div>
+            <div class="is-card">
+              <h3>Tipo Gravamen</h3>
+              <div class="is-rate">${(m200.tipo_gravamen * 100).toFixed(0)}%</div>
+            </div>
+          </div>`;
+      }
+
+      // H-3: Modelo 202
+      const m202 = calculateModelo202(isResult.cuotaIntegra);
+      const m202El = document.getElementById('modelo202Content');
+      if (m202El) {
+        let paymentsHtml = m202.payments.map(p => `
+          <div class="is-card">
+            <h3>${p.period} — ${p.deadline}</h3>
+            <div class="is-amount">${formatEUR(p.amount)}</div>
+          </div>`).join('');
+
+        m202El.innerHTML = `
+          <div class="is-breakdown" style="grid-template-columns: repeat(3, 1fr);">
+            ${paymentsHtml}
+          </div>
+          <div class="is-card" style="margin-top: var(--spacing-sm);">
+            <div class="is-note">Total advance payments: ${formatEUR(m202.annualTotal)} (${(m202.rate * 100).toFixed(0)}% of last year's IS cuota integra). These are credited against Modelo 200.</div>
+          </div>`;
+      }
+
+      // H-4: Salary vs Dividend Optimizer
+      const scenarios = calculateSalaryVsDividend(annualRevenue - (totalExpensesMonthly * 12), retaInfo.annual);
+      const optEl = document.getElementById('salaryDividendContent');
+      if (optEl) {
+        optEl.innerHTML = scenarios.map(s => `
+          <div class="optimizer-card ${s.isOptimal ? 'optimal' : ''}">
+            <h4>Salary: ${formatEUR(s.salary)}/yr</h4>
+            <div class="opt-amount" style="color: ${s.isOptimal ? 'var(--positive)' : 'var(--text)'};">${formatEUR(s.totalNet)}</div>
+            <div class="opt-detail">
+              IS: ${formatEUR(s.isTax)} | IRPF: ${formatEUR(s.salaryIRPF)}<br>
+              Div tax: ${formatEUR(s.dividendTax)} | RETA: ${formatEUR(s.retaCost)}<br>
+              Effective: ${s.effectiveRate}%
+            </div>
+            ${s.isOptimal ? '<span class="opt-badge">Optimal</span>' : ''}
+          </div>`).join('');
+      }
+
+      // H-6: Cuentas Anuales
+      const cuentasEl = document.getElementById('cuentasAnualesContent');
+      if (cuentasEl) {
+        cuentasEl.innerHTML = renderCuentasAnuales(annualRevenue, annualExpenses, adminSalary, retaInfo.annual, isResult.cuotaIntegra);
+      }
+    }
+
+    // ============================================================
     // PHASE G: COMPETITIVE FEATURES
     // ============================================================
 
@@ -31022,6 +31544,9 @@ Generated by Autonomo Tax Calculator`;
       renderTasksWidget();
       renderSavingsBanner();
 
+      // Phase H: Initialize SL calculations
+      recalculateSL();
+
       // Phase D: Initialize offline indicator
       OfflineIndicator.init();
 
@@ -31066,6 +31591,15 @@ Generated by Autonomo Tax Calculator`;
           }
         } catch (err) {
           console.error('[INIT] Failed to update sharing section:', err);
+        }
+      });
+
+      // Phase H: Subscribe to entity changes for SL section visibility
+      EntityContext.subscribe(() => {
+        try {
+          recalculateSL();
+        } catch (err) {
+          console.error('[INIT] Failed to update SL sections:', err);
         }
       });
 
