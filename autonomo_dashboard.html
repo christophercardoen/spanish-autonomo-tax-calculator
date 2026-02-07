@@ -4277,6 +4277,88 @@
       }
     }
 
+    /* Phase F: Skip Navigation Link */
+    .skip-nav {
+      position: absolute;
+      top: -100%;
+      left: var(--spacing-md);
+      z-index: 10000;
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--accent);
+      color: white;
+      border-radius: var(--radius-sm);
+      font-size: var(--size-body);
+      font-weight: 600;
+      text-decoration: none;
+      transition: top 0.15s ease-out;
+    }
+    .skip-nav:focus {
+      top: var(--spacing-sm);
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Phase F: Focus trap visual indicator */
+    dialog:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Phase F: Minimum touch target size (WCAG 2.5.8) */
+    button, [role="button"], .tab-label, .status-option, select {
+      min-height: 44px;
+    }
+    input[type="checkbox"], input[type="radio"] {
+      min-width: 20px;
+      min-height: 20px;
+    }
+    .dialog-close, .close-btn, .dismiss-btn {
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Phase F: Keyboard shortcut hints */
+    .kbd-hint {
+      display: none;
+      font-size: var(--size-tiny);
+      color: var(--text-faint);
+      margin-left: var(--spacing-xs);
+      font-family: 'JetBrains Mono', monospace;
+      opacity: 0.7;
+    }
+    @media (min-width: 768px) {
+      .kbd-hint { display: inline; }
+    }
+
+    /* Phase F: Forced colors mode (Windows High Contrast) */
+    @media (forced-colors: active) {
+      * {
+        forced-color-adjust: auto;
+      }
+      .tab-label {
+        border: 1px solid ButtonText;
+      }
+      .primary-btn, .auth-button {
+        border: 2px solid ButtonText;
+      }
+      .scenario-card {
+        border: 1px solid ButtonText;
+      }
+      dialog {
+        border: 2px solid ButtonText;
+      }
+      .skip-nav:focus {
+        outline: 3px solid Highlight;
+      }
+      :focus-visible {
+        outline: 2px solid Highlight !important;
+        outline-offset: 2px;
+      }
+    }
+
     @media print {
       /* Light theme for printing */
       body {
@@ -9470,6 +9552,9 @@
   -->
 </head>
 <body>
+  <!-- Phase F: Skip Navigation Link -->
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
   <!-- Phase D: Offline/Online Indicator -->
   <div id="offlineIndicator" class="offline-indicator" role="alert" aria-live="polite">
     <span class="offline-dot"></span>
@@ -10214,7 +10299,7 @@
   <div id="notification" class="notification hidden"></div>
 
   <div class="container">
-    <main class="dashboard" role="main">
+    <main id="main-content" class="dashboard" role="main" tabindex="-1">
       <!-- Dashboard Header -->
       <header class="dashboard-header">
         <div style="flex:1;min-width:0">
@@ -10298,22 +10383,22 @@
       <input type="radio" name="tabs" id="tab-compliance" class="tab-input">
 
       <!-- Tab navigation -->
-      <nav class="tab-nav" aria-label="Main navigation">
-        <label for="tab-scenarios" class="tab-label">Scenarios</label>
-        <label for="tab-calendar" class="tab-label">Calendar</label>
-        <label for="tab-expenses" class="tab-label">Expenses</label>
-        <label for="tab-invoices" class="tab-label">Invoices</label>
-        <label for="tab-details" class="tab-label">Details</label>
-        <label for="tab-income" class="tab-label">Income</label>
-        <label for="tab-clients" class="tab-label">Clients</label>
-        <label for="tab-compliance" class="tab-label">Compliance</label>
+      <nav class="tab-nav" role="tablist" aria-label="Main navigation">
+        <label for="tab-scenarios" class="tab-label" role="tab">Scenarios <span class="kbd-hint">Alt+1</span></label>
+        <label for="tab-calendar" class="tab-label" role="tab">Calendar <span class="kbd-hint">Alt+2</span></label>
+        <label for="tab-expenses" class="tab-label" role="tab">Expenses <span class="kbd-hint">Alt+3</span></label>
+        <label for="tab-invoices" class="tab-label" role="tab">Invoices <span class="kbd-hint">Alt+4</span></label>
+        <label for="tab-details" class="tab-label" role="tab">Details <span class="kbd-hint">Alt+5</span></label>
+        <label for="tab-income" class="tab-label" role="tab">Income <span class="kbd-hint">Alt+6</span></label>
+        <label for="tab-clients" class="tab-label" role="tab">Clients <span class="kbd-hint">Alt+7</span></label>
+        <label for="tab-compliance" class="tab-label" role="tab">Compliance <span class="kbd-hint">Alt+8</span></label>
       </nav>
 
       <!-- Tab panels container -->
       <div class="tab-panels">
 
         <!-- EXPENSES TAB -->
-        <section class="tab-panel panel-expenses">
+        <section class="tab-panel panel-expenses" role="tabpanel" aria-label="Expenses">
           <div class="expenses-container">
       <h2>Expense Tracking</h2>
       <div id="spainSection"></div>
@@ -10324,9 +10409,9 @@
       </div>
 
       <!-- Add Expense Dialog (modal for better UX) -->
-      <dialog id="addExpenseDialog" class="expense-dialog">
+      <dialog id="addExpenseDialog" class="expense-dialog" aria-labelledby="addExpenseTitle">
         <div class="dialog-header">
-          <h2>Add New Expense</h2>
+          <h2 id="addExpenseTitle">Add New Expense</h2>
           <button type="button" class="dialog-close" onclick="hideAddForm()" aria-label="Close">x</button>
         </div>
         <div style="padding: 1.5rem;">
@@ -10422,7 +10507,7 @@
           </div>
 
           <!-- Phase 17-04: Expense List Container -->
-          <div id="expenseListContainer">
+          <div id="expenseListContainer" aria-live="polite" aria-relevant="additions removals">
             <div class="expense-list-empty">
               No expenses tracked yet. Click "+ Add Expense" to get started.
             </div>
@@ -10437,7 +10522,7 @@
       </div>
 
       <!-- Phase 17: Expense Form Dialog -->
-      <dialog id="expenseFormDialog" class="expense-form-dialog" data-edit-id="">
+      <dialog id="expenseFormDialog" class="expense-form-dialog" data-edit-id="" aria-labelledby="expenseFormTitle">
         <div class="dialog-header">
           <h2 id="expenseFormTitle">Add Expense</h2>
           <button type="button" class="dialog-close" onclick="closeExpenseFormDialog()" aria-label="Close">x</button>
@@ -10594,7 +10679,7 @@
         </section>
 
         <!-- INVOICES TAB -->
-        <section class="tab-panel panel-invoices">
+        <section class="tab-panel panel-invoices" role="tabpanel" aria-label="Invoices">
           <!-- Overdue Alert Banner (hidden by default) -->
           <div id="overdue-alert" class="overdue-alert" style="display: none;">
             <span class="overdue-alert-icon">!</span>
@@ -10740,10 +10825,10 @@
         </section>
 
         <!-- SCENARIOS TAB -->
-        <section class="tab-panel panel-scenarios">
+        <section class="tab-panel panel-scenarios" role="tabpanel" aria-label="Scenarios">
           <div class="scenario-section">
             <h2>Scenario Comparison</h2>
-            <div id="scenarioCards" class="scenario-cards">
+            <div id="scenarioCards" class="scenario-cards" aria-live="polite">
               <!-- Populated by renderScenarioCards() -->
             </div>
             <div class="export-actions">
@@ -10783,7 +10868,7 @@
         </section>
 
         <!-- CALENDAR TAB -->
-        <section class="tab-panel panel-calendar">
+        <section class="tab-panel panel-calendar" role="tabpanel" aria-label="Calendar">
           <div class="calendar-section">
       <h2>Work Calendar <span id="calendarYearTitle">2026</span></h2>
 
@@ -10937,7 +11022,7 @@
         </section>
 
         <!-- DETAILS TAB - What-If Calculator -->
-        <section class="tab-panel panel-details">
+        <section class="tab-panel panel-details" role="tabpanel" aria-label="Details">
           <div class="calculator-header">
             <h2>What-If Calculator</h2>
             <p class="calculator-subtitle">Adjust any value to see how it affects your net income</p>
@@ -11094,7 +11179,7 @@
         </section>
 
         <!-- INCOME TAB (Phase 8 - ENH-02) -->
-        <section class="tab-panel panel-income">
+        <section class="tab-panel panel-income" role="tabpanel" aria-label="Income">
           <div class="income-header">
             <h2>Income Tracking</h2>
             <div class="income-summary">
@@ -11117,13 +11202,13 @@
             <button type="button" class="add-btn" data-permission="create" data-permission-type="income" onclick="openIncomeDialog()">+ Add Income</button>
           </div>
 
-          <div id="incomeList" class="income-list">
+          <div id="incomeList" class="income-list" aria-live="polite" aria-relevant="additions removals">
             <!-- Income entries rendered here -->
           </div>
         </section>
 
         <!-- CLIENTS TAB (Phase 15) -->
-        <section class="tab-panel panel-clients">
+        <section class="tab-panel panel-clients" role="tabpanel" aria-label="Clients">
           <div class="clients-header">
             <h2>Clients</h2>
             <div class="clients-actions">
@@ -11153,7 +11238,7 @@
             </label>
           </div>
 
-          <div id="client-list" class="client-list">
+          <div id="client-list" class="client-list" aria-live="polite" aria-relevant="additions removals">
             <!-- Populated by ClientListUI -->
           </div>
 
@@ -11263,7 +11348,7 @@
         </section>
 
         <!-- COMPLIANCE TAB -->
-        <section class="tab-panel panel-compliance" id="compliancePanel">
+        <section class="tab-panel panel-compliance" id="compliancePanel" role="tabpanel" aria-label="Compliance">
           <!-- Content populated by renderComplianceContent() -->
         </section>
 
@@ -11416,10 +11501,10 @@
     </dialog>
 
     <!-- Detail Modal for Scenario Breakdown (UI-04) -->
-    <dialog id="detail-modal" class="detail-dialog">
+    <dialog id="detail-modal" class="detail-dialog" aria-labelledby="detailDialogTitle">
       <div class="detail-content">
         <header class="detail-header">
-          <h2 class="detail-title">Scenario Details</h2>
+          <h2 id="detailDialogTitle" class="detail-title">Scenario Details</h2>
           <button class="close-btn" onclick="closeDetailModal()" aria-label="Close">&times;</button>
         </header>
         <div class="detail-body" id="detail-body">
@@ -11461,9 +11546,9 @@
     </dialog>
 
     <!-- Contracted Pattern Wizard Dialog -->
-    <dialog id="contractedWizardDialog">
+    <dialog id="contractedWizardDialog" aria-labelledby="contractedWizardTitle">
       <div class="dialog-header">
-        <h2>Apply Contracted Pattern?</h2>
+        <h2 id="contractedWizardTitle">Apply Contracted Pattern?</h2>
         <button type="button" class="dialog-close" onclick="declineContractedPattern()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
@@ -11484,7 +11569,7 @@
     </dialog>
 
     <!-- Day Picker Dialog (Single Day Status) -->
-    <dialog id="dayPickerDialog">
+    <dialog id="dayPickerDialog" aria-labelledby="pickerDateDisplay">
       <div class="dialog-header">
         <h2 id="pickerDateDisplay">February 15, 2026</h2>
         <button type="button" class="dialog-close" onclick="closeDayPicker()" aria-label="Close">x</button>
@@ -11528,9 +11613,9 @@
     </dialog>
 
     <!-- Bulk Picker Dialog (Multiple Days Status) -->
-    <dialog id="bulkPickerDialog">
+    <dialog id="bulkPickerDialog" aria-labelledby="bulkPickerTitle">
       <div class="dialog-header">
-        <h2>Set Status for <span id="bulkCount">5</span> Days</h2>
+        <h2 id="bulkPickerTitle">Set Status for <span id="bulkCount">5</span> Days</h2>
         <button type="button" class="dialog-close" onclick="closeBulkPicker()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
@@ -11566,7 +11651,7 @@
     </dialog>
 
     <!-- Income Entry Dialog (Phase 8 - ENH-02) -->
-    <dialog id="incomeDialog" class="modal-dialog">
+    <dialog id="incomeDialog" class="modal-dialog" aria-labelledby="incomeDialogTitle">
       <form id="incomeForm" onsubmit="saveIncomeEntry(event)">
         <div class="dialog-header">
           <h3 id="incomeDialogTitle">Add Income Entry</h3>
@@ -11625,7 +11710,7 @@
     </dialog>
 
     <!-- Tooltip Modal (single instance, reused for all tooltips) -->
-    <dialog id="tooltipModal" class="tooltip-modal">
+    <dialog id="tooltipModal" class="tooltip-modal" aria-labelledby="tooltipModalTitle">
       <div class="tooltip-modal-content">
         <h3 id="tooltipModalTitle" class="tooltip-modal-title"></h3>
         <p id="tooltipModalText" class="tooltip-modal-text"></p>
@@ -11634,7 +11719,7 @@
     </dialog>
 
     <!-- Invoice Form Dialog -->
-    <dialog id="invoiceDialog" class="invoice-dialog">
+    <dialog id="invoiceDialog" class="invoice-dialog" aria-labelledby="invoiceDialogTitle">
       <div class="dialog-header">
         <h2 id="invoiceDialogTitle">New Invoice</h2>
         <button type="button" class="dialog-close" onclick="closeInvoiceForm()" aria-label="Close">x</button>
@@ -11749,9 +11834,9 @@
     </dialog>
 
     <!-- Calendar Populate Dialog -->
-    <dialog id="calendarPopulateDialog" class="invoice-dialog" style="max-width: 500px;">
+    <dialog id="calendarPopulateDialog" class="invoice-dialog" style="max-width: 500px;" aria-labelledby="calPopTitle">
       <div class="dialog-header">
-        <h2>Populate from Calendar</h2>
+        <h2 id="calPopTitle">Populate from Calendar</h2>
         <button type="button" class="dialog-close" onclick="document.getElementById('calendarPopulateDialog').close()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
@@ -11776,9 +11861,9 @@
     </dialog>
 
     <!-- Rectificativa Dialog -->
-    <dialog id="rectificativaDialog" class="invoice-dialog" style="max-width: 500px;">
+    <dialog id="rectificativaDialog" class="invoice-dialog" style="max-width: 500px;" aria-labelledby="rectTitle">
       <div class="dialog-header">
-        <h2>Create Factura Rectificativa</h2>
+        <h2 id="rectTitle">Create Factura Rectificativa</h2>
         <button type="button" class="dialog-close" onclick="document.getElementById('rectificativaDialog').close()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
@@ -11807,9 +11892,9 @@
     </dialog>
 
     <!-- Email Invoice Dialog (18-07) -->
-    <dialog id="emailInvoiceDialog" class="invoice-dialog" style="max-width: 500px;">
+    <dialog id="emailInvoiceDialog" class="invoice-dialog" style="max-width: 500px;" aria-labelledby="emailInvTitle">
       <div class="dialog-header">
-        <h2>Email Invoice</h2>
+        <h2 id="emailInvTitle">Email Invoice</h2>
         <button type="button" class="dialog-close" onclick="document.getElementById('emailInvoiceDialog').close()" aria-label="Close">x</button>
       </div>
       <div style="padding: 1.5rem;">
@@ -12001,6 +12086,159 @@
       }
       el.innerHTML = html;
     }
+
+    // ============================================================
+    // PHASE F: ACCESSIBILITY — Focus Trap & Keyboard Shortcuts
+    // ============================================================
+
+    /**
+     * FocusTrap — traps Tab/Shift+Tab inside a dialog element.
+     * Usage: FocusTrap.activate(dialogElement) / FocusTrap.deactivate()
+     */
+    const FocusTrap = {
+      _active: null,
+      _handler: null,
+      _previousFocus: null,
+
+      activate(dialog) {
+        if (!dialog) return;
+        this._previousFocus = document.activeElement;
+        this._active = dialog;
+
+        this._handler = (e) => {
+          if (e.key !== 'Tab') return;
+          const focusable = dialog.querySelectorAll(
+            'button:not([disabled]), [href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+          if (focusable.length === 0) return;
+
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        };
+
+        dialog.addEventListener('keydown', this._handler);
+
+        // Focus first focusable element (or the dialog itself)
+        requestAnimationFrame(() => {
+          const firstFocusable = dialog.querySelector(
+            'button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+          if (firstFocusable) firstFocusable.focus();
+        });
+      },
+
+      deactivate() {
+        if (this._active && this._handler) {
+          this._active.removeEventListener('keydown', this._handler);
+        }
+        // Restore previous focus
+        if (this._previousFocus && typeof this._previousFocus.focus === 'function') {
+          this._previousFocus.focus();
+        }
+        this._active = null;
+        this._handler = null;
+        this._previousFocus = null;
+      }
+    };
+
+    /**
+     * KeyboardShortcuts — global keyboard shortcuts for navigation.
+     * Alt+1-8 = switch tabs, Alt+N = new scenario, Escape = close dialog, ? = show help
+     */
+    const KeyboardShortcuts = {
+      _helpShown: false,
+
+      init() {
+        document.addEventListener('keydown', (e) => {
+          // Don't intercept when user is typing in an input/textarea/select
+          const tag = document.activeElement?.tagName;
+          if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
+            // Only handle Escape in inputs (to blur)
+            if (e.key === 'Escape') {
+              document.activeElement.blur();
+              e.preventDefault();
+            }
+            return;
+          }
+
+          // Alt+1 through Alt+8: switch tabs
+          if (e.altKey && e.key >= '1' && e.key <= '8') {
+            e.preventDefault();
+            const tabs = ['scenarios', 'calendar', 'expenses', 'invoices', 'details', 'income', 'clients', 'compliance'];
+            const idx = parseInt(e.key) - 1;
+            if (idx < tabs.length) {
+              const radio = document.getElementById('tab-' + tabs[idx]);
+              if (radio) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change'));
+              }
+            }
+            return;
+          }
+
+          // Escape: close any open dialog
+          if (e.key === 'Escape') {
+            const openDialog = document.querySelector('dialog[open]');
+            if (openDialog) {
+              openDialog.close();
+              FocusTrap.deactivate();
+              e.preventDefault();
+            }
+            return;
+          }
+
+          // ? key: show keyboard shortcut help
+          if (e.key === '?' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+            e.preventDefault();
+            showToast(
+              'Keyboard shortcuts: Alt+1-8 = Switch tabs | Esc = Close dialog | ? = This help',
+              'info', 6000
+            );
+            return;
+          }
+        });
+      }
+    };
+
+    /**
+     * DialogA11y — patches all dialogs to activate focus trap on open and deactivate on close.
+     */
+    const DialogA11y = {
+      init() {
+        document.querySelectorAll('dialog').forEach(dialog => {
+          // Observe the 'open' attribute to auto-activate/deactivate focus trap
+          const observer = new MutationObserver((mutations) => {
+            for (const m of mutations) {
+              if (m.attributeName === 'open') {
+                if (dialog.hasAttribute('open')) {
+                  FocusTrap.activate(dialog);
+                } else {
+                  FocusTrap.deactivate();
+                }
+              }
+            }
+          });
+          observer.observe(dialog, { attributes: true });
+
+          // Also handle close event
+          dialog.addEventListener('close', () => {
+            FocusTrap.deactivate();
+          });
+        });
+      }
+    };
 
     // ============================================================
     // ONBOARDING FLOW (Phase C-2)
@@ -30046,6 +30284,10 @@ Generated by Autonomo Tax Calculator`;
 
       // Phase 14-03: Initialize User Menu
       UserMenuUI.init();
+
+      // Phase F: Initialize accessibility features
+      KeyboardShortcuts.init();
+      DialogA11y.init();
 
       // Phase D: Initialize offline indicator
       OfflineIndicator.init();
