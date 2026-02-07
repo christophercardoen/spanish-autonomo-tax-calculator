@@ -1988,6 +1988,71 @@
       font-size: var(--size-small); color: var(--text-muted); margin-top: 0.25rem;
     }
 
+    /* Modelo 303 IVA Quarterly Estimator */
+    .modelo303-section {
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .modelo303-section h2 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+    .modelo303-section .section-subtitle { color: var(--text-muted); font-size: var(--size-small); margin-bottom: 1rem; }
+    .modelo303-quarters { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .modelo303-annual {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.25rem;
+    }
+
+    /* Tax Calendar Section */
+    .tax-calendar-section {
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .tax-calendar-section h2 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+    .tax-deadline-list { list-style: none; padding: 0; margin: 0; }
+    .tax-deadline-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.75rem; border-radius: var(--radius-md);
+      border: 1px solid var(--border); margin-bottom: 0.5rem;
+      background: var(--bg-surface);
+      transition: border-color 0.15s ease;
+    }
+    .tax-deadline-item:hover { border-color: var(--accent); }
+    .tax-deadline-item.past { opacity: 0.5; }
+    .tax-deadline-item.urgent { border-color: var(--negative); background: color-mix(in srgb, var(--negative) 5%, var(--bg-surface)); }
+    .tax-deadline-item.soon { border-color: var(--warning); background: color-mix(in srgb, var(--warning) 5%, var(--bg-surface)); }
+    .tax-deadline-date {
+      font-family: 'JetBrains Mono', monospace; font-size: var(--size-numbers);
+      font-weight: 600; min-width: 70px; text-align: center;
+      padding: 0.25rem 0.5rem; border-radius: var(--radius-sm);
+      background: var(--surface-hover);
+    }
+    .tax-deadline-info { flex: 1; }
+    .tax-deadline-model { font-weight: 600; color: var(--text); }
+    .tax-deadline-desc { font-size: var(--size-small); color: var(--text-muted); }
+    .tax-deadline-status {
+      font-size: var(--size-labels); font-weight: 600; padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+    }
+    .tax-deadline-status.due { color: var(--warning); }
+    .tax-deadline-status.overdue { color: var(--negative); }
+    .tax-deadline-status.upcoming { color: var(--text-muted); }
+    .tax-deadline-status.done { color: var(--positive); }
+
+    /* Tarifa Plana Toggle */
+    .tarifa-plana-toggle {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 0.75rem; margin-top: 0.25rem;
+      background: color-mix(in srgb, var(--accent) 8%, var(--bg-surface));
+      border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
+      border-radius: var(--radius-md); font-size: var(--size-small);
+    }
+    .tarifa-plana-toggle label { cursor: pointer; color: var(--text-muted); }
+    .tarifa-plana-toggle input[type="checkbox"] { accent-color: var(--accent); }
+    .tarifa-plana-badge {
+      font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+      padding: 0.1rem 0.4rem; border-radius: 3px;
+      background: var(--accent); color: white;
+    }
+
     /* Mobile responsive for calculator */
     @media (max-width: 900px) {
       .calculator-layout {
@@ -10825,6 +10890,11 @@
                       <span class="input-unit">EUR/mo</span>
                     </div>
                     <span class="input-hint" id="retaSourceHint">Fixed from registration</span>
+                    <div class="tarifa-plana-toggle">
+                      <input type="checkbox" id="tarifaPlanaEnabled" onchange="applyTarifaPlana()">
+                      <label for="tarifaPlanaEnabled">Tarifa plana (new autonomo)</label>
+                      <span class="tarifa-plana-badge">80 EUR</span>
+                    </div>
                   </div>
                   <div class="input-field">
                     <label for="calcMinimoPersonal">Minimo Personal</label>
@@ -10862,6 +10932,44 @@
             <div class="modelo130-annual" id="modelo130Annual">
               <!-- Populated by calculateModelo130() -->
             </div>
+          </div>
+
+          <!-- Modelo 303 Quarterly IVA Estimator (C-1) -->
+          <div class="modelo303-section" id="modelo303Section">
+            <h2>Modelo 303 — Quarterly IVA Declaration</h2>
+            <p class="section-subtitle">Estimated IVA a ingresar (IVA repercutido minus IVA soportado). Based on uniform monthly revenue and the IVA rate below.</p>
+
+            <div style="display:flex;gap:1rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;">
+              <label for="modelo303IvaRate" style="font-size:var(--size-small);color:var(--text-muted);">IVA rate on your invoices:</label>
+              <select id="modelo303IvaRate" onchange="recalculateTotals()" style="padding:0.35rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-surface);color:var(--text);font-size:var(--size-small);">
+                <option value="0.21" selected>21% General</option>
+                <option value="0.10">10% Reducido</option>
+                <option value="0.04">4% Super-reducido</option>
+                <option value="0">0% Exempt / Intra-EU</option>
+              </select>
+              <label for="modelo303IvaSoportadoPct" style="font-size:var(--size-small);color:var(--text-muted);">IVA soportado % of expenses:</label>
+              <select id="modelo303IvaSoportadoPct" onchange="recalculateTotals()" style="padding:0.35rem 0.5rem;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-surface);color:var(--text);font-size:var(--size-small);">
+                <option value="0.21" selected>21% (most deductible expenses)</option>
+                <option value="0.10">10% (reduced-rate purchases)</option>
+                <option value="0">0% (no IVA soportado)</option>
+              </select>
+            </div>
+
+            <div class="modelo303-quarters" id="modelo303Quarters">
+              <!-- Populated by calculateModelo303() -->
+            </div>
+
+            <div class="modelo303-annual" id="modelo303Annual">
+              <!-- Populated by calculateModelo303() -->
+            </div>
+          </div>
+
+          <!-- Tax Calendar (C-5) -->
+          <div class="tax-calendar-section" id="taxCalendarSection">
+            <h2>Tax Calendar — Upcoming Deadlines</h2>
+            <ul class="tax-deadline-list" id="taxDeadlineList">
+              <!-- Populated by renderTaxCalendar() -->
+            </ul>
           </div>
         </section>
 
@@ -11901,6 +12009,21 @@
       // Source: User's Seguridad Social registration document
       RETA_MONTHLY: 428.40,
       RETA_ANNUAL: 5140.80,
+
+      // Tarifa plana for new autonomos
+      // Source: RDL 13/2022, Ley 31/2015 (BOE)
+      // https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537
+      // First 12 months: 80 EUR/month flat rate (regardless of base)
+      // Months 13-24: reduced rate (varies by CCAA but typically ~160 EUR)
+      TARIFA_PLANA_MONTHLY: 80,
+      TARIFA_PLANA_MONTHS: 12,  // Duration of first-period flat rate
+
+      // IVA rates (Spain)
+      // Source: AEAT - Tipos impositivos del IVA
+      // https://sede.agenciatributaria.gob.es/Sede/iva/informacion-general-iva/tipos-impositivos-iva.html
+      IVA_GENERAL: 0.21,          // General rate: 21%
+      IVA_REDUCIDO: 0.10,         // Reduced rate: 10% (food, transport, housing renovations)
+      IVA_SUPERREDUCIDO: 0.04,    // Super-reduced rate: 4% (bread, milk, books, medicines)
 
       // Expenses dificil justificacion (Estimacion Directa Simplificada)
       // Source: AEAT Estimacion Directa Simplificada
@@ -15438,6 +15561,12 @@ Generated by Autonomo Tax Calculator`;
 
       // Update Modelo 130 quarterly estimation
       calculateModelo130(monthlyRevenue, totalDeductible, retaMonthly);
+
+      // Update Modelo 303 IVA estimation (C-1)
+      calculateModelo303(monthlyRevenue, totalDeductible);
+
+      // Update tax calendar (C-5)
+      renderTaxCalendar();
     }
 
     // ============================================================
@@ -15565,6 +15694,238 @@ Generated by Autonomo Tax Calculator`;
           Note: This is an estimate based on uniform monthly income/expenses. Actual Modelo 130 uses real invoiced income per quarter.
           Retenciones (client withholdings) are not included — deduct them from Box 08 if applicable. Filing deadlines: Q1 Apr 20, Q2 Jul 20, Q3 Oct 20, Q4 Jan 30.
         </p>`;
+    }
+
+    // ============================================================
+    // TARIFA PLANA TOGGLE (C-3)
+    // ============================================================
+    // Applies 80 EUR/month flat RETA for new autonomos (first 12 months)
+    // Source: RDL 13/2022, Ley 31/2015
+    // ============================================================
+    function applyTarifaPlana() {
+      const checkbox = document.getElementById('tarifaPlanaEnabled');
+      const retaInput = document.getElementById('calcRetaMonthly');
+      const retaHint = document.getElementById('retaSourceHint');
+      if (!checkbox || !retaInput) return;
+
+      if (checkbox.checked) {
+        retaInput.value = FISCAL_2025.TARIFA_PLANA_MONTHLY;
+        retaInput.disabled = true;
+        if (retaHint) retaHint.textContent = 'Tarifa plana: 80 EUR/mo (first 12 months)';
+      } else {
+        retaInput.value = FISCAL_2025.RETA_MONTHLY;
+        retaInput.disabled = false;
+        if (retaHint) retaHint.textContent = 'Fixed from registration';
+      }
+      recalculateTotals();
+    }
+
+    // ============================================================
+    // MODELO 303 QUARTERLY IVA ESTIMATION (C-1)
+    // ============================================================
+    // Modelo 303: Declaración trimestral de IVA
+    // IVA repercutido (collected from clients) minus IVA soportado (paid on expenses)
+    // = Amount to pay to AEAT (or claim back if negative)
+    // Filed on same dates as Modelo 130: Apr 20, Jul 20, Oct 20, Jan 30
+    // ============================================================
+    function calculateModelo303(monthlyRevenue, monthlyDeductible) {
+      const quartersEl = document.getElementById('modelo303Quarters');
+      const annualEl = document.getElementById('modelo303Annual');
+      if (!quartersEl || !annualEl) return;
+
+      // Get IVA rates from UI dropdowns
+      const ivaRateEl = document.getElementById('modelo303IvaRate');
+      const ivaSoportadoEl = document.getElementById('modelo303IvaSoportadoPct');
+      const ivaRepercutidoRate = ivaRateEl ? parseFloat(ivaRateEl.value) : FISCAL_2025.IVA_GENERAL;
+      const ivaSoportadoRate = ivaSoportadoEl ? parseFloat(ivaSoportadoEl.value) : FISCAL_2025.IVA_GENERAL;
+
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth();
+      const currentYear = currentDate.getFullYear();
+      const currentQ = Math.floor(currentMonth / 3);
+
+      const quarters = [
+        { label: 'Q1', period: 'Jan — Mar', months: 3, deadline: 'Apr 20', deadlineMonth: 3, deadlineDay: 20 },
+        { label: 'Q2', period: 'Apr — Jun', months: 3, deadline: 'Jul 20', deadlineMonth: 6, deadlineDay: 20 },
+        { label: 'Q3', period: 'Jul — Sep', months: 3, deadline: 'Oct 20', deadlineMonth: 9, deadlineDay: 20 },
+        { label: 'Q4', period: 'Oct — Dec', months: 3, deadline: 'Jan 30 (next year)', deadlineMonth: 0, deadlineDay: 30 }
+      ];
+
+      let cardsHtml = '';
+      let totalRepercutido = 0;
+      let totalSoportado = 0;
+      let totalPago = 0;
+
+      quarters.forEach((q, i) => {
+        // Per-quarter values (not cumulative — Modelo 303 is per quarter, unlike 130)
+        const qRevenue = monthlyRevenue * q.months;
+        const qExpenses = monthlyDeductible * q.months;
+
+        // IVA repercutido: tax charged on invoices
+        const ivaRepercutido = Math.round(qRevenue * ivaRepercutidoRate * 100) / 100;
+
+        // IVA soportado: tax paid on deductible expenses
+        const ivaSoportado = Math.round(qExpenses * ivaSoportadoRate * 100) / 100;
+
+        // A ingresar: positive = pay to AEAT, negative = claim back
+        const aIngresar = Math.round((ivaRepercutido - ivaSoportado) * 100) / 100;
+
+        totalRepercutido += ivaRepercutido;
+        totalSoportado += ivaSoportado;
+        totalPago += aIngresar;
+
+        const isCurrent = i === currentQ;
+        let deadlineClass = '';
+        if (isCurrent) {
+          const deadlineDate = new Date(currentYear + (q.deadlineMonth === 0 ? 1 : 0), q.deadlineMonth, q.deadlineDay);
+          const daysUntil = Math.ceil((deadlineDate - currentDate) / (1000 * 60 * 60 * 24));
+          if (daysUntil <= 30 && daysUntil >= 0) deadlineClass = 'urgent';
+        }
+
+        cardsHtml += `
+          <div class="quarter-card ${isCurrent ? 'current' : ''}">
+            <div class="q-header">
+              <span class="q-label">${q.label} <span style="color:var(--text-muted);font-weight:400;font-size:0.8rem">${q.period}</span></span>
+              <span class="q-deadline ${deadlineClass}">Due: ${q.deadline}</span>
+            </div>
+            <div class="q-rows">
+              <div class="q-row"><span class="q-key">[01] Base imponible</span><span class="q-val">${formatEUR(qRevenue)}</span></div>
+              <div class="q-row"><span class="q-key">[03] IVA repercutido (${(ivaRepercutidoRate * 100).toFixed(0)}%)</span><span class="q-val">${formatEUR(ivaRepercutido)}</span></div>
+              <div class="q-row"><span class="q-key">[28] Base deducible</span><span class="q-val">${formatEUR(qExpenses)}</span></div>
+              <div class="q-row"><span class="q-key">[29] IVA soportado (${(ivaSoportadoRate * 100).toFixed(0)}%)</span><span class="q-val">${formatEUR(ivaSoportado)}</span></div>
+              <div class="q-row q-total ${aIngresar < 0 ? 'q-negative' : ''}">
+                <span class="q-key">[71] ${aIngresar >= 0 ? 'A ingresar' : 'A compensar'}</span>
+                <span class="q-val">${formatEUR(Math.abs(aIngresar))}${aIngresar < 0 ? ' (favor)' : ''}</span>
+              </div>
+            </div>
+          </div>`;
+      });
+
+      quartersEl.innerHTML = cardsHtml;
+
+      // Annual summary (Modelo 390 preview, C-2)
+      const netIva = totalRepercutido - totalSoportado;
+      annualEl.innerHTML = `
+        <h3>Annual IVA Summary (Modelo 390 preview)</h3>
+        <div class="annual-summary">
+          <div class="annual-stat">
+            <div class="stat-value">${formatEUR(totalRepercutido)}</div>
+            <div class="stat-label">IVA repercutido (collected)</div>
+          </div>
+          <div class="annual-stat">
+            <div class="stat-value">${formatEUR(totalSoportado)}</div>
+            <div class="stat-label">IVA soportado (paid)</div>
+          </div>
+          <div class="annual-stat">
+            <div class="stat-value ${netIva >= 0 ? '' : 'positive'}">${formatEUR(Math.abs(netIva))}</div>
+            <div class="stat-label">${netIva >= 0 ? 'Total IVA to pay' : 'Total IVA to claim'}</div>
+          </div>
+          <div class="annual-stat">
+            <div class="stat-value">${formatEUR(Math.abs(netIva) / 4)}</div>
+            <div class="stat-label">Average per quarter</div>
+          </div>
+        </div>
+        <p style="color:var(--text-dim);font-size:0.75rem;margin-top:1rem;">
+          Note: Modelo 390 is the annual summary filed in January. It aggregates all four quarterly Modelo 303 declarations.
+          This estimate assumes uniform monthly revenue/expenses. Actual 303 uses real invoiced amounts. Intra-EU services (B2B) may be IVA-exempt under reverse charge.
+        </p>`;
+    }
+
+    // ============================================================
+    // TAX CALENDAR (C-5)
+    // ============================================================
+    // Shows upcoming tax deadlines for the current year.
+    // Autonomo filing obligations: Modelo 130, 303, 390, Renta
+    // ============================================================
+    function renderTaxCalendar() {
+      const listEl = document.getElementById('taxDeadlineList');
+      if (!listEl) return;
+
+      const now = new Date();
+      const year = now.getFullYear();
+
+      // All major autonomo filing deadlines
+      const deadlines = [
+        { date: new Date(year, 0, 30), model: 'Modelo 130', desc: 'Q4 IRPF advance payment (prev year)', quarter: 'Q4' },
+        { date: new Date(year, 0, 30), model: 'Modelo 303', desc: 'Q4 IVA declaration (prev year)', quarter: 'Q4' },
+        { date: new Date(year, 0, 30), model: 'Modelo 390', desc: 'Annual IVA summary (prev year)', quarter: 'Annual' },
+        { date: new Date(year, 3, 20), model: 'Modelo 130', desc: 'Q1 IRPF advance payment', quarter: 'Q1' },
+        { date: new Date(year, 3, 20), model: 'Modelo 303', desc: 'Q1 IVA declaration', quarter: 'Q1' },
+        { date: new Date(year, 5, 30), model: 'Renta (IRPF)', desc: 'Annual income tax declaration', quarter: 'Annual' },
+        { date: new Date(year, 6, 20), model: 'Modelo 130', desc: 'Q2 IRPF advance payment', quarter: 'Q2' },
+        { date: new Date(year, 6, 20), model: 'Modelo 303', desc: 'Q2 IVA declaration', quarter: 'Q2' },
+        { date: new Date(year, 9, 20), model: 'Modelo 130', desc: 'Q3 IRPF advance payment', quarter: 'Q3' },
+        { date: new Date(year, 9, 20), model: 'Modelo 303', desc: 'Q3 IVA declaration', quarter: 'Q3' },
+        // RETA monthly payments (last business day of each month)
+        { date: new Date(year, 0, 31), model: 'RETA', desc: 'January social security payment', quarter: 'Monthly' },
+      ];
+
+      // Add RETA monthly for remaining months
+      for (let m = 1; m < 12; m++) {
+        const lastDay = new Date(year, m + 1, 0).getDate();
+        deadlines.push({
+          date: new Date(year, m, lastDay),
+          model: 'RETA',
+          desc: `${new Date(year, m).toLocaleString('en', { month: 'long' })} social security payment`,
+          quarter: 'Monthly'
+        });
+      }
+
+      // Sort by date
+      deadlines.sort((a, b) => a.date - b.date);
+
+      // Only show upcoming + recently past (last 30 days)
+      const thirtyDaysAgo = new Date(now);
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+      const filtered = deadlines.filter(d => d.date >= thirtyDaysAgo);
+
+      let html = '';
+      filtered.forEach(d => {
+        const daysUntil = Math.ceil((d.date - now) / (1000 * 60 * 60 * 24));
+        let itemClass = '';
+        let statusClass = '';
+        let statusText = '';
+
+        if (daysUntil < 0) {
+          itemClass = 'past';
+          statusClass = 'done';
+          statusText = 'Past';
+        } else if (daysUntil === 0) {
+          itemClass = 'urgent';
+          statusClass = 'overdue';
+          statusText = 'TODAY';
+        } else if (daysUntil <= 7) {
+          itemClass = 'urgent';
+          statusClass = 'due';
+          statusText = `${daysUntil}d left`;
+        } else if (daysUntil <= 30) {
+          itemClass = 'soon';
+          statusClass = 'due';
+          statusText = `${daysUntil}d left`;
+        } else {
+          statusClass = 'upcoming';
+          statusText = `${daysUntil}d`;
+        }
+
+        const dateStr = d.date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+
+        html += `
+          <li class="tax-deadline-item ${itemClass}">
+            <span class="tax-deadline-date">${dateStr}</span>
+            <div class="tax-deadline-info">
+              <span class="tax-deadline-model">${escapeHtml(d.model)}</span>
+              <span class="tax-deadline-desc">${escapeHtml(d.desc)}</span>
+            </div>
+            <span class="tax-deadline-status ${statusClass}">${statusText}</span>
+          </li>`;
+      });
+
+      if (html === '') {
+        html = '<li class="tax-deadline-item"><span class="tax-deadline-info"><span class="tax-deadline-desc">No upcoming deadlines</span></span></li>';
+      }
+
+      listEl.innerHTML = html;
     }
 
     // ============================================================
