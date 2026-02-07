@@ -14,7 +14,7 @@
   <meta property="og:title" content="Autonomo Tax Calculator">
   <meta property="og:description" content="All-in-one tax calculator for Spanish autónomos working cross-border in the EU. IRPF, RETA, 183-day rule, expenses, invoices.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#1a1a2e">
+  <meta name="theme-color" content="var(--bg)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -251,7 +251,7 @@
     }
     ::-webkit-scrollbar-thumb {
       background: var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
     ::-webkit-scrollbar-thumb:hover {
       background: var(--text-faint);
@@ -396,7 +396,7 @@
 
     .dashboard-title {
       margin: 0;
-      font-size: 18px;
+      font-size: var(--size-section-title);
       font-weight: 600;
       color: var(--text);
       letter-spacing: -0.01em;
@@ -744,17 +744,17 @@
 
     .category-badge {
       background: var(--accent);
-      color: #1a1a1a;
+      color: var(--text);
     }
 
     .vies-badge.valid {
       background: var(--positive);
-      color: #1a1a1a;
+      color: var(--text);
     }
 
     .vies-badge.invalid {
       background: var(--warning);
-      color: #1a1a1a;
+      color: var(--text);
     }
 
     .client-detail-summary {
@@ -933,17 +933,17 @@
 
     .status-badge.active {
       background: var(--positive);
-      color: #1a1a1a;
+      color: var(--text);
     }
 
     .status-badge.upcoming {
       background: var(--warning);
-      color: #1a1a1a;
+      color: var(--text);
     }
 
     .status-badge.completed {
       background: var(--text-muted);
-      color: #1a1a1a;
+      color: var(--text);
     }
 
     .status-badge.cancelled {
@@ -964,7 +964,7 @@
       padding: 4rem 2rem; text-align: center;
     }
     .empty-state-illustrated .empty-icon {
-      width: 80px; height: 80px; border-radius: 20px;
+      width: 80px; height: 80px; border-radius: var(--radius-xl);
       background: var(--accent-surface-hover); display: flex;
       align-items: center; justify-content: center;
       margin-bottom: 1.5rem; font-size: 2.2rem;
@@ -978,12 +978,42 @@
       line-height: 1.6; margin-bottom: 1.5rem;
     }
     .empty-state-illustrated .empty-cta {
-      background: var(--accent); color: #000; border: none;
+      background: var(--accent); color: white; border: none;
       padding: 0.65rem 1.5rem; border-radius: var(--radius-md); font-weight: 600;
       font-size: var(--size-labels); cursor: pointer; transition: filter 0.2s;
       font-family: inherit;
     }
     .empty-state-illustrated .empty-cta:hover { filter: brightness(1.1); }
+
+    /* Skeleton Loading States (E-9) */
+    .skeleton {
+      background: linear-gradient(90deg, var(--surface-hover) 25%, var(--hover-bg) 50%, var(--surface-hover) 75%);
+      background-size: 200% 100%;
+      animation: skeleton-pulse 1.5s ease-in-out infinite;
+      border-radius: var(--radius-sm);
+    }
+    @keyframes skeleton-pulse {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skeleton-text { height: 1em; margin-bottom: 0.5em; }
+    .skeleton-text.short { width: 40%; }
+    .skeleton-text.medium { width: 65%; }
+    .skeleton-text.long { width: 90%; }
+    .skeleton-card {
+      height: 120px; border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-md);
+    }
+    .skeleton-row {
+      display: flex; gap: var(--spacing-md); align-items: center;
+      padding: var(--spacing-sm) 0;
+    }
+    .skeleton-avatar { width: 32px; height: 32px; border-radius: var(--radius-full); flex-shrink: 0; }
+    .skeleton-line { flex: 1; height: 14px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .skeleton { animation: none; }
+    }
 
     /* Icon buttons */
     .btn-icon {
@@ -1364,7 +1394,7 @@
       margin: 0 0 4px 0;
       padding: 4px 8px;
       background: var(--surface-subtle);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     .compliance-grid {
@@ -1847,7 +1877,7 @@
 
     .input-hint {
       display: block;
-      font-size: 11px;
+      font-size: var(--size-tiny);
       color: var(--text-muted);
       margin-top: 4px;
       opacity: 0.8;
@@ -1939,7 +1969,7 @@
     }
     .quarter-card {
       background: var(--bg-surface); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1.25rem; position: relative;
+      border-radius: var(--radius-lg); padding: 1.25rem; position: relative;
     }
     .quarter-card.current { border-color: var(--accent); }
     .quarter-card .q-header {
@@ -1951,7 +1981,7 @@
     }
     .quarter-card .q-deadline {
       font-size: var(--size-caption); color: var(--text-muted);
-      background: var(--hover-bg); padding: 0.2rem 0.5rem; border-radius: 4px;
+      background: var(--hover-bg); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm);
     }
     .quarter-card .q-deadline.urgent {
       background: rgba(251,146,60,0.15); color: var(--warning);
@@ -1972,7 +2002,7 @@
     .quarter-card .q-row.q-total.q-negative .q-val { color: var(--negative); }
     .modelo130-annual {
       background: var(--bg-surface); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1.25rem;
+      border-radius: var(--radius-lg); padding: 1.25rem;
     }
     .modelo130-annual h3 { font-size: var(--size-numbers); margin-bottom: 0.75rem; }
     .annual-summary {
@@ -1998,7 +2028,7 @@
     .modelo303-quarters { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
     .modelo303-annual {
       background: var(--bg-surface); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1.25rem;
+      border-radius: var(--radius-lg); padding: 1.25rem;
     }
 
     /* Tax Calendar Section */
@@ -2049,7 +2079,7 @@
     .tarifa-plana-toggle input[type="checkbox"] { accent-color: var(--accent); }
     .tarifa-plana-badge {
       font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
-      padding: 0.1rem 0.4rem; border-radius: 3px;
+      padding: 0.1rem 0.4rem; border-radius: var(--radius-sm);
       background: var(--accent); color: white;
     }
 
@@ -2189,7 +2219,7 @@
       }
     }
     h2 { color: var(--text); margin: 0 0 var(--spacing-md) 0; font-size: var(--size-section-title); font-weight: 600; letter-spacing: -0.01em; }
-    h3 { color: var(--text); margin: 0 0 var(--spacing-sm) 0; font-size: 16px; font-weight: 600; }
+    h3 { color: var(--text); margin: 0 0 var(--spacing-sm) 0; font-size: var(--size-numbers); font-weight: 600; }
     hr { border: none; border-top: 1px solid var(--border); margin: 0.5rem 0; }
 
     /* Source citation button styling (click to open modal) */
@@ -2203,7 +2233,7 @@
       background: rgba(74, 222, 128, 0.2);
       border: 1px solid var(--accent);
       border-radius: 50%;
-      font-size: 11px;
+      font-size: var(--size-tiny);
       font-weight: 600;
       color: var(--accent);
       cursor: pointer;
@@ -2234,7 +2264,7 @@
       background: rgba(74, 222, 128, 0.2);
       border: 1px solid var(--accent);
       border-radius: 50%;
-      font-size: 10px;
+      font-size: var(--size-tiny);
       color: var(--accent);
       cursor: help;
       position: relative;
@@ -2251,7 +2281,7 @@
       border: 1px solid var(--border);
       padding: 0.5rem 0.75rem;
       border-radius: var(--radius-md);
-      font-size: 11px;
+      font-size: var(--size-tiny);
       white-space: normal;
       max-width: 300px;
       z-index: 100;
@@ -2398,14 +2428,14 @@
       height: 24px;
       border-radius: var(--radius-sm);
       cursor: pointer;
-      font-size: 14px;
+      font-size: var(--size-labels);
       line-height: 1;
       padding: 0;
     }
 
     .delete-btn:hover {
       background: var(--negative);
-      color: #fff;
+      color: white;
     }
 
     /* Add Expense Form */
@@ -2414,7 +2444,7 @@
       border: 1px dashed var(--border);
       color: var(--text);
       padding: 0.5rem 1rem;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       margin-top: 0.5rem;
       width: 100%;
@@ -2451,7 +2481,7 @@
     .add-form {
       background: rgba(0,0,0,0.2);
       padding: 1rem;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       margin-top: 0.5rem;
     }
 
@@ -2480,7 +2510,7 @@
       padding: 0.5rem;
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       color: var(--text);
     }
 
@@ -2492,7 +2522,7 @@
 
     .form-actions button {
       padding: 0.5rem 1rem;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
     }
 
@@ -2521,7 +2551,7 @@
 
     .reset-btn:hover {
       background: var(--negative);
-      color: #fff;
+      color: white;
     }
 
     /* Detection badge for auto-detected expense categories (ENH-01) */
@@ -2531,7 +2561,7 @@
       gap: 4px;
       padding: 3px 10px;
       border-radius: var(--radius-sm);
-      font-size: 11px;
+      font-size: var(--size-tiny);
       font-weight: 600;
       margin-left: 8px;
     }
@@ -2549,7 +2579,7 @@
     }
 
     .detection-hint {
-      font-size: 11px;
+      font-size: var(--size-tiny);
       color: var(--text-muted);
       margin-top: 4px;
       font-style: italic;
@@ -2644,7 +2674,7 @@
       color: var(--bg);
       font-size: var(--size-tiny);
       padding: 0.2rem 0.5rem;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       font-weight: 600;
     }
 
@@ -2730,12 +2760,12 @@
 
     .scenario-cards::-webkit-scrollbar-track {
       background: var(--hover-bg);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     .scenario-cards::-webkit-scrollbar-thumb {
       background: var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     /* Desktop: scenario cards fill available space instead of clipping */
@@ -2896,7 +2926,7 @@
     .dialog-header h2 {
       margin: 0;
       color: var(--text);
-      font-size: 16px;
+      font-size: var(--size-numbers);
     }
 
     .dialog-close {
@@ -2961,7 +2991,7 @@
       border-radius: var(--radius-md);
       color: var(--text);
       font-family: var(--font-mono);
-      font-size: 14px;
+      font-size: var(--size-labels);
       transition: border-color var(--ease-fast);
     }
 
@@ -3053,7 +3083,7 @@
 
     .primary-btn {
       background: var(--accent);
-      color: #fff;
+      color: white;
       border: none;
       font-weight: 600;
       transition: background var(--ease-default);
@@ -3083,7 +3113,7 @@
 
     .danger-btn:hover {
       background: var(--negative);
-      color: #fff;
+      color: white;
     }
 
     /* Responsive: stack on mobile */
@@ -3111,12 +3141,12 @@
 
     .comparison-container::-webkit-scrollbar-track {
       background: var(--hover-bg);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     .comparison-container::-webkit-scrollbar-thumb {
       background: var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     .comparison-container::-webkit-scrollbar-thumb:hover {
@@ -3246,7 +3276,7 @@
     .year-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: var(--radius-lg);
       padding: 1.25rem;
     }
     .year-card.current-year {
@@ -3265,7 +3295,7 @@
     .year-card-header .year-badge {
       font-size: var(--size-tiny);
       padding: 0.2rem 0.6rem;
-      border-radius: 10px;
+      border-radius: var(--radius-lg);
       font-weight: 600;
     }
     .year-badge.current { background: rgba(74,222,128,0.15); color: var(--accent); }
@@ -3347,7 +3377,7 @@
       padding: 0.75rem;
       background: var(--surface-hover);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       transition: border-color 0.2s;
     }
@@ -3398,7 +3428,7 @@
       border: 1px solid var(--border);
       color: var(--text);
       padding: 0.5rem 1rem;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       font-size: var(--size-numbers);
       transition: border-color 0.2s, color 0.2s;
@@ -3526,7 +3556,7 @@
       min-height: 60px;
       background: var(--surface-hover);
       border: 1px solid transparent;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       padding: 6px;
       display: flex;
       flex-direction: column;
@@ -3595,7 +3625,7 @@
     }
 
     .contracted-badge {
-      font-size: 9px;
+      font-size: var(--size-tiny);
       font-weight: 600;
       color: var(--accent);
       opacity: 0.8;
@@ -3607,7 +3637,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       margin-top: 4px;
     }
 
@@ -3639,7 +3669,7 @@
       padding: 0.75rem;
       background: var(--surface-hover);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       transition: border-color 0.2s;
     }
@@ -3693,7 +3723,7 @@
       background: var(--accent);
       color: var(--bg);
       padding: 2px 10px;
-      border-radius: 999px;
+      border-radius: var(--radius-full);
       font-weight: 700;
       font-size: var(--size-small);
       min-width: 24px;
@@ -3726,7 +3756,7 @@
       margin: 0 2px;
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 3px;
+      border-radius: var(--radius-sm);
       font-family: var(--font-mono);
       font-size: 0.85em;
     }
@@ -3752,7 +3782,7 @@
       padding: 6px 12px;
       background: rgba(0, 0, 0, 0.2);
       border: none;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       color: var(--bg);
       font-size: var(--size-labels);
       cursor: pointer;
@@ -3772,7 +3802,7 @@
       height: 28px;
       padding: 0;
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       background: var(--bg-surface);
       color: var(--text-muted);
       font-size: var(--size-tiny);
@@ -3791,7 +3821,7 @@
     .month-select-all {
       padding: 4px 10px;
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       background: transparent;
       color: var(--text-muted);
       font-size: var(--size-caption);
@@ -3815,7 +3845,7 @@
     .year-jump-btn {
       padding: 4px 12px;
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       background: transparent;
       color: var(--text-muted);
       font-size: var(--size-labels);
@@ -3923,14 +3953,14 @@
     /* Warning Badge */
     .warning-badge {
       padding: 0.2rem 0.5rem;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       font-size: var(--size-caption);
       font-weight: 600;
     }
 
-    .warning-badge.yellow { background: var(--warning); color: #fff; }
-    .warning-badge.orange { background: var(--warning); color: #fff; }
-    .warning-badge.red { background: var(--negative); color: #fff; }
+    .warning-badge.yellow { background: var(--warning); color: white; }
+    .warning-badge.orange { background: var(--warning); color: white; }
+    .warning-badge.red { background: var(--negative); color: white; }
 
     /* Warning Banner */
     .warning-banner {
@@ -4078,7 +4108,7 @@
       bottom: 2rem;
       right: 2rem;
       padding: 0.75rem 1.5rem;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       font-size: var(--size-labels);
       z-index: 1000;
       animation: slideIn 0.3s ease;
@@ -4143,7 +4173,7 @@
       justify-content: center;
       width: 16px;
       height: 16px;
-      font-size: 10px;
+      font-size: var(--size-tiny);
       font-weight: 700;
       color: var(--bg);
       background: var(--accent);
@@ -4632,7 +4662,7 @@
       }
 
       .dashboard-title {
-        font-size: 15px;
+        font-size: var(--size-body);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -4657,7 +4687,7 @@
       /* Tab nav stays horizontal scroll on mobile */
       .tab-label {
         padding: 8px 12px;
-        font-size: 12px;
+        font-size: var(--size-caption);
         min-height: 40px;
       }
 
@@ -4763,7 +4793,7 @@
       }
 
       .contracted-badge {
-        font-size: 8px;
+        font-size: var(--size-tiny);
         top: 1px;
         right: 2px;
       }
@@ -4881,7 +4911,7 @@
       .form-group select {
         width: 100%;
         min-height: 44px;
-        font-size: 16px; /* Prevents zoom on iOS */
+        font-size: var(--size-numbers); /* Prevents zoom on iOS */
       }
 
       /* Detail dialog mobile */
@@ -4991,7 +5021,7 @@
       .form-row select {
         width: 100%;
         min-height: 44px;
-        font-size: 16px; /* Prevents zoom on iOS */
+        font-size: var(--size-numbers); /* Prevents zoom on iOS */
       }
 
       .form-actions {
@@ -5198,8 +5228,8 @@
       padding: 0 6px;
       background: var(--warning);
       color: var(--bg);
-      border-radius: 10px;
-      font-size: 11px;
+      border-radius: var(--radius-lg);
+      font-size: var(--size-tiny);
       font-weight: 600;
     }
 
@@ -5231,7 +5261,7 @@
     }
 
     .entity-modal {
-      background: var(--bg-surface, #242424);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg, 12px);
       width: 90%;
@@ -5257,22 +5287,22 @@
     .entity-modal__title {
       font-size: var(--size-header, 20px);
       font-weight: 600;
-      color: var(--text, #eaeaea);
+      color: var(--text);
       margin: 0;
     }
 
     .entity-modal__close {
       background: transparent;
       border: none;
-      color: var(--text-muted, #a0a0a0);
-      font-size: 24px;
+      color: var(--text-muted);
+      font-size: var(--size-page-title);
       cursor: pointer;
       padding: var(--spacing-xs, 4px);
       line-height: 1;
     }
 
     .entity-modal__close:hover {
-      color: var(--text, #eaeaea);
+      color: var(--text);
     }
 
     .entity-modal__body {
@@ -5286,7 +5316,7 @@
     .entity-modal__section-title {
       font-size: var(--size-small, 12px);
       font-weight: 600;
-      color: var(--text-muted, #a0a0a0);
+      color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: var(--spacing-md, 16px);
@@ -5308,29 +5338,29 @@
     }
 
     .entity-type-option:hover {
-      border-color: var(--accent, #4ade80);
+      border-color: var(--accent);
       background: var(--accent-surface-hover);
     }
 
     .entity-type-option.selected {
-      border-color: var(--accent, #4ade80);
+      border-color: var(--accent);
       background: var(--accent-surface-hover);
     }
 
     .entity-type-option__icon {
-      font-size: 32px;
+      font-size: var(--size-display);
       margin-bottom: var(--spacing-sm, 8px);
     }
 
     .entity-type-option__name {
       font-weight: 600;
-      color: var(--text, #eaeaea);
+      color: var(--text);
       margin-bottom: var(--spacing-xs, 4px);
     }
 
     .entity-type-option__desc {
       font-size: var(--size-small, 12px);
-      color: var(--text-muted, #a0a0a0);
+      color: var(--text-muted);
     }
 
     .entity-form__group {
@@ -5341,7 +5371,7 @@
       display: block;
       font-size: var(--size-small, 12px);
       font-weight: 500;
-      color: var(--text-muted, #a0a0a0);
+      color: var(--text-muted);
       margin-bottom: 6px;
     }
 
@@ -5354,10 +5384,10 @@
     .entity-form__select {
       width: 100%;
       padding: 10px 12px;
-      background: var(--bg, #1a1a1a);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm, 4px);
-      color: var(--text, #eaeaea);
+      color: var(--text);
       font-size: var(--size-labels, 14px);
       font-family: inherit;
       box-sizing: border-box;
@@ -5366,7 +5396,7 @@
     .entity-form__input:focus,
     .entity-form__select:focus {
       outline: none;
-      border-color: var(--accent, #4ade80);
+      border-color: var(--accent);
     }
 
     .entity-form__input.invalid {
@@ -5374,7 +5404,7 @@
     }
 
     .entity-form__input.valid {
-      border-color: var(--positive, #4ade80);
+      border-color: var(--positive);
     }
 
     .entity-form__error {
@@ -5385,7 +5415,7 @@
 
     .entity-form__hint {
       font-size: var(--size-small, 12px);
-      color: var(--text-muted, #a0a0a0);
+      color: var(--text-muted);
       margin-top: var(--spacing-xs, 4px);
       opacity: 0.8;
     }
@@ -5420,18 +5450,18 @@
     .entity-modal__btn--secondary {
       background: transparent;
       border: 1px solid var(--border);
-      color: var(--text-muted, #a0a0a0);
+      color: var(--text-muted);
     }
 
     .entity-modal__btn--secondary:hover {
       background: var(--hover-bg);
-      color: var(--text, #eaeaea);
+      color: var(--text);
     }
 
     .entity-modal__btn--primary {
-      background: var(--accent, #4ade80);
+      background: var(--accent);
       border: none;
-      color: var(--bg, #1a1a1a);
+      color: var(--bg);
     }
 
     .entity-modal__btn--primary:hover {
@@ -5445,7 +5475,7 @@
 
     /* Registro Mercantil fieldset */
     .registro-mercantil-fields {
-      background: var(--bg, #1a1a1a);
+      background: var(--bg);
       border-radius: var(--radius-md, 8px);
       padding: var(--spacing-md, 16px);
       margin-top: var(--spacing-sm, 8px);
@@ -5502,16 +5532,16 @@
 
     .entity-switcher__trigger:hover {
       background: var(--bg-surface);
-      border-color: var(--accent, #3b82f6);
+      border-color: var(--accent);
     }
 
     .entity-switcher__trigger:focus {
-      outline: 2px solid var(--accent, #3b82f6);
+      outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
     .entity-switcher__icon {
-      font-size: 18px;
+      font-size: var(--size-section-title);
       flex-shrink: 0;
     }
 
@@ -5525,11 +5555,11 @@
     }
 
     .entity-switcher__type {
-      font-size: 11px;
-      color: var(--text-secondary, #888);
+      font-size: var(--size-tiny);
+      color: var(--text-secondary);
       background: var(--bg-elevated);
       padding: 2px 6px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       flex-shrink: 0;
     }
 
@@ -5572,7 +5602,7 @@
 
     .entity-switcher__option:hover,
     .entity-switcher__option:focus {
-      background: var(--bg, #1a1a1a);
+      background: var(--bg);
       outline: none;
     }
 
@@ -5581,11 +5611,11 @@
     }
 
     .entity-switcher__option--action {
-      color: var(--accent, #3b82f6);
+      color: var(--accent);
     }
 
     .entity-switcher__option-icon {
-      font-size: 16px;
+      font-size: var(--size-numbers);
       flex-shrink: 0;
     }
 
@@ -5597,15 +5627,15 @@
     }
 
     .entity-switcher__option-type {
-      font-size: 11px;
-      color: var(--text-secondary, #888);
+      font-size: var(--size-tiny);
+      color: var(--text-secondary);
       flex-shrink: 0;
     }
 
     .entity-switcher__check {
-      color: var(--positive, #22c55e);
+      color: var(--positive);
       flex-shrink: 0;
-      font-size: 16px;
+      font-size: var(--size-numbers);
       font-weight: bold;
       margin-left: 8px;
     }
@@ -5619,8 +5649,8 @@
     .entity-switcher__empty {
       padding: 16px;
       text-align: center;
-      color: var(--text-secondary, #888);
-      font-size: 13px;
+      color: var(--text-secondary);
+      font-size: var(--size-small);
     }
 
     /* Visually hidden for screen readers */
@@ -5652,7 +5682,7 @@
     }
 
     .dual-activity-warning__icon {
-      font-size: 24px;
+      font-size: var(--size-page-title);
       flex-shrink: 0;
     }
 
@@ -5667,28 +5697,28 @@
     }
 
     .dual-activity-warning__text {
-      font-size: 13px;
-      color: var(--text-secondary, #888);
+      font-size: var(--size-small);
+      color: var(--text-secondary);
       line-height: 1.5;
       margin-bottom: 8px;
     }
 
     .dual-activity-warning__entities {
-      font-size: 12px;
-      color: var(--text-tertiary, #666);
+      font-size: var(--size-caption);
+      color: var(--text-tertiary);
     }
 
     .dual-activity-warning__entity-count {
       background: var(--hover-bg);
       padding: 4px 8px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     .dual-activity-warning__dismiss {
       background: transparent;
       border: none;
-      color: var(--text-tertiary, #666);
-      font-size: 16px;
+      color: var(--text-tertiary);
+      font-size: var(--size-numbers);
       cursor: pointer;
       padding: 4px;
       flex-shrink: 0;
@@ -5709,7 +5739,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--bg, #1a1a1a);
+      background: var(--bg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -5721,7 +5751,7 @@
     }
 
     .auth-container {
-      background: var(--bg-surface, #242424);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 48px;
@@ -5731,15 +5761,15 @@
     }
 
     .auth-logo {
-      font-size: 24px;
+      font-size: var(--size-page-title);
       font-weight: 600;
-      color: var(--text, #eaeaea);
+      color: var(--text);
       margin-bottom: 8px;
     }
 
     .auth-subtitle {
-      color: var(--text-muted, #a0a0a0);
-      font-size: 14px;
+      color: var(--text-muted);
+      font-size: var(--size-labels);
       margin-bottom: 32px;
     }
 
@@ -5750,12 +5780,12 @@
     }
 
     .auth-input {
-      background: var(--bg, #1a1a1a);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 14px 16px;
-      font-size: 16px;
-      color: var(--text, #eaeaea);
+      font-size: var(--size-numbers);
+      color: var(--text);
       width: 100%;
       box-sizing: border-box;
       transition: border-color 0.2s;
@@ -5768,16 +5798,16 @@
     }
 
     .auth-input::placeholder {
-      color: var(--text-muted, #a0a0a0);
+      color: var(--text-muted);
     }
 
     .auth-button {
       background: var(--accent);
-      color: #fff;
+      color: white;
       border: none;
       border-radius: var(--radius-md);
       padding: 14px 24px;
-      font-size: 16px;
+      font-size: var(--size-numbers);
       font-weight: 600;
       cursor: pointer;
       transition: background-color var(--ease-default), transform 0.1s;
@@ -5797,8 +5827,8 @@
     }
 
     .auth-button.google {
-      background: #fff;
-      color: #333;
+      background: white;
+      color: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -5819,8 +5849,8 @@
       align-items: center;
       gap: 16px;
       margin: 8px 0;
-      color: var(--text-muted, #a0a0a0);
-      font-size: 13px;
+      color: var(--text-muted);
+      font-size: var(--size-small);
     }
 
     .auth-divider::before,
@@ -5834,7 +5864,7 @@
     .auth-message {
       padding: 12px 16px;
       border-radius: var(--radius-md);
-      font-size: 14px;
+      font-size: var(--size-labels);
       margin-top: 16px;
     }
 
@@ -5852,12 +5882,12 @@
 
     .auth-footer {
       margin-top: 24px;
-      color: var(--text-muted, #a0a0a0);
-      font-size: 12px;
+      color: var(--text-muted);
+      font-size: var(--size-caption);
     }
 
     .auth-link {
-      color: var(--accent, #4ade80);
+      color: var(--accent);
       cursor: pointer;
       text-decoration: none;
       background: none;
@@ -5887,7 +5917,7 @@
       color: var(--warning);
       padding: 12px 16px;
       border-radius: var(--radius-md);
-      font-size: 13px;
+      font-size: var(--size-small);
       margin-bottom: 24px;
     }
 
@@ -5915,27 +5945,27 @@
     }
 
     .user-menu-trigger:hover {
-      background: var(--bg-elevated, #2d2d44);
+      background: var(--bg-elevated);
     }
 
     .user-avatar {
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: var(--accent, #4ade80);
+      background: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: var(--size-caption);
       font-weight: 600;
-      color: #1a1a1a;
+      color: var(--text);
     }
 
     .user-menu-dropdown {
       position: absolute;
       top: calc(100% + 8px);
       right: 0;
-      background: var(--bg-surface, #242424);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       min-width: 200px;
@@ -5950,9 +5980,9 @@
 
     .user-menu-item {
       padding: 12px 16px;
-      color: var(--text, #eaeaea);
+      color: var(--text);
       cursor: pointer;
-      font-size: 14px;
+      font-size: var(--size-labels);
       transition: background-color 0.2s;
       display: flex;
       align-items: center;
@@ -5968,7 +5998,7 @@
     }
 
     .user-menu-item:hover {
-      background: var(--bg-elevated, #2d2d44);
+      background: var(--bg-elevated);
     }
 
     .user-menu-item.danger {
@@ -6071,25 +6101,25 @@
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: var(--accent, #4ade80);
+      background: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: var(--size-display);
       font-weight: 600;
-      color: #1a1a1a;
+      color: var(--text);
     }
 
     .profile-info h2 {
       margin: 0 0 4px 0;
-      font-size: 24px;
-      color: var(--text, #eaeaea);
+      font-size: var(--size-page-title);
+      color: var(--text);
     }
 
     .profile-info p {
       margin: 0;
-      color: var(--text-muted, #a0a0a0);
-      font-size: 14px;
+      color: var(--text-muted);
+      font-size: var(--size-labels);
     }
 
     .profile-form {
@@ -6105,24 +6135,24 @@
     }
 
     .profile-field label {
-      font-size: 13px;
-      color: var(--text-muted, #a0a0a0);
+      font-size: var(--size-small);
+      color: var(--text-muted);
       font-weight: 500;
     }
 
     .profile-field input {
-      background: var(--bg, #1a1a1a);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 12px 14px;
-      font-size: 15px;
-      color: var(--text, #eaeaea);
+      font-size: var(--size-body);
+      color: var(--text);
       transition: border-color 0.2s;
     }
 
     .profile-field input:focus {
       outline: none;
-      border-color: var(--accent, #4ade80);
+      border-color: var(--accent);
     }
 
     .profile-actions {
@@ -6132,12 +6162,12 @@
     }
 
     .profile-save-btn {
-      background: var(--accent, #4ade80);
-      color: #1a1a1a;
+      background: var(--accent);
+      color: var(--text);
       border: none;
       border-radius: var(--radius-md);
       padding: 12px 24px;
-      font-size: 14px;
+      font-size: var(--size-labels);
       font-weight: 500;
       cursor: pointer;
       transition: background-color 0.2s;
@@ -6180,7 +6210,7 @@
     }
 
     .mfa-content {
-      background: var(--bg-secondary, #242424);
+      background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 32px;
@@ -6191,18 +6221,18 @@
 
     .mfa-content h3 {
       margin: 0 0 8px 0;
-      font-size: 20px;
+      font-size: var(--size-header);
       color: var(--text);
     }
 
     .mfa-content p {
-      color: var(--text-secondary, #888);
-      font-size: 14px;
+      color: var(--text-secondary);
+      font-size: var(--size-labels);
       margin-bottom: 24px;
     }
 
     .mfa-qr-code {
-      background: #fff;
+      background: white;
       padding: 16px;
       border-radius: var(--radius-md);
       margin-bottom: 16px;
@@ -6216,19 +6246,19 @@
     }
 
     .mfa-secret {
-      background: var(--bg-primary, #1a1a1a);
+      background: var(--bg-primary);
       padding: 12px;
       border-radius: var(--radius-sm);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-secondary, #888);
+      font-size: var(--size-caption);
+      color: var(--text-secondary);
       margin-bottom: 20px;
       word-break: break-all;
     }
 
     .mfa-secret-label {
-      font-size: 11px;
-      color: var(--text-tertiary, #666);
+      font-size: var(--size-tiny);
+      color: var(--text-tertiary);
       margin-bottom: 4px;
     }
 
@@ -6243,9 +6273,9 @@
       width: 48px;
       height: 56px;
       text-align: center;
-      font-size: 24px;
+      font-size: var(--size-page-title);
       font-family: 'JetBrains Mono', monospace;
-      background: var(--bg-primary, #1a1a1a);
+      background: var(--bg-primary);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       color: var(--text);
@@ -6253,7 +6283,7 @@
 
     .mfa-code-input input:focus {
       outline: none;
-      border-color: var(--accent-color, #3b82f6);
+      border-color: var(--accent-color);
     }
 
     .mfa-actions {
@@ -6265,15 +6295,15 @@
     .mfa-btn {
       padding: 12px 24px;
       border-radius: var(--radius-md);
-      font-size: 14px;
+      font-size: var(--size-labels);
       font-weight: 500;
       cursor: pointer;
       transition: background-color 0.2s;
     }
 
     .mfa-btn-primary {
-      background: var(--accent-color, #3b82f6);
-      color: #fff;
+      background: var(--accent-color);
+      color: white;
       border: none;
     }
 
@@ -6288,12 +6318,12 @@
 
     .mfa-btn-secondary {
       background: transparent;
-      color: var(--text-secondary, #888);
+      color: var(--text-secondary);
       border: 1px solid var(--border);
     }
 
     .mfa-btn-secondary:hover {
-      background: var(--bg-tertiary, #2a2a2a);
+      background: var(--bg-tertiary);
     }
 
     /* Sessions Modal Styles - Phase 14-04 */
@@ -6315,7 +6345,7 @@
     }
 
     .sessions-content {
-      background: var(--bg-secondary, #242424);
+      background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 24px;
@@ -6334,17 +6364,17 @@
 
     .sessions-header h3 {
       margin: 0;
-      font-size: 18px;
+      font-size: var(--size-section-title);
       color: var(--text);
     }
 
     .sessions-close {
       background: none;
       border: none;
-      color: var(--text-secondary, #888);
+      color: var(--text-secondary);
       cursor: pointer;
       padding: 4px;
-      font-size: 20px;
+      font-size: var(--size-header);
     }
 
     .sessions-list {
@@ -6354,7 +6384,7 @@
     }
 
     .session-item {
-      background: var(--bg-primary, #1a1a1a);
+      background: var(--bg-primary);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 16px;
@@ -6364,7 +6394,7 @@
     }
 
     .session-item.current {
-      border-color: var(--accent-color, #3b82f6);
+      border-color: var(--accent-color);
     }
 
     .session-info {
@@ -6374,22 +6404,22 @@
     }
 
     .session-device {
-      font-size: 14px;
+      font-size: var(--size-labels);
       color: var(--text);
       font-weight: 500;
     }
 
     .session-details {
-      font-size: 12px;
-      color: var(--text-secondary, #888);
+      font-size: var(--size-caption);
+      color: var(--text-secondary);
     }
 
     .session-current-badge {
-      font-size: 11px;
-      background: var(--accent-color, #3b82f6);
-      color: #fff;
+      font-size: var(--size-tiny);
+      background: var(--accent-color);
+      color: white;
       padding: 2px 8px;
-      border-radius: 10px;
+      border-radius: var(--radius-lg);
       margin-left: 8px;
     }
 
@@ -6399,14 +6429,14 @@
       color: var(--negative);
       padding: 8px 12px;
       border-radius: var(--radius-sm);
-      font-size: 12px;
+      font-size: var(--size-caption);
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .session-revoke:hover {
       background: var(--negative);
-      color: #fff;
+      color: white;
     }
 
     .sessions-actions {
@@ -6422,7 +6452,7 @@
       width: 100%;
       padding: 12px;
       border-radius: var(--radius-md);
-      font-size: 14px;
+      font-size: var(--size-labels);
       cursor: pointer;
       transition: background-color 0.2s;
     }
@@ -6439,9 +6469,9 @@
 
     .sessions-empty {
       text-align: center;
-      color: var(--text-secondary, #888);
+      color: var(--text-secondary);
       padding: 32px;
-      font-size: 14px;
+      font-size: var(--size-labels);
     }
 
     /* Invite Modal Styles - Phase 14-05 */
@@ -6463,7 +6493,7 @@
     }
 
     .invite-content {
-      background: var(--bg-secondary, #242424);
+      background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 24px;
@@ -6480,17 +6510,17 @@
 
     .invite-header h3 {
       margin: 0;
-      font-size: 18px;
+      font-size: var(--size-section-title);
       color: var(--text);
     }
 
     .invite-close {
       background: none;
       border: none;
-      color: var(--text-secondary, #888);
+      color: var(--text-secondary);
       cursor: pointer;
       padding: 4px;
-      font-size: 20px;
+      font-size: var(--size-header);
     }
 
     .invite-form {
@@ -6506,18 +6536,18 @@
     }
 
     .invite-field label {
-      font-size: 13px;
-      color: var(--text-secondary, #888);
+      font-size: var(--size-small);
+      color: var(--text-secondary);
       font-weight: 500;
     }
 
     .invite-field input,
     .invite-field select {
-      background: var(--bg-primary, #1a1a1a);
+      background: var(--bg-primary);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 12px 14px;
-      font-size: 15px;
+      font-size: var(--size-body);
       color: var(--text);
       transition: border-color 0.2s;
     }
@@ -6525,7 +6555,7 @@
     .invite-field input:focus,
     .invite-field select:focus {
       outline: none;
-      border-color: var(--accent-color, #3b82f6);
+      border-color: var(--accent-color);
     }
 
     .invite-field select {
@@ -6533,18 +6563,18 @@
     }
 
     .invite-field .help-text {
-      font-size: 12px;
-      color: var(--text-tertiary, #666);
+      font-size: var(--size-caption);
+      color: var(--text-tertiary);
       margin-top: 4px;
     }
 
     .invite-submit {
-      background: var(--accent-color, #3b82f6);
-      color: #fff;
+      background: var(--accent-color);
+      color: white;
       border: none;
       border-radius: var(--radius-md);
       padding: 12px 24px;
-      font-size: 14px;
+      font-size: var(--size-labels);
       font-weight: 500;
       cursor: pointer;
       transition: background-color 0.2s;
@@ -6570,7 +6600,7 @@
     }
 
     .invite-result-title {
-      font-size: 14px;
+      font-size: var(--size-labels);
       font-weight: 500;
       color: var(--positive);
       margin-bottom: var(--spacing-ms);
@@ -6581,8 +6611,8 @@
     }
 
     .invite-result-label {
-      font-size: 12px;
-      color: var(--text-tertiary, #666);
+      font-size: var(--size-caption);
+      color: var(--text-tertiary);
       margin-bottom: 4px;
     }
 
@@ -6594,23 +6624,23 @@
 
     .invite-result-value input {
       flex: 1;
-      background: var(--bg-primary, #1a1a1a);
+      background: var(--bg-primary);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 10px 12px;
-      font-size: 13px;
+      font-size: var(--size-small);
       color: var(--text);
       font-family: 'JetBrains Mono', monospace;
     }
 
     .invite-copy-btn {
-      background: var(--bg-tertiary, #2a2a2a);
+      background: var(--bg-tertiary);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 10px 14px;
       color: var(--text);
       cursor: pointer;
-      font-size: 12px;
+      font-size: var(--size-caption);
       white-space: nowrap;
     }
 
@@ -6634,17 +6664,17 @@
 
     .sharing-header h4 {
       margin: 0;
-      font-size: 16px;
+      font-size: var(--size-numbers);
       color: var(--text);
     }
 
     .sharing-invite-btn {
-      background: var(--accent-color, #3b82f6);
-      color: #fff;
+      background: var(--accent-color);
+      color: white;
       border: none;
       border-radius: var(--radius-sm);
       padding: 8px 16px;
-      font-size: 13px;
+      font-size: var(--size-small);
       cursor: pointer;
     }
 
@@ -6659,7 +6689,7 @@
     }
 
     .sharing-item {
-      background: var(--bg-primary, #1a1a1a);
+      background: var(--bg-primary);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 12px 16px;
@@ -6680,18 +6710,18 @@
     }
 
     .sharing-user-name {
-      font-size: 14px;
+      font-size: var(--size-labels);
       color: var(--text);
     }
 
     .sharing-user-email {
-      font-size: 12px;
-      color: var(--text-secondary, #888);
+      font-size: var(--size-caption);
+      color: var(--text-secondary);
     }
 
     .sharing-user-status {
-      font-size: 11px;
-      color: var(--text-tertiary, #666);
+      font-size: var(--size-tiny);
+      color: var(--text-tertiary);
       font-style: italic;
     }
 
@@ -6702,7 +6732,7 @@
     }
 
     .sharing-role-badge {
-      font-size: 12px;
+      font-size: var(--size-caption);
       padding: 4px 10px;
       border-radius: var(--radius-lg);
       font-weight: 500;
@@ -6710,22 +6740,22 @@
 
     .sharing-role-badge.owner {
       background: rgba(168, 85, 247, 0.2);
-      color: #a855f7;
+      color: var(--accent-color);
     }
 
     .sharing-role-badge.partner {
       background: rgba(34, 197, 94, 0.2);
-      color: #22c55e;
+      color: var(--positive);
     }
 
     .sharing-role-badge.accountant {
       background: rgba(59, 130, 246, 0.2);
-      color: #3b82f6;
+      color: var(--abroad);
     }
 
     .sharing-role-badge.gestor {
       background: rgba(234, 179, 8, 0.2);
-      color: #eab308;
+      color: var(--warning);
     }
 
     .sharing-revoke {
@@ -6733,7 +6763,7 @@
       border: none;
       color: var(--negative);
       cursor: pointer;
-      font-size: 12px;
+      font-size: var(--size-caption);
       padding: 4px 8px;
     }
 
@@ -6743,9 +6773,9 @@
 
     .sharing-empty {
       text-align: center;
-      color: var(--text-tertiary, #666);
+      color: var(--text-tertiary);
       padding: 24px;
-      font-size: 14px;
+      font-size: var(--size-labels);
     }
 
     /* Accept Invite Banner - Phase 14-05 */
@@ -6766,14 +6796,14 @@
 
     .invite-accept-info h4 {
       margin: 0 0 4px 0;
-      font-size: 14px;
+      font-size: var(--size-labels);
       color: var(--text);
     }
 
     .invite-accept-info p {
       margin: 0;
-      font-size: 13px;
-      color: var(--text-secondary, #888);
+      font-size: var(--size-small);
+      color: var(--text-secondary);
     }
 
     .invite-accept-actions {
@@ -6784,14 +6814,14 @@
     .invite-accept-btn {
       padding: 8px 16px;
       border-radius: var(--radius-sm);
-      font-size: 13px;
+      font-size: var(--size-small);
       cursor: pointer;
       transition: background-color 0.2s;
     }
 
     .invite-accept-btn.accept {
-      background: var(--accent-color, #3b82f6);
-      color: #fff;
+      background: var(--accent-color);
+      color: white;
       border: none;
     }
 
@@ -6801,12 +6831,12 @@
 
     .invite-accept-btn.decline {
       background: transparent;
-      color: var(--text-secondary, #888);
+      color: var(--text-secondary);
       border: 1px solid var(--border);
     }
 
     .invite-accept-btn.decline:hover {
-      background: var(--bg-tertiary, #2a2a2a);
+      background: var(--bg-tertiary);
     }
 
     /* Permission UI Styles - Phase 14-06 */
@@ -6816,39 +6846,39 @@
     }
 
     .role-indicator {
-      font-size: 11px;
+      font-size: var(--size-tiny);
       padding: 2px 8px;
-      border-radius: 10px;
+      border-radius: var(--radius-lg);
       margin-left: 8px;
     }
 
     .role-indicator.role-owner {
       background: rgba(168, 85, 247, 0.2);
-      color: #a855f7;
+      color: var(--accent-color);
     }
 
     .role-indicator.role-partner {
       background: rgba(34, 197, 94, 0.2);
-      color: #22c55e;
+      color: var(--positive);
     }
 
     .role-indicator.role-accountant {
       background: rgba(59, 130, 246, 0.2);
-      color: #3b82f6;
+      color: var(--abroad);
     }
 
     .role-indicator.role-gestor {
       background: rgba(234, 179, 8, 0.2);
-      color: #eab308;
+      color: var(--warning);
     }
 
     /* Read-only mode indicator for gestors */
     .read-only-banner {
       background: rgba(234, 179, 8, 0.1);
       border: 1px solid rgba(234, 179, 8, 0.2);
-      color: #eab308;
+      color: var(--warning);
       padding: 8px 16px;
-      font-size: 13px;
+      font-size: var(--size-small);
       text-align: center;
       display: none;
       border-radius: var(--radius-sm);
@@ -6861,7 +6891,7 @@
 
     /* Role badge in entity switcher items */
     .entity-switcher__option-role {
-      font-size: 10px;
+      font-size: var(--size-tiny);
       padding: 1px 6px;
       border-radius: var(--radius-md);
       margin-left: auto;
@@ -6870,17 +6900,17 @@
 
     .entity-switcher__option-role.role-partner {
       background: rgba(34, 197, 94, 0.2);
-      color: #22c55e;
+      color: var(--positive);
     }
 
     .entity-switcher__option-role.role-accountant {
       background: rgba(59, 130, 246, 0.2);
-      color: #3b82f6;
+      color: var(--abroad);
     }
 
     .entity-switcher__option-role.role-gestor {
       background: rgba(234, 179, 8, 0.2);
-      color: #eab308;
+      color: var(--warning);
     }
 
     /* ===========================================
@@ -7068,8 +7098,8 @@
       width: 18px;
       height: 18px;
       margin: 0;
-      border: 2px solid var(--border, #444);
-      border-radius: 4px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
       background: transparent;
       cursor: pointer;
       position: relative;
@@ -7078,8 +7108,8 @@
     }
 
     .checkbox-label input[type="checkbox"]:checked {
-      border-color: var(--positive, #22c55e);
-      background: var(--positive, #22c55e);
+      border-color: var(--positive);
+      background: var(--positive);
     }
 
     .checkbox-label input[type="checkbox"]:checked::after {
@@ -7088,14 +7118,14 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #000;
-      font-size: 14px;
+      color: var(--text);
+      font-size: var(--size-labels);
       font-weight: bold;
       line-height: 1;
     }
 
     .checkbox-label input[type="checkbox"]:focus {
-      outline: 2px solid var(--accent, #3b82f6);
+      outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
@@ -7129,7 +7159,7 @@
     .client-modal-actions .btn-primary {
       background: var(--accent);
       border: none;
-      color: #000;
+      color: var(--text);
     }
 
     .client-modal-actions .btn-primary:hover {
@@ -7282,7 +7312,7 @@
     .day-expense-item .de-trip-badge {
       display: inline-block;
       padding: 0 4px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       font-size: var(--size-tiny);
       font-weight: 600;
       background: rgba(96, 165, 250, 0.15);
@@ -7307,7 +7337,7 @@
     .deduction-pct-badge {
       display: inline-block;
       padding: 0 4px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       font-size: var(--size-tiny);
       font-weight: 600;
       background: rgba(251, 191, 36, 0.15);
@@ -7546,7 +7576,7 @@
       padding: 0.25rem 0.5rem;
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       font-size: var(--size-small);
       transition: all 0.15s ease;
@@ -7560,7 +7590,7 @@
     .day-checkbox-group label:has(input:checked) {
       background: var(--accent);
       border-color: var(--accent);
-      color: #fff;
+      color: white;
     }
 
     /* Phase 16-03: Pattern Preview Styles */
@@ -7594,7 +7624,7 @@
     }
 
     .pattern-preview .preview-warning {
-      color: var(--warning-color, #f59e0b);
+      color: var(--warning-color);
       font-size: var(--size-small);
       margin-top: 0.5rem;
     }
@@ -7667,7 +7697,7 @@
       padding: 0.5rem;
       background: var(--hover-bg);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       color: var(--text);
       font-family: 'JetBrains Mono', monospace;
       font-size: var(--size-labels);
@@ -7715,7 +7745,7 @@
       display: none;
       margin-top: 0.5rem;
       padding: 0.5rem;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       font-size: var(--size-labels);
     }
 
@@ -7743,7 +7773,7 @@
     .expense-form-dialog .ocr-confidence {
       display: inline-block;
       padding: 0.15rem 0.5rem;
-      border-radius: 10px;
+      border-radius: var(--radius-lg);
       font-size: var(--size-caption);
       font-weight: 600;
     }
@@ -7777,7 +7807,7 @@
       font-size: var(--size-caption);
       background: rgba(0,0,0,0.3);
       padding: 0.5rem;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       max-height: 100px;
       overflow-y: auto;
       white-space: pre-wrap;
@@ -7838,7 +7868,7 @@
     }
 
     .expense-filters .filter-group label {
-      font-size: 11px;
+      font-size: var(--size-tiny);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--text-muted);
@@ -7884,7 +7914,7 @@
     }
 
     .expense-summary-bar .summary-stat .stat-label {
-      font-size: 11px;
+      font-size: var(--size-tiny);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--text-muted);
@@ -7923,7 +7953,7 @@
       padding: 0.6rem 0.75rem;
       text-align: left;
       font-weight: 500;
-      font-size: 11px;
+      font-size: var(--size-tiny);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--text-muted);
@@ -7985,8 +8015,8 @@
     .expense-category-badge {
       display: inline-block;
       padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 11px;
+      border-radius: var(--radius-lg);
+      font-size: var(--size-tiny);
       font-weight: 500;
       background: var(--accent-surface-hover);
       color: var(--accent);
@@ -7998,7 +8028,7 @@
       display: inline-block;
       padding: 1px 6px;
       border-radius: var(--radius-md);
-      font-size: 10px;
+      font-size: var(--size-tiny);
       font-weight: 600;
       background: rgba(96, 165, 250, 0.15);
       color: var(--accent-color);
@@ -8051,7 +8081,7 @@
       display: inline-block;
       padding: 1px 6px;
       border-radius: var(--radius-md);
-      font-size: 10px;
+      font-size: var(--size-tiny);
       font-weight: 600;
       background: rgba(248, 113, 113, 0.15);
       color: var(--negative);
@@ -8062,14 +8092,14 @@
       margin-left: 4px;
       color: var(--warning);
       cursor: help;
-      font-size: 12px;
+      font-size: var(--size-caption);
     }
     .expense-receipt-icon {
       display: inline-block;
       margin-left: 4px;
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 12px;
+      font-size: var(--size-caption);
       transition: color 0.15s;
     }
     .expense-receipt-icon:hover { color: var(--accent); }
@@ -8127,7 +8157,7 @@
       background: var(--hover-bg); color: var(--text);
     }
     .expense-summary-bar .summary-stat .billable-detail {
-      font-size: 10px; color: var(--text-muted); opacity: 0.7; margin-top: 1px;
+      font-size: var(--size-tiny); color: var(--text-muted); opacity: 0.7; margin-top: 1px;
     }
     .expense-archived-toggle {
       display: flex; align-items: center; gap: 0.5rem;
@@ -8152,7 +8182,7 @@
       display: flex; gap: 0.75rem; color: var(--text-muted);
     }
     .expense-archived-item .restore-btn {
-      padding: 2px 8px; font-size: 11px;
+      padding: 2px 8px; font-size: var(--size-tiny);
       border: 1px solid rgba(74, 222, 128, 0.3);
       border-radius: var(--radius-sm);
       background: transparent; color: var(--accent);
@@ -8174,7 +8204,7 @@
 
     .expense-actions button {
       padding: 3px 8px;
-      font-size: 11px;
+      font-size: var(--size-tiny);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       background: transparent;
@@ -8336,7 +8366,7 @@
       height: 22px;
       border-radius: 50%;
       background: var(--negative);
-      color: #fff;
+      color: white;
       font-weight: 700;
       font-size: var(--size-small);
       flex-shrink: 0;
@@ -8687,7 +8717,7 @@
       padding: 0.5rem;
       background: var(--hover-bg);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       color: var(--text);
       font-family: var(--font-mono);
       font-size: var(--size-labels);
@@ -8765,7 +8795,7 @@
       padding: 0.4rem;
       background: var(--hover-bg);
       border: 1px solid var(--border);
-      border-radius: 3px;
+      border-radius: var(--radius-sm);
       color: var(--text);
       font-size: var(--size-labels);
     }
@@ -8795,7 +8825,7 @@
       cursor: pointer;
       font-size: var(--size-numbers);
       padding: 0.2rem 0.4rem;
-      border-radius: 3px;
+      border-radius: var(--radius-sm);
       opacity: 0.6;
       transition: opacity 0.15s;
     }
@@ -8829,7 +8859,7 @@
       padding: 0.4rem 0.5rem;
       background: var(--hover-bg);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       color: var(--text);
       font-size: var(--size-labels);
     }
@@ -8886,7 +8916,7 @@
       padding: 0.5rem;
       background: var(--hover-bg);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
       font-size: var(--size-labels);
@@ -8924,7 +8954,7 @@
 
     .invoice-dialog .dialog-actions .btn-primary {
       background: var(--accent);
-      color: #1a1a1a;
+      color: var(--text);
       border-color: var(--accent);
       font-weight: 600;
     }
@@ -9144,7 +9174,7 @@
       padding: 0.4rem 0.5rem;
       background: var(--hover-bg);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       color: var(--text);
       font-size: var(--size-labels);
     }
@@ -9320,7 +9350,7 @@
       border-radius: var(--radius-md);
       font-size: var(--size-labels);
       line-height: 1.4;
-      color: #fff;
+      color: white;
       background: var(--bg-surface);
       border-left: 4px solid;
       box-shadow: 0 4px 20px rgba(0,0,0,0.4);
@@ -9332,7 +9362,7 @@
     .toast.toast-out {
       animation: toast-out 0.3s ease forwards;
     }
-    .toast-success { border-color: var(--accent, #4ade80); }
+    .toast-success { border-color: var(--accent); }
     .toast-error { border-color: var(--negative); }
     .toast-warning { border-color: var(--warning); }
     .toast-info { border-color: var(--accent-color); }
@@ -9363,7 +9393,7 @@
       width: 8px; height: 8px; border-radius: 50%;
       background: var(--border); transition: all 0.3s ease;
     }
-    .onboarding-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+    .onboarding-dot.active { background: var(--accent); width: 24px; border-radius: var(--radius-sm); }
     .onboarding-dot.done { background: var(--accent); }
     .onboarding-icon { font-size: var(--size-display); text-align: center; margin-bottom: 1rem; }
     .onboarding-title {
@@ -9381,7 +9411,7 @@
       font-weight: 500; cursor: pointer; border: none; transition: all 0.2s;
     }
     .onboarding-btn-primary {
-      background: var(--accent); color: #fff;
+      background: var(--accent); color: white;
     }
     .onboarding-btn-primary:hover { background: var(--accent-hover); }
     .onboarding-btn-skip {
@@ -9492,17 +9522,17 @@
 
       <!-- Demo mode button (outside form) -->
       <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);">
-        <p style="color: var(--text-muted, #888); font-size: 12px; text-align: center; margin-bottom: var(--spacing-ms);">
+        <p style="color: var(--text-muted); font-size: var(--size-caption); text-align: center; margin-bottom: var(--spacing-ms);">
           For testing without authentication:
         </p>
-        <button type="button" id="demo-mode-btn" style="width: 100%; padding: 12px 16px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; border-radius: var(--radius-md); color: white; font-size: 14px; font-weight: 500; cursor: pointer;">
+        <button type="button" id="demo-mode-btn" style="width: 100%; padding: 12px 16px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; border-radius: var(--radius-md); color: white; font-size: var(--size-labels); font-weight: 500; cursor: pointer;">
           🧪 Enter Demo Mode
         </button>
       </div>
 
       <!-- Password reset form -->
       <form class="auth-form auth-reset-form" onsubmit="AuthUI.handlePasswordReset(event)">
-        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+        <p style="color: var(--text-muted); font-size: var(--size-labels); margin-bottom: 16px;">
           Enter your email to receive a password reset link.
         </p>
         <input
@@ -9524,7 +9554,7 @@
 
       <!-- New password form (after clicking reset link) -->
       <form class="auth-form auth-new-password-form" onsubmit="AuthUI.handleNewPassword(event)">
-        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+        <p style="color: var(--text-muted); font-size: var(--size-labels); margin-bottom: 16px;">
           Enter your new password.
         </p>
         <input
@@ -10766,7 +10796,7 @@
         <span id="yearSummaryThreshold" class="threshold-indicator">(0/183)</span>
       </div>
 
-      <div class="calendar-info" style="margin-bottom: 1rem; padding: 0.75rem; background: var(--surface-hover); border-radius: 4px; font-size: var(--size-labels);">
+      <div class="calendar-info" style="margin-bottom: 1rem; padding: 0.75rem; background: var(--surface-hover); border-radius: var(--radius-sm); font-size: var(--size-labels);">
         <strong style="color: var(--accent);">How days are counted:</strong>
         <ul style="margin: 0.5rem 0 0 1.5rem; opacity: 0.8; line-height: 1.6;">
           <li><strong>Abroad days</strong> + <strong>Travel days</strong> count toward 183-day threshold</li>
@@ -11800,7 +11830,7 @@
           <textarea id="emailBody" rows="6" style="font-family: inherit; resize: vertical;"></textarea>
         </div>
         <p class="text-dim" style="font-size: var(--size-small); margin-top: 0.5rem;">PDF will be attached automatically.</p>
-        <div id="emailStatusMsg" style="display: none; padding: 0.75rem; border-radius: 4px; margin-top: 0.75rem; font-size: var(--size-labels);"></div>
+        <div id="emailStatusMsg" style="display: none; padding: 0.75rem; border-radius: var(--radius-sm); margin-top: 0.75rem; font-size: var(--size-labels);"></div>
         <div class="dialog-actions">
           <button class="btn" onclick="document.getElementById('emailInvoiceDialog').close()">Cancel</button>
           <button class="btn btn-primary" id="sendEmailBtn" onclick="handleSendInvoiceEmail()">Send Email</button>
@@ -11934,6 +11964,42 @@
       if (toast.classList.contains('toast-out')) return;
       toast.classList.add('toast-out');
       toast.addEventListener('animationend', () => toast.remove());
+    }
+
+    // ============================================================
+    // SKELETON LOADING HELPERS (E-9)
+    // ============================================================
+    /**
+     * Show skeleton loading state in a container
+     * @param {string} containerId - ID of the container element
+     * @param {number} rows - Number of skeleton rows to show
+     */
+    function showSkeleton(containerId, rows = 3) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      let html = '';
+      for (let i = 0; i < rows; i++) {
+        html += `<div class="skeleton-row">
+          <div class="skeleton skeleton-avatar"></div>
+          <div class="skeleton skeleton-line" style="width:${60 + Math.random() * 30}%"></div>
+        </div>`;
+      }
+      el.innerHTML = html;
+    }
+
+    /**
+     * Show skeleton cards in a container
+     * @param {string} containerId - ID of the container element
+     * @param {number} count - Number of skeleton cards to show
+     */
+    function showSkeletonCards(containerId, count = 4) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      let html = '';
+      for (let i = 0; i < count; i++) {
+        html += '<div class="skeleton skeleton-card"></div>';
+      }
+      el.innerHTML = html;
     }
 
     // ============================================================
@@ -14687,7 +14753,7 @@ Generated by Autonomo Tax Calculator`;
                 <span>Received: ${dateDisplay}</span>
                 <span style="color: ${statusColor}; text-transform: capitalize;">${entry.status}</span>
               </div>
-              ${entry.description ? `<div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">${escapeHtml(entry.description)}</div>` : ''}
+              ${entry.description ? `<div style="font-size: var(--size-caption); color: var(--text-muted); margin-top: 4px;">${escapeHtml(entry.description)}</div>` : ''}
             </div>
             <div class="income-amount">${entry.amount.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} EUR</div>
             <div class="income-actions">
@@ -32255,7 +32321,7 @@ Generated by Autonomo Tax Calculator`;
       CONTENT_WIDTH: 170, // 210 - 20 - 20
 
       // Colors
-      ACCENT_COLOR: [59, 130, 246],    // #3b82f6
+      ACCENT_COLOR: [59, 130, 246],    // var(--abroad)
       TEXT_COLOR: [40, 40, 40],
       TEXT_MUTED: [120, 120, 120],
       LINE_COLOR: [200, 200, 200],
@@ -33195,7 +33261,7 @@ Generated by Autonomo Tax Calculator`;
         if (statusEl) {
           statusEl.style.display = 'block';
           statusEl.style.background = 'rgba(245, 158, 11, 0.15)';
-          statusEl.style.color = 'var(--warning, #f59e0b)';
+          statusEl.style.color = 'var(--warning)';
           statusEl.innerHTML = '<strong>Email sending requires Supabase configuration.</strong><br>' +
             'To enable email delivery:<br>' +
             '1. Configure SUPABASE_CONFIG in the dashboard<br>' +
@@ -33222,7 +33288,7 @@ Generated by Autonomo Tax Calculator`;
         if (sendBtn) sendBtn.textContent = 'Sending...';
 
         // Convert body text to simple HTML (preserve newlines)
-        const emailHtml = '<div style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #333;">' +
+        const emailHtml = '<div style="font-family: Arial, sans-serif; font-size: var(--size-labels); line-height: 1.6; color: #333;">' +
           emailBody.split('\n').map(line => line ? `<p style="margin: 0 0 8px;">${escapeHtml(line)}</p>` : '<br>').join('') +
           '</div>';
 
