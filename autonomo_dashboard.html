@@ -10,9 +10,9 @@
   <link rel="apple-touch-icon" href="favicon.svg">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="description" content="Tax calculator for Spanish autónomos working in Belgium. Calculate IRPF, RETA, track the 183-day rule, manage expenses, invoices, and clients.">
+  <meta name="description" content="Tax calculator for Spanish autónomos working cross-border in the EU. Calculate IRPF, RETA, track the 183-day rule, manage expenses, invoices, and clients.">
   <meta property="og:title" content="Autonomo Tax Calculator">
-  <meta property="og:description" content="All-in-one tax calculator for Spanish autónomos in Belgium. IRPF, RETA, 183-day rule, expenses, invoices.">
+  <meta property="og:description" content="All-in-one tax calculator for Spanish autónomos working cross-border in the EU. IRPF, RETA, 183-day rule, expenses, invoices.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#1a1a2e">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +45,7 @@
       --positive: #047857;    /* Matches accent */
       --negative: #dc2626;
       --warning: #b45309;     /* Was #d97706 (3.2:1 FAIL) → now 5.0:1 on white */
-      --belgium: #2563eb;
+      --abroad: #2563eb;
 
       /* Borders & surfaces */
       --border: #e5e7eb;
@@ -57,7 +57,7 @@
       --accent-surface-hover: rgba(4,120,87,0.1);
       --negative-surface: rgba(220,38,38,0.06);
       --warning-surface: rgba(180,83,9,0.06);
-      --belgium-surface: rgba(37,99,235,0.06);
+      --abroad-surface: rgba(37,99,235,0.06);
       --overlay: rgba(0,0,0,0.4);
       --overlay-bg: rgba(0,0,0,0.03);
 
@@ -160,7 +160,7 @@
       --positive: #34d399;
       --negative: #f87171;
       --warning: #fbbf24;
-      --belgium: #60a5fa;
+      --abroad: #60a5fa;
 
       --border: rgba(255,255,255,0.08);
       --border-subtle: rgba(255,255,255,0.04);
@@ -171,7 +171,7 @@
       --accent-surface-hover: rgba(52,211,153,0.14);
       --negative-surface: rgba(248,113,113,0.1);
       --warning-surface: rgba(251,191,36,0.08);
-      --belgium-surface: rgba(96,165,250,0.08);
+      --abroad-surface: rgba(96,165,250,0.08);
       --overlay: rgba(0,0,0,0.6);
       --overlay-bg: rgba(0,0,0,0.2);
 
@@ -1419,26 +1419,26 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      color: var(--belgium);
+      color: var(--abroad);
       text-decoration: none;
       font-size: var(--size-small);
       padding: 4px 8px;
       border-radius: var(--radius-sm);
-      background: var(--belgium-surface);
-      border: 1px solid var(--belgium-surface);
+      background: var(--abroad-surface);
+      border: 1px solid var(--abroad-surface);
       transition: all 0.15s ease;
     }
 
     .official-source-link:hover {
-      background: var(--belgium-surface);
-      border-color: var(--belgium);
+      background: var(--abroad-surface);
+      border-color: var(--abroad);
     }
 
     /* Inline source citation (within text) */
     .inline-source-link {
-      color: var(--belgium);
+      color: var(--abroad);
       text-decoration: none;
-      border-bottom: 1px dotted var(--belgium);
+      border-bottom: 1px dotted var(--abroad);
     }
 
     .inline-source-link:hover {
@@ -2547,7 +2547,7 @@
 
     /* Custom scenario */
     .scenario-card.custom {
-      border-left: 3px solid var(--belgium);
+      border-left: 3px solid var(--abroad);
     }
 
     /* Selected scenario */
@@ -3431,8 +3431,8 @@
       background: var(--border);
     }
 
-    .toolbar-status-btn.belgium:hover {
-      border-color: var(--belgium);
+    .toolbar-status-btn.abroad:hover {
+      border-color: var(--abroad);
       background: rgba(59, 130, 246, 0.15);
     }
 
@@ -3452,7 +3452,7 @@
       border-radius: 2px;
     }
 
-    .status-indicator.belgium { background: var(--belgium); }
+    .status-indicator.abroad { background: var(--abroad); }
     .status-indicator.spain { background: var(--positive); }
     .status-indicator.travel { background: var(--warning); }
 
@@ -3488,7 +3488,7 @@
       accent-color: var(--accent);
     }
 
-    .day-cell.belgium {
+    .day-cell.abroad {
       background: rgba(59, 130, 246, 0.15);
       border-color: rgba(59, 130, 246, 0.3);
     }
@@ -3503,7 +3503,7 @@
       border-color: rgba(251, 146, 60, 0.3);
     }
 
-    .day-cell.selected.belgium,
+    .day-cell.selected.abroad,
     .day-cell.selected.spain,
     .day-cell.selected.travel {
       box-shadow: 0 0 0 2px var(--accent);
@@ -9831,7 +9831,7 @@
             <div class="client-form-group">
               <label for="projectPatternLocation">Default Location</label>
               <select id="projectPatternLocation">
-                <option value="belgium">BE Belgium</option>
+                <option value="abroad">Abroad (client country)</option>
                 <option value="spain">ES Spain</option>
                 <option value="travel">Travel</option>
                 <option value="other">Other</option>
@@ -9863,8 +9863,8 @@
           <label>Location</label>
           <div class="radio-group" id="dayEditorLocationGroup">
             <label class="radio-option">
-              <input type="radio" name="dayLocation" value="belgium" />
-              <span>🇧🇪 Belgium</span>
+              <input type="radio" name="dayLocation" value="abroad" />
+              <span>🌍 Abroad</span>
             </label>
             <label class="radio-option">
               <input type="radio" name="dayLocation" value="spain" />
@@ -10600,12 +10600,12 @@
         <!-- CALENDAR TAB -->
         <section class="tab-panel panel-calendar">
           <div class="calendar-section">
-      <h2>Belgium Calendar <span id="calendarYearTitle">2026</span></h2>
+      <h2>Work Calendar <span id="calendarYearTitle">2026</span></h2>
 
       <!-- Year Summary (Phase 16-04) -->
       <div id="yearSummary" class="year-summary">
         <strong id="yearSummaryLabel">2026 Summary:</strong>
-        <span id="yearSummaryBelgium">0</span> Belgium
+        <span id="yearSummaryAbroad">0</span> Abroad
         <span id="yearSummarySpain">0</span> Spain
         <span id="yearSummaryTravel">0</span> Travel
         <span id="yearSummaryThreshold" class="threshold-indicator">(0/183)</span>
@@ -10614,21 +10614,21 @@
       <div class="calendar-info" style="margin-bottom: 1rem; padding: 0.75rem; background: var(--surface-hover); border-radius: 4px; font-size: var(--size-labels);">
         <strong style="color: var(--accent);">How days are counted:</strong>
         <ul style="margin: 0.5rem 0 0 1.5rem; opacity: 0.8; line-height: 1.6;">
-          <li><strong>Belgium days</strong> + <strong>Travel days</strong> count toward 183-day threshold</li>
+          <li><strong>Abroad days</strong> + <strong>Travel days</strong> count toward 183-day threshold</li>
           <li><strong>Spain days</strong> do not count toward threshold</li>
-          <li><strong>Travel days:</strong> Use for flight days between countries</li>
+          <li><strong>Travel days:</strong> Use for flight/transit days between countries</li>
         </ul>
       </div>
 
       <div class="calendar-stats">
         <div class="count-display">
           <span class="count-label">This month:</span>
-          <span id="monthBelgiumCount" class="count-value">0</span> Belgium
+          <span id="monthAbroadCount" class="count-value">0</span> Abroad
         </div>
         <div class="count-display">
           <span class="count-label">Annual total:</span>
-          <span id="annualBelgiumCount" class="count-value">0</span> Belgium + Travel
-          <span class="source-hint" data-tooltip="Entry and exit days (travel days between Belgium and Spain) may be counted by BOTH countries' tax authorities. This calculator counts Travel days toward the 183-day threshold as a conservative approach. Art. 4 Spain-Belgium tax treaty applies for tie-breaker.">?</span>
+          <span id="annualAbroadCount" class="count-value">0</span> Abroad + Travel
+          <span class="source-hint" data-tooltip="Entry and exit days (travel days between Spain and your work country) may be counted by BOTH countries' tax authorities. This calculator counts Travel days toward the 183-day threshold as a conservative approach. The applicable double taxation treaty tie-breaker applies.">?</span>
           <span id="warningBadge" class="warning-badge hidden"></span>
         </div>
       </div>
@@ -10653,8 +10653,8 @@
         </div>
         <div class="toolbar-actions">
           <span class="toolbar-label">Set status:</span>
-          <button type="button" class="toolbar-status-btn belgium" onclick="applyStatusToSelected('belgium')">
-            <span class="status-indicator belgium"></span> Belgium
+          <button type="button" class="toolbar-status-btn abroad" onclick="applyStatusToSelected('abroad')">
+            <span class="status-indicator abroad"></span> Abroad
           </button>
           <button type="button" class="toolbar-status-btn spain" onclick="applyStatusToSelected('spain')">
             <span class="status-indicator spain"></span> Spain
@@ -10730,7 +10730,7 @@
       <details class="holidays-reference" style="margin-top: 1rem;">
         <summary style="cursor: pointer; opacity: 0.8;">Belgian Public Holidays 2026 (Reference)</summary>
         <div style="padding: 1rem 0; font-size: var(--size-labels); opacity: 0.8;">
-          <p style="margin-bottom: 0.5rem;">These are NOT auto-marked. Mark manually if you are in Belgium:</p>
+          <p style="margin-bottom: 0.5rem;">These are NOT auto-marked. Mark manually if you are abroad:</p>
           <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
             <li>Apr 6 - Easter Monday</li>
             <li>May 1 - Labour Day</li>
@@ -10743,7 +10743,7 @@
             <li>Dec 25 - Christmas Day</li>
           </ul>
           <p style="margin-top: 0.75rem; font-style: italic;">
-            If a holiday falls the day before a contracted work day, you may need to be in Belgium.
+            If a holiday falls the day before a contracted work day, you may need to be abroad.
             These still count toward the 183-day threshold.
           </p>
         </div>
@@ -10785,7 +10785,7 @@
                   <span class="input-hint">Home office, phone, utilities</span>
                 </div>
                 <div class="input-field">
-                  <label for="calcWorkTravel">Work Travel (Belgium)</label>
+                  <label for="calcWorkTravel">Work Travel (Abroad)</label>
                   <div class="input-with-euro">
                     <input type="number" id="calcWorkTravel" value="1000" min="0" step="100" oninput="recalculateTotals()">
                     <span class="input-unit">EUR/mo</span>
@@ -11266,9 +11266,9 @@
 
         <div class="status-options">
           <label class="status-option">
-            <input type="radio" name="dayStatus" value="belgium">
-            <span class="status-emoji-large">&#x1F1E7;&#x1F1EA;</span>
-            <span>Belgium</span>
+            <input type="radio" name="dayStatus" value="abroad">
+            <span class="status-emoji-large">&#x1F30D;</span>
+            <span>Abroad</span>
           </label>
           <label class="status-option">
             <input type="radio" name="dayStatus" value="spain">
@@ -11309,9 +11309,9 @@
         <p style="opacity: 0.7; margin-bottom: 1rem;">Apply status to all selected days:</p>
         <div class="status-options">
           <label class="status-option">
-            <input type="radio" name="bulkStatus" value="belgium">
-            <span class="status-emoji-large">&#x1F1E7;&#x1F1EA;</span>
-            <span>Belgium</span>
+            <input type="radio" name="bulkStatus" value="abroad">
+            <span class="status-emoji-large">&#x1F30D;</span>
+            <span>Abroad</span>
           </label>
           <label class="status-option">
             <input type="radio" name="bulkStatus" value="spain">
@@ -11747,7 +11747,7 @@
         {
           icon: '\u{1F4CA}',
           title: 'Welcome to Autonomo Tax Calculator',
-          desc: 'Your all-in-one tool for managing taxes as a <strong>Spanish aut\u00f3nomo</strong> working in Belgium. Let\u2019s take a quick tour of the key features.'
+          desc: 'Your all-in-one tool for managing taxes as a <strong>Spanish aut\u00f3nomo</strong> working cross-border in the EU. Let\u2019s take a quick tour of the key features.'
         },
         {
           icon: '\u{1F4B0}',
@@ -11756,8 +11756,8 @@
         },
         {
           icon: '\u{1F4C5}',
-          title: 'Belgium Calendar & 183-Day Rule',
-          desc: 'Track your <strong>work days in Belgium</strong> on the Calendar tab. The app monitors the 183-day threshold and warns you before you exceed it.'
+          title: 'Work Calendar & 183-Day Rule',
+          desc: 'Track your <strong>work days abroad</strong> on the Calendar tab. The app monitors the 183-day threshold per country and warns you before you exceed it.'
         },
         {
           icon: '\u{1F4DD}',
@@ -11910,7 +11910,7 @@
       GASTOS_DIFICIL_MAX: 2000,
 
       // Private costs (fixed, not deductible)
-      // Breakdown: Rent 70% (808.50) + GSM 50% (27.50) + Electricity 91% (91) + Auto (600) + Insurance (200)
+      // Private costs: Rent private portion + Mobile private + Electricity private + Car + Insurance
       PRIVATE_COSTS_MONTHLY: 1727
     });
 
@@ -11950,14 +11950,14 @@
     // ============================================================
     // CALENDAR CONSTANTS
     // ============================================================
-    // Data structures for Belgium presence calendar (Feb-Dec 2026)
+    // Data structures for work presence calendar (tracks days abroad)
     // ============================================================
 
     const CALENDAR_STORAGE_KEY = 'autonomo_calendar_v1';
 
     const DAY_STATUS = Object.freeze({
       UNSET: 'unset',
-      BELGIUM: 'belgium',
+      ABROAD: 'abroad',
       SPAIN: 'spain',
       TRAVEL: 'travel'
     });
@@ -11978,7 +11978,7 @@
       currentYear: 2026,  // Track year independently for navigation
       startMonth: 1,  // February (0-indexed) - legacy compatibility
       endMonth: 11,   // December (0-indexed) - legacy compatibility
-      days: {},       // { "2026-02-15": { status: "belgium", contracted: true } }
+      days: {},       // { "2026-02-15": { status: "abroad", contracted: true } }
       contractedPatternApplied: false,
       lastModified: null,
       currentMonth: 1  // February (0-indexed) - for navigation
@@ -12132,7 +12132,7 @@
      */
     function getStatusEmoji(status) {
       switch (status) {
-        case DAY_STATUS.BELGIUM: return '\u{1F1E7}\u{1F1EA}'; // Flag Belgium
+        case DAY_STATUS.ABROAD: return '\u{1F30D}'; // Globe (Abroad)
         case DAY_STATUS.SPAIN: return '\u{1F1EA}\u{1F1F8}'; // Flag Spain
         case DAY_STATUS.TRAVEL: return '\u{2708}\u{FE0F}'; // Airplane
         default: return '';
@@ -12455,7 +12455,7 @@
 
     /**
      * Apply contracted pattern to calendar
-     * Marks all contracted days as Belgium with contracted flag
+     * Marks all contracted days as Abroad with contracted flag
      */
     function applyContractedPattern() {
       const contractedDays = generateContractedPattern(
@@ -12464,10 +12464,10 @@
         calendarState.endMonth
       );
 
-      // Mark each contracted day as Belgium + contracted
+      // Mark each contracted day as Abroad + contracted
       contractedDays.forEach(dateKey => {
         calendarState.days[dateKey] = {
-          status: DAY_STATUS.BELGIUM,
+          status: DAY_STATUS.ABROAD,
           contracted: true
         };
       });
@@ -12536,7 +12536,7 @@
 
     /**
      * Apply a status to all selected days
-     * @param {string} status - Status to apply ('belgium', 'spain', 'travel', 'unset')
+     * @param {string} status - Status to apply ('abroad', 'spain', 'travel', 'unset')
      */
     function applyStatusToSelected(status) {
       if (selectedDates.size === 0) {
@@ -12654,10 +12654,10 @@
       const annualCountEl = document.getElementById('pickerAnnualCount');
 
       if (monthCountEl) {
-        monthCountEl.textContent = `${counts.monthBelgium} days in Belgium this month`;
+        monthCountEl.textContent = `${counts.monthAbroad} days abroad this month`;
       }
       if (annualCountEl) {
-        annualCountEl.textContent = `${counts.annualThreshold} days in Belgium (annual total)`;
+        annualCountEl.textContent = `${counts.annualThreshold} days abroad (annual total)`;
       }
     }
 
@@ -12772,7 +12772,7 @@
       // Default to belgium selected
       const radios = dialog.querySelectorAll('input[name="bulkStatus"]');
       radios.forEach(radio => {
-        radio.checked = radio.value === 'belgium';
+        radio.checked = radio.value === 'abroad';
       });
 
       dialog.showModal();
@@ -12905,7 +12905,7 @@
     // ============================================================
     // COUNTING SYSTEM AND WARNING THRESHOLDS (Task 2)
     // ============================================================
-    // Count Belgium/Spain/Travel days and display warnings
+    // Count Abroad/Spain/Travel days and display warnings
     // ============================================================
 
     const WARNING_THRESHOLDS = Object.freeze({
@@ -12932,8 +12932,8 @@
      */
     function calculateCounts() {
       const days = calendarState.days;
-      let monthBelgium = 0, monthTravel = 0, monthSpain = 0;
-      let annualBelgium = 0, annualTravel = 0, annualSpain = 0;
+      let monthAbroad = 0, monthTravel = 0, monthSpain = 0;
+      let annualAbroad = 0, annualTravel = 0, annualSpain = 0;
 
       const currentMonth = calendarState.currentMonth;
       const year = calendarState.year;
@@ -12942,23 +12942,26 @@
         const [y, m] = dateKey.split('-').map(Number);
         if (y !== year) return;
 
+        // Normalize legacy 'belgium' status to 'abroad'
+        const status = data.status === 'belgium' ? 'abroad' : data.status;
+
         // Annual counts
-        if (data.status === 'belgium') annualBelgium++;
-        else if (data.status === 'travel') annualTravel++;
-        else if (data.status === 'spain') annualSpain++;
+        if (status === 'abroad') annualAbroad++;
+        else if (status === 'travel') annualTravel++;
+        else if (status === 'spain') annualSpain++;
 
         // Monthly counts (for current displayed month)
         if (m - 1 === currentMonth) {  // m is 1-indexed from ISO string
-          if (data.status === 'belgium') monthBelgium++;
-          else if (data.status === 'travel') monthTravel++;
-          else if (data.status === 'spain') monthSpain++;
+          if (status === 'abroad') monthAbroad++;
+          else if (status === 'travel') monthTravel++;
+          else if (status === 'spain') monthSpain++;
         }
       });
 
       return {
-        monthBelgium, monthTravel, monthSpain,
-        annualBelgium, annualTravel, annualSpain,
-        annualThreshold: annualBelgium + annualTravel  // Conservative: both count
+        monthAbroad, monthTravel, monthSpain,
+        annualAbroad, annualTravel, annualSpain,
+        annualThreshold: annualAbroad + annualTravel  // Conservative: both count
       };
     }
 
@@ -12989,7 +12992,7 @@
           const fallbackCounts = calculateCounts();
           return {
             annual: {
-              belgium: fallbackCounts.annualBelgium,
+              abroad: fallbackCounts.annualAbroad,
               spain: fallbackCounts.annualSpain,
               travel: fallbackCounts.annualTravel,
               other: 0,
@@ -13000,21 +13003,24 @@
         }
       }
 
-      let belgium = 0, spain = 0, travel = 0, other = 0;
+      let abroad = 0, spain = 0, travel = 0, other = 0;
       const monthCounts = {};
 
       // Initialize month counts (month is 1-12 for display)
       for (let m = 1; m <= 12; m++) {
-        monthCounts[m] = { belgium: 0, spain: 0, travel: 0 };
+        monthCounts[m] = { abroad: 0, spain: 0, travel: 0 };
       }
 
       days.forEach(d => {
         const month = parseInt(d.date.split('-')[1], 10);
 
-        switch (d.location) {
-          case 'belgium':
-            belgium++;
-            monthCounts[month].belgium++;
+        // Normalize legacy 'belgium' location to 'abroad'
+        const loc = d.location === 'belgium' ? 'abroad' : d.location;
+
+        switch (loc) {
+          case 'abroad':
+            abroad++;
+            monthCounts[month].abroad++;
             break;
           case 'spain':
             spain++;
@@ -13032,11 +13038,11 @@
 
       return {
         annual: {
-          belgium,
+          abroad,
           spain,
           travel,
           other,
-          threshold: belgium + travel  // Both count toward 183
+          threshold: abroad + travel  // Both count toward 183
         },
         monthly: monthCounts
       };
@@ -13044,7 +13050,7 @@
 
     /**
      * Get warning level based on threshold count
-     * @param {number} thresholdCount - Number of Belgium + Travel days
+     * @param {number} thresholdCount - Number of Abroad + Travel days
      * @returns {string|null} - 'red', 'orange', 'yellow', or null (legacy API)
      */
     function getWarningLevel(thresholdCount) {
@@ -13057,7 +13063,7 @@
     /**
      * Get progressive warning level object for threshold count
      * Returns WARNING_LEVELS entry for appropriate tier
-     * @param {number} thresholdCount - Number of Belgium + Travel days
+     * @param {number} thresholdCount - Number of Abroad + Travel days
      * @returns {object} - WARNING_LEVELS entry
      */
     function getProgressiveWarningLevel(thresholdCount) {
@@ -13120,13 +13126,13 @@
 
         // Update year summary display
         const summaryLabel = document.getElementById('yearSummaryLabel');
-        const summaryBelgium = document.getElementById('yearSummaryBelgium');
+        const summaryAbroad = document.getElementById('yearSummaryAbroad');
         const summarySpain = document.getElementById('yearSummarySpain');
         const summaryTravel = document.getElementById('yearSummaryTravel');
         const summaryThreshold = document.getElementById('yearSummaryThreshold');
 
         if (summaryLabel) summaryLabel.textContent = `${year} Summary:`;
-        if (summaryBelgium) { summaryBelgium.textContent = counts.annual.belgium; summaryBelgium.style.color = 'var(--belgium)'; }
+        if (summaryAbroad) { summaryAbroad.textContent = counts.annual.abroad; summaryAbroad.style.color = 'var(--abroad)'; }
         if (summarySpain) { summarySpain.textContent = counts.annual.spain; summarySpain.style.color = 'var(--positive)'; }
         if (summaryTravel) { summaryTravel.textContent = counts.annual.travel; summaryTravel.style.color = 'var(--warning)'; }
         if (summaryThreshold) {
@@ -13137,15 +13143,15 @@
         }
 
         // Update monthly count (current month display)
-        const monthCountEl = document.getElementById('monthBelgiumCount');
+        const monthCountEl = document.getElementById('monthAbroadCount');
         if (monthCountEl) {
           // currentMonth is 0-indexed, monthCounts uses 1-indexed
-          const monthData = counts.monthly[currentMonth + 1] || { belgium: 0 };
-          monthCountEl.textContent = monthData.belgium;
+          const monthData = counts.monthly[currentMonth + 1] || { abroad: 0 };
+          monthCountEl.textContent = monthData.abroad;
         }
 
         // Update annual count
-        const annualCountEl = document.getElementById('annualBelgiumCount');
+        const annualCountEl = document.getElementById('annualAbroadCount');
         if (annualCountEl) {
           annualCountEl.textContent = counts.annual.threshold;
         }
@@ -13168,9 +13174,9 @@
 
           banner.className = `warning-banner ${warningLevel}`;
           const messages = {
-            yellow: `Approaching threshold: ${counts.annual.threshold} days in Belgium (183 triggers residency review)`,
-            orange: `Very close to threshold: ${counts.annual.threshold} days in Belgium (183 triggers residency review)`,
-            red: `Threshold exceeded: ${counts.annual.threshold} days in Belgium (exceeds 183-day limit)`
+            yellow: `Approaching threshold: ${counts.annual.threshold} days abroad (183 triggers residency review)`,
+            orange: `Very close to threshold: ${counts.annual.threshold} days abroad (183 triggers residency review)`,
+            red: `Threshold exceeded: ${counts.annual.threshold} days abroad (exceeds 183-day limit)`
           };
           banner.textContent = messages[warningLevel];
         }
@@ -13194,13 +13200,13 @@
 
       // Update year summary display (sync version - limited data)
       const summaryLabel = document.getElementById('yearSummaryLabel');
-      const summaryBelgium = document.getElementById('yearSummaryBelgium');
+      const summaryAbroad = document.getElementById('yearSummaryAbroad');
       const summarySpain = document.getElementById('yearSummarySpain');
       const summaryTravel = document.getElementById('yearSummaryTravel');
       const summaryThreshold = document.getElementById('yearSummaryThreshold');
 
       if (summaryLabel) summaryLabel.textContent = `${year} Summary:`;
-      if (summaryBelgium) { summaryBelgium.textContent = counts.annualBelgium; summaryBelgium.style.color = 'var(--belgium)'; }
+      if (summaryAbroad) { summaryAbroad.textContent = counts.annualAbroad; summaryAbroad.style.color = 'var(--abroad)'; }
       if (summarySpain) { summarySpain.textContent = counts.annualSpain; summarySpain.style.color = 'var(--positive)'; }
       if (summaryTravel) { summaryTravel.textContent = counts.annualTravel; summaryTravel.style.color = 'var(--warning)'; }
       if (summaryThreshold) {
@@ -13210,9 +13216,9 @@
         summaryThreshold.textContent = `(${counts.annualThreshold}/183)`;
       }
 
-      const monthCountEl = document.getElementById('monthBelgiumCount');
-      const annualCountEl = document.getElementById('annualBelgiumCount');
-      if (monthCountEl) monthCountEl.textContent = counts.monthBelgium;
+      const monthCountEl = document.getElementById('monthAbroadCount');
+      const annualCountEl = document.getElementById('annualAbroadCount');
+      if (monthCountEl) monthCountEl.textContent = counts.monthAbroad;
       if (annualCountEl) annualCountEl.textContent = counts.annualThreshold;
 
       // Update progressive warning banner
@@ -13232,9 +13238,9 @@
 
         banner.className = `warning-banner ${warningLevel}`;
         const messages = {
-          yellow: `Approaching threshold: ${counts.annualThreshold} days in Belgium (183 triggers residency review)`,
-          orange: `Very close to threshold: ${counts.annualThreshold} days in Belgium (183 triggers residency review)`,
-          red: `Threshold exceeded: ${counts.annualThreshold} days in Belgium (exceeds 183-day limit)`
+          yellow: `Approaching threshold: ${counts.annualThreshold} days abroad (183 triggers residency review)`,
+          orange: `Very close to threshold: ${counts.annualThreshold} days abroad (183 triggers residency review)`,
+          red: `Threshold exceeded: ${counts.annualThreshold} days abroad (exceeds 183-day limit)`
         };
         banner.textContent = messages[warningLevel];
       }
@@ -13354,14 +13360,16 @@
 
           // Build summary with location and client
           const locationText = {
-            belgium: 'Belgium',
+            abroad: 'Abroad',
+            belgium: 'Abroad',  // Legacy compatibility
             spain: 'Spain',
             travel: 'Travel',
             other: 'Other'
           }[d.location] || d.location;
 
           const locationEmoji = {
-            belgium: '🇧🇪',
+            abroad: '🌍',
+            belgium: '🌍',  // Legacy compatibility
             spain: '🇪🇸',
             travel: '✈️',
             other: '📍'
@@ -13416,7 +13424,8 @@ END:VCALENDAR`;
           nextDay.setDate(nextDay.getDate() + 1);
 
           const statusText = {
-            belgium: 'Belgium Work Day',
+            abroad: 'Work Day (Abroad)',
+            belgium: 'Work Day (Abroad)',  // Legacy compatibility
             spain: 'Spain',
             travel: 'Travel Day'
           }[data.status];
@@ -13430,16 +13439,16 @@ DTSTAMP:${formatICSTimestamp(new Date())}
 DTSTART;VALUE=DATE:${dateKey.replace(/-/g, '')}
 DTEND;VALUE=DATE:${toISODateKey(nextDay).replace(/-/g, '')}
 SUMMARY:${statusText}${contractedNote}
-DESCRIPTION:${statusText} - Autonomo Tax Calculator Belgium Tracking
+DESCRIPTION:${statusText} - Autonomo Tax Calculator Work Tracking
 END:VEVENT`;
         });
 
       return `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Autonomo Tax Calculator//Belgium Calendar//EN
+PRODID:-//Autonomo Tax Calculator//Work Calendar//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Belgium Work Calendar 2026
+X-WR-CALNAME:Work Calendar
 ${events.join('\n')}
 END:VCALENDAR`;
     }
@@ -13541,12 +13550,12 @@ END:VCALENDAR`;
       const summaryRows = [
         [],  // Empty row
         ['SUMMARY'],
-        ['Total Belgium Days', stats.belgium],
+        ['Total Abroad Days', stats.abroad],
         ['Total Travel Days', stats.travel],
         ['Total Spain Days', stats.spain],
         ['Total Other Days', stats.other],
-        ['Combined (Belgium + Travel)', stats.belgium + stats.travel],
-        ['183-day Threshold', (stats.belgium + stats.travel) >= 183 ? 'EXCEEDED' : 'OK']
+        ['Combined (Abroad + Travel)', stats.abroad + stats.travel],
+        ['183-day Threshold', (stats.abroad + stats.travel) >= 183 ? 'EXCEEDED' : 'OK']
       ];
 
       const allRows = [headers, ...rows, ...summaryRows];
@@ -13580,10 +13589,10 @@ END:VCALENDAR`;
       const summaryRows = [
         [],  // Empty row
         ['SUMMARY'],
-        ['Total Belgium Days', counts.annualBelgium],
+        ['Total Abroad Days', counts.annualAbroad],
         ['Total Travel Days', counts.annualTravel],
         ['Total Spain Days', counts.annualSpain],
-        ['Combined (Belgium + Travel)', counts.annualThreshold],
+        ['Combined (Abroad + Travel)', counts.annualThreshold],
         ['183-day Threshold', counts.annualThreshold >= 183 ? 'EXCEEDED' : 'OK']
       ];
 
@@ -13647,19 +13656,20 @@ END:VCALENDAR`;
       const breakdown = [];
 
       for (let m = 1; m <= 11; m++) {  // Feb(1) to Dec(11) - 0-indexed months
-        let belgium = 0, travel = 0, spain = 0;
+        let abroadCount = 0, travel = 0, spain = 0;
 
         Object.entries(calendarState.days).forEach(([dateKey, data]) => {
           const month = parseInt(dateKey.split('-')[1], 10) - 1;  // Convert to 0-indexed
+          const status = data.status === 'belgium' ? 'abroad' : data.status;  // Legacy compat
           if (month === m) {
-            if (data.status === 'belgium') belgium++;
-            else if (data.status === 'travel') travel++;
-            else if (data.status === 'spain') spain++;
+            if (status === 'abroad') abroadCount++;
+            else if (status === 'travel') travel++;
+            else if (status === 'spain') spain++;
           }
         });
 
-        if (belgium + travel + spain > 0) {
-          breakdown.push(`  ${months[m - 1]}: ${belgium} BE, ${travel} Travel, ${spain} ES`);
+        if (abroadCount + travel + spain > 0) {
+          breakdown.push(`  ${months[m - 1]}: ${abroadCount} Abroad, ${travel} Travel, ${spain} ES`);
         }
       }
 
@@ -13677,18 +13687,19 @@ END:VCALENDAR`;
         ? `\nWARNING: ${counts.annualThreshold >= 183 ? 'THRESHOLD EXCEEDED' : 'Approaching threshold'}`
         : '';
 
-      const summary = `Belgium Calendar 2026 Summary
+      const year = calendarState?.currentYear || calendarState?.year || 2026;
+      const summary = `Work Calendar ${year} Summary
 ============================
-Total Belgium days: ${counts.annualBelgium}
+Total Abroad days: ${counts.annualAbroad}
 Total Travel days: ${counts.annualTravel}
 Total Spain days: ${counts.annualSpain}
-Combined (Belgium + Travel): ${counts.annualThreshold}
+Combined (Abroad + Travel): ${counts.annualThreshold}
 183-day threshold status: ${counts.annualThreshold >= 183 ? 'EXCEEDED' : 'OK'}${warningText}
 
 Monthly Breakdown:
 ${generateMonthlyBreakdown()}
 
-Note: Entry and exit days may count in BOTH Belgium and Spain.
+Note: Entry and exit days may count in BOTH Spain and the work country.
 Generated by Autonomo Tax Calculator`;
 
       try {
@@ -13823,18 +13834,18 @@ Generated by Autonomo Tax Calculator`;
         description: 'Official dietas limits regulation'
       },
 
-      // Spain-Belgium Treaty
+      // Spanish Double Taxation Treaties
       BOE_TREATY: {
-        name: 'Convenio Spain-Belgium - BOE',
+        name: 'Convenios de Doble Imposicion - BOE',
         url: 'https://www.boe.es/buscar/act.php?id=BOE-A-2003-13375',
-        description: 'Double taxation treaty (BOE-A-2003-13375)'
+        description: 'Double taxation treaties (example: Spain-Belgium BOE-A-2003-13375)'
       },
 
-      // AEAT Treaty Page for Belgium
-      AEAT_TREATY_BELGIUM: {
-        name: 'CDI Belgium - AEAT',
-        url: 'https://sede.agenciatributaria.gob.es/Sede/normativa-criterios-interpretativos/fiscalidad-internacional/convenios-doble-imposicion-firmados-espana/belgica.html',
-        description: 'AEAT treaty information page for Belgium'
+      // AEAT Treaty Pages (all countries)
+      AEAT_TREATIES: {
+        name: 'CDI Treaties - AEAT',
+        url: 'https://sede.agenciatributaria.gob.es/Sede/normativa-criterios-interpretativos/fiscalidad-internacional/convenios-doble-imposicion-firmados-espana.html',
+        description: 'AEAT double taxation treaty index (all countries)'
       },
 
       // LIRPF - Tax Residence Definition
@@ -13956,8 +13967,8 @@ Generated by Autonomo Tax Calculator`;
     });
 
     const TREATY_ARTICLE_4 = Object.freeze({
-      title: 'Article 4: Tax Residence Tie-Breaker',
-      source: 'Spain-Belgium Tax Treaty (BOE-A-2003-13375)',
+      title: 'Article 4: Tax Residence Tie-Breaker (OECD Model)',
+      source: 'OECD Model Tax Convention, Art. 4 (applied in all Spanish CDI treaties)',
       steps: [
         {
           name: 'Permanent Home',
@@ -14064,10 +14075,10 @@ Generated by Autonomo Tax Calculator`;
       },
       dietas: {
         title: 'Dietas (Per Diem)',
-        text: 'Tax-exempt daily allowance for work travel. Belgium: 91.35 EUR with overnight stay.'
+        text: 'Tax-exempt daily allowance for work travel. Abroad: 91.35 EUR/day with overnight stay. Spain: 53.34 EUR/day.'
       },
       treaty: {
-        title: 'Spain-Belgium Tax Treaty',
+        title: 'Double Taxation Treaty (CDI)',
         text: 'Bilateral agreement preventing double taxation. Article 4 defines tax residency rules.'
       }
     });
@@ -14120,28 +14131,28 @@ Generated by Autonomo Tax Calculator`;
     // ============================================================
     // EXPENSE DATA CONSTANTS
     // ============================================================
-    // Pre-filled expense data for Spain deductible, Belgium costs, and private
-    // All amounts from CLAUDE.md Fixed Costs section
+    // Pre-filled expense data for Spain deductible, work travel costs, and private
+    // Default amounts are examples - users should edit to match their situation
     // ============================================================
 
     const DEFAULT_EXPENSES = Object.freeze({
       version: 1,
       categories: Object.freeze({
         spainDeductible: Object.freeze([
-          Object.freeze({ id: 'huur', name: 'Rent (30% deductible)', baseAmount: 1155, deductionPct: 30, deletable: true }),
-          Object.freeze({ id: 'gsm', name: 'Mobile (50% deductible)', baseAmount: 55, deductionPct: 50, deletable: true }),
-          Object.freeze({ id: 'elektriciteit', name: 'Electricity (9% deductible)', baseAmount: 100, deductionPct: 9, deletable: true })
+          Object.freeze({ id: 'rent', name: 'Rent (% deductible)', baseAmount: 0, deductionPct: 30, deletable: true }),
+          Object.freeze({ id: 'mobile', name: 'Mobile (% deductible)', baseAmount: 0, deductionPct: 50, deletable: true }),
+          Object.freeze({ id: 'electricity', name: 'Electricity (% deductible)', baseAmount: 0, deductionPct: 9, deletable: true })
         ]),
         workTravel: Object.freeze([
-          Object.freeze({ id: 'belgium-travel-low', name: 'Belgium Travel (Standard)', amount: 1000, description: '3 days, 1 flight (Mon-Wed pattern)', deletable: true }),
-          Object.freeze({ id: 'belgium-travel-high', name: 'Belgium Travel (Extended)', amount: 2500, description: '17 days, 4 flights (full week pattern)', deletable: true })
+          Object.freeze({ id: 'work-travel-low', name: 'Work Travel (Standard)', amount: 0, description: 'E.g. 3 days, 1 flight per month', deletable: true }),
+          Object.freeze({ id: 'work-travel-high', name: 'Work Travel (Extended)', amount: 0, description: 'E.g. 17 days, 4 flights per month', deletable: true })
         ]),
         private: Object.freeze([
-          Object.freeze({ id: 'huur-private', name: 'Rent (70% private)', amount: 808.50, deletable: true }),
-          Object.freeze({ id: 'gsm-private', name: 'Mobile (50% private)', amount: 27.50, deletable: true }),
-          Object.freeze({ id: 'elektriciteit-private', name: 'Electricity (91% private)', amount: 91, deletable: true }),
-          Object.freeze({ id: 'auto', name: 'Car', amount: 600, deletable: true }),
-          Object.freeze({ id: 'verzekeringen', name: 'Insurance', amount: 200, deletable: true })
+          Object.freeze({ id: 'rent-private', name: 'Rent (private portion)', amount: 0, deletable: true }),
+          Object.freeze({ id: 'mobile-private', name: 'Mobile (private portion)', amount: 0, deletable: true }),
+          Object.freeze({ id: 'electricity-private', name: 'Electricity (private portion)', amount: 0, deletable: true }),
+          Object.freeze({ id: 'car', name: 'Car', amount: 0, deletable: true }),
+          Object.freeze({ id: 'insurance', name: 'Insurance', amount: 0, deletable: true })
         ])
       })
     });
@@ -14158,6 +14169,7 @@ Generated by Autonomo Tax Calculator`;
     /**
      * Migrate old expense data format to new work-travel structure
      * Converts belgiumPattern + belgiumCosts to workTravel category
+     * Also migrates old Belgium-specific expense IDs to generic names
      * @param {object} data - Expense data object
      * @returns {object} - Migrated expense data
      */
@@ -14169,8 +14181,8 @@ Generated by Autonomo Tax Calculator`;
         // Create workTravel category from old data
         if (!data.categories.workTravel) {
           data.categories.workTravel = [
-            { id: 'belgium-travel-migrated', name: 'Belgium Travel', amount: amount,
-              description: 'Migrated from pattern', deletable: true }
+            { id: 'work-travel-migrated', name: 'Work Travel', amount: amount,
+              description: 'Migrated from previous format', deletable: true }
           ];
         }
 
@@ -14179,6 +14191,16 @@ Generated by Autonomo Tax Calculator`;
         delete data.belgiumPattern;
 
         DEBUG && console.log('Migrated expense data from belgiumPattern to workTravel');
+      }
+
+      // Migrate old Belgium-specific travel IDs to generic ones
+      if (data.categories.workTravel) {
+        data.categories.workTravel = data.categories.workTravel.map(item => {
+          if (item.id === 'belgium-travel-low') return { ...item, id: 'work-travel-low', name: item.name.replace('Belgium Travel', 'Work Travel') };
+          if (item.id === 'belgium-travel-high') return { ...item, id: 'work-travel-high', name: item.name.replace('Belgium Travel', 'Work Travel') };
+          if (item.id === 'belgium-travel-migrated') return { ...item, id: 'work-travel-migrated', name: 'Work Travel' };
+          return item;
+        });
       }
 
       return data;
@@ -14467,59 +14489,59 @@ Generated by Autonomo Tax Calculator`;
     // ============================================================
     // SCENARIO PRESETS
     // ============================================================
-    // Pre-configured scenarios (A-E) from CLAUDE.md
-    // Values: A(3K), B(6K), C(9K), D(12K), E(18K)
-    // Belgium patterns: A/B use 'low' (1K), C/D/E use 'high' (2.5K)
+    // Pre-configured scenarios (A-E) with typical revenue/expense levels
+    // Values: A(3K), B(6K), C(9K), D(12K), E(18K) monthly revenue
+    // Work travel: A/B use 'low' (1K), C/D/E use 'high' (2.5K)
     // ============================================================
 
     const SCENARIO_PRESETS = Object.freeze({
       'A': Object.freeze({
         id: 'A',
-        name: 'Scenario A',
+        name: 'Starter',
         isPreset: true,
         monthlyRevenue: 3000,
         monthlyExpenses: 750,
-        workTravelCost: 1000,  // Standard pattern: 3 days, 1 flight
+        workTravelCost: 1000,  // Standard: few days/month abroad
         hasDescendant: true,
         fiscalOverrides: null
       }),
       'B': Object.freeze({
         id: 'B',
-        name: 'Scenario B',
+        name: 'Part-time',
         isPreset: true,
         monthlyRevenue: 6000,
         monthlyExpenses: 1500,
-        workTravelCost: 1000,  // Standard pattern
+        workTravelCost: 1000,  // Standard travel pattern
         hasDescendant: true,
         fiscalOverrides: null
       }),
       'C': Object.freeze({
         id: 'C',
-        name: 'Scenario C',
+        name: 'Standard',
         isPreset: true,
         monthlyRevenue: 9000,
         monthlyExpenses: 3000,
-        workTravelCost: 2500,  // Extended pattern: 17 days, 4 flights
+        workTravelCost: 2500,  // Extended: frequent travel abroad
         hasDescendant: true,
         fiscalOverrides: null
       }),
       'D': Object.freeze({
         id: 'D',
-        name: 'Scenario D',
+        name: 'Professional',
         isPreset: true,
         monthlyRevenue: 12000,
         monthlyExpenses: 5000,
-        workTravelCost: 2500,  // Extended pattern
+        workTravelCost: 2500,  // Extended travel pattern
         hasDescendant: true,
         fiscalOverrides: null
       }),
       'E': Object.freeze({
         id: 'E',
-        name: 'Scenario E',
+        name: 'Senior',
         isPreset: true,
         monthlyRevenue: 18000,
         monthlyExpenses: 8000,
-        workTravelCost: 2500,  // Extended pattern
+        workTravelCost: 2500,  // Extended travel pattern
         hasDescendant: true,
         fiscalOverrides: null
       })
@@ -14742,7 +14764,7 @@ Generated by Autonomo Tax Calculator`;
 
     /**
      * Get work travel cost for a scenario
-     * Supports both new workTravelCost property and legacy belgiumPattern
+     * Supports both new workTravelCost property and legacy formats
      * @param {object} scenario - Scenario object
      * @returns {number} - Monthly work travel cost
      */
@@ -14771,7 +14793,7 @@ Generated by Autonomo Tax Calculator`;
     }
 
     // ============================================================
-    // DEPRECATED: Belgium pattern toggle functions removed
+    // DEPRECATED: Legacy pattern toggle functions removed
     // Work travel expenses are now editable items like other categories
     // Migration function in loadExpenses() handles old localStorage data
     // ============================================================
@@ -14874,7 +14896,7 @@ Generated by Autonomo Tax Calculator`;
         // Private: 0% deductible
         return `${formatEUR(expense.amount)} x 0% = ${formatEUR(0)}`;
       } else {
-        // Belgium costs: 100% deductible
+        // Work travel costs: 100% deductible
         return `${formatEUR(expense.amount)} x 100% = ${formatEUR(expense.amount)}`;
       }
     }
@@ -16966,15 +16988,15 @@ Generated by Autonomo Tax Calculator`;
       }
     }
 
-    function getBelgiumDayCount() {
+    function getAbroadDayCount() {
       // Uses existing calendarState from Phase 4
       if (typeof calendarState === 'undefined' || !calendarState.days) return 0;
       let count = 0;
       for (const dateKey in calendarState.days) {
         const dayData = calendarState.days[dateKey];
-        const status = dayData.status;
-        // Count Belgium and Travel days toward threshold (conservative approach)
-        if (status === 'belgium' || status === 'travel') {
+        const status = dayData.status === 'belgium' ? 'abroad' : dayData.status;  // Legacy compat
+        // Count Abroad and Travel days toward threshold (conservative approach)
+        if (status === 'abroad' || status === 'travel') {
           count++;
         }
       }
@@ -16992,20 +17014,20 @@ Generated by Autonomo Tax Calculator`;
         return;
       }
 
-      const belgiumDays = getBelgiumDayCount();
+      const abroadDays = getAbroadDayCount();
 
       // Remove previous threshold classes
       banner.classList.remove('threshold-170', 'threshold-180', 'threshold-183');
 
-      if (belgiumDays >= 183) {
+      if (abroadDays >= 183) {
         banner.classList.add('visible', 'threshold-183');
-        textEl.innerHTML = `<strong>${belgiumDays} Belgium/travel days.</strong> You have exceeded the 183-day threshold. Treaty tie-breaker provisions apply to determine tax residence.`;
-      } else if (belgiumDays >= 180) {
+        textEl.innerHTML = `<strong>${abroadDays} abroad/travel days.</strong> You have exceeded the 183-day threshold. Treaty tie-breaker provisions apply to determine tax residence.`;
+      } else if (abroadDays >= 180) {
         banner.classList.add('visible', 'threshold-180');
-        textEl.innerHTML = `<strong>${belgiumDays} Belgium/travel days.</strong> You are approaching the 183-day threshold. Review treaty provisions in the Compliance tab.`;
-      } else if (belgiumDays >= 170) {
+        textEl.innerHTML = `<strong>${abroadDays} abroad/travel days.</strong> You are approaching the 183-day threshold. Review treaty provisions in the Compliance tab.`;
+      } else if (abroadDays >= 170) {
         banner.classList.add('visible', 'threshold-170');
-        textEl.innerHTML = `<strong>${belgiumDays} Belgium/travel days.</strong> Approaching 183-day threshold. Consider reviewing treaty provisions.`;
+        textEl.innerHTML = `<strong>${abroadDays} abroad/travel days.</strong> Approaching 183-day threshold. Consider reviewing treaty provisions.`;
       } else {
         banner.classList.remove('visible');
       }
@@ -17023,10 +17045,10 @@ Generated by Autonomo Tax Calculator`;
         <h2>Compliance Information</h2>
 
         <div class="compliance-columns">
-          <!-- LEFT COLUMN: Working in Belgium -->
+          <!-- LEFT COLUMN: Working Abroad -->
           <div class="compliance-col">
             <div class="action-phase">
-              <h3>While Working in Belgium</h3>
+              <h3>While Working Abroad</h3>
               <div class="compliance-section">
                 <button class="section-header" aria-expanded="false" aria-controls="content-dietas">
                   <span>Dietas Limits</span>
@@ -17037,7 +17059,7 @@ Generated by Autonomo Tax Calculator`;
                     <thead><tr><th>Location</th><th>Overnight</th><th>Day only</th></tr></thead>
                     <tbody>
                       <tr><td>Spain</td><td>${formatEUR(DIETAS_LIMITS.spain.withOvernight)}</td><td>${formatEUR(DIETAS_LIMITS.spain.withoutOvernight)}</td></tr>
-                      <tr><td>Belgium</td><td class="highlight">${formatEUR(DIETAS_LIMITS.abroad.withOvernight)}</td><td>${formatEUR(DIETAS_LIMITS.abroad.withoutOvernight)}</td></tr>
+                      <tr><td>Abroad (EU)</td><td class="highlight">${formatEUR(DIETAS_LIMITS.abroad.withOvernight)}</td><td>${formatEUR(DIETAS_LIMITS.abroad.withoutOvernight)}</td></tr>
                     </tbody>
                   </table>
                   <cite class="source-citation">${renderInlineSource('AEAT_DIETAS', DIETAS_LIMITS.source)} | ${renderInlineSource('BOE_REGLAMENTO_IRPF', 'Reglamento Art. 9')}</cite>
@@ -17091,7 +17113,7 @@ Generated by Autonomo Tax Calculator`;
                   <p class="plain-summary">183+ days in Spain = Spanish tax resident (domestic law)</p>
                   <div class="entry-exit-warning">
                     <strong>Entry/exit days count in BOTH countries</strong>
-                    <p>Travel day counts in both Spain and Belgium simultaneously</p>
+                    <p>Travel days may count in both Spain and the work country simultaneously</p>
                   </div>
                   <cite class="source-citation">${renderInlineSource('BOE_LIRPF', 'LIRPF Art. 9.1.a')}</cite>
                 </div>
@@ -17117,7 +17139,7 @@ Generated by Autonomo Tax Calculator`;
                   <ol class="tie-breaker-steps">
                     ${TREATY_ARTICLE_4.steps.map(s => `<li><span class="step-name">${s.name}</span><span class="step-plain">${s.plain}</span></li>`).join('')}
                   </ol>
-                  <cite class="source-citation">${renderInlineSource('BOE_TREATY', 'BOE-A-2003-13375')} | ${renderInlineSource('AEAT_TREATY_BELGIUM', 'AEAT Belgium CDI')}</cite>
+                  <cite class="source-citation">${renderInlineSource('BOE_TREATY', 'BOE-A-2003-13375')} | ${renderInlineSource('AEAT_TREATIES', 'AEAT - CDI Treaties')}</cite>
                 </div>
               </div>
               <div class="compliance-section">
@@ -17893,7 +17915,8 @@ Generated by Autonomo Tax Calculator`;
         if (!this.isAuthorized) throw new Error('Not authorized');
 
         const locationText = {
-          belgium: 'Belgium Work Day',
+          abroad: 'Work Day (Abroad)',
+          belgium: 'Work Day (Abroad)',  // Legacy compatibility
           spain: 'Spain',
           travel: 'Travel Day',
           other: 'Other'
@@ -24522,7 +24545,7 @@ Generated by Autonomo Tax Calculator`;
             ? 'Limit: 91.35 EUR/day abroad w/ overnight, 48.08 EUR without. Requires electronic payment.'
             : 'Deduction: 100% if justified (SL). Representation limit 1% of revenue.';
         case 'TRAVEL':
-          return 'Deduction: 100% if justified as business travel. Hotel IVA via Modelo 360 (Belgium).';
+          return 'Deduction: 100% if justified as business travel. Hotel IVA recovery via Modelo 360 (EU countries).';
         case 'IT_SOFTWARE':
           return 'Deduction: 100%. Hardware > 300 EUR may require depreciation (26%/year).';
         case 'OFFICE_SUPPLIES':
@@ -26429,7 +26452,7 @@ Generated by Autonomo Tax Calculator`;
 
         // Reset location to default
         const locationSelect = document.getElementById('projectPatternLocation');
-        if (locationSelect) locationSelect.value = 'belgium';
+        if (locationSelect) locationSelect.value = 'abroad';
       },
 
       /**
@@ -26495,7 +26518,7 @@ Generated by Autonomo Tax Calculator`;
 
         // Get location
         const locationSelect = document.getElementById('projectPatternLocation');
-        const location = locationSelect?.value || 'belgium';
+        const location = locationSelect?.value || 'abroad';
 
         return {
           type: WORK_PATTERN_TYPE.WEEKLY,
@@ -26701,7 +26724,7 @@ Generated by Autonomo Tax Calculator`;
      * Defines possible location values for calendar days
      */
     const LOCATION_TYPE = Object.freeze({
-      BELGIUM: 'belgium',
+      ABROAD: 'abroad',
       SPAIN: 'spain',
       TRAVEL: 'travel',
       OTHER: 'other',
@@ -26940,25 +26963,27 @@ Generated by Autonomo Tax Calculator`;
       },
 
       /**
-       * Get statistics for Belgium days in a year (for 183-day rule)
+       * Get statistics for work days in a year (for 183-day rule)
        * @param {number} year - Year (e.g., 2026)
-       * @returns {Promise<Object>} Statistics { total, belgium, spain, travel, other }
+       * @returns {Promise<Object>} Statistics { total, abroad, spain, travel, other }
        */
       async getYearStatistics(year) {
         const days = await this.getDaysForYear(year);
 
         const stats = {
           total: days.length,
-          belgium: 0,
+          abroad: 0,
           spain: 0,
           travel: 0,
           other: 0
         };
 
         for (const day of days) {
-          switch (day.location) {
-            case LOCATION_TYPE.BELGIUM:
-              stats.belgium++;
+          // Normalize legacy 'belgium' location to 'abroad'
+          const loc = day.location === 'belgium' ? 'abroad' : day.location;
+          switch (loc) {
+            case LOCATION_TYPE.ABROAD:
+              stats.abroad++;
               break;
             case LOCATION_TYPE.SPAIN:
               stats.spain++;
@@ -26980,7 +27005,7 @@ Generated by Autonomo Tax Calculator`;
      * Migrate localStorage calendar data to IndexedDB
      * Runs once per entity on first access
      *
-     * v1 localStorage format: { version: 1, days: { "YYYY-MM-DD": { status: "belgium", contracted: true } } }
+     * v1 localStorage format: { version: 1, days: { "YYYY-MM-DD": { status: "belgium"|"abroad", contracted: true } } }
      * v2 IndexedDB format: { entity_id, date, location, client_id, project_id, notes, created_at, updated_at }
      */
     async function migrateCalendarToIndexedDB() {
@@ -27071,7 +27096,7 @@ Generated by Autonomo Tax Calculator`;
       type: 'weekly',
       days: [],              // Array of day numbers (1=Mon, 2=Tue, ..., 7=Sun)
       first_week_extra: [],  // Extra days for first week of month
-      location: 'belgium',   // Default location for pattern days
+      location: 'abroad',   // Default location for pattern days
       active: false          // Must be explicitly activated
     };
 
