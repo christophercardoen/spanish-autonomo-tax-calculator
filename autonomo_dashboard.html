@@ -4277,6 +4277,149 @@
       }
     }
 
+    /* Phase G: Tax Timeline Widget */
+    .tax-timeline { margin-top: var(--spacing-lg); }
+    .tax-timeline h3 { margin-bottom: var(--spacing-sm); }
+    .timeline-track {
+      display: flex; flex-direction: column; gap: var(--spacing-xs);
+      border-left: 3px solid var(--border);
+      margin-left: var(--spacing-sm);
+      padding-left: var(--spacing-md);
+    }
+    .timeline-item {
+      display: flex; align-items: center; gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      font-size: var(--size-labels);
+    }
+    .timeline-item.overdue { border-color: var(--negative); background: color-mix(in srgb, var(--negative) 5%, var(--bg-surface)); }
+    .timeline-item.due-soon { border-color: var(--warning); background: color-mix(in srgb, var(--warning) 5%, var(--bg-surface)); }
+    .timeline-item.upcoming { opacity: 0.8; }
+    .timeline-item.completed { opacity: 0.5; text-decoration: line-through; }
+    .timeline-date { font-family: 'JetBrains Mono', monospace; font-weight: 600; min-width: 80px; }
+    .timeline-label { flex: 1; }
+    .timeline-amount { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+    .timeline-badge {
+      font-size: var(--size-tiny); padding: 2px 6px; border-radius: var(--radius-full);
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .timeline-badge.overdue { background: var(--negative); color: white; }
+    .timeline-badge.due-soon { background: var(--warning); color: white; }
+
+    /* Phase G: Tasks Widget */
+    .tasks-widget { margin-top: var(--spacing-lg); }
+    .tasks-widget h3 { margin-bottom: var(--spacing-sm); }
+    .task-list { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+    .task-item {
+      display: flex; align-items: center; gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      font-size: var(--size-labels);
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .task-item:hover { border-color: var(--accent); }
+    .task-icon { font-size: var(--size-section-title); flex-shrink: 0; }
+    .task-text { flex: 1; }
+    .task-urgency { font-size: var(--size-tiny); font-weight: 600; }
+    .task-urgency.high { color: var(--negative); }
+    .task-urgency.medium { color: var(--warning); }
+    .task-urgency.low { color: var(--text-muted); }
+
+    /* Phase G: Savings Feedback */
+    .savings-banner {
+      display: flex; align-items: center; gap: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: color-mix(in srgb, var(--positive) 8%, var(--bg-surface));
+      border: 1px solid var(--positive);
+      border-radius: var(--radius-lg);
+      margin-top: var(--spacing-md);
+    }
+    .savings-icon { font-size: var(--size-display); }
+    .savings-amount { font-family: 'JetBrains Mono', monospace; font-size: var(--size-header); font-weight: 700; color: var(--positive); }
+    .savings-label { font-size: var(--size-labels); color: var(--text-muted); }
+
+    /* Phase G: Expense Pagination */
+    .expense-pagination {
+      display: flex; justify-content: center; align-items: center; gap: var(--spacing-sm);
+      padding: var(--spacing-md) 0;
+    }
+    .expense-pagination button {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border: 1px solid var(--border); background: var(--bg-surface);
+      border-radius: var(--radius-sm); cursor: pointer; color: var(--text);
+      min-height: 36px; font-size: var(--size-labels);
+    }
+    .expense-pagination button:hover { background: var(--surface-hover); }
+    .expense-pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .expense-pagination button.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .expense-pagination .page-info { font-size: var(--size-labels); color: var(--text-muted); }
+
+    /* Phase G: Settings Section */
+    .settings-section { padding: var(--spacing-md) 0; }
+    .settings-group {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+    .settings-group h3 {
+      font-size: var(--size-body); margin-bottom: var(--spacing-sm);
+      padding-bottom: var(--spacing-xs); border-bottom: 1px solid var(--border);
+    }
+    .setting-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: var(--spacing-sm) 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+    }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-label { font-size: var(--size-labels); }
+    .setting-desc { font-size: var(--size-small); color: var(--text-muted); }
+    .setting-control { display: flex; align-items: center; gap: var(--spacing-xs); }
+    .toggle-switch {
+      position: relative; width: 44px; height: 24px;
+      background: var(--border); border-radius: var(--radius-full);
+      cursor: pointer; transition: background 0.2s;
+    }
+    .toggle-switch.active { background: var(--accent); }
+    .toggle-switch::after {
+      content: ''; position: absolute; top: 2px; left: 2px;
+      width: 20px; height: 20px; border-radius: var(--radius-full);
+      background: white; transition: transform 0.2s;
+    }
+    .toggle-switch.active::after { transform: translateX(20px); }
+
+    /* Phase G: Help & Feedback */
+    .help-fab {
+      position: fixed; bottom: var(--spacing-lg); right: var(--spacing-lg);
+      width: 48px; height: 48px; border-radius: var(--radius-full);
+      background: var(--accent); color: white; border: none;
+      font-size: var(--size-header); cursor: pointer;
+      box-shadow: var(--shadow-lg, 0 4px 12px rgba(0,0,0,0.15));
+      z-index: 100; display: flex; align-items: center; justify-content: center;
+      transition: transform 0.15s;
+    }
+    .help-fab:hover { transform: scale(1.1); }
+    .help-menu {
+      position: fixed; bottom: 76px; right: var(--spacing-lg);
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: var(--spacing-sm);
+      box-shadow: var(--shadow-lg, 0 4px 12px rgba(0,0,0,0.15));
+      z-index: 100; display: none; min-width: 200px;
+    }
+    .help-menu.visible { display: block; }
+    .help-menu-item {
+      display: flex; align-items: center; gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-sm); cursor: pointer;
+      font-size: var(--size-labels); color: var(--text);
+      transition: background 0.1s;
+    }
+    .help-menu-item:hover { background: var(--surface-hover); }
+
     /* Phase F: Skip Navigation Link */
     .skip-nav {
       position: absolute;
@@ -10864,6 +11007,31 @@
                 <!-- Populated by renderYearComparison() -->
               </div>
             </div>
+
+            <!-- Phase G-6: Tax Savings Feedback Banner -->
+            <div id="savingsBanner" class="savings-banner" style="display: none;">
+              <span class="savings-icon">&#x1F4B0;</span>
+              <div>
+                <div class="savings-amount" id="savingsAmount">0 EUR</div>
+                <div class="savings-label">Estimated annual tax savings from deductions you're tracking</div>
+              </div>
+            </div>
+
+            <!-- Phase G-5: Tax Timeline Widget -->
+            <div class="tax-timeline">
+              <h3>Tax Timeline</h3>
+              <div id="taxTimelineTrack" class="timeline-track" aria-live="polite">
+                <!-- Populated by renderTaxTimeline() -->
+              </div>
+            </div>
+
+            <!-- Phase G-7: Tasks Widget (What Needs Attention) -->
+            <div class="tasks-widget">
+              <h3>What Needs Attention</h3>
+              <div id="tasksWidgetList" class="task-list" aria-live="polite">
+                <!-- Populated by renderTasksWidget() -->
+              </div>
+            </div>
           </div>
         </section>
 
@@ -11175,6 +11343,85 @@
             <ul class="tax-deadline-list" id="taxDeadlineList">
               <!-- Populated by renderTaxCalendar() -->
             </ul>
+          </div>
+
+          <!-- Phase G-8: Settings Section -->
+          <div class="settings-section">
+            <h2>Settings</h2>
+
+            <div class="settings-group">
+              <h3>Display</h3>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-label">Dark Theme</div>
+                  <div class="setting-desc">Switch between light and dark modes</div>
+                </div>
+                <div class="setting-control">
+                  <div id="settingsThemeToggle" class="toggle-switch" onclick="SettingsManager.toggleTheme()" role="switch" aria-label="Dark theme"></div>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-label">Compact Numbers</div>
+                  <div class="setting-desc">Show amounts like 12.5K instead of 12,500.00</div>
+                </div>
+                <div class="setting-control">
+                  <div id="settingsCompactNumbers" class="toggle-switch" onclick="SettingsManager.toggleSetting('compactNumbers')" role="switch" aria-label="Compact numbers"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-group">
+              <h3>Tax Configuration</h3>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-label">Fiscal Year</div>
+                  <div class="setting-desc">Which tax year to use for calculations</div>
+                </div>
+                <div class="setting-control">
+                  <select id="settingsFiscalYear" onchange="SettingsManager.setFiscalYear(this.value)">
+                    <option value="2025">2025</option>
+                    <option value="2026" selected>2026</option>
+                    <option value="2027">2027 (projected)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-label">RETA Calculation Mode</div>
+                  <div class="setting-desc">Fixed cuota from registration or income-based tramo</div>
+                </div>
+                <div class="setting-control">
+                  <select id="settingsRetaMode" onchange="SettingsManager.setRetaMode(this.value)">
+                    <option value="fixed" selected>Fixed cuota (428.40 EUR)</option>
+                    <option value="tramo">Income-based tramo</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-group">
+              <h3>Data</h3>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-label">Export All Data</div>
+                  <div class="setting-desc">Download a JSON backup of all your data</div>
+                </div>
+                <div class="setting-control">
+                  <button class="secondary-btn" onclick="DataExporter.exportAll()">Export JSON</button>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-label">Import Data</div>
+                  <div class="setting-desc">Restore from a previous JSON backup</div>
+                </div>
+                <div class="setting-control">
+                  <input type="file" id="settingsImportFile" accept=".json" style="display:none" onchange="SettingsManager.handleImport(this)">
+                  <button class="secondary-btn" onclick="document.getElementById('settingsImportFile').click()">Import JSON</button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -15961,6 +16208,10 @@ Generated by Autonomo Tax Calculator`;
 
       // Update tax calendar (C-5)
       renderTaxCalendar();
+
+      // Phase G: Update timeline and savings
+      renderTaxTimeline();
+      renderSavingsBanner();
     }
 
     // ============================================================
@@ -26115,6 +26366,9 @@ Generated by Autonomo Tax Calculator`;
           }
         }
 
+        // Phase G-2: Track pagination totals
+        ExpensePagination.totalItems = expenses.length;
+
         // Empty state
         if (!expenses || expenses.length === 0) {
           if (hasActiveFilters) {
@@ -26133,11 +26387,16 @@ Generated by Autonomo Tax Calculator`;
           return;
         }
 
+        // Phase G-2: Paginate expenses
+        const pageStart = (ExpensePagination.currentPage - 1) * ExpensePagination.pageSize;
+        const pageEnd = pageStart + ExpensePagination.pageSize;
+        const pagedExpenses = expenses.slice(pageStart, pageEnd);
+
         // Build table rows (desktop) and cards (mobile) simultaneously
         let tableRows = '';
         let cards = '';
 
-        for (const exp of expenses) {
+        for (const exp of pagedExpenses) {
           const catConfig = EXPENSE_CATEGORY[exp.category];
           const catLabel = catConfig?.label || exp.category;
           const dateDisplay = formatDateEU(exp.date);
@@ -26258,6 +26517,7 @@ Generated by Autonomo Tax Calculator`;
             </table>
           </div>
           <div class="expense-list-cards">${cards}</div>
+          ${ExpensePagination.renderControls()}
           ${deductionSummaryHtml}`;
 
       } catch (err) {
@@ -30236,6 +30496,473 @@ Generated by Autonomo Tax Calculator`;
       }
     }
 
+    // ============================================================
+    // PHASE G: COMPETITIVE FEATURES
+    // ============================================================
+
+    /**
+     * G-1: duplicateInvoice — Clone an existing invoice as a new draft
+     */
+    async function duplicateInvoice(invoiceId) {
+      try {
+        const entityId = EntityContext.current?.id;
+        if (!entityId) { showToast('No entity selected', 'error'); return; }
+
+        // Fetch original invoice and its line items
+        const original = await db.invoices.get(invoiceId);
+        if (!original) { showToast('Invoice not found', 'error'); return; }
+
+        const lineItems = await InvoiceManager.getLineItems(invoiceId);
+
+        // Generate new invoice number
+        const allInvoices = await db.invoices.where('entity_id').equals(entityId).toArray();
+        const nextNum = allInvoices.length + 1;
+        const year = new Date().getFullYear();
+        const newNumber = `INV-${year}-${String(nextNum).padStart(3, '0')}`;
+
+        // Create new invoice (draft, today's date, same client/terms)
+        const newInvoice = {
+          entity_id: entityId,
+          client_id: original.client_id,
+          invoice_number: newNumber,
+          date: new Date().toISOString().split('T')[0],
+          due_date: null,
+          status: 'draft',
+          currency: original.currency || 'EUR',
+          notes: original.notes || '',
+          terms: original.terms || '',
+          iva_rate: original.iva_rate,
+          irpf_retention: original.irpf_retention,
+          legal_text: original.legal_text || '',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        };
+
+        const newId = await db.invoices.add(newInvoice);
+
+        // Clone line items
+        for (const item of lineItems) {
+          await db.invoice_items.add({
+            invoice_id: newId,
+            description: item.description,
+            quantity: item.quantity,
+            unit_price_cents: item.unit_price_cents,
+            iva_rate: item.iva_rate,
+            created_at: new Date().toISOString()
+          });
+        }
+
+        showToast(`Invoice duplicated as ${newNumber} (draft)`, 'success');
+        await renderInvoiceList();
+      } catch (err) {
+        console.error('Failed to duplicate invoice:', err);
+        showToast('Failed to duplicate invoice: ' + err.message, 'error');
+      }
+    }
+
+    /**
+     * G-2: Expense pagination state and helpers
+     */
+    const ExpensePagination = {
+      currentPage: 1,
+      pageSize: 50,
+      totalItems: 0,
+
+      getTotalPages() {
+        return Math.max(1, Math.ceil(this.totalItems / this.pageSize));
+      },
+
+      setPage(page) {
+        this.currentPage = Math.max(1, Math.min(page, this.getTotalPages()));
+        renderExpenseList();
+      },
+
+      renderControls() {
+        const total = this.getTotalPages();
+        if (this.totalItems <= this.pageSize) return '';
+
+        let html = '<div class="expense-pagination">';
+        html += `<button onclick="ExpensePagination.setPage(${this.currentPage - 1})" ${this.currentPage <= 1 ? 'disabled' : ''}>Prev</button>`;
+
+        for (let i = 1; i <= total; i++) {
+          if (total > 7 && i > 2 && i < total - 1 && Math.abs(i - this.currentPage) > 1) {
+            if (i === 3 || i === total - 2) html += '<span class="page-info">...</span>';
+            continue;
+          }
+          html += `<button class="${i === this.currentPage ? 'active' : ''}" onclick="ExpensePagination.setPage(${i})">${i}</button>`;
+        }
+
+        html += `<button onclick="ExpensePagination.setPage(${this.currentPage + 1})" ${this.currentPage >= total ? 'disabled' : ''}>Next</button>`;
+        html += `<span class="page-info">${this.totalItems} expenses</span>`;
+        html += '</div>';
+        return html;
+      }
+    };
+
+    /**
+     * G-3: RETA Tramo System — income-based social security brackets (2025)
+     * Source: Seguridad Social — Tabla de cotización por ingresos reales
+     * https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537
+     */
+    const RETA_TRAMOS_2025 = Object.freeze([
+      { upTo: 670,    base_min: 653.59,  base_max: 718.95,  rate: 0.3128 },
+      { upTo: 900,    base_min: 718.95,  base_max: 900.00,  rate: 0.3128 },
+      { upTo: 1166.70, base_min: 872.55, base_max: 1166.70, rate: 0.3128 },
+      { upTo: 1300,   base_min: 950.98,  base_max: 1300.00, rate: 0.3128 },
+      { upTo: 1500,   base_min: 960.78,  base_max: 1500.00, rate: 0.3128 },
+      { upTo: 1700,   base_min: 960.78,  base_max: 1700.00, rate: 0.3128 },
+      { upTo: 1850,   base_min: 1045.75, base_max: 1850.00, rate: 0.3128 },
+      { upTo: 2030,   base_min: 1062.09, base_max: 2030.00, rate: 0.3128 },
+      { upTo: 2330,   base_min: 1078.43, base_max: 2330.00, rate: 0.3128 },
+      { upTo: 2760,   base_min: 1111.11, base_max: 2760.00, rate: 0.3128 },
+      { upTo: 3190,   base_min: 1176.47, base_max: 3190.00, rate: 0.3128 },
+      { upTo: 3620,   base_min: 1241.83, base_max: 3620.00, rate: 0.3128 },
+      { upTo: 4050,   base_min: 1307.19, base_max: 4050.00, rate: 0.3128 },
+      { upTo: 6000,   base_min: 1454.25, base_max: 4720.50, rate: 0.3128 },
+      { upTo: Infinity, base_min: 1732.03, base_max: 4720.50, rate: 0.3128 }
+    ]);
+
+    function calculateRetaTramo(monthlyNetIncome) {
+      for (const tramo of RETA_TRAMOS_2025) {
+        if (monthlyNetIncome <= tramo.upTo) {
+          return {
+            base: tramo.base_min,
+            cuota: Math.round(tramo.base_min * tramo.rate * 100) / 100,
+            tramo: `Up to ${tramo.upTo === Infinity ? '6,000+' : tramo.upTo.toLocaleString()} EUR/mo`
+          };
+        }
+      }
+      const last = RETA_TRAMOS_2025[RETA_TRAMOS_2025.length - 1];
+      return { base: last.base_min, cuota: Math.round(last.base_min * last.rate * 100) / 100, tramo: '6,000+ EUR/mo' };
+    }
+
+    /**
+     * G-5: Tax Timeline Widget — shows upcoming fiscal deadlines with estimated amounts
+     */
+    function renderTaxTimeline() {
+      const container = document.getElementById('taxTimelineTrack');
+      if (!container) return;
+
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const currentQuarter = Math.floor(now.getMonth() / 3) + 1;
+
+      // Deadlines for the current fiscal year
+      const deadlines = [
+        { date: `${currentYear}-01-30`, label: 'Modelo 303 Q4', modelo: '303', q: 4 },
+        { date: `${currentYear}-01-30`, label: 'Modelo 130 Q4', modelo: '130', q: 4 },
+        { date: `${currentYear}-01-30`, label: 'Modelo 390 Annual IVA', modelo: '390', q: 0 },
+        { date: `${currentYear}-04-20`, label: 'Modelo 303 Q1', modelo: '303', q: 1 },
+        { date: `${currentYear}-04-20`, label: 'Modelo 130 Q1', modelo: '130', q: 1 },
+        { date: `${currentYear}-07-20`, label: 'Modelo 303 Q2', modelo: '303', q: 2 },
+        { date: `${currentYear}-07-20`, label: 'Modelo 130 Q2', modelo: '130', q: 2 },
+        { date: `${currentYear}-06-30`, label: 'Renta (IRPF Annual)', modelo: 'renta', q: 0 },
+        { date: `${currentYear}-10-20`, label: 'Modelo 303 Q3', modelo: '303', q: 3 },
+        { date: `${currentYear}-10-20`, label: 'Modelo 130 Q3', modelo: '130', q: 3 },
+      ];
+
+      // Sort by date
+      deadlines.sort((a, b) => a.date.localeCompare(b.date));
+
+      // Get current scenario amounts for estimates
+      const revenue = parseFloat(document.getElementById('monthlyRevenue')?.value) || 6000;
+      const deductible = parseFloat(document.getElementById('calcSpainDeductible')?.value) || 383;
+
+      let html = '';
+      for (const d of deadlines) {
+        const dDate = new Date(d.date + 'T00:00:00');
+        const diffDays = Math.ceil((dDate - now) / (1000 * 60 * 60 * 24));
+
+        let status = 'upcoming';
+        let badge = '';
+        if (diffDays < 0) {
+          status = 'completed';
+        } else if (diffDays <= 7) {
+          status = 'overdue';
+          badge = '<span class="timeline-badge overdue">Due now</span>';
+        } else if (diffDays <= 30) {
+          status = 'due-soon';
+          badge = '<span class="timeline-badge due-soon">Due soon</span>';
+        }
+
+        // Estimate amounts
+        let amount = '';
+        if (d.modelo === '130') {
+          const quarterlyRevenue = revenue * 3;
+          const quarterlyDeductible = deductible * 3;
+          const estimate = Math.round((quarterlyRevenue - quarterlyDeductible) * 0.20);
+          amount = `~${estimate.toLocaleString()} EUR`;
+        } else if (d.modelo === '303') {
+          const quarterlyIva = Math.round(revenue * 3 * 0.21);
+          amount = `~${quarterlyIva.toLocaleString()} EUR`;
+        }
+
+        const dateStr = dDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+        html += `
+          <div class="timeline-item ${status}">
+            <span class="timeline-date">${dateStr}</span>
+            <span class="timeline-label">${d.label}</span>
+            ${amount ? `<span class="timeline-amount">${amount}</span>` : ''}
+            ${badge}
+          </div>`;
+      }
+
+      container.innerHTML = html || '<div style="padding: var(--spacing-sm); color: var(--text-muted);">No upcoming deadlines.</div>';
+    }
+
+    /**
+     * G-6: Tax Savings Feedback — show estimated savings from tracked deductions
+     */
+    function renderSavingsBanner() {
+      const banner = document.getElementById('savingsBanner');
+      const amountEl = document.getElementById('savingsAmount');
+      if (!banner || !amountEl) return;
+
+      const spainDeductible = parseFloat(document.getElementById('calcSpainDeductible')?.value) || 0;
+      const workTravel = parseFloat(document.getElementById('calcWorkTravel')?.value) || 0;
+      const totalDeductible = (spainDeductible + workTravel) * 12;
+
+      if (totalDeductible <= 0) {
+        banner.style.display = 'none';
+        return;
+      }
+
+      // Estimate tax savings: approximate marginal rate (24-30% for typical autonomo income)
+      const revenue = parseFloat(document.getElementById('monthlyRevenue')?.value) || 6000;
+      const annualRevenue = revenue * 12;
+      let marginalRate = 0.19;
+      if (annualRevenue > 60000) marginalRate = 0.37;
+      else if (annualRevenue > 35200) marginalRate = 0.30;
+      else if (annualRevenue > 20200) marginalRate = 0.24;
+      else if (annualRevenue > 12450) marginalRate = 0.19;
+
+      const estimatedSavings = Math.round(totalDeductible * marginalRate);
+
+      amountEl.textContent = estimatedSavings.toLocaleString() + ' EUR';
+      banner.style.display = 'flex';
+    }
+
+    /**
+     * G-7: Tasks Widget — shows actionable items that need attention
+     */
+    async function renderTasksWidget() {
+      const container = document.getElementById('tasksWidgetList');
+      if (!container) return;
+
+      const tasks = [];
+      const now = new Date();
+
+      // Check 183-day threshold
+      try {
+        if (typeof calendarState !== 'undefined' && calendarState) {
+          let abroadCount = 0;
+          const year = now.getFullYear();
+          for (const [key, val] of Object.entries(calendarState)) {
+            if (key.startsWith(year + '-') && val?.status === DAY_STATUS.ABROAD) abroadCount++;
+          }
+          const threshold = 183;
+          const pct = Math.round((abroadCount / threshold) * 100);
+          if (pct >= 90) {
+            tasks.push({ icon: '\u26A0\uFE0F', text: `183-day threshold at ${pct}% (${abroadCount}/${threshold} days abroad)`, urgency: 'high', action: "document.getElementById('tab-calendar').click()" });
+          } else if (pct >= 70) {
+            tasks.push({ icon: '\u{1F4C5}', text: `183-day tracking: ${abroadCount}/${threshold} days abroad (${pct}%)`, urgency: 'medium', action: "document.getElementById('tab-calendar').click()" });
+          }
+        }
+      } catch (e) { /* calendar not loaded yet */ }
+
+      // Check for overdue invoices
+      try {
+        const entityId = EntityContext.current?.id;
+        if (entityId) {
+          const invoices = await db.invoices.where('entity_id').equals(entityId).toArray();
+          const overdue = invoices.filter(inv => inv.status === 'sent' && InvoiceManager.isOverdue(inv));
+          if (overdue.length > 0) {
+            tasks.push({ icon: '\u{1F4B8}', text: `${overdue.length} overdue invoice${overdue.length > 1 ? 's' : ''} need attention`, urgency: 'high', action: "document.getElementById('tab-invoices').click()" });
+          }
+          const drafts = invoices.filter(inv => inv.status === 'draft');
+          if (drafts.length > 0) {
+            tasks.push({ icon: '\u{1F4DD}', text: `${drafts.length} draft invoice${drafts.length > 1 ? 's' : ''} ready to send`, urgency: 'low', action: "document.getElementById('tab-invoices').click()" });
+          }
+        }
+      } catch (e) { /* DB not ready */ }
+
+      // Check upcoming tax deadlines
+      const nextDeadlines = [
+        { date: `${now.getFullYear()}-04-20`, label: 'Q1 tax filings (Modelo 130 + 303)' },
+        { date: `${now.getFullYear()}-07-20`, label: 'Q2 tax filings (Modelo 130 + 303)' },
+        { date: `${now.getFullYear()}-10-20`, label: 'Q3 tax filings (Modelo 130 + 303)' },
+        { date: `${now.getFullYear()}-06-30`, label: 'Annual Renta declaration' },
+      ];
+      for (const dl of nextDeadlines) {
+        const dlDate = new Date(dl.date + 'T00:00:00');
+        const diffDays = Math.ceil((dlDate - now) / (1000 * 60 * 60 * 24));
+        if (diffDays > 0 && diffDays <= 30) {
+          tasks.push({ icon: '\u{1F4C6}', text: `${dl.label} due in ${diffDays} days`, urgency: diffDays <= 7 ? 'high' : 'medium', action: "document.getElementById('tab-details').click()" });
+        }
+      }
+
+      // Check if no expenses tracked
+      try {
+        const entityId = EntityContext.current?.id;
+        if (entityId) {
+          const expCount = await db.expenses.where('entity_id').equals(entityId).count();
+          if (expCount === 0) {
+            tasks.push({ icon: '\u{1F9FE}', text: 'Start tracking expenses to maximize deductions', urgency: 'low', action: "document.getElementById('tab-expenses').click()" });
+          }
+        }
+      } catch (e) { /* DB not ready */ }
+
+      if (tasks.length === 0) {
+        container.innerHTML = '<div style="padding: var(--spacing-sm); color: var(--text-muted);">All caught up! No pending tasks.</div>';
+        return;
+      }
+
+      container.innerHTML = tasks.map(t => `
+        <div class="task-item" onclick="${t.action}">
+          <span class="task-icon">${t.icon}</span>
+          <span class="task-text">${t.text}</span>
+          <span class="task-urgency ${t.urgency}">${t.urgency}</span>
+        </div>
+      `).join('');
+    }
+
+    /**
+     * G-8: Settings Manager
+     */
+    const SettingsManager = {
+      _settings: {},
+
+      init() {
+        try {
+          this._settings = JSON.parse(localStorage.getItem('autonomo_settings') || '{}');
+        } catch { this._settings = {}; }
+
+        // Apply theme toggle state
+        const themeToggle = document.getElementById('settingsThemeToggle');
+        if (themeToggle) {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          themeToggle.classList.toggle('active', isDark);
+        }
+
+        // Apply compact numbers setting
+        const compactToggle = document.getElementById('settingsCompactNumbers');
+        if (compactToggle) compactToggle.classList.toggle('active', !!this._settings.compactNumbers);
+
+        // Apply RETA mode
+        const retaSelect = document.getElementById('settingsRetaMode');
+        if (retaSelect && this._settings.retaMode) retaSelect.value = this._settings.retaMode;
+      },
+
+      toggleTheme() {
+        if (typeof toggleTheme === 'function') toggleTheme();
+        const themeToggle = document.getElementById('settingsThemeToggle');
+        if (themeToggle) {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          themeToggle.classList.toggle('active', isDark);
+        }
+      },
+
+      toggleSetting(key) {
+        this._settings[key] = !this._settings[key];
+        localStorage.setItem('autonomo_settings', JSON.stringify(this._settings));
+        const el = document.getElementById('settings' + key.charAt(0).toUpperCase() + key.slice(1));
+        if (el) el.classList.toggle('active', !!this._settings[key]);
+        showToast(`${key} ${this._settings[key] ? 'enabled' : 'disabled'}`, 'info', 2000);
+      },
+
+      setFiscalYear(year) {
+        this._settings.fiscalYear = year;
+        localStorage.setItem('autonomo_settings', JSON.stringify(this._settings));
+        showToast(`Fiscal year set to ${year}`, 'info', 2000);
+      },
+
+      setRetaMode(mode) {
+        this._settings.retaMode = mode;
+        localStorage.setItem('autonomo_settings', JSON.stringify(this._settings));
+        showToast(`RETA mode set to ${mode}`, 'info', 2000);
+        if (typeof recalculateTotals === 'function') recalculateTotals();
+      },
+
+      async handleImport(input) {
+        if (!input.files || !input.files[0]) return;
+        try {
+          const text = await input.files[0].text();
+          const data = JSON.parse(text);
+          await DataExporter.importAll(data);
+          showToast('Data imported successfully. Reloading...', 'success');
+          setTimeout(() => window.location.reload(), 1500);
+        } catch (err) {
+          showToast('Import failed: ' + err.message, 'error');
+        }
+        input.value = '';
+      }
+    };
+
+    /**
+     * G-9/G-10: Help Menu & Feedback
+     */
+    const HelpMenu = {
+      _open: false,
+
+      toggle() {
+        this._open = !this._open;
+        const menu = document.getElementById('helpMenu');
+        if (menu) menu.classList.toggle('visible', this._open);
+
+        // Close on outside click
+        if (this._open) {
+          setTimeout(() => {
+            document.addEventListener('click', this._outsideClick);
+          }, 0);
+        }
+      },
+
+      _outsideClick(e) {
+        if (!e.target.closest('#helpMenu') && !e.target.closest('#helpFab')) {
+          HelpMenu._open = false;
+          const menu = document.getElementById('helpMenu');
+          if (menu) menu.classList.remove('visible');
+          document.removeEventListener('click', HelpMenu._outsideClick);
+        }
+      },
+
+      showShortcuts() {
+        this.toggle();
+        showToast(
+          'Alt+1-8: Switch tabs | Esc: Close dialog | ?: Help',
+          'info', 8000
+        );
+      },
+
+      showAbout() {
+        this.toggle();
+        showToast(
+          'Autonomo Tax Calculator v2.0 — Cross-border tax planning for Spanish autonomos working in the EU.',
+          'info', 8000
+        );
+      },
+
+      showFeedback() {
+        this.toggle();
+        const email = 'feedback@example.com';
+        const subject = encodeURIComponent('Autonomo Tax Calculator Feedback');
+        const body = encodeURIComponent('Hi,\n\nI have the following feedback:\n\n');
+        window.open(`mailto:${email}?subject=${subject}&body=${body}`, '_blank');
+      },
+
+      showDisclaimer() {
+        this.toggle();
+        const modal = document.getElementById('tooltipModal');
+        const title = document.getElementById('tooltipModalTitle');
+        const text = document.getElementById('tooltipModalText');
+        if (modal && title && text) {
+          title.textContent = 'Tax Disclaimer';
+          text.textContent = 'This calculator provides estimates for informational purposes only. It does not constitute tax, legal, or financial advice. Always consult with a qualified tax professional (asesor fiscal, gestor) before making financial decisions or filing tax returns.';
+          modal.showModal();
+        }
+      }
+    };
+
     // Initialize on page load
     let _appInitialized = false;
     document.addEventListener('DOMContentLoaded', async () => {
@@ -30288,6 +31015,12 @@ Generated by Autonomo Tax Calculator`;
       // Phase F: Initialize accessibility features
       KeyboardShortcuts.init();
       DialogA11y.init();
+
+      // Phase G: Initialize settings, widgets, and help
+      SettingsManager.init();
+      renderTaxTimeline();
+      renderTasksWidget();
+      renderSavingsBanner();
 
       // Phase D: Initialize offline indicator
       OfflineIndicator.init();
@@ -30807,6 +31540,9 @@ Generated by Autonomo Tax Calculator`;
 
           // Action buttons based on status
           let actionsHtml = `<button onclick="event.stopPropagation(); showInvoiceDetail(${inv.id})" title="View">View</button>`;
+          // Phase G-1: Duplicate button (always available)
+          actionsHtml += ` <button data-permission="create" onclick="event.stopPropagation(); duplicateInvoice(${inv.id})" title="Duplicate invoice">Dup</button>`;
+
           if (inv.status === 'draft') {
             actionsHtml += ` <button data-permission="edit" onclick="event.stopPropagation(); openInvoiceForm(${inv.id})" title="Edit">Edit</button>`;
             actionsHtml += ` <button data-permission="delete" onclick="event.stopPropagation(); handleArchiveInvoice(${inv.id})" title="Archive" style="color: var(--negative);">Del</button>`;
@@ -32129,6 +32865,9 @@ Generated by Autonomo Tax Calculator`;
       } else if (invoice.status === 'paid') {
         html += `<button class="btn btn-small" data-permission="create" onclick="handleCreateRectificativa(${invoice.id})">Rectificativa</button>`;
       }
+
+      // Phase G-1: Duplicate button (always available)
+      html += `<button class="btn btn-small" data-permission="create" onclick="duplicateInvoice(${invoice.id})">Duplicate</button>`;
 
       // Separator between workflow and delivery actions
       html += `<span style="display:inline-block; width:1px; height:20px; background:var(--border); margin:0 4px; vertical-align:middle;"></span>`;
@@ -33732,6 +34471,15 @@ Generated by Autonomo Tax Calculator`;
       </div>
     </div>
   </div>
+  <!-- Phase G-9/G-10: Help FAB & Feedback -->
+  <button id="helpFab" class="help-fab" onclick="HelpMenu.toggle()" aria-label="Help and feedback" title="Help & Feedback">?</button>
+  <div id="helpMenu" class="help-menu" role="menu" aria-label="Help menu">
+    <div class="help-menu-item" role="menuitem" onclick="HelpMenu.showShortcuts()">&#x2328; Keyboard Shortcuts</div>
+    <div class="help-menu-item" role="menuitem" onclick="HelpMenu.showAbout()">&#x2139; About This App</div>
+    <div class="help-menu-item" role="menuitem" onclick="HelpMenu.showFeedback()">&#x1F4AC; Send Feedback</div>
+    <div class="help-menu-item" role="menuitem" onclick="HelpMenu.showDisclaimer()">&#x26A0; Tax Disclaimer</div>
+  </div>
+
   <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 </body>
 </html>
